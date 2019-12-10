@@ -1,0 +1,17 @@
+{
+  "env": {
+    "commonjs": true,
+    "es6": true,
+    "node": true,
+    "browser": true
+  },
+  "extends": ["airbnb", "plugin:prettier/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "rules": {
+    "react/jsx-filename-extension": [0],
+    "react/prop-types": [0],
+    "react/prefer-stateless-function": [1]
+  }
+}
