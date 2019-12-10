@@ -1,8 +1,0 @@
-{
-  "files.exclude": {
-    "node_modules": true,
-    ".vscode": true,
-    "public": true,
-    "build": true
-  }
-}
