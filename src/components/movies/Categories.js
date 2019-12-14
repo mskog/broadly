@@ -1,12 +1,12 @@
 import React from "react";
 
-import MoviesCategory from "./MoviesCategory";
+import Category from "./Category";
 
 const CATEGORIES = ["watched", "downloads", "waitlist"];
 
-export default function MoviesCategories({ category, setSelectedCategory }) {
+export default function Categories({ category, setSelectedCategory }) {
   const options = CATEGORIES.map(cat => (
-    <MoviesCategory
+    <Category
       key={cat}
       name={cat}
       active={category === cat}

@@ -6,8 +6,8 @@ import LazyLoad from "react-lazyload";
 
 import { formattedRuntime, releaseYear } from "../../utilities";
 
-import MoviePoster from "../MoviePoster";
-import Ratings from "../Ratings";
+import MoviePoster from "../shared/MoviePoster";
+import Ratings from "../shared/Ratings";
 
 export default function Movie({ movie }) {
   const { tmdbId, title, releaseDate, runtime, rtCriticsRating } = movie;

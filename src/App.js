@@ -2,7 +2,7 @@ import React from "react";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 
-import Movies from "./components/movies/Movies";
+import Movies from "./components/movies/Index";
 
 function App() {
   document.body.classList.add("bg-background-blue");

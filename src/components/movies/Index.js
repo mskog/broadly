@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
-import MoviesCategories from "./MoviesCategories";
-import MoviesList from "./MoviesList";
+import Categories from "./Categories";
+import List from "./List";
 
 const MOVIES = gql`
   query Movies($category: String, $first: Int, $skip: Int) {
@@ -18,7 +18,7 @@ const MOVIES = gql`
   }
 `;
 
-export default function Movies() {
+export default function Index() {
   const [selectedCategory, setSelectedCategory] = useState("watched");
 
   const { loading, error, data, fetchMore } = useQuery(MOVIES, {
@@ -44,12 +44,12 @@ export default function Movies() {
   } else if (error) {
     mainContent = <p>Error</p>;
   } else {
-    mainContent = <MoviesList loadMore={loadMore} movies={data.movies} />;
+    mainContent = <List loadMore={loadMore} movies={data.movies} />;
   }
 
   return (
     <div>
-      <MoviesCategories
+      <Categories
         category={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />

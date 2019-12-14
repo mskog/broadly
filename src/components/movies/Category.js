@@ -5,7 +5,7 @@ import React from "react";
 
 import capitalize from "lodash/capitalize";
 
-export default function MoviesCategory({ name, active, setSelectedCategory }) {
+export default function Category({ name, active, setSelectedCategory }) {
   let classNames =
     "flex-1 text-lg font-bold text-center cursor-pointer hover:text-white pb-2";
 
