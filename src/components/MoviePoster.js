@@ -30,7 +30,7 @@ export default function MoviePoster({ tmdbId }) {
 
   return (
     <img
-      className="h-full rounded object-contain"
+      className="absolute object-contain h-40 -mt-10 rounded"
       alt="A poster"
       src={thumbnail(url)}
     />

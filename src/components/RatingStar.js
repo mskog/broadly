@@ -18,7 +18,7 @@ function icon(minimum, maximum, score) {
 export default function RatingStar({ minimum, maximum, score }) {
   return (
     <FontAwesomeIcon
-      className="text-yellow-600 mr-1"
+      className="mr-1 text-yellow-600"
       icon={icon(minimum, maximum, score)}
     />
   );

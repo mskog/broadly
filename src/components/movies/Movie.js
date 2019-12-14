@@ -13,15 +13,15 @@ export default function Movie({ movie }) {
   const { tmdbId, title, releaseDate, runtime, rtCriticsRating } = movie;
 
   return (
-    <div className="bg-background-blue-2 rounded shadow text-gray-100">
-      <div className="flex p-4 h-48">
-        <div className="w-1/3">
+    <div className="text-gray-100 rounded shadow-lg shadow-fat bg-background-blue-2">
+      <div className="flex h-40 p-4">
+        <div className="relative w-2/5">
           <LazyLoad>
             <MoviePoster tmdbId={tmdbId} />
           </LazyLoad>
         </div>
-        <div className="w-full p-4">
-          <h2 className="text-3xl font-medium leading-none">{title}</h2>
+        <div className="w-full p-2">
+          <h2 className="text-3xl font-light leading-none ">{title}</h2>
           <Ratings score={rtCriticsRating} />
           <div className="mt-1 text-xs font-thin">
             <span className="mr-2">

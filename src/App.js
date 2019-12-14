@@ -15,9 +15,9 @@ function App() {
     <ApolloProvider client={client}>
       <div
         style={{ height: "100%" }}
-        className="App bg-background-blue h-screen"
+        className="h-screen App bg-background-blue"
       >
-        <div className="container mx-auto px-8">
+        <div className="container px-8 mx-auto overflow-auto">
           <Movies />
         </div>
       </div>

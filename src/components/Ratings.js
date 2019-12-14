@@ -10,13 +10,13 @@ export default function Ratings({ score }) {
   }
 
   return (
-    <div className="text-xs flex items-center">
+    <div className="flex items-center text-xs">
       <RatingStar minimum="0" maximum="20" score={score} />
       <RatingStar minimum="20" maximum="40" score={score} />
       <RatingStar minimum="40" maximum="60" score={score} />
       <RatingStar minimum="60" maximum="80" score={score} />
       <RatingStar minimum="80" maximum="100" score={score} />
-      <span className="font-bold text-lg text-yellow-600">
+      <span className="text-lg font-bold text-yellow-600">
         {formattedScore}
       </span>
     </div>

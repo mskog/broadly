@@ -53,7 +53,7 @@ export default function Movies() {
         category={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
-      {mainContent}
+      <div className="mt-20">{mainContent}</div>
     </div>
   );
 }
