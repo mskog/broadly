@@ -1,11 +1,6 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-
 import React from "react";
 
 import { Link } from "react-router-dom";
-
-import capitalize from "lodash/capitalize";
 
 export default function Category({ name, active }) {
   let classNames =
@@ -19,7 +14,9 @@ export default function Category({ name, active }) {
 
   return (
     <li key={name} className={classNames}>
-      <Link to={`/movies/${name}`}>{capitalize(name)}</Link>
+      <Link to={`/movies/${name}`} className="capitalize">
+        {name}
+      </Link>
     </li>
   );
 }

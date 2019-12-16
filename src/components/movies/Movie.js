@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 import { formattedRuntime, releaseYear } from "../../utilities";
 
-import MoviePoster from "./MoviePoster";
+import Poster from "./Poster";
 import Ratings from "../shared/Ratings";
 
 export default function Movie({ movie }) {
@@ -19,7 +19,7 @@ export default function Movie({ movie }) {
         <div className="relative w-2/5">
           <LazyLoad>
             <Link to={`/movies/${id}`}>
-              <MoviePoster tmdbId={tmdbId} />
+              <Poster tmdbId={tmdbId} />
             </Link>
           </LazyLoad>
         </div>

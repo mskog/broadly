@@ -21,7 +21,7 @@ function image({ loading, error, data }) {
 }
 
 // TODO: Use lazy loading and fancy placeholders
-export default function MoviePoster({ tmdbId }) {
+export default function Poster({ tmdbId }) {
   const url = image(
     useQuery(MOVIE_POSTER, {
       variables: { tmdbId }

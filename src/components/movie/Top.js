@@ -5,8 +5,8 @@ import { gql } from "apollo-boost";
 
 import { releaseYear, formattedRuntime, cdnImage } from "../../utilities";
 
-import LevelItem from "./LevelItem";
-import Level from "./Level";
+import LevelItem from "../shared/LevelItem";
+import Level from "../shared/Level";
 import RtRating from "../shared/RtRating";
 
 const MOVIE_POSTER = gql`
