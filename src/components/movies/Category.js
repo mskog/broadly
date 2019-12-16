@@ -3,9 +3,11 @@
 
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import capitalize from "lodash/capitalize";
 
-export default function Category({ name, active, setSelectedCategory }) {
+export default function Category({ name, active }) {
   let classNames =
     "flex-1 text-lg font-bold text-center cursor-pointer hover:text-white pb-2";
 
@@ -15,13 +17,9 @@ export default function Category({ name, active, setSelectedCategory }) {
     classNames += " text-blue-700";
   }
 
-  const onClick = () => {
-    setSelectedCategory(name);
-  };
-
   return (
-    <li onClick={onClick} key={name} className={classNames}>
-      {capitalize(name)}
+    <li key={name} className={classNames}>
+      <Link to={`/movies/${name}`}>{capitalize(name)}</Link>
     </li>
   );
 }

@@ -3,25 +3,30 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
 import LazyLoad from "react-lazyload";
+import { Link } from "react-router-dom";
 
 import { formattedRuntime, releaseYear } from "../../utilities";
 
-import MoviePoster from "../shared/MoviePoster";
+import MoviePoster from "./MoviePoster";
 import Ratings from "../shared/Ratings";
 
 export default function Movie({ movie }) {
-  const { tmdbId, title, releaseDate, runtime, rtCriticsRating } = movie;
+  const { id, tmdbId, title, releaseDate, runtime, rtCriticsRating } = movie;
 
   return (
     <div className="text-gray-100 rounded shadow-lg shadow-fat bg-background-blue-2">
       <div className="flex h-40 p-4">
         <div className="relative w-2/5">
           <LazyLoad>
-            <MoviePoster tmdbId={tmdbId} />
+            <Link to={`/movies/${id}`}>
+              <MoviePoster tmdbId={tmdbId} />
+            </Link>
           </LazyLoad>
         </div>
         <div className="w-full p-2">
-          <h2 className="text-3xl font-light leading-none ">{title}</h2>
+          <Link to={`/movies/${id}`}>
+            <h2 className="text-3xl font-light leading-none ">{title}</h2>
+          </Link>
           <Ratings score={rtCriticsRating} />
           <div className="mt-1 text-xs font-thin">
             <span className="mr-2">

@@ -12,4 +12,8 @@ function thumbnail(url) {
   return `https://thumbs.mskog.com/240x0/${url}`;
 }
 
-module.exports = { formattedRuntime, releaseYear, thumbnail };
+function cdnImage(url) {
+  return `https://thumbs.mskog.com/${url}`;
+}
+
+module.exports = { formattedRuntime, releaseYear, thumbnail, cdnImage };

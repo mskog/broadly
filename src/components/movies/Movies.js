@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
+import queryString from "query-string";
+
 import Categories from "./Categories";
 import List from "./List";
+import Search from "./Search";
 
 const MOVIES = gql`
-  query Movies($category: String, $first: Int, $skip: Int) {
-    movies(first: $first, skip: $skip, category: $category) {
+  query Movie($category: String, $first: Int, $skip: Int, $query: String) {
+    movies(
+      first: $first
+      skip: $skip
+      category: $category
+      filter: { query: $query }
+    ) {
       id
       tmdbId
       title
@@ -18,12 +26,20 @@ const MOVIES = gql`
   }
 `;
 
-export default function Index() {
-  const [selectedCategory, setSelectedCategory] = useState("watched");
+export default function Movies(props) {
+  const {
+    history,
+    pathname,
+    match: {
+      params: { category }
+    },
+    location: { search }
+  } = props;
+
+  const { query } = queryString.parse(search);
 
   const { loading, error, data, fetchMore } = useQuery(MOVIES, {
-    variables: { category: selectedCategory, first: 20, skip: 0 },
-    fetchPolicy: "cache-and-network"
+    variables: { category, first: 20, skip: 0, query }
   });
 
   const loadMore = () => {
@@ -38,7 +54,7 @@ export default function Index() {
     });
   };
 
-  let mainContent = null;
+  let mainContent;
   if (loading && !data) {
     mainContent = <p>Loading...</p>;
   } else if (error) {
@@ -48,11 +64,11 @@ export default function Index() {
   }
 
   return (
-    <div>
-      <Categories
-        category={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
+    <div className="container px-8 mx-auto overflow-auto">
+      <Categories category={category} />
+      <div className="flex justify-center">
+        <Search pathname={pathname} history={history} query={query} />
+      </div>
       <div className="mt-20">{mainContent}</div>
     </div>
   );

@@ -10,6 +10,9 @@ export default function List({ loadMore, movies }) {
     </div>
   ));
 
+  if (movies.length === 0)
+    return <div className="text-gray-200">No results </div>;
+
   return (
     <div>
       <InfiniteScroll
