@@ -9,7 +9,7 @@ import List from "./List";
 import Search from "./Search";
 
 const MOVIES = gql`
-  query Movie($category: String, $first: Int, $skip: Int, $query: String) {
+  query Movies($category: String, $first: Int, $skip: Int, $query: String) {
     movies(
       first: $first
       skip: $skip
@@ -20,8 +20,13 @@ const MOVIES = gql`
       tmdbId
       title
       releaseDate
+      downloadAt
       runtime
       rtCriticsRating
+      rtAudienceRating
+      watched
+      personalRating
+      overview
     }
   }
 `;
@@ -39,7 +44,8 @@ export default function Movies(props) {
   const { query } = queryString.parse(search);
 
   const { loading, error, data, fetchMore } = useQuery(MOVIES, {
-    variables: { category, first: 20, skip: 0, query }
+    variables: { category, first: 20, skip: 0, query },
+    fetchPolicy: "cache-and-network"
   });
 
   const loadMore = () => {

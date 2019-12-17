@@ -11,7 +11,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "apollo-boost": "^0.4.4",
+    "apollo-boost": "^0.4.7",
     "apollo-cache-persist": "^0.1.1",
     "graphql": "^14.5.8",
     "lodash": "^4.17.15",
@@ -23,7 +23,8 @@
     "react-infinite-scroll-component": "^5.0.4",
     "react-lazyload": "^2.6.5",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0"
+    "react-scripts": "3.3.0",
+    "urql": "^1.7.0"
   },
   "scripts": {
     "build:styles": "postcss src/styles/tailwind.css -o src/styles/styles.css",
