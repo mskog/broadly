@@ -2,7 +2,7 @@ import React from "react";
 
 import queryString from "query-string";
 
-import { useMoviesQuery } from "../../state/movies";
+import { useMoviesQuery } from "../../store/movies";
 
 import Categories from "./Categories";
 import List from "./List";

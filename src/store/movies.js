@@ -50,24 +50,37 @@ const DELETE_MOVIE = gql`
   }
 `;
 
-const useMoviesQuery = ({ category, first, skip, query }) => {
+const FORCE_MOVIE = gql`
+  mutation ForceMovie($id: ID!) {
+    forceMovieDownload(id: $id) {
+      id
+    }
+  }
+`;
+
+export const useMoviesQuery = ({ category, first, skip, query }) => {
   return useQuery(GET_MOVIES, {
     variables: { category, first, skip, query },
     fetchPolicy: "cache-and-network"
   });
 };
 
-const useMovieQuery = ({ id }) => {
+export const useMovieQuery = ({ id }) => {
   return useQuery(GET_MOVIE, {
     variables: { id }
   });
 };
 
-const useDeleteMovieMutation = ({ id, update }) => {
+export const useDeleteMovieMutation = ({ id, update }) => {
   return useMutation(DELETE_MOVIE, {
     variables: { id },
     update
   });
 };
 
-export { useMoviesQuery, useMovieQuery, useDeleteMovieMutation };
+export const useForceMovieMutation = ({ id, update }) => {
+  return useMutation(FORCE_MOVIE, {
+    variables: { id },
+    update
+  });
+};
