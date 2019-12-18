@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-export default function Category({ name, active }) {
+export default function Category({ name, value, active }) {
   let classNames =
     "flex-1 text-base font-bold text-center cursor-pointer hover:text-white pb-2";
 
@@ -14,7 +14,7 @@ export default function Category({ name, active }) {
 
   return (
     <li key={name} className={classNames}>
-      <Link to={`/movies/${name}`} className="capitalize">
+      <Link to={`/tv_shows/${value}`} className="capitalize">
         {name}
       </Link>
     </li>

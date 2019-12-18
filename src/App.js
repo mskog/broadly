@@ -3,8 +3,12 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { Switch, Route, Redirect } from "react-router-dom";
 
+import Navigation from "./components/shared/Navigation";
+
 import Movies from "./components/movies/Movies";
 import Movie from "./components/movie/Movie";
+
+import TvShows from "./components/tv_shows/TvShows";
 
 function App() {
   document.body.classList.add("bg-background-blue");
@@ -19,11 +23,15 @@ function App() {
         style={{ height: "100%" }}
         className="h-screen App bg-background-blue"
       >
-        <Switch>
-          <Redirect from="/" exact to="/movies/watched" />
-          <Route path="/movies/:id(\d+)" component={Movie} />
-          <Route path="/movies/:category(\w+)" component={Movies} />
-        </Switch>
+        <Navigation />
+        <div className="pt-10">
+          <Switch>
+            <Redirect from="/" exact to="/movies/watched" />
+            <Route path="/movies/:id(\d+)" component={Movie} />
+            <Route path="/movies/:category(\w+)" component={Movies} />
+            <Route path="/tv_shows/:category" component={TvShows} />
+          </Switch>
+        </div>
       </div>
     </ApolloProvider>
   );

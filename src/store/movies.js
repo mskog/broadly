@@ -3,12 +3,7 @@ import { gql } from "apollo-boost";
 
 const GET_MOVIES = gql`
   query Movies($category: String, $first: Int, $skip: Int, $query: String) {
-    movies(
-      first: $first
-      skip: $skip
-      category: $category
-      filter: { query: $query }
-    ) {
+    movies(first: $first, skip: $skip, category: $category, query: $query) {
       id
       tmdbId
       title
