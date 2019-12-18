@@ -1,19 +1,11 @@
 import React from "react";
 
-import { useMutation } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
 import { useHistory } from "react-router-dom";
+
+import { useDeleteMovieMutation } from "../../store/movies";
 
 import Delete from "./Delete";
 import Force from "./Force";
-
-const DELETE_MOVIE = gql`
-  mutation DeleteMovie($id: ID!) {
-    deleteMovie(id: $id) {
-      id
-    }
-  }
-`;
 
 export default function Actions(props) {
   const {
@@ -22,9 +14,9 @@ export default function Actions(props) {
 
   const history = useHistory();
 
-  const [deleteMovie] = useMutation(DELETE_MOVIE, {
-    variables: { id },
-    update() {
+  const [deleteMovie] = useDeleteMovieMutation({
+    id,
+    update: () => {
       history.goBack();
     }
   });

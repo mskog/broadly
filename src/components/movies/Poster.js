@@ -5,6 +5,9 @@ import { gql } from "apollo-boost";
 
 import { thumbnail } from "../../utilities";
 
+const IMAGE_PLACEHOLDER =
+  "https://image.tmdb.org/t/p/original/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
+
 const MOVIE_POSTER = gql`
   query MoviePoster($tmdbId: ID!) {
     moviePoster(tmdbId: $tmdbId) {
@@ -15,7 +18,7 @@ const MOVIE_POSTER = gql`
 
 function image({ loading, error, data }) {
   if (loading || error) {
-    return "https://image.tmdb.org/t/p/original/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
+    return IMAGE_PLACEHOLDER;
   }
   return data.moviePoster.url;
 }

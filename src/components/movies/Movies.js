@@ -1,35 +1,12 @@
 import React from "react";
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
 
 import queryString from "query-string";
+
+import { useMoviesQuery } from "../../state/movies";
 
 import Categories from "./Categories";
 import List from "./List";
 import Search from "./Search";
-
-const MOVIES = gql`
-  query Movies($category: String, $first: Int, $skip: Int, $query: String) {
-    movies(
-      first: $first
-      skip: $skip
-      category: $category
-      filter: { query: $query }
-    ) {
-      id
-      tmdbId
-      title
-      releaseDate
-      downloadAt
-      runtime
-      rtCriticsRating
-      rtAudienceRating
-      watched
-      personalRating
-      overview
-    }
-  }
-`;
 
 export default function Movies(props) {
   const {
@@ -43,9 +20,11 @@ export default function Movies(props) {
 
   const { query } = queryString.parse(search);
 
-  const { loading, error, data, fetchMore } = useQuery(MOVIES, {
-    variables: { category, first: 20, skip: 0, query },
-    fetchPolicy: "cache-and-network"
+  const { loading, error, data, fetchMore } = useMoviesQuery({
+    first: 20,
+    skip: 0,
+    category,
+    query
   });
 
   const loadMore = () => {

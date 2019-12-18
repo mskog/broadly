@@ -1,27 +1,9 @@
 import React from "react";
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+
+import { useMovieQuery } from "../../store/movies";
 
 import Top from "./Top";
 import Actions from "./Actions";
-
-const MOVIE = gql`
-  query Movies($id: ID!) {
-    movie(id: $id) {
-      id
-      tmdbId
-      title
-      releaseDate
-      downloadAt
-      runtime
-      rtCriticsRating
-      rtAudienceRating
-      watched
-      personalRating
-      overview
-    }
-  }
-`;
 
 function Movie(props) {
   const {
@@ -31,9 +13,7 @@ function Movie(props) {
     }
   } = props;
 
-  const { data } = useQuery(MOVIE, {
-    variables: { id }
-  });
+  const { data } = useMovieQuery({ id });
 
   if (!data) {
     return null;
