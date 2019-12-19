@@ -22,13 +22,13 @@ export default function TvShow({ tvShow }) {
       <div className="flex h-40 p-4">
         <div className="relative w-2/5">
           <LazyLoad>
-            <Link to={`/tv_shows/details/${id}`}>
+            <Link to={`/tv_show/${id}`}>
               <Poster tmdbId={tmdbId} />
             </Link>
           </LazyLoad>
         </div>
         <div className="w-full p-2">
-          <Link to={`/tv_shows/details/${id}`}>
+          <Link to={`/tv_show/${id}`}>
             <h2 className="text-3xl font-light leading-none ">{name}</h2>
           </Link>
           <Ratings score={voteAverage * 10} />

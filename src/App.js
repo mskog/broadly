@@ -9,6 +9,7 @@ import Movies from "./components/movies/Movies";
 import Movie from "./components/movie/Movie";
 
 import TvShows from "./components/tv_shows/TvShows";
+import TvShow from "./components/tv_show/TvShow";
 
 function App() {
   document.body.classList.add("bg-background-blue");
@@ -30,6 +31,7 @@ function App() {
             <Route path="/movies/:id(\d+)" component={Movie} />
             <Route path="/movies/:category(\w+)" component={Movies} />
             <Route path="/tv_shows/:category" component={TvShows} />
+            <Route path="/tv_show/:id" component={TvShow} />
           </Switch>
         </div>
       </div>

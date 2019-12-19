@@ -8,7 +8,7 @@ export default function Navigation() {
       style={{
         backgroundColor: "rgba(21, 26, 48, 0.6)"
       }}
-      className="fixed z-50 flex flex-wrap items-center justify-between w-full p-8 px-8 mx-auto md:pl-20"
+      className="fixed z-50 flex flex-wrap items-center justify-between w-full p-8 px-8"
     >
       <div className="flex flex-grow block w-auto w-full lg:items-center">
         <div className="flex-grow text-base">
