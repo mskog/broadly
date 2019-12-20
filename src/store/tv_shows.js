@@ -27,6 +27,7 @@ const GET_TV_SHOW = gql`
       name
       status
       watching
+      collected
       tmdbDetails {
         voteAverage
         firstAirDate
@@ -58,9 +59,18 @@ const WATCH_TV_SHOW = gql`
   }
 `;
 
+const COLLECT_TV_SHOW = gql`
+  mutation CollectTvShow($id: ID!) {
+    collectTvShow(id: $id) {
+      id
+    }
+  }
+`;
+
 export const useTvShowsQuery = ({ category, first, skip, query }) => {
   return useQuery(GET_TV_SHOWS, {
-    variables: { category, first, skip, query }
+    variables: { category, first, skip, query },
+    fetchPolicy: "cache-and-network"
   });
 };
 
@@ -80,6 +90,14 @@ export const useUnwatchTvShowMutation = ({ id, update }) => {
 
 export const useWatchTvShowMutation = ({ id, update }) => {
   return useMutation(WATCH_TV_SHOW, {
+    variables: { id },
+    refetchQueries: ["TvShow", "TvShows"],
+    update
+  });
+};
+
+export const useCollectTvShowMutation = ({ id, update }) => {
+  return useMutation(COLLECT_TV_SHOW, {
     variables: { id },
     refetchQueries: ["TvShow", "TvShows"],
     update

@@ -2,16 +2,18 @@ import React from "react";
 
 import {
   useUnwatchTvShowMutation,
-  useWatchTvShowMutation
+  useWatchTvShowMutation,
+  useCollectTvShowMutation
 } from "../../store/tv_shows";
 
 import Watch from "./Watch";
 import Unwatch from "./Unwatch";
+import Collect from "./Collect";
 
 // Add collect and sample
 export default function Actions(props) {
   const {
-    tvShow: { id, watching }
+    tvShow: { id, watching, collected }
   } = props;
 
   const [unwatchTvShow] = useUnwatchTvShowMutation({
@@ -22,10 +24,15 @@ export default function Actions(props) {
     id
   });
 
+  const [collectTvShow] = useCollectTvShowMutation({
+    id
+  });
+
   return (
     <>
       <Watch watching={watching} handle={watchTvShow} />
       <Unwatch watching={watching} handle={unwatchTvShow} />
+      <Collect collected={collected} handle={collectTvShow} />
     </>
   );
 }

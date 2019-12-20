@@ -6,7 +6,7 @@ import { useMoviesQuery } from "../../store/movies";
 
 import Categories from "./Categories";
 import List from "./List";
-import Search from "./Search";
+import Search from "../shared/Search";
 
 export default function Movies(props) {
   const {
@@ -52,7 +52,12 @@ export default function Movies(props) {
     <div className="container px-8 mx-auto overflow-auto">
       <Categories category={category} />
       <div className="flex justify-center">
-        <Search pathname={pathname} history={history} query={query} />
+        <Search
+          pathname={pathname}
+          history={history}
+          query={query}
+          placeholder="Movie name or description..."
+        />
       </div>
       <div className="mt-20">{mainContent}</div>
     </div>
