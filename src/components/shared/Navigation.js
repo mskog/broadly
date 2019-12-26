@@ -14,6 +14,7 @@ export default function Navigation() {
         <div className="flex-grow text-base">
           <NavigationLink title="Movies" href="/movies/watched" />
           <NavigationLink title="TV Shows" href="/tv_shows/watching" />
+          <NavigationLink title="Episodes" href="/episodes" />
         </div>
       </div>
     </nav>

@@ -11,6 +11,10 @@ import Movie from "./components/movie/Movie";
 import TvShows from "./components/tv_shows/TvShows";
 import TvShow from "./components/tv_show/TvShow";
 
+import Episode from "./components/episode/Episode";
+
+import Episodes from "./components/episodes/Episodes";
+
 function App() {
   document.body.classList.add("bg-background-blue");
 
@@ -25,13 +29,15 @@ function App() {
         className="h-screen App bg-background-blue"
       >
         <Navigation />
-        <div className="pt-10">
+        <div className="">
           <Switch>
             <Redirect from="/" exact to="/movies/watched" />
             <Route path="/movies/:id(\d+)" component={Movie} />
             <Route path="/movies/:category(\w+)" component={Movies} />
             <Route path="/tv_shows/:category" component={TvShows} />
             <Route path="/tv_show/:id" component={TvShow} />
+            <Route path="/episode/:id" component={Episode} />
+            <Route path="/episodes" component={Episodes} />
           </Switch>
         </div>
       </div>

@@ -39,6 +39,60 @@ const GET_TV_SHOW = gql`
           tmdb
         }
       }
+      episodes {
+        id
+        name
+        season
+        episode
+        still
+        tmdbDetails {
+          name
+          overview
+        }
+      }
+    }
+  }
+`;
+
+const GET_EPISODE = gql`
+  query Episode($id: ID!) {
+    episode(id: $id) {
+      id
+      name
+      season
+      episode
+      still
+      tmdbDetails {
+        name
+        overview
+        airDate
+      }
+      tvShow {
+        id
+        name
+      }
+    }
+  }
+`;
+
+const GET_EPISODES = gql`
+  query Episodes($first: Int, $skip: Int) {
+    episodes(first: $first, skip: $skip) {
+      id
+      name
+      season
+      episode
+      still
+      tmdbDetails {
+        name
+        overview
+        airDate
+      }
+
+      tvShow {
+        id
+        name
+      }
     }
   }
 `;
@@ -77,6 +131,18 @@ export const useTvShowsQuery = ({ category, first, skip, query }) => {
 export const useTvShowQuery = ({ id }) => {
   return useQuery(GET_TV_SHOW, {
     variables: { id }
+  });
+};
+
+export const useEpisodeQuery = ({ id }) => {
+  return useQuery(GET_EPISODE, {
+    variables: { id }
+  });
+};
+
+export const useEpisodesQuery = ({ first, skip }) => {
+  return useQuery(GET_EPISODES, {
+    variables: { first, skip }
   });
 };
 

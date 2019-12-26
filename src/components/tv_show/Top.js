@@ -19,7 +19,7 @@ const TV_SHOW_POSTER = gql`
 
 function image({ loading, error, data }) {
   if (loading || error) {
-    return "https://image.tmdb.org/t/p/original/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
+    return "";
   }
   return data.tvShowPoster.url;
 }

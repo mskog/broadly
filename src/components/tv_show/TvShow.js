@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import { uniq, sortBy } from "lodash";
 
 import { useTvShowQuery } from "../../store/tv_shows";
 
 import Top from "./Top";
 import Actions from "./Actions";
+import Seasons from "./Seasons";
+import Episodes from "./Episodes";
 
 function TvShow(props) {
   const {
@@ -13,6 +16,8 @@ function TvShow(props) {
     }
   } = props;
 
+  const [selectedSeason, setSelectedSeason] = useState(1);
+
   const { data } = useTvShowQuery({ id });
 
   if (!data) {
@@ -20,8 +25,17 @@ function TvShow(props) {
   }
 
   const {
-    traktDetails: { overview }
+    traktDetails: { overview },
+    episodes
   } = data.tvShow;
+
+  const seasonNumbers = sortBy(
+    uniq(episodes.map(episode => parseInt(episode.season, 0)))
+  );
+
+  const selectedEpisodes = episodes.filter(
+    episode => episode.season === selectedSeason
+  );
 
   return (
     <div className="pb-20">
@@ -31,6 +45,16 @@ function TvShow(props) {
         <div className="flex flex-col pt-4 -mx-2 md:flex-row">
           <Actions history={history} tvShow={data.tvShow} />
         </div>
+
+        <Seasons
+          tvShowId={id}
+          seasonNumbers={seasonNumbers}
+          selectedSeason={selectedSeason}
+          onSelect={setSelectedSeason}
+        />
+      </div>
+      <div className="container mx-auto mt-8">
+        <Episodes episodes={selectedEpisodes} />
       </div>
     </div>
   );
