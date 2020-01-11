@@ -2,11 +2,12 @@ import React from "react";
 
 import queryString from "query-string";
 
-import { useMoviesQuery } from "../../store/movies";
+import { useMoviesQuery } from "store/movies";
+
+import SearchBox from "components/shared/SearchBox";
 
 import Categories from "./Categories";
 import List from "./List";
-import Search from "../shared/Search";
 
 export default function Movies(props) {
   const {
@@ -52,7 +53,7 @@ export default function Movies(props) {
     <div className="container px-8 pt-10 mx-auto overflow-auto">
       <Categories category={category} />
       <div className="flex justify-center">
-        <Search
+        <SearchBox
           pathname={pathname}
           history={history}
           query={query}

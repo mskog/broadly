@@ -5,10 +5,10 @@ import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
 import LazyLoad from "react-lazyload";
 import { Link } from "react-router-dom";
 
-import { formattedRuntime, releaseYear } from "../../utilities";
+import { formattedRuntime, releaseYear } from "utilities";
 
+import Ratings from "components/shared/Ratings";
 import Poster from "./Poster";
-import Ratings from "../shared/Ratings";
 
 export default function Movie({ movie }) {
   const { id, tmdbId, title, releaseDate, runtime, rtCriticsRating } = movie;

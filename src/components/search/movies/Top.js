@@ -7,7 +7,6 @@ import { releaseYear, formattedRuntime, cdnImage } from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
-import RtRating from "components/shared/RtRating";
 
 const MOVIE_POSTER = gql`
   query MoviePoster($tmdbId: ID!) {
@@ -33,38 +32,13 @@ function backgroundStyle(url) {
 
 // TODO: Use lazy loading and fancy placeholders
 export default function Top({ movie }) {
-  const {
-    tmdbId,
-    title,
-    releaseDate,
-    runtime,
-    rtCriticsRating,
-    rtAudienceRating,
-    personalRating,
-    watched
-  } = movie;
+  const { tmdbId, title, year } = movie;
 
   const url = image(
     useQuery(MOVIE_POSTER, {
       variables: { tmdbId }
     })
   );
-
-  let rating;
-  if (watched) {
-    rating = <LevelItem title="Rating" value={`${personalRating} / 10`} />;
-  } else {
-    rating = (
-      <>
-        <LevelItem title="Tomatometer">
-          <RtRating rating={rtCriticsRating} />
-        </LevelItem>
-        <LevelItem title="Audience">
-          <RtRating rating={rtAudienceRating} />
-        </LevelItem>
-      </>
-    );
-  }
 
   return (
     <div>
@@ -79,12 +53,7 @@ export default function Top({ movie }) {
           </h1>
           <div className="md:pt-10">
             <Level>
-              <LevelItem
-                title="Release date"
-                value={releaseYear(releaseDate)}
-              />
-              <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
-              {rating}
+              <LevelItem title="Year" value={year} />
             </Level>
           </div>
         </div>

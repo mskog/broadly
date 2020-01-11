@@ -1,7 +1,8 @@
 import React from "react";
-import Top from "./Top";
 
-import { useEpisodeQuery } from "../../store/tv_shows";
+import { useEpisodeQuery } from "store/tv_shows";
+
+import Top from "./Top";
 
 export default function Episode(props) {
   const {

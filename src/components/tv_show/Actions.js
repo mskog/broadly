@@ -4,13 +4,12 @@ import {
   useUnwatchTvShowMutation,
   useWatchTvShowMutation,
   useCollectTvShowMutation
-} from "../../store/tv_shows";
+} from "store/tv_shows";
 
 import Watch from "./Watch";
 import Unwatch from "./Unwatch";
 import Collect from "./Collect";
 
-// Add collect and sample
 export default function Actions(props) {
   const {
     tvShow: { id, watching, collected }

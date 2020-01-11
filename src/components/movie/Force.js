@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Force({ handle, downloadAt }) {
-  if (downloadAt) return null;
+  if (!downloadAt) return null;
 
   return (
     <div className="w-full mx-1 my-2 md:w-6/12">

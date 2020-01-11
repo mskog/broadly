@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { padStart } from "lodash";
 
-import { cdnImage } from "../../utilities";
+import { cdnImage } from "utilities";
 
-import LevelItem from "../shared/LevelItem";
-import Level from "../shared/Level";
+import LevelItem from "components/shared/LevelItem";
+import Level from "components/shared/Level";
 
 function backgroundStyle(url) {
   return {

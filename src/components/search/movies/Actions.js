@@ -4,8 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import { useDeleteMovieMutation, useForceMovieMutation } from "store/movies";
 
-import Delete from "./Delete";
-import Force from "./Force";
+import AddToWaitlist from "./AddToWaitlist";
 
 export default function Actions(props) {
   const {

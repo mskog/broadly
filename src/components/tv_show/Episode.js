@@ -41,7 +41,7 @@ export default function Episode({ episode }) {
               backgroundImage: `linear-gradient(to bottom, rgba(21,26,48,0.6), rgba(21,26,48,0.9)), url(${still})`
             }}
           >
-            <div className="p-8">
+            <div className="p-4">
               {episodeHeader(seasonEpisode(season, episodeNumber), episodeName)}
               <p className="text-gray-500">
                 {truncate(overview, { length: 100 })}

@@ -15,6 +15,10 @@ import Episode from "./components/episode/Episode";
 
 import Episodes from "./components/episodes/Episodes";
 
+import Search from "./components/search/Search";
+
+import MovieSearchResult from "./components/search/movies/Details";
+
 function App() {
   document.body.classList.add("bg-background-blue");
 
@@ -26,7 +30,7 @@ function App() {
     <ApolloProvider client={client}>
       <div
         style={{ height: "100%" }}
-        className="h-screen App bg-background-blue"
+        className="h-screen text-gray-400 App bg-background-blue"
       >
         <Navigation />
         <div className="">
@@ -38,6 +42,11 @@ function App() {
             <Route path="/tv_show/:id" component={TvShow} />
             <Route path="/episode/:id" component={Episode} />
             <Route path="/episodes" component={Episodes} />
+            <Route
+              path="/search/movies/details/:imdbId"
+              component={MovieSearchResult}
+            />
+            <Route path="/search/:category?" component={Search} />
           </Switch>
         </div>
       </div>

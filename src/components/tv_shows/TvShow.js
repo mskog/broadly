@@ -5,10 +5,10 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import LazyLoad from "react-lazyload";
 import { Link } from "react-router-dom";
 
-import { releaseYear } from "../../utilities";
+import { releaseYear } from "utilities";
 
+import Ratings from "components/shared/Ratings";
 import Poster from "./Poster";
-import Ratings from "../shared/Ratings";
 
 export default function TvShow({ tvShow }) {
   const {

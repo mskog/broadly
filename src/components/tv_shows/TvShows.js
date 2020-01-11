@@ -2,11 +2,11 @@ import React from "react";
 
 import queryString from "query-string";
 
-import { useTvShowsQuery } from "../../store/tv_shows";
+import { useTvShowsQuery } from "store/tv_shows";
 
+import SearchBox from "components/shared/SearchBox";
 import Categories from "./Categories";
 import List from "./List";
-import Search from "../shared/Search";
 
 export default function TvShows(props) {
   const {
@@ -55,7 +55,7 @@ export default function TvShows(props) {
     <div className="container px-8 pt-10 mx-auto overflow-auto">
       <Categories category={category} />
       <div className="flex justify-center">
-        <Search
+        <SearchBox
           pathname={pathname}
           history={history}
           query={query}

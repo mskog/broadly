@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useEpisodesQuery } from "../../store/tv_shows";
+import { useEpisodesQuery } from "store/tv_shows";
 import List from "./List";
 
 export default function Episodes() {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { uniq, sortBy } from "lodash";
+import { uniq, sortBy, last } from "lodash";
 
-import { useTvShowQuery } from "../../store/tv_shows";
+import { useTvShowQuery } from "store/tv_shows";
 
 import Top from "./Top";
 import Actions from "./Actions";
@@ -16,7 +16,7 @@ function TvShow(props) {
     }
   } = props;
 
-  const [selectedSeason, setSelectedSeason] = useState(1);
+  const [selectedSeason, setSelectedSeason] = useState();
 
   const { data } = useTvShowQuery({ id });
 
@@ -34,7 +34,7 @@ function TvShow(props) {
   );
 
   const selectedEpisodes = episodes.filter(
-    episode => episode.season === selectedSeason
+    episode => episode.season === (selectedSeason || last(seasonNumbers))
   );
 
   return (
@@ -49,7 +49,7 @@ function TvShow(props) {
         <Seasons
           tvShowId={id}
           seasonNumbers={seasonNumbers}
-          selectedSeason={selectedSeason}
+          selectedSeason={selectedSeason || last(seasonNumbers)}
           onSelect={setSelectedSeason}
         />
       </div>

@@ -6,6 +6,13 @@
     "browser": true
   },
   "extends": ["airbnb", "plugin:prettier/recommended"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": ["node_modules", "src/"]
+      }
+    }
+  },
   "parserOptions": {
     "ecmaVersion": 2018
   },

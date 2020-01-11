@@ -3,7 +3,7 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
-import { thumbnail } from "../../utilities";
+import { thumbnail } from "utilities";
 
 const IMAGE_PLACEHOLDER =
   "https://image.tmdb.org/t/p/original/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";

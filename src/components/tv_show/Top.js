@@ -3,11 +3,11 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
-import { cdnImage } from "../../utilities";
+import { cdnImage } from "utilities";
 
-import LevelItem from "../shared/LevelItem";
-import Level from "../shared/Level";
-import RtRating from "../shared/RtRating";
+import LevelItem from "components/shared/LevelItem";
+import Level from "components/shared/Level";
+import RtRating from "components/shared/RtRating";
 
 const TV_SHOW_POSTER = gql`
   query TvShowPoster($tmdbId: ID!) {

@@ -15,6 +15,7 @@ export default function Navigation() {
           <NavigationLink title="Movies" href="/movies/watched" />
           <NavigationLink title="TV Shows" href="/tv_shows/watching" />
           <NavigationLink title="Episodes" href="/episodes" />
+          <NavigationLink title="Search" href="/search" />
         </div>
       </div>
     </nav>
