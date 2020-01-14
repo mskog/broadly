@@ -121,6 +121,14 @@ const COLLECT_TV_SHOW = gql`
   }
 `;
 
+const SAMPLE_TV_SHOW = gql`
+  mutation SampleTvShow($id: String!) {
+    sampleTvShow(id: $id) {
+      id
+    }
+  }
+`;
+
 export const useTvShowsQuery = ({ category, first, skip, query }) => {
   return useQuery(GET_TV_SHOWS, {
     variables: { category, first, skip, query },
@@ -156,6 +164,14 @@ export const useUnwatchTvShowMutation = ({ id, update }) => {
 
 export const useWatchTvShowMutation = ({ id, update }) => {
   return useMutation(WATCH_TV_SHOW, {
+    variables: { id },
+    refetchQueries: ["TvShow", "TvShows"],
+    update
+  });
+};
+
+export const useSampleTvShowMutation = ({ id, update }) => {
+  return useMutation(SAMPLE_TV_SHOW, {
     variables: { id },
     refetchQueries: ["TvShow", "TvShows"],
     update

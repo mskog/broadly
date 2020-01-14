@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-export default function Category({ name, value, active }) {
+export default function Category({ name, value, active, query }) {
   let classNames =
     "flex-1 text-base font-bold text-center cursor-pointer hover:text-white pb-2";
 
@@ -14,7 +14,7 @@ export default function Category({ name, value, active }) {
 
   return (
     <li key={name} className={classNames}>
-      <Link to={`/search/${value}`} className="capitalize">
+      <Link to={`/search/${value}?query=${query}`} className="capitalize">
         {name}
       </Link>
     </li>

@@ -1,19 +1,19 @@
 import React from "react";
 
-import { useMovieSearchQuery } from "store/search";
+import { useTvShowSearchQuery } from "store/search";
 
 import Loading from "components/shared/LoadingFull";
 import Result from "./Result";
 
 export default function Results({ query }) {
-  const { data } = useMovieSearchQuery({
+  const { data } = useTvShowSearchQuery({
     query
   });
 
   let results = <Loading />;
 
   if (data) {
-    results = data.movieSearch.map(result => {
+    results = data.tvShowSearch.map(result => {
       return (
         <div key={result.imdbId} className="px-3 mb-10 md:w-full lg:w-1/2">
           <Result result={result} />

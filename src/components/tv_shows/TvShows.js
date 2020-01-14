@@ -4,6 +4,7 @@ import queryString from "query-string";
 
 import { useTvShowsQuery } from "store/tv_shows";
 
+import Loading from "components/shared/LoadingFull";
 import SearchBox from "components/shared/SearchBox";
 import Categories from "./Categories";
 import List from "./List";
@@ -44,7 +45,7 @@ export default function TvShows(props) {
 
   let mainContent;
   if (loading && !data) {
-    mainContent = <p>Loading...</p>;
+    mainContent = <Loading />;
   } else if (error) {
     mainContent = <p>Error</p>;
   } else {

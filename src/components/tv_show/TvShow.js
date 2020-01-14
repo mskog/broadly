@@ -3,6 +3,7 @@ import { uniq, sortBy, last } from "lodash";
 
 import { useTvShowQuery } from "store/tv_shows";
 
+import Loading from "components/shared/LoadingFull";
 import Top from "./Top";
 import Actions from "./Actions";
 import Seasons from "./Seasons";
@@ -21,7 +22,7 @@ function TvShow(props) {
   const { data } = useTvShowQuery({ id });
 
   if (!data) {
-    return null;
+    return <Loading />;
   }
 
   const {

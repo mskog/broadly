@@ -4,6 +4,7 @@ import queryString from "query-string";
 
 import { useMoviesQuery } from "store/movies";
 
+import Loading from "components/shared/LoadingFull";
 import SearchBox from "components/shared/SearchBox";
 
 import Categories from "./Categories";
@@ -42,7 +43,7 @@ export default function Movies(props) {
 
   let mainContent;
   if (loading && !data) {
-    mainContent = <p>Loading...</p>;
+    mainContent = <Loading />;
   } else if (error) {
     mainContent = <p>Error</p>;
   } else {

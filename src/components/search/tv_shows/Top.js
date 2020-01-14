@@ -7,10 +7,11 @@ import { cdnImage } from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
+import Ratings from "components/shared/Ratings";
 
-const MOVIE_POSTER = gql`
-  query MoviePoster($tmdbId: ID!) {
-    moviePoster(tmdbId: $tmdbId) {
+const TV_SHOW_POSTER = gql`
+  query TvShowPoster($tmdbId: ID!) {
+    tvShowPoster(tmdbId: $tmdbId) {
       url
     }
   }
@@ -20,7 +21,7 @@ function image({ loading, error, data }) {
   if (loading || error) {
     return "https://image.tmdb.org/t/p/original/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
   }
-  return data.moviePoster.url;
+  return data.tvShowPoster.url;
 }
 
 function backgroundStyle(url) {
@@ -31,11 +32,16 @@ function backgroundStyle(url) {
 }
 
 // TODO: Use lazy loading and fancy placeholders
-export default function Top({ movie }) {
-  const { tmdbId, title, year } = movie;
+// TODO: There are more details to show if we want
+export default function Top({ tvShow }) {
+  const {
+    tmdbId,
+    title,
+    details: { firstAired, runtime, airedEpisodes, status, rating }
+  } = tvShow;
 
   const url = image(
-    useQuery(MOVIE_POSTER, {
+    useQuery(TV_SHOW_POSTER, {
       variables: { tmdbId }
     })
   );
@@ -50,10 +56,14 @@ export default function Top({ movie }) {
         <div className="flex flex-col justify-end h-full pb-10">
           <h1 className="text-5xl text-center text-gray-200 md:text-left">
             {title}
+            <Ratings score={rating * 10} />
           </h1>
-          <div className="md:pt-10">
+          <div className="capitalize md:pt-10">
             <Level>
-              <LevelItem title="Year" value={year} />
+              <LevelItem title="Status" value={status} />
+              <LevelItem title="First Aired" value={firstAired} />
+              <LevelItem title="Runtime" value={`${runtime}m`} />
+              <LevelItem title="Aired episodes" value={airedEpisodes} />
             </Level>
           </div>
         </div>

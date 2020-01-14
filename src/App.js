@@ -18,6 +18,7 @@ import Episodes from "./components/episodes/Episodes";
 import Search from "./components/search/Search";
 
 import MovieSearchResult from "./components/search/movies/Details";
+import TvShowSearchResult from "./components/search/tv_shows/Details";
 
 function App() {
   document.body.classList.add("bg-background-blue");
@@ -45,6 +46,10 @@ function App() {
             <Route
               path="/search/movies/details/:imdbId"
               component={MovieSearchResult}
+            />
+            <Route
+              path="/search/tv_shows/details/:imdbId"
+              component={TvShowSearchResult}
             />
             <Route path="/search/:category?" component={Search} />
           </Switch>

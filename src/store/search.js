@@ -41,6 +41,34 @@ const GET_MOVIE_SEARCH_RESULT = gql`
   }
 `;
 
+const GET_TV_SHOW_SEARCH = gql`
+  query TvShowSearch($query: String!) {
+    tvShowSearch(query: $query) {
+      title
+      year
+      imdbId
+      imdbUrl
+      downloaded
+      overview
+      tmdbId
+    }
+  }
+`;
+
+const GET_TV_SHOW_SEARCH_RESULT = gql`
+  query TvShowSearchResult($imdbId: String!) {
+    tvShowSearchResult(imdbId: $imdbId) {
+      title
+      year
+      imdbId
+      imdbUrl
+      downloaded
+      overview
+      tmdbId
+    }
+  }
+`;
+
 export const useMovieSearchQuery = ({ query }) => {
   return useQuery(GET_MOVIE_SEARCH, {
     variables: { query },
@@ -50,6 +78,20 @@ export const useMovieSearchQuery = ({ query }) => {
 
 export const useMovieSearchResultQuery = ({ imdbId }) => {
   return useQuery(GET_MOVIE_SEARCH_RESULT, {
+    variables: { imdbId },
+    fetchPolicy: "cache-and-network"
+  });
+};
+
+export const useTvShowSearchQuery = ({ query }) => {
+  return useQuery(GET_TV_SHOW_SEARCH, {
+    variables: { query },
+    fetchPolicy: "cache-and-network"
+  });
+};
+
+export const useTvShowSearchResultQuery = ({ imdbId }) => {
+  return useQuery(GET_TV_SHOW_SEARCH_RESULT, {
     variables: { imdbId },
     fetchPolicy: "cache-and-network"
   });

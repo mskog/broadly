@@ -2,6 +2,8 @@ import React from "react";
 
 import { useEpisodeQuery } from "store/tv_shows";
 
+import Loading from "components/shared/LoadingFull";
+
 import Top from "./Top";
 
 export default function Episode(props) {
@@ -14,7 +16,7 @@ export default function Episode(props) {
   const { data } = useEpisodeQuery({ id });
 
   if (!data) {
-    return null;
+    return <Loading />;
   }
 
   return (

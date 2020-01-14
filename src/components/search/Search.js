@@ -6,6 +6,7 @@ import SearchBox from "../shared/SearchBox";
 import Categories from "./Categories";
 
 import MovieResults from "./movies/Results";
+import TvShowResults from "./tv_shows/Results";
 
 export default function Search(props) {
   const {
@@ -21,12 +22,16 @@ export default function Search(props) {
 
   let mainContent;
   if (query) {
+    let categoryComponent;
+    if (category === "movies") {
+      categoryComponent = <MovieResults query={query} />;
+    } else {
+      categoryComponent = <TvShowResults query={query} />;
+    }
     mainContent = (
       <div>
-        <Categories category={category} />
-        <div className="mt-10">
-          <MovieResults query={query} />
-        </div>
+        <Categories category={category} query={query} />
+        <div className="mt-20">{categoryComponent}</div>
       </div>
     );
   }
@@ -40,10 +45,10 @@ export default function Search(props) {
           query={query}
           placeholder="Movie or TV Show id, url or name..."
           debounceTimeout={300}
-          minLength={5}
+          minLength={3}
         />
       </div>
-      {mainContent}
+      <div>{mainContent}</div>
     </div>
   );
 }

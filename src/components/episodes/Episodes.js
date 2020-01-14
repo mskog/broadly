@@ -1,6 +1,7 @@
 import React from "react";
 
 import { useEpisodesQuery } from "store/tv_shows";
+import Loading from "components/shared/LoadingFull";
 import List from "./List";
 
 export default function Episodes() {
@@ -25,7 +26,7 @@ export default function Episodes() {
   };
   let mainContent;
   if (loading && !data) {
-    mainContent = <p>Loading...</p>;
+    mainContent = <Loading />;
   } else if (error) {
     mainContent = <p>Error</p>;
   } else {

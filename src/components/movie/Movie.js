@@ -2,6 +2,8 @@ import React from "react";
 
 import { useMovieQuery } from "store/movies";
 
+import Loading from "components/shared/LoadingFull";
+
 import Top from "./Top";
 import Actions from "./Actions";
 import ReleaseInformation from "./ReleaseInformation";
@@ -17,7 +19,7 @@ function Movie(props) {
   const { data } = useMovieQuery({ id });
 
   if (!data) {
-    return null;
+    return <Loading />;
   }
 
   const {
