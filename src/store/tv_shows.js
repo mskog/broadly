@@ -65,7 +65,7 @@ const GET_EPISODE = gql`
       tmdbDetails {
         name
         overview
-        airDate
+        firstAirDate
       }
       tvShow {
         id
@@ -86,7 +86,7 @@ const GET_EPISODES = gql`
       tmdbDetails {
         name
         overview
-        airDate
+        firstAirDate
       }
 
       tvShow {

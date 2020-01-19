@@ -20,6 +20,8 @@ import Search from "./components/search/Search";
 import MovieSearchResult from "./components/search/movies/Details";
 import TvShowSearchResult from "./components/search/tv_shows/Details";
 
+import TvShowsCalendar from "components/tv_shows_calendar/TvShowsCalendar";
+
 function App() {
   document.body.classList.add("bg-background-blue");
 
@@ -52,6 +54,7 @@ function App() {
               component={TvShowSearchResult}
             />
             <Route path="/search/:category?" component={Search} />
+            <Route path="/calendar" component={TvShowsCalendar} />
           </Switch>
         </div>
       </div>

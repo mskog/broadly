@@ -23,7 +23,9 @@ export default function TvShow({ tvShow }) {
         <div className="relative w-2/5">
           <LazyLoad>
             <Link to={`/tv_show/${id}`}>
-              <Poster tmdbId={tmdbId} />
+              <div className="h-40 -mt-10 rounded">
+                <Poster tmdbId={tmdbId} />
+              </div>
             </Link>
           </LazyLoad>
         </div>

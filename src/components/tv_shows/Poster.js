@@ -31,7 +31,5 @@ export default function Poster({ tmdbId }) {
     })
   );
 
-  return (
-    <img className="h-40 -mt-10 rounded" alt="A poster" src={thumbnail(url)} />
-  );
+  return <img className="h-full rounded" alt="A poster" src={thumbnail(url)} />;
 }
