@@ -8,6 +8,8 @@ import {
   useSampleTvShowMutation
 } from "store/tv_shows";
 
+import Loading from "components/shared/LoadingFull";
+
 import Top from "./Top";
 
 const GET_TV_SHOW_DETAILS = gql`
@@ -48,7 +50,7 @@ export default function Details(props) {
   });
 
   if (!data) {
-    return null;
+    return <Loading />;
   }
 
   return (

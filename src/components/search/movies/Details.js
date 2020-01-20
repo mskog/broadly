@@ -2,6 +2,8 @@ import React from "react";
 
 import { useMovieSearchResultQuery } from "store/search";
 
+import Loading from "components/shared/LoadingFull";
+
 import Top from "./Top";
 import Release from "./Release";
 
@@ -17,7 +19,7 @@ export default function Details(props) {
   });
 
   if (!data) {
-    return null;
+    return <Loading />;
   }
 
   return (
