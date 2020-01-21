@@ -9,6 +9,7 @@ import {
 } from "store/tv_shows";
 
 import Loading from "components/shared/LoadingFull";
+import LoaderButton from "components/shared/LoaderButton";
 
 import Top from "./Top";
 
@@ -62,22 +63,22 @@ export default function Details(props) {
         </p>
         <div className="flex flex-col pt-4 -mx-2 md:flex-row">
           <div className="w-full mx-1 my-2 md:w-6/12">
-            <button
+            <LoaderButton
               type="button"
               className="w-full px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700"
               onClick={sampleTvShow}
             >
               Sample
-            </button>
+            </LoaderButton>
           </div>
           <div className="w-full mx-1 my-2 md:w-6/12">
-            <button
+            <LoaderButton
               type="button"
               className="w-full px-4 py-2 font-bold text-white bg-teal-500 rounded hover:bg-teal-700"
               onClick={collectTvShow}
             >
               Collect
-            </button>
+            </LoaderButton>
           </div>
         </div>
       </div>
