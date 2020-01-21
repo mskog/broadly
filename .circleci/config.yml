@@ -5,7 +5,7 @@ executors:
       - image: circleci/node:10
         user: node
 commands:
-  gatsby-build:
+  build:
     steps:
       - checkout
       - restore_cache:
@@ -38,7 +38,7 @@ jobs:
     executor: node-executor
     working_directory: ~/repo
     steps:
-      - gatsby-build
+      - build
       - run:
           name: Deploy
           command: USER=node ./node_modules/@cloudflare/wrangler/run-wrangler.js publish
