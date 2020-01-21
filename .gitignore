@@ -28,4 +28,3 @@ src/styles/styles.css
 
 .env*
 dist
-cloudflare_worker
