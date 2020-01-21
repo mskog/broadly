@@ -1,0 +1,10 @@
+name = "broadly"
+type = "webpack"
+account_id = "be6b96b2bb0b5622e6ef9b93d14e2d49"
+route="broadly.mskog.com/*"
+zone_id="39b6b3783327ab08e70b206942f4dd2a"
+
+[site]
+bucket = "./build"
+entry-point = "cloudflare_worker"
+

@@ -25,3 +25,7 @@ yarn-error.log*
 .vscode
 
 src/styles/styles.css
+
+.env
+dist
+cloudflare_worker

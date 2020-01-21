@@ -3,6 +3,8 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { Switch, Route, Redirect } from "react-router-dom";
 
+import TvShowsCalendar from "components/tv_shows_calendar/TvShowsCalendar";
+
 import Navigation from "./components/shared/Navigation";
 
 import Movies from "./components/movies/Movies";
@@ -20,13 +22,11 @@ import Search from "./components/search/Search";
 import MovieSearchResult from "./components/search/movies/Details";
 import TvShowSearchResult from "./components/search/tv_shows/Details";
 
-import TvShowsCalendar from "components/tv_shows_calendar/TvShowsCalendar";
-
 function App() {
   document.body.classList.add("bg-background-blue");
 
   const client = new ApolloClient({
-    uri: "http://localhost:5000/graphql"
+    uri: process.env.REACT_APP_API_URL
   });
 
   return (
