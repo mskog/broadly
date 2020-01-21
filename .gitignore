@@ -26,6 +26,6 @@ yarn-error.log*
 
 src/styles/styles.css
 
-.env
+.env*
 dist
 cloudflare_worker
