@@ -35,7 +35,9 @@ function App() {
         style={{ height: "100%" }}
         className="h-screen text-gray-400 App bg-background-blue"
       >
-        <Navigation />
+        <div className="container m-auto">
+          <Navigation />
+        </div>
         <div className="">
           <Switch>
             <Redirect from="/" exact to="/movies/watched" />
