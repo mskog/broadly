@@ -26,7 +26,10 @@ function App() {
   document.body.classList.add("bg-background-blue");
 
   const client = new ApolloClient({
-    uri: process.env.REACT_APP_API_URL
+    uri: process.env.REACT_APP_API_URL,
+    headers: {
+      Authorization: `Basic ${process.env.REACT_APP_BASIC_AUTHORIZATION_TOKEN}`
+    }
   });
 
   return (
