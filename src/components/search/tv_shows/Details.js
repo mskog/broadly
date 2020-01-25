@@ -1,5 +1,7 @@
 import React from "react";
 
+import { useHistory } from "react-router-dom";
+
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
 
@@ -38,16 +40,24 @@ export default function Details(props) {
     }
   } = props;
 
+  const history = useHistory();
+
   const { data } = useQuery(GET_TV_SHOW_DETAILS, {
     variables: { imdbId }
   });
 
   const [sampleTvShow] = useSampleTvShowMutation({
-    id: imdbId
+    id: imdbId,
+    update: () => {
+      history.goBack();
+    }
   });
 
   const [collectTvShow] = useCollectTvShowMutation({
-    id: imdbId
+    id: imdbId,
+    update: () => {
+      history.goBack();
+    }
   });
 
   if (!data) {
