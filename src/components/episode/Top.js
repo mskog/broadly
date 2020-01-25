@@ -36,7 +36,7 @@ export default function Top({ episode }) {
       />
       <div className="container h-full max-w-2xl px-8 mx-auto">
         <div className="flex flex-col justify-end h-full pb-10">
-          <Link to={`/tv_show/${tvShowId}`}>
+          <Link to={`/tv_shows/${tvShowId}`}>
             <h1 className="text-5xl leading-none text-center text-gray-200 md:text-left">
               {tvShowName}
             </h1>

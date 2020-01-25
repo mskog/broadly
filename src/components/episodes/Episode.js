@@ -32,7 +32,7 @@ export default function Episode({ episode }) {
 
   return (
     <div className="w-full p-2 md:w-1/2 lg:w-1/3">
-      <Link to={`/episode/${id}`}>
+      <Link to={`/episodes/${id}`}>
         <div
           className="h-40 bg-cover "
           style={{

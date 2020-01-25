@@ -30,7 +30,7 @@ export default function List({ tvShows }) {
             <h2 className="text-xl font-semibold">{formattedDate}</h2>
           </div>
           <div className="mb-8">
-            <Link to={`/tv_show/${tvShow.id}`}>
+            <Link to={`/tv_shows/${tvShow.id}`}>
               <Poster tmdbId={tvShow.tmdbDetails.id} />
             </Link>
           </div>
