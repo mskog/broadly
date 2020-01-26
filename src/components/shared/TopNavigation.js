@@ -32,7 +32,7 @@ export default function Navigation(props) {
         <button
           type="button"
           onClick={() => toggleExpansion(!isExpanded)}
-          className="flex items-center px-3 py-2 text-gray-200 border border-gray-400 rounded hover:text-white hover:border-white"
+          className="flex items-center px-3 py-2 text-gray-200 border border-gray-400 rounded hover:text-white hover:border-white focus:outline-none"
         >
           <FontAwesomeIcon icon={faBars} />
         </button>
