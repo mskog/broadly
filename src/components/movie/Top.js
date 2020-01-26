@@ -74,7 +74,7 @@ export default function Top({ movie }) {
       />
       <div className="container h-full max-w-2xl px-8 mx-auto">
         <div className="flex flex-col justify-end h-full pb-10">
-          <h1 className="text-5xl text-center text-gray-200 md:text-left">
+          <h1 className="text-5xl leading-none text-center text-gray-200 md:text-left">
             {title}
           </h1>
           <div className="md:pt-10">
