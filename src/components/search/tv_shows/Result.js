@@ -12,7 +12,7 @@ export default function Result({ result }) {
   return (
     <div className="text-gray-100 rounded shadow-lg shadow-fat bg-background-blue-2">
       <div className="flex h-40 p-4">
-        <div className="relative w-2/5">
+        <div className="relative w-3/5 md:w-2/5">
           <LazyLoad>
             <Link to={`/search/tv_shows/details/${imdbId}`}>
               <Poster tmdbId={tmdbId} />
