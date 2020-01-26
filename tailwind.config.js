@@ -16,7 +16,8 @@ module.exports = {
     }
   },
   variants: {
-    alignSelf: ["odd"]
+    alignSelf: ["odd"],
+    borderWidth: ["responsive"]
   },
   plugins: []
 };
