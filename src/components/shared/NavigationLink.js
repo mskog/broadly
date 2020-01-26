@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function NavigationLink({ title, href, active, onClick }) {
-  console.log(active);
   const textColor = active ? "md:border-b-4 md:border-teal-500" : "";
 
   return (

@@ -55,7 +55,7 @@ export default function TvShows(props) {
   return (
     <div className="container px-4 mx-auto overflow-auto md:pt-10">
       <Categories category={category} />
-      <div className="flex justify-center">
+      <div className="flex flex-col items-center">
         <AutoSearchBox
           pathname={pathname}
           history={history}

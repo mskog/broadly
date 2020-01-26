@@ -3,10 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export default function SearchBox({ pathname, history, query, placeholder }) {
-  const [text, setText] = useState(query);
+  const [text, setText] = useState(query || "");
 
   const handleChange = event => {
     event.preventDefault();
+    setText(event.target.value);
     history.replace({ pathname, search: `?query=${text}` });
   };
 
@@ -33,15 +34,17 @@ export default function SearchBox({ pathname, history, query, placeholder }) {
           <FontAwesomeIcon className="" icon={faSearch} />
         </button>
       </form>
-      <div className="pt-1">
-        <button
-          type="button"
-          className="text-sm text-gray-500 underline"
-          onClick={clearSearch}
-        >
-          Clear
-        </button>
-      </div>
+      {text !== "" && (
+        <div className="pt-1">
+          <button
+            type="button"
+            className="text-sm text-gray-500 underline"
+            onClick={clearSearch}
+          >
+            Clear
+          </button>
+        </div>
+      )}
     </div>
   );
 }
