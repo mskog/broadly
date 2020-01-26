@@ -5,7 +5,7 @@ import { DateTime } from "luxon";
 
 import { Link } from "react-router-dom";
 
-import Poster from "components/tv_shows/Poster";
+import Poster from "./Poster";
 
 export default function List({ tvShows }) {
   const groupedTvShows = groupBy(tvShows, tvShow =>
