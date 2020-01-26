@@ -38,14 +38,12 @@ export default function Search(props) {
 
   return (
     <div className="container px-8 pt-32 mx-auto overflow-auto">
-      <div className="flex justify-center">
-        <SearchBox
-          pathname={pathname}
-          history={history}
-          query={query}
-          placeholder="Movie or TV Show id, url or name..."
-        />
-      </div>
+      <SearchBox
+        pathname={pathname}
+        history={history}
+        query={query}
+        placeholder="Movie or TV Show id, url or name..."
+      />
       <div>{mainContent}</div>
     </div>
   );
