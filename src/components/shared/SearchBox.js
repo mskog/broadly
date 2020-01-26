@@ -1,27 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-import { DebounceInput } from "react-debounce-input";
+export default function SearchBox({ pathname, history, query, placeholder }) {
+  const [text, setText] = useState(query);
 
-export default function SearchBox({
-  pathname,
-  history,
-  query,
-  placeholder,
-  minLength = 3,
-  debounceTimeout = 200
-}) {
-  const handleQueryChange = event => {
-    history.replace({ pathname, search: `?query=${event.target.value}` });
+  const handleChange = event => {
+    event.preventDefault();
+    history.replace({ pathname, search: `?query=${text}` });
   };
 
   return (
-    <DebounceInput
-      minLength={minLength}
-      debounceTimeout={debounceTimeout}
-      value={query}
-      onChange={handleQueryChange}
-      className="w-full px-3 py-2 my-8 text-gray-700 bg-gray-200 border rounded shadow appearance-none md:w-6/12 xt-gray-700 mxleading-tight focus:outline-none focus:shadow-outline"
-      placeholder={placeholder}
-    />
+    <form className="flex justify-center w-full" onSubmit={handleChange}>
+      <input
+        type="text"
+        value={text}
+        className="flex-grow px-3 py-2 leading-tight text-gray-700 bg-gray-200 border rounded rounded-r-none shadow appearance-none md:flex-grow-0 md:w-6/12 focus:outline-none focus:shadow-outline"
+        placeholder={placeholder}
+        onChange={event => setText(event.target.value)}
+      />
+      <button
+        type="submit"
+        className="px-3 py-2 bg-teal-500 rounded rounded-l-none"
+      >
+        <FontAwesomeIcon className="" icon={faSearch} />
+      </button>
+    </form>
   );
 }

@@ -44,8 +44,6 @@ export default function Search(props) {
           history={history}
           query={query}
           placeholder="Movie or TV Show id, url or name..."
-          debounceTimeout={300}
-          minLength={3}
         />
       </div>
       <div>{mainContent}</div>

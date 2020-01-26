@@ -5,7 +5,7 @@ import queryString from "query-string";
 import { useTvShowsQuery } from "store/tv_shows";
 
 import Loading from "components/shared/LoadingFull";
-import SearchBox from "components/shared/SearchBox";
+import AutoSearchBox from "components/shared/AutoSearchBox";
 import Categories from "./Categories";
 import List from "./List";
 
@@ -56,7 +56,7 @@ export default function TvShows(props) {
     <div className="container px-4 mx-auto overflow-auto md:pt-10">
       <Categories category={category} />
       <div className="flex justify-center">
-        <SearchBox
+        <AutoSearchBox
           pathname={pathname}
           history={history}
           query={query}
