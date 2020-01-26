@@ -51,7 +51,7 @@ export default function Movies(props) {
   }
 
   return (
-    <div className="container px-8 mx-auto overflow-auto md:pt-10">
+    <div className="container px-4 mx-auto overflow-auto md:pt-10">
       <Categories category={category} />
       <div className="flex justify-center">
         <SearchBox
