@@ -29,7 +29,7 @@ export default function TvShowsCalendar() {
   }
 
   return (
-    <div className="container max-w-xl pt-20 mx-auto">
+    <div className="container max-w-xl mx-auto md:pt-10">
       <List tvShows={data.tvShowsCalendar} />
     </div>
   );

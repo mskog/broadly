@@ -5,7 +5,7 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 import TvShowsCalendar from "components/tv_shows_calendar/TvShowsCalendar";
 
-import Navigation from "./components/shared/Navigation";
+import TopNavigation from "./components/shared/TopNavigation";
 
 import Movies from "./components/movies/Movies";
 import Movie from "./components/movie/Movie";
@@ -32,15 +32,15 @@ function App() {
     }
   });
 
-  const NavigationWithRouter = withRouter(Navigation);
+  const TopNavigationWithRouter = withRouter(TopNavigation);
 
   return (
     <ApolloProvider client={client}>
       <div
         style={{ height: "100%" }}
-        className="h-screen text-gray-400 App bg-background-blue"
+        className="h-screen overflow-scroll text-gray-400 App bg-background-blue"
       >
-        <NavigationWithRouter />
+        <TopNavigationWithRouter />
         <div className="">
           <Switch>
             <Redirect from="/" exact to="/movies/watched" />

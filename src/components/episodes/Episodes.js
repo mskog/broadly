@@ -34,7 +34,7 @@ export default function Episodes() {
   }
 
   return (
-    <div className="container px-8 pt-20 mx-auto overflow-auto">
+    <div className="container px-8 pt-10 mx-auto overflow-auto">
       {mainContent}
     </div>
   );
