@@ -37,7 +37,7 @@ export default function Search(props) {
   }
 
   return (
-    <div className="container px-8 pt-20 mx-auto overflow-auto">
+    <div className="container px-8 pt-32 mx-auto overflow-auto">
       <div className="flex justify-center">
         <SearchBox
           pathname={pathname}

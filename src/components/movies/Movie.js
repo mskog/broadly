@@ -16,14 +16,14 @@ export default function Movie({ movie }) {
   return (
     <div className="text-gray-100 rounded shadow-lg shadow-fat bg-background-blue-2">
       <div className="flex h-40 p-4">
-        <div className="relative w-2/5">
+        <div className="relative w-3/5 md:w-2/5">
           <LazyLoad>
             <Link to={`/movies/${id}`}>
               <Poster tmdbId={tmdbId} />
             </Link>
           </LazyLoad>
         </div>
-        <div className="w-full p-2">
+        <div className="w-full pl-2">
           <Link to={`/movies/${id}`}>
             <h2 className="text-3xl font-light leading-none ">{title}</h2>
           </Link>
