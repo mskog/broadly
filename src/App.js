@@ -1,4 +1,5 @@
 import React from "react";
+import "typeface-roboto";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";

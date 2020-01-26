@@ -13,6 +13,9 @@ module.exports = {
         "66vh": "66vh",
         "75vh": "75vh"
       }
+    },
+    fontFamily: {
+      body: ["Roboto", "sans-serif"]
     }
   },
   variants: {
