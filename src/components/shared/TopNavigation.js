@@ -21,13 +21,8 @@ export default function Navigation(props) {
   return (
     <nav
       style={{ backgroundColor: `rgba(21, 26, 48, ${menuOpacity})` }}
-      className="fixed z-50 flex flex-wrap items-center justify-between w-full p-6"
+      className="fixed z-50 flex flex-wrap items-center justify-end w-full p-6"
     >
-      <div className="flex items-center flex-shrink-0 mr-6 text-white">
-        <Link to="/movies/watched">
-          <span className="text-xl font-semibold tracking-tight">Broad</span>
-        </Link>
-      </div>
       <div className="block lg:hidden">
         <button
           type="button"

@@ -29,9 +29,9 @@ export default function TvShow({ tvShow }) {
             </Link>
           </LazyLoad>
         </div>
-        <div className="w-full pl-2">
+        <div className="w-full ">
           <Link to={`/tv_shows/${id}`}>
-            <h2 className="text-3xl font-light leading-none ">{name}</h2>
+            <h2 className="text-3xl leading-none ">{name}</h2>
           </Link>
           <Ratings score={voteAverage * 10} />
           <div className="mt-2 text-sm font-thin">

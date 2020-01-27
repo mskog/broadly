@@ -31,7 +31,7 @@ export default function TvShowsCalendar() {
   }
 
   return (
-    <div className="container max-w-xl mx-auto md:pt-10">
+    <div className="container max-w-xl pt-10 mx-auto">
       <List tvShows={data.tvShowsCalendar} />
     </div>
   );

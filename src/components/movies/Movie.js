@@ -23,9 +23,9 @@ export default function Movie({ movie }) {
             </Link>
           </LazyLoad>
         </div>
-        <div className="w-full pl-2">
+        <div className="w-full">
           <Link to={`/movies/${id}`}>
-            <h2 className="text-3xl font-light leading-none ">{title}</h2>
+            <h2 className="text-3xl leading-none ">{title}</h2>
           </Link>
           <Ratings score={rtCriticsRating} />
           <div className="mt-2 text-sm font-thin">
