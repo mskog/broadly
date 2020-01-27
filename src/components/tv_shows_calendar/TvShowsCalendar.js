@@ -22,7 +22,9 @@ const GET_TV_SHOWS_CALENDAR = gql`
 `;
 
 export default function TvShowsCalendar() {
-  const { data } = useQuery(GET_TV_SHOWS_CALENDAR);
+  const { data } = useQuery(GET_TV_SHOWS_CALENDAR, {
+    fetchPolicy: "cache-and-network"
+  });
 
   if (!data) {
     return <Loading />;

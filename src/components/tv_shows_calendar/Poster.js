@@ -27,7 +27,8 @@ function image({ loading, error, data }) {
 export default function Poster({ tmdbId }) {
   const url = image(
     useQuery(TV_SHOW_POSTER, {
-      variables: { tmdbId }
+      variables: { tmdbId },
+      fetchPolicy: "cache-first"
     })
   );
 

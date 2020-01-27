@@ -138,19 +138,22 @@ export const useTvShowsQuery = ({ category, first, skip, query }) => {
 
 export const useTvShowQuery = ({ id }) => {
   return useQuery(GET_TV_SHOW, {
-    variables: { id }
+    variables: { id },
+    fetchPolicy: "cache-and-network"
   });
 };
 
 export const useEpisodeQuery = ({ id }) => {
   return useQuery(GET_EPISODE, {
+    fetchPolicy: "cache-and-network",
     variables: { id }
   });
 };
 
 export const useEpisodesQuery = ({ first, skip }) => {
   return useQuery(GET_EPISODES, {
-    variables: { first, skip }
+    variables: { first, skip },
+    fetchPolicy: "cache-and-network"
   });
 };
 

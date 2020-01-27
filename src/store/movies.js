@@ -90,7 +90,8 @@ export const useMoviesQuery = ({ category, first, skip, query }) => {
 
 export const useMovieQuery = ({ id }) => {
   return useQuery(GET_MOVIE, {
-    variables: { id }
+    variables: { id },
+    fetchPolicy: "cache-and-network"
   });
 };
 

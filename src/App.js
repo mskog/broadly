@@ -1,10 +1,11 @@
 /* eslint-disable no-console */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "typeface-roboto";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
+import { persistCache } from "apollo-cache-persist";
 import { HttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
@@ -32,29 +33,43 @@ import TvShowSearchResult from "./components/search/tv_shows/Details";
 function App() {
   document.body.classList.add("bg-background-blue");
 
-  const cache = new InMemoryCache();
+  const [client, setClient] = useState(undefined);
 
-  const client = new ApolloClient({
-    link: ApolloLink.from([
-      onError(({ graphQLErrors, networkError }) => {
-        if (graphQLErrors)
-          graphQLErrors.forEach(({ message, locations, path }) =>
-            console.log(
-              `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-            )
-          );
-        if (networkError) console.log(`[Network error]: ${networkError}`);
-      }),
-      new HttpLink({
-        uri: process.env.REACT_APP_API_URL,
-        credentials: "same-origin",
-        headers: {
-          Authorization: `Basic ${process.env.REACT_APP_BASIC_AUTHORIZATION_TOKEN}`
-        }
-      })
-    ]),
-    cache
-  });
+  useEffect(() => {
+    const cache = new InMemoryCache();
+
+    const c = new ApolloClient({
+      link: ApolloLink.from([
+        onError(({ graphQLErrors, networkError }) => {
+          if (graphQLErrors)
+            graphQLErrors.forEach(({ message, locations, path }) =>
+              console.log(
+                `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+              )
+            );
+          if (networkError) console.log(`[Network error]: ${networkError}`);
+        }),
+        new HttpLink({
+          uri: process.env.REACT_APP_API_URL,
+          credentials: "same-origin",
+          headers: {
+            Authorization: `Basic ${process.env.REACT_APP_BASIC_AUTHORIZATION_TOKEN}`
+          }
+        })
+      ]),
+      cache
+    });
+
+    persistCache({
+      cache,
+      storage: window.localStorage
+    }).then(() => {
+      setClient(c);
+    });
+    return () => {};
+  }, []);
+
+  if (client === undefined) return <div>Loading...</div>;
 
   const TopNavigationWithRouter = withRouter(TopNavigation);
 

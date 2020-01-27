@@ -1,16 +1,11 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import LazyLoad from "react-lazyload";
 
 import Episode from "./Episode";
 
 export default function List({ loadMore, episodes }) {
   const episodeComponents = episodes.map(episode => {
-    return (
-      <LazyLoad key={episode.id}>
-        <Episode episode={episode} />
-      </LazyLoad>
-    );
+    return <Episode key={episode.id} episode={episode} />;
   });
 
   return (
