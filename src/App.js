@@ -62,7 +62,7 @@ function App() {
     <ApolloProvider client={client}>
       <div
         style={{ height: "100%" }}
-        className="h-screen overflow-scroll text-gray-400 App bg-background-blue"
+        className="h-screen text-gray-400 App bg-background-blue"
       >
         <TopNavigationWithRouter />
         <div className="">
