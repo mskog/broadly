@@ -6,7 +6,7 @@ import List from "./List";
 
 export default function Episodes() {
   const { loading, error, data, fetchMore } = useEpisodesQuery({
-    first: 20,
+    first: 40,
     skip: 0
   });
 
