@@ -6,7 +6,7 @@ import List from "./List";
 
 export default function Episodes() {
   const { loading, error, data, fetchMore } = useEpisodesQuery({
-    first: 40,
+    first: 30,
     skip: 0
   });
 
@@ -33,9 +33,5 @@ export default function Episodes() {
     mainContent = <List loadMore={loadMore} episodes={data.episodes} />;
   }
 
-  return (
-    <div className="container px-8 pt-10 mx-auto overflow-auto">
-      {mainContent}
-    </div>
-  );
+  return <div className="container px-8 pt-10 mx-auto">{mainContent}</div>;
 }
