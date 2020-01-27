@@ -34,7 +34,7 @@ export default function TvShow({ tvShow }) {
             <h2 className="text-3xl font-light leading-none ">{name}</h2>
           </Link>
           <Ratings score={voteAverage * 10} />
-          <div className="mt-1 text-xs font-thin">
+          <div className="mt-2 text-sm font-thin">
             <span className="mr-2">
               <FontAwesomeIcon className="mr-1" icon={faCalendar} />
               {releaseYear(firstAirDate)}

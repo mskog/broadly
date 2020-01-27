@@ -28,7 +28,7 @@ export default function Movie({ movie }) {
             <h2 className="text-3xl font-light leading-none ">{title}</h2>
           </Link>
           <Ratings score={rtCriticsRating} />
-          <div className="mt-1 text-xs font-thin">
+          <div className="mt-2 text-sm font-thin">
             <span className="mr-2">
               <FontAwesomeIcon className="mr-1" icon={faCalendar} />
               {releaseYear(releaseDate)}
