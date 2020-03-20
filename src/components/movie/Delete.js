@@ -1,9 +1,7 @@
 import React from "react";
 import LoaderButton from "components/shared/LoaderButton";
 
-export default function Delete({ handle, downloadAt }) {
-  if (downloadAt) return null;
-
+export default function Delete({ handle, bestRelease }) {
   return (
     <div className="w-full mx-1 my-2 md:w-6/12">
       <LoaderButton

@@ -1,8 +1,8 @@
 import React from "react";
 import LoaderButton from "components/shared/LoaderButton";
 
-export default function Force({ handle, downloadAt }) {
-  if (!downloadAt) return null;
+export default function Force({ handle, bestRelease }) {
+  if (!bestRelease) return null;
 
   return (
     <div className="w-full mx-1 my-2 md:w-6/12">

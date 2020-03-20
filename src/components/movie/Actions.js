@@ -9,7 +9,7 @@ import Force from "./Force";
 
 export default function Actions(props) {
   const {
-    movie: { id, downloadAt }
+    movie: { id, bestRelease }
   } = props;
 
   const history = useHistory();
@@ -30,8 +30,8 @@ export default function Actions(props) {
 
   return (
     <>
-      <Force downloadAt={downloadAt} handle={forceMovie} />
-      <Delete downloadAt={downloadAt} handle={deleteMovie} />
+      <Force bestRelease={bestRelease} handle={forceMovie} />
+      <Delete bestRelease={bestRelease} handle={deleteMovie} />
     </>
   );
 }
