@@ -49,6 +49,19 @@ const GET_MOVIE = gql`
   }
 `;
 
+const GET_MOVIE_SUMMARY = gql`
+  query MovieSummary($imdbId: ID!) {
+    movieSummary(imdbId: $imdbId) {
+      title
+      overview
+      rating
+      status
+      runtime
+      released
+    }
+  }
+`;
+
 const DELETE_MOVIE = gql`
   mutation DeleteMovie($id: ID!) {
     deleteMovie(id: $id) {
@@ -85,6 +98,13 @@ export const useMoviesQuery = ({ category, first, skip, query }) => {
   return useQuery(GET_MOVIES, {
     variables: { category, first, skip, query },
     fetchPolicy: "cache-and-network"
+  });
+};
+
+export const useMovieSummaryQuery = ({ imdbId }) => {
+  return useQuery(GET_MOVIE_SUMMARY, {
+    variables: { imdbId },
+    fetchPolicy: "cache-first"
   });
 };
 

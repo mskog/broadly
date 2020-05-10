@@ -54,6 +54,21 @@ const GET_TV_SHOW = gql`
   }
 `;
 
+const GET_TV_SHOW_SUMMARY = gql`
+  query TvShowSummary($imdbId: ID!) {
+    tvShowSummary(imdbId: $imdbId) {
+      title
+      overview
+      rating
+      status
+      rating
+      firstAired
+      runtime
+      airedEpisodes
+    }
+  }
+`;
+
 const GET_EPISODE = gql`
   query Episode($id: ID!) {
     episode(id: $id) {
@@ -140,6 +155,13 @@ export const useTvShowQuery = ({ id }) => {
   return useQuery(GET_TV_SHOW, {
     variables: { id },
     fetchPolicy: "cache-and-network"
+  });
+};
+
+export const useTvShowSummaryQuery = ({ imdbId }) => {
+  return useQuery(GET_TV_SHOW_SUMMARY, {
+    variables: { imdbId },
+    fetchPolicy: "cache-first"
   });
 };
 
