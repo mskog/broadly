@@ -98,6 +98,7 @@ const GET_EPISODES = gql`
       season
       episode
       still
+      watched
       tmdbDetails {
         name
         overview
