@@ -19,13 +19,20 @@ export default function Episode(props) {
     return <Loading />;
   }
 
+  const { episode } = data;
+
+  let overview;
+  if (episode.watched) {
+    overview = episode.tmdbDetails.overview;
+  } else {
+    overview = "[ Overview hidden until watched ]";
+  }
+
   return (
     <div>
-      <Top episode={data.episode} />
+      <Top episode={episode} />
       <div className="container max-w-2xl px-8 mx-auto">
-        <p className="py-4 text-lg text-gray-400">
-          {data.episode.tmdbDetails.overview}
-        </p>
+        <p className="py-4 text-lg text-gray-400">{overview}</p>
       </div>
     </div>
   );

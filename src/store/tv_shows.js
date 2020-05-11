@@ -45,6 +45,7 @@ const GET_TV_SHOW = gql`
         season
         episode
         still
+        watched
         tmdbDetails {
           name
           overview
@@ -77,6 +78,7 @@ const GET_EPISODE = gql`
       season
       episode
       still
+      watched
       tmdbDetails {
         name
         overview

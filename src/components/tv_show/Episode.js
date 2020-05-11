@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import { padStart, truncate } from "lodash";
 import LazyLoad from "react-lazyload";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+
 function seasonEpisode(season, episodeNumber) {
   return `S${padStart(season, 2, "0")}E${padStart(episodeNumber, 2, "0")}`;
 }
@@ -26,21 +29,36 @@ export default function Episode({ episode }) {
     still,
     season,
     episode: episodeNumber,
+    watched,
     tmdbDetails = {}
   } = episode;
 
-  const { name: episodeName = name, overview } = tmdbDetails;
+  const { name: episodeName = name } = tmdbDetails;
+
+  let overview;
+  if (watched) {
+    overview = tmdbDetails.overview;
+  } else {
+    overview = "[ Overview hidden until watched ]";
+  }
 
   return (
     <LazyLoad>
       <div className="w-full p-2 md:w-1/2 lg:w-1/3">
         <Link to={`/episodes/${id}`}>
           <div
-            className="h-40 bg-cover "
+            className="relative h-40 bg-cover"
             style={{
               backgroundImage: `linear-gradient(to bottom, rgba(21,26,48,0.6), rgba(21,26,48,0.9)), url(${still})`
             }}
           >
+            {watched && (
+              <div className="absolute top-0 right-0">
+                <div className="p-2 text-gray-500">
+                  <FontAwesomeIcon icon={faEye} />
+                </div>
+              </div>
+            )}
             <div className="p-4">
               {episodeHeader(seasonEpisode(season, episodeNumber), episodeName)}
               <p className="text-gray-500">

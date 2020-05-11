@@ -40,13 +40,13 @@ export default function Episode({ episode }) {
     <div className="w-full p-2 md:w-1/2 lg:w-1/3">
       <Link to={`/episodes/${id}`}>
         <div
-          className="h-40 bg-cover "
+          className="relative h-40 bg-cover"
           style={{
             backgroundImage: `linear-gradient(to bottom, rgba(21,26,48,0.6), rgba(21,26,48,0.9)), url(${still})`
           }}
         >
           {watched && (
-            <div className="flex justify-end">
+            <div className="absolute top-0 right-0">
               <div className="p-2 text-gray-500">
                 <FontAwesomeIcon icon={faEye} />
               </div>

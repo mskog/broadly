@@ -24,7 +24,7 @@ export default function Top({ episode }) {
     season,
     episode: episodeNumber,
     still,
-    tmdbDetails: { name, airDate },
+    tmdbDetails: { name },
     tvShow: { id: tvShowId, name: tvShowName }
   } = episode;
 
@@ -50,7 +50,6 @@ export default function Top({ episode }) {
                 title="Episode"
                 value={seasonEpisode(season, episodeNumber)}
               />
-              <LevelItem title="Air date" value={airDate} />
             </Level>
           </div>
         </div>

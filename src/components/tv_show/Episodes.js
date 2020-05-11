@@ -1,14 +1,13 @@
 import React from "react";
-import { sortBy, uniqBy } from "lodash";
+import { sortBy, uniqBy, reverse } from "lodash";
 
 import Episode from "./Episode";
 
 export default function Episodes({ episodes }) {
   const uniqEpisodes = uniqBy(episodes, episode => episode.episode);
 
-  const episodeComponents = sortBy(
-    uniqEpisodes,
-    episode => episode.episode
+  const episodeComponents = reverse(
+    sortBy(uniqEpisodes, episode => episode.episode)
   ).map(episode => {
     return <Episode key={episode.episode} episode={episode} />;
   });
