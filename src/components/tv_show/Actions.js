@@ -12,7 +12,7 @@ import Collect from "./Collect";
 
 export default function Actions(props) {
   const {
-    tvShow: { id, watching, collected }
+    tvShow: { id, watching, collected, waitlist }
   } = props;
 
   const [unwatchTvShow] = useUnwatchTvShowMutation({
@@ -29,9 +29,13 @@ export default function Actions(props) {
 
   return (
     <>
-      <Watch watching={watching} handle={watchTvShow} />
-      <Unwatch watching={watching} handle={unwatchTvShow} />
-      <Collect collected={collected} handle={collectTvShow} />
+      <Watch waitlist={waitlist} watching={watching} handle={watchTvShow} />
+      <Unwatch waitlist={waitlist} watching={watching} handle={unwatchTvShow} />
+      <Collect
+        waitlist={waitlist}
+        collected={collected}
+        handle={collectTvShow}
+      />
     </>
   );
 }

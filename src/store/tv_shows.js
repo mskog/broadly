@@ -28,6 +28,7 @@ const GET_TV_SHOW = gql`
       status
       watching
       collected
+      waitlist
       tmdbDetails {
         voteAverage
         firstAirDate

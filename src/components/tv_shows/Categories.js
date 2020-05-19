@@ -4,7 +4,8 @@ import Category from "./Category";
 
 const CATEGORIES = [
   { name: "watching", value: "watching" },
-  { name: "not watching", value: "not_watching" },
+  { name: "waitlist", value: "waitlist" },
+  { name: "other", value: "not_watching" },
   { name: "ended", value: "ended" }
 ];
 
