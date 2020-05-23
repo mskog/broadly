@@ -1,8 +1,5 @@
 import React from "react";
 
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
-
 import { releaseYear, formattedRuntime, cdnImage } from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
