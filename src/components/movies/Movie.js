@@ -2,7 +2,6 @@ import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
-import LazyLoad from "react-lazyload";
 import { Link } from "react-router-dom";
 
 import { formattedRuntime, releaseYear } from "utilities";
@@ -11,17 +10,22 @@ import Ratings from "components/shared/Ratings";
 import Poster from "./Poster";
 
 export default function Movie({ movie }) {
-  const { id, tmdbId, title, releaseDate, runtime, rtCriticsRating } = movie;
+  const {
+    id,
+    title,
+    releaseDate,
+    runtime,
+    rtCriticsRating,
+    posterImage
+  } = movie;
 
   return (
     <div className="text-gray-100 rounded shadow-lg shadow-fat bg-background-blue-2">
       <div className="flex h-40 p-4">
         <div className="relative w-3/5 md:w-2/5">
-          <LazyLoad>
-            <Link to={`/movies/${id}`}>
-              <Poster tmdbId={tmdbId} />
-            </Link>
-          </LazyLoad>
+          <Link to={`/movies/${id}`}>
+            <Poster src={posterImage} />
+          </Link>
         </div>
         <div className="w-full">
           <Link to={`/movies/${id}`}>

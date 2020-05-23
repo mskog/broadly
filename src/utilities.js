@@ -9,11 +9,30 @@ function releaseYear(releaseDate) {
 }
 
 function thumbnail(url) {
+  if (process.env.NODE_ENV === "development") {
+    return url;
+  }
   return `https://thumbs.mskog.com/240x0/${url}`;
 }
 
+function placeholder(url) {
+  if (process.env.NODE_ENV === "development") {
+    return url;
+  }
+  return `https://thumbs.mskog.com/20x0/filters:blur(5)/${url}`;
+}
+
 function cdnImage(url) {
+  if (process.env.NODE_ENV === "development") {
+    return url;
+  }
   return `https://thumbs.mskog.com/${url}`;
 }
 
-module.exports = { formattedRuntime, releaseYear, thumbnail, cdnImage };
+module.exports = {
+  formattedRuntime,
+  releaseYear,
+  thumbnail,
+  placeholder,
+  cdnImage
+};

@@ -34,21 +34,15 @@ function backgroundStyle(url) {
 // TODO: Use lazy loading and fancy placeholders
 export default function Top({ movie }) {
   const {
-    tmdbId,
     title,
     releaseDate,
     runtime,
     rtCriticsRating,
     rtAudienceRating,
     personalRating,
-    watched
+    watched,
+    backdropImage
   } = movie;
-
-  const url = image(
-    useQuery(MOVIE_POSTER, {
-      variables: { tmdbId }
-    })
-  );
 
   let rating;
   if (watched) {
@@ -70,7 +64,7 @@ export default function Top({ movie }) {
     <div>
       <div
         className="w-full -mb-40 h-66vh"
-        style={backgroundStyle(cdnImage(url))}
+        style={backgroundStyle(cdnImage(backdropImage))}
       />
       <div className="container h-full max-w-2xl px-8 mx-auto">
         <div className="flex flex-col justify-end h-full pb-10">

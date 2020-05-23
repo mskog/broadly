@@ -15,6 +15,8 @@ const GET_MOVIES = gql`
       watched
       personalRating
       overview
+      backdropImage
+      posterImage
     }
   }
 `;
@@ -35,6 +37,8 @@ const GET_MOVIE = gql`
       overview
       hasKillerRelease
       hasAcceptableRelease
+      backdropImage
+      posterImage
       bestRelease {
         codec
         container
