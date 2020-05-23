@@ -9,21 +9,6 @@ import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
 import RtRating from "components/shared/RtRating";
 
-const MOVIE_POSTER = gql`
-  query MoviePoster($tmdbId: ID!) {
-    moviePoster(tmdbId: $tmdbId) {
-      url
-    }
-  }
-`;
-
-function image({ loading, error, data }) {
-  if (loading || error) {
-    return "https://image.tmdb.org/t/p/original/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
-  }
-  return data.moviePoster.url;
-}
-
 function backgroundStyle(url) {
   return {
     backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url(${url})`,
