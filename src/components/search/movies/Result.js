@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { useMovieSummaryQuery } from "store/movies";
 
-import Poster from "components/movies/Poster";
+import Poster from "components/search/movies/Poster";
 
 import ResultDetails from "./ResultDetails";
 

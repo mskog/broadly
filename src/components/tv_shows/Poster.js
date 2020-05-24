@@ -1,42 +1,22 @@
 import React from "react";
 
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
-
 import { thumbnail } from "utilities";
 
-const IMAGE_PLACEHOLDER =
-  "https://image.tmdb.org/t/p/original/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
+import ProgressiveImage from "components/shared/ProgressiveImage";
 
-const TV_SHOW_POSTER = gql`
-  query TvShowPoster($tmdbId: ID!) {
-    tvShowPoster(tmdbId: $tmdbId) {
-      url
-    }
+export default function Poster({ src }) {
+  console.log(src);
+  let imageSrc;
+  if (!src) {
+    imageSrc = "https://www.fillmurray.com/105/160";
+  } else {
+    imageSrc = src;
   }
-`;
-
-function image({ loading, error, data }) {
-  if (loading || error) {
-    return IMAGE_PLACEHOLDER;
-  }
-  return data.tvShowPoster.url;
-}
-
-// TODO: Use lazy loading and fancy placeholders
-export default function Poster({ tmdbId }) {
-  const url = image(
-    useQuery(TV_SHOW_POSTER, {
-      variables: { tmdbId },
-      fetchPolicy: "cache-first"
-    })
-  );
 
   return (
-    <img
+    <ProgressiveImage
       className="h-40 -mt-10 rounded w-30"
-      alt="A poster"
-      src={thumbnail(url)}
+      src={thumbnail(imageSrc)}
     />
   );
 }

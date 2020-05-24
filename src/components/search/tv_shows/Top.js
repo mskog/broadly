@@ -19,14 +19,14 @@ const TV_SHOW_POSTER = gql`
 
 function image({ loading, error, data }) {
   if (loading || error) {
-    return "https://image.tmdb.org/t/p/original/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
+    return "https://image.tmdb.org/t/p/w1280/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
   }
   return data.tvShowPoster.url;
 }
 
 function backgroundStyle(url) {
   return {
-    backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url(${url})`,
+    backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url('${url}')`,
     backgroundSize: "cover"
   };
 }
@@ -45,6 +45,8 @@ export default function Top({ tvShow }) {
       variables: { tmdbId }
     })
   );
+
+  console.log(url);
 
   return (
     <div>

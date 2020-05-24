@@ -6,6 +6,9 @@ const GET_TV_SHOWS = gql`
     tvShows(category: $category, first: $first, skip: $skip, query: $query) {
       id
       name
+      posterImage
+      posterImageThumbnail
+      backdropImage
       tmdbDetails {
         voteAverage
         firstAirDate
@@ -29,6 +32,8 @@ const GET_TV_SHOW = gql`
       watching
       collected
       waitlist
+      posterImage
+      backdropImage
       tmdbDetails {
         voteAverage
         firstAirDate
@@ -45,7 +50,8 @@ const GET_TV_SHOW = gql`
         name
         season
         episode
-        still
+        stillImage
+        stillImageThumbnail
         watched
         tmdbDetails {
           name
@@ -78,7 +84,8 @@ const GET_EPISODE = gql`
       name
       season
       episode
-      still
+      stillImage
+      stillImageThumbnail
       watched
       tmdbDetails {
         name
@@ -100,7 +107,8 @@ const GET_EPISODES = gql`
       name
       season
       episode
-      still
+      stillImage
+      stillImageThumbnail
       watched
       tmdbDetails {
         name

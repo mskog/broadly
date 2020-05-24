@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 
 import { releaseYear } from "utilities";
 
+import { cdnImage } from "utilities";
+
 import Ratings from "components/shared/Ratings";
 import Poster from "./Poster";
 
@@ -14,7 +16,8 @@ export default function TvShow({ tvShow }) {
   const {
     id,
     name,
-    tmdbDetails: { id: tmdbId, voteAverage, firstAirDate }
+    posterImageThumbnail,
+    tmdbDetails: { voteAverage, firstAirDate }
   } = tvShow;
 
   return (
@@ -24,7 +27,7 @@ export default function TvShow({ tvShow }) {
           <LazyLoad>
             <Link to={`/tv_shows/${id}`}>
               <div className="h-40 -mt-10 rounded">
-                <Poster tmdbId={tmdbId} />
+                <Poster src={cdnImage(posterImageThumbnail)} />
               </div>
             </Link>
           </LazyLoad>

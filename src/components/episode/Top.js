@@ -9,7 +9,7 @@ import Level from "components/shared/Level";
 
 function backgroundStyle(url) {
   return {
-    backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url(${url})`,
+    backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url('${url}')`,
     backgroundSize: "cover",
     backgroundPosition: "center"
   };
@@ -23,7 +23,7 @@ export default function Top({ episode }) {
   const {
     season,
     episode: episodeNumber,
-    still,
+    stillImage,
     tmdbDetails: { name },
     tvShow: { id: tvShowId, name: tvShowName }
   } = episode;
@@ -32,7 +32,7 @@ export default function Top({ episode }) {
     <div>
       <div
         className="w-full -mb-40 h-75vh"
-        style={backgroundStyle(cdnImage(still))}
+        style={backgroundStyle(cdnImage(stillImage))}
       />
       <div className="container h-full max-w-2xl px-8 mx-auto">
         <div className="flex flex-col justify-end h-full pb-10">

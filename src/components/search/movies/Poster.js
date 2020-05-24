@@ -8,9 +8,9 @@ import { thumbnail } from "utilities";
 const IMAGE_PLACEHOLDER =
   "https://image.tmdb.org/t/p/w300/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
 
-const TV_SHOW_POSTER = gql`
-  query TvShowPoster($tmdbId: ID!) {
-    tvShowPoster(tmdbId: $tmdbId) {
+const MOVIE_POSTER = gql`
+  query MoviePoster($tmdbId: ID!) {
+    moviePoster(tmdbId: $tmdbId) {
       url
     }
   }
@@ -20,17 +20,23 @@ function image({ loading, error, data }) {
   if (loading || error) {
     return IMAGE_PLACEHOLDER;
   }
-  return data.tvShowPoster.url;
+  return data.moviePoster.url;
 }
 
 // TODO: Use lazy loading and fancy placeholders
 export default function Poster({ tmdbId }) {
   const url = image(
-    useQuery(TV_SHOW_POSTER, {
+    useQuery(MOVIE_POSTER, {
       variables: { tmdbId },
       fetchPolicy: "cache-first"
     })
   );
 
-  return <img className="rounded" alt="A poster" src={thumbnail(url)} />;
+  return (
+    <img
+      className="h-40 -mt-10 rounded w-30"
+      alt="A poster"
+      src={thumbnail(url)}
+    />
+  );
 }

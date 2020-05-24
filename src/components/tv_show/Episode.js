@@ -9,6 +9,8 @@ import LazyLoad from "react-lazyload";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
+import { cdnImage } from "utilities";
+
 function seasonEpisode(season, episodeNumber) {
   return `S${padStart(season, 2, "0")}E${padStart(episodeNumber, 2, "0")}`;
 }
@@ -26,7 +28,7 @@ export default function Episode({ episode }) {
   const {
     id,
     name,
-    still,
+    stillImageThumbnail,
     season,
     episode: episodeNumber,
     watched,
@@ -49,7 +51,9 @@ export default function Episode({ episode }) {
           <div
             className="relative h-40 bg-cover"
             style={{
-              backgroundImage: `linear-gradient(to bottom, rgba(21,26,48,0.6), rgba(21,26,48,0.9)), url(${still})`
+              backgroundImage: `linear-gradient(to bottom, rgba(21,26,48,0.6), rgba(21,26,48,0.9)), url('${cdnImage(
+                stillImageThumbnail
+              )}')`
             }}
           >
             {watched && (

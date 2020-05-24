@@ -39,6 +39,7 @@ const GET_MOVIE = gql`
       hasAcceptableRelease
       backdropImage
       posterImage
+      posterImageThumbnail
       bestRelease {
         codec
         container

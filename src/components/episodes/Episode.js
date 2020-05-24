@@ -8,6 +8,8 @@ import { padStart } from "lodash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
+import { cdnImage } from "utilities";
+
 function seasonEpisode(season, episodeNumber) {
   return `S${padStart(season, 2, "0")}E${padStart(episodeNumber, 2, "0")}`;
 }
@@ -24,15 +26,13 @@ function episodeHeader(episode, name) {
 export default function Episode({ episode }) {
   const {
     id,
-    still,
+    stillImageThumbnail,
     season,
     episode: episodeNumber,
     tmdbDetails = {},
     tvShow: { name },
     watched
   } = episode;
-
-  console.log(episode);
 
   const { name: episodeName } = tmdbDetails;
 
@@ -42,7 +42,9 @@ export default function Episode({ episode }) {
         <div
           className="relative h-40 bg-cover"
           style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(21,26,48,0.6), rgba(21,26,48,0.9)), url(${still})`
+            backgroundImage: `linear-gradient(to bottom, rgba(21,26,48,0.6), rgba(21,26,48,0.9)), url('${cdnImage(
+              stillImageThumbnail
+            )}')`
           }}
         >
           {watched && (

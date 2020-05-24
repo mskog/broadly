@@ -16,7 +16,7 @@ export default function Movie({ movie }) {
     releaseDate,
     runtime,
     rtCriticsRating,
-    posterImage
+    posterImageThumbnail
   } = movie;
 
   return (
@@ -24,7 +24,7 @@ export default function Movie({ movie }) {
       <div className="flex h-40 p-4">
         <div className="relative w-3/5 md:w-2/5">
           <Link to={`/movies/${id}`}>
-            <Poster src={posterImage} />
+            <Poster src={posterImageThumbnail} />
           </Link>
         </div>
         <div className="w-full">

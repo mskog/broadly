@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 import { useTvShowSummaryQuery } from "store/tv_shows";
 
-import Poster from "components/tv_shows/Poster";
+import Poster from "components/search/tv_shows/Poster";
 
 import ResultDetails from "./ResultDetails";
 
@@ -16,8 +16,6 @@ export default function Result({ result }) {
   const { data } = useTvShowSummaryQuery({
     imdbId
   });
-
-  console.log(data);
 
   return (
     <div className="text-gray-100 rounded shadow-lg shadow-fat bg-background-blue-2">

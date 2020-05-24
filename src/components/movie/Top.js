@@ -8,7 +8,7 @@ import RtRating from "components/shared/RtRating";
 
 function backgroundStyle(url) {
   return {
-    backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url(${url})`,
+    backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url('${url}')`,
     backgroundSize: "cover"
   };
 }
