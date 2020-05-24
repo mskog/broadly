@@ -17,6 +17,7 @@ const GET_MOVIES = gql`
       overview
       backdropImage
       posterImage
+      posterImageThumbnail
     }
   }
 `;
