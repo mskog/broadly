@@ -18,6 +18,7 @@ const GET_TV_SHOWS = gql`
         ids {
           tmdb
         }
+        runtime
       }
     }
   }

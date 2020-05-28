@@ -1,13 +1,11 @@
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
 import LazyLoad from "react-lazyload";
 import { Link } from "react-router-dom";
 
-import { releaseYear } from "utilities";
-
-import { cdnImage } from "utilities";
+import { formattedRuntime, releaseYear, cdnImage } from "utilities";
 
 import Ratings from "components/shared/Ratings";
 import Poster from "./Poster";
@@ -17,7 +15,8 @@ export default function TvShow({ tvShow }) {
     id,
     name,
     posterImageThumbnail,
-    tmdbDetails: { voteAverage, firstAirDate }
+    tmdbDetails: { voteAverage, firstAirDate },
+    traktDetails: { runtime }
   } = tvShow;
 
   return (
@@ -41,6 +40,10 @@ export default function TvShow({ tvShow }) {
             <span className="mr-2">
               <FontAwesomeIcon className="mr-1" icon={faCalendar} />
               {releaseYear(firstAirDate)}
+            </span>
+            <span>
+              <FontAwesomeIcon className="mr-1" icon={faClock} />
+              {formattedRuntime(runtime)}
             </span>
           </div>
         </div>
