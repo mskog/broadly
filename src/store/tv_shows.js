@@ -45,6 +45,7 @@ const GET_TV_SHOW = gql`
         ids {
           tmdb
         }
+        runtime
       }
       episodes {
         id

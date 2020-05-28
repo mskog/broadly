@@ -1,6 +1,6 @@
 import React from "react";
 
-import { cdnImage } from "utilities";
+import { formattedRuntime, cdnImage } from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
@@ -20,7 +20,8 @@ export default function Top({ tvShow }) {
     name,
     status,
     backdropImage,
-    tmdbDetails: { voteAverage, firstAirDate }
+    tmdbDetails: { voteAverage, firstAirDate },
+    traktDetails: { runtime }
   } = tvShow;
 
   const rating = (
@@ -44,6 +45,7 @@ export default function Top({ tvShow }) {
           <div className="capitalize md:pt-10">
             <Level>
               <LevelItem title="First Aired" value={firstAirDate} />
+              <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
               <LevelItem title="Status" value={status} />
               {rating}
             </Level>
