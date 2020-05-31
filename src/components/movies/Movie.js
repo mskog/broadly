@@ -16,8 +16,11 @@ export default function Movie({ movie }) {
     releaseDate,
     runtime,
     rtCriticsRating,
+    personalRating,
     posterImageThumbnail
   } = movie;
+
+  const rating = personalRating * 10 || rtCriticsRating;
 
   return (
     <div className="text-gray-100 rounded shadow-lg shadow-fat bg-background-blue-2">
@@ -31,7 +34,7 @@ export default function Movie({ movie }) {
           <Link to={`/movies/${id}`}>
             <h2 className="text-3xl leading-none ">{title}</h2>
           </Link>
-          <Ratings score={rtCriticsRating} />
+          <Ratings score={rating} />
           <div className="mt-2 text-sm font-thin">
             <span className="mr-2">
               <FontAwesomeIcon className="mr-1" icon={faCalendar} />
