@@ -21,7 +21,7 @@ function placeholder(url) {
 }
 
 function cdnImage(url) {
-  return `https://thumbs.mskog.com/filters:quality(50)/${url}`;
+  return `https://thumbs.mskog.com/filters:quality(80)/${url}`;
 }
 
 module.exports = {
