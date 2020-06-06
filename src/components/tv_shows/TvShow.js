@@ -5,7 +5,7 @@ import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
 import LazyLoad from "react-lazyload";
 import { Link } from "react-router-dom";
 
-import { formattedRuntime, releaseYear, cdnImage } from "utilities";
+import Utilities from "utilities";
 
 import Ratings from "components/shared/Ratings";
 import Poster from "./Poster";
@@ -26,7 +26,7 @@ export default function TvShow({ tvShow }) {
           <LazyLoad>
             <Link to={`/tv_shows/${id}`}>
               <div className="h-40 -mt-10 rounded">
-                <Poster src={cdnImage(posterImageThumbnail)} />
+                <Poster src={Utilities.cdnImage(posterImageThumbnail)} />
               </div>
             </Link>
           </LazyLoad>
@@ -39,11 +39,11 @@ export default function TvShow({ tvShow }) {
           <div className="mt-2 text-sm font-thin">
             <span className="mr-2">
               <FontAwesomeIcon className="mr-1" icon={faCalendar} />
-              {releaseYear(firstAirDate)}
+              {Utilities.releaseYear(firstAirDate)}
             </span>
             <span>
               <FontAwesomeIcon className="mr-1" icon={faClock} />
-              {formattedRuntime(runtime)}
+              {Utilities.formattedRuntime(runtime)}
             </span>
           </div>
         </div>

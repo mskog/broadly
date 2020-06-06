@@ -8,7 +8,7 @@ import { padStart } from "lodash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
-import { cdnImage } from "utilities";
+import Utilities from "utilities";
 
 function seasonEpisode(season, episodeNumber) {
   return `S${padStart(season, 2, "0")}E${padStart(episodeNumber, 2, "0")}`;
@@ -42,7 +42,7 @@ export default function Episode({ episode }) {
         <div
           className="relative h-40 bg-cover"
           style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(21,26,48,0.6), rgba(21,26,48,0.9)), url('${cdnImage(
+            backgroundImage: `linear-gradient(to bottom, rgba(21,26,48,0.6), rgba(21,26,48,0.9)), url('${Utilities.cdnImage(
               stillImageThumbnail
             )}')`
           }}

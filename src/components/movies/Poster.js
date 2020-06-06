@@ -1,6 +1,6 @@
 import React from "react";
 
-import { thumbnail } from "utilities";
+import Utilities from "utilities";
 
 import ProgressiveImage from "components/shared/ProgressiveImage";
 
@@ -15,7 +15,7 @@ export default function Poster({ src }) {
   return (
     <ProgressiveImage
       className="h-40 -mt-10 rounded w-30"
-      src={thumbnail(imageSrc)}
+      src={Utilities.thumbnail(imageSrc)}
     />
   );
 }

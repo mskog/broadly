@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { padStart } from "lodash";
 
-import { cdnImage } from "utilities";
+import Utilities from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
@@ -32,7 +32,7 @@ export default function Top({ episode }) {
     <div>
       <div
         className="w-full -mb-40 h-75vh"
-        style={backgroundStyle(cdnImage(stillImage))}
+        style={backgroundStyle(Utilities.cdnImage(stillImage))}
       />
       <div className="container h-full max-w-2xl px-8 mx-auto">
         <div className="flex flex-col justify-end h-full pb-10">

@@ -1,7 +1,7 @@
 import React from "react";
 
 import Ratings from "components/shared/Ratings";
-import { formattedRuntime, releaseYear } from "utilities";
+import Utilities from "utilities";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
@@ -14,11 +14,11 @@ export default function ResultDetails({ rating, released, runtime }) {
       <div className="mt-2 text-sm font-thin">
         <span className="mr-2">
           <FontAwesomeIcon className="mr-1" icon={faCalendar} />
-          {releaseYear(released)}
+          {Utilities.releaseYear(released)}
         </span>
         <span>
           <FontAwesomeIcon className="mr-1" icon={faClock} />
-          {formattedRuntime(runtime)}
+          {Utilities.formattedRuntime(runtime)}
         </span>
       </div>
     </div>

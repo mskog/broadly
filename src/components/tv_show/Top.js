@@ -1,6 +1,6 @@
 import React from "react";
 
-import { formattedRuntime, cdnImage } from "utilities";
+import Utilities from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
@@ -35,7 +35,7 @@ export default function Top({ tvShow }) {
     <div>
       <div
         className="w-full -mb-40 h-75vh"
-        style={backgroundStyle(cdnImage(backdropImage))}
+        style={backgroundStyle(Utilities.cdnImage(backdropImage))}
       />
       <div className="container h-full max-w-2xl px-8 mx-auto">
         <div className="flex flex-col justify-end h-full pb-10">
@@ -45,7 +45,10 @@ export default function Top({ tvShow }) {
           <div className="capitalize md:pt-10">
             <Level>
               <LevelItem title="First Aired" value={firstAirDate} />
-              <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
+              <LevelItem
+                title="Runtime"
+                value={Utilities.formattedRuntime(runtime)}
+              />
               <LevelItem title="Status" value={status} />
               {rating}
             </Level>

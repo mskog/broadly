@@ -3,7 +3,7 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
-import { thumbnail } from "utilities";
+import Utilities from "utilities";
 
 const IMAGE_PLACEHOLDER =
   "https://image.tmdb.org/t/p/w300/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
@@ -36,7 +36,7 @@ export default function Poster({ tmdbId }) {
     <img
       className="h-40 -mt-10 rounded w-30"
       alt="A poster"
-      src={thumbnail(url)}
+      src={Utilities.thumbnail(url)}
     />
   );
 }

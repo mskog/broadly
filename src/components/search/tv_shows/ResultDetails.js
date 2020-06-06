@@ -3,7 +3,7 @@ import React from "react";
 import { capitalize } from "lodash";
 
 import Ratings from "components/shared/Ratings";
-import { formattedRuntime, releaseYear } from "utilities";
+import Utilities from "utilities";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -26,11 +26,11 @@ export default function ResultDetails({
       <div className="grid grid-cols-2 gap-1 mt-2 text-sm font-thin md:-mx-2 md:flex">
         <div className="md:px-2">
           <FontAwesomeIcon className="mr-1" icon={faCalendar} />
-          {releaseYear(firstAired)}
+          {Utilities.releaseYear(firstAired)}
         </div>
         <div className="md:px-2">
           <FontAwesomeIcon className="mr-1" icon={faClock} />
-          {formattedRuntime(runtime)}
+          {Utilities.formattedRuntime(runtime)}
         </div>
         <div className="md:px-2">
           <FontAwesomeIcon className="mr-1" icon={faTv} />
