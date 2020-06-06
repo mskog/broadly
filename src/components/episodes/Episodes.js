@@ -3,11 +3,19 @@ import React from "react";
 import { useEpisodesQuery } from "store/tv_shows";
 import Loading from "components/shared/LoadingFull";
 import List from "./List";
+import Categories from "./Categories";
 
-export default function Episodes() {
+export default function Episodes(props) {
+  const {
+    match: {
+      params: { category = "WATCHED" }
+    }
+  } = props;
+
   const { loading, error, data, fetchMore } = useEpisodesQuery({
     first: 30,
-    skip: 0
+    skip: 0,
+    category: category.toUpperCase()
   });
 
   const loadMore = () => {
@@ -33,5 +41,10 @@ export default function Episodes() {
     mainContent = <List loadMore={loadMore} episodes={data.episodes} />;
   }
 
-  return <div className="container px-8 pt-10 mx-auto">{mainContent}</div>;
+  return (
+    <div className="container px-8 pt-10 mx-auto">
+      <Categories category={category} />
+      {mainContent}
+    </div>
+  );
 }

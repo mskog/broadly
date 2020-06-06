@@ -50,7 +50,7 @@ export default function Navigation(props) {
           />
           <NavigationLink
             title="Episodes"
-            href="/episodes"
+            href="/episodes/downloads"
             active={currentNav === "episodes"}
             onClick={() => toggleExpansion(!isExpanded)}
           />

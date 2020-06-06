@@ -87,8 +87,8 @@ function App() {
             <Route path="/movies/:category(\w+)" component={Movies} />
             <Route path="/tv_shows/:id(\d+)" component={TvShow} />
             <Route path="/tv_shows/:category(\w+)" component={TvShows} />
-            <Route path="/episodes/:id" component={Episode} />
-            <Route path="/episodes" component={Episodes} />
+            <Route path="/episodes/:id(\d+)" component={Episode} />
+            <Route path="/episodes/:category(\w+)?" component={Episodes} />
             <Route
               path="/search/movies/details/:imdbId"
               component={MovieSearchResult}

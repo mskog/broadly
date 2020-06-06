@@ -103,8 +103,8 @@ const GET_EPISODE = gql`
 `;
 
 const GET_EPISODES = gql`
-  query Episodes($first: Int, $skip: Int) {
-    episodes(first: $first, skip: $skip) {
+  query Episodes($first: Int, $skip: Int, $category: EpisodeCategory) {
+    episodes(first: $first, skip: $skip, category: $category) {
       id
       name
       season
@@ -186,9 +186,9 @@ export const useEpisodeQuery = ({ id }) => {
   });
 };
 
-export const useEpisodesQuery = ({ first, skip }) => {
+export const useEpisodesQuery = ({ first, skip, category }) => {
   return useQuery(GET_EPISODES, {
-    variables: { first, skip },
+    variables: { first, skip, category },
     fetchPolicy: "cache-and-network"
   });
 };
