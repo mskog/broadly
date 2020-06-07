@@ -41,7 +41,7 @@ export default function Episode({ episode }) {
   if (watched) {
     overview = tmdbDetails.overview;
   } else {
-    overview = "[ Overview hidden until watched ]";
+    overview = "[ Overview hidden to prevent spoilers ]";
   }
 
   return (

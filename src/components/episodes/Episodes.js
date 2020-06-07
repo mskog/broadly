@@ -42,7 +42,7 @@ export default function Episodes(props) {
   }
 
   return (
-    <div className="container px-8 pt-10 mx-auto">
+    <div className="container px-8 mx-auto md:pt-10">
       <Categories category={category} />
       {mainContent}
     </div>

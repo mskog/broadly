@@ -25,7 +25,7 @@ export default function Episode(props) {
   if (episode.watched) {
     overview = episode.tmdbDetails.overview;
   } else {
-    overview = "[ Overview hidden until watched ]";
+    overview = "[ Overview hidden to prevent spoilers ]";
   }
 
   return (
