@@ -1,6 +1,16 @@
 import React from "react";
 
-function LevelItem({ title, value, children, defaultText = "?" }) {
+function LevelItem({
+  title,
+  value,
+  children,
+  defaultText = "?",
+  hideIfBlank = false
+}) {
+  if (!value && hideIfBlank) {
+    return <></>;
+  }
+
   return (
     <div className="pt-4 text-center md:pt-0">
       <div className="text-2xl font-semibold leading-none text-gray-400">

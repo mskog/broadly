@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { padStart } from "lodash";
+import { DateTime } from "luxon";
 
 import { cdnImage } from "utilities";
 
@@ -25,6 +26,7 @@ export default function Top({ episode }) {
     episode: episodeNumber,
     stillImage,
     tmdbDetails: { name },
+    watchedAt,
     tvShow: { id: tvShowId, name: tvShowName }
   } = episode;
 
@@ -49,6 +51,11 @@ export default function Top({ episode }) {
               <LevelItem
                 title="Episode"
                 value={seasonEpisode(season, episodeNumber)}
+              />
+              <LevelItem
+                hideIfBlank
+                title="Watched"
+                value={DateTime.fromISO(watchedAt).toISODate()}
               />
             </Level>
           </div>

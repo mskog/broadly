@@ -89,6 +89,7 @@ const GET_EPISODE = gql`
       stillImage
       stillImageThumbnail
       watched
+      watchedAt
       tmdbDetails {
         name
         overview
@@ -158,6 +159,14 @@ const SAMPLE_TV_SHOW = gql`
   }
 `;
 
+const EPISODE_WATCHED = gql`
+  mutation EpisodeWatched($id: ID!) {
+    episodeWatched(id: $id) {
+      id
+    }
+  }
+`;
+
 export const useTvShowsQuery = ({ category, first, skip, query }) => {
   return useQuery(GET_TV_SHOWS, {
     variables: { category, first, skip, query },
@@ -221,6 +230,14 @@ export const useCollectTvShowMutation = ({ id, update }) => {
   return useMutation(COLLECT_TV_SHOW, {
     variables: { id },
     refetchQueries: ["TvShow", "TvShows"],
+    update
+  });
+};
+
+export const useEpisodeWatchedMutation = ({ id, update }) => {
+  return useMutation(EPISODE_WATCHED, {
+    variables: { id },
+    refetchQueries: ["TvShow", "Episode"],
     update
   });
 };
