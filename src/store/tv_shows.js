@@ -98,6 +98,9 @@ const GET_EPISODE = gql`
       tvShow {
         id
         name
+        traktDetails {
+          runtime
+        }
       }
     }
   }

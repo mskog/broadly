@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { padStart } from "lodash";
 import { DateTime } from "luxon";
 
-import { cdnImage } from "utilities";
+import { formattedRuntime, cdnImage } from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
@@ -27,7 +27,11 @@ export default function Top({ episode }) {
     stillImage,
     tmdbDetails: { name },
     watchedAt,
-    tvShow: { id: tvShowId, name: tvShowName }
+    tvShow: {
+      id: tvShowId,
+      name: tvShowName,
+      traktDetails: { runtime }
+    }
   } = episode;
 
   return (
@@ -57,6 +61,7 @@ export default function Top({ episode }) {
                 title="Watched"
                 value={DateTime.fromISO(watchedAt).toISODate()}
               />
+              <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
             </Level>
           </div>
         </div>
