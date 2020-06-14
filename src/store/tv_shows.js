@@ -46,6 +46,7 @@ const GET_TV_SHOW = gql`
           tmdb
         }
         runtime
+        genres
       }
       episodes {
         id
@@ -75,6 +76,7 @@ const GET_TV_SHOW_SUMMARY = gql`
       firstAired
       runtime
       airedEpisodes
+      genres
     }
   }
 `;

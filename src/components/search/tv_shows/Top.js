@@ -37,7 +37,7 @@ export default function Top({ tvShow }) {
   const {
     tmdbId,
     title,
-    details: { firstAired, runtime, airedEpisodes, status, rating }
+    details: { firstAired, runtime, airedEpisodes, status, rating, genres }
   } = tvShow;
 
   const url = image(
@@ -45,8 +45,6 @@ export default function Top({ tvShow }) {
       variables: { tmdbId }
     })
   );
-
-  console.log(url);
 
   return (
     <div>
@@ -68,6 +66,17 @@ export default function Top({ tvShow }) {
               <LevelItem title="Aired episodes" value={airedEpisodes} />
             </Level>
           </div>
+          {genres && (
+            <div className="flex flex-row justify-center pt-8 space-x-1">
+              {genres.map(genre => {
+                return (
+                  <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-gray-300 text-gray-800">
+                    {genre}
+                  </span>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </div>

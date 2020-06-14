@@ -28,6 +28,7 @@ const GET_TV_SHOW_DETAILS = gql`
         airedEpisodes
         status
         rating
+        genres
       }
     }
   }

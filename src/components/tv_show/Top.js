@@ -14,23 +14,15 @@ function backgroundStyle(url) {
   };
 }
 
-// TODO: Use lazy loading and fancy placeholders
 export default function Top({ tvShow }) {
   const {
     name,
     status,
     backdropImage,
     tmdbDetails: { voteAverage, firstAirDate },
-    traktDetails: { runtime }
+    traktDetails: { runtime, genres }
   } = tvShow;
 
-  const rating = (
-    <>
-      <LevelItem title="Rating">
-        <RtRating rating={voteAverage * 10} />
-      </LevelItem>
-    </>
-  );
   return (
     <div>
       <div
@@ -47,9 +39,22 @@ export default function Top({ tvShow }) {
               <LevelItem title="First Aired" value={firstAirDate} />
               <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
               <LevelItem title="Status" value={status} />
-              {rating}
+              <LevelItem title="Rating">
+                <RtRating rating={voteAverage * 10} />
+              </LevelItem>
             </Level>
           </div>
+          {genres && (
+            <div className="flex flex-row justify-center pt-8 space-x-1">
+              {genres.map(genre => {
+                return (
+                  <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-gray-300 text-gray-800">
+                    {genre}
+                  </span>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </div>

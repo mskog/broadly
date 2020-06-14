@@ -38,6 +38,7 @@ export default function Result({ result }) {
               runtime={data.tvShowSummary.runtime}
               status={data.tvShowSummary.status}
               airedEpisodes={data.tvShowSummary.airedEpisodes}
+              genres={data.tvShowSummary.genres}
             />
           )}
         </div>
