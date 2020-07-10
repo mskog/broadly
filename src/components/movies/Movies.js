@@ -5,15 +5,12 @@ import queryString from "query-string";
 import { useMoviesQuery } from "store/movies";
 
 import Loading from "components/shared/LoadingFull";
-import AutoSearchBox from "components/shared/AutoSearchBox";
 
 import Categories from "./Categories";
 import List from "./List";
 
 export default function Movies(props) {
   const {
-    history,
-    pathname,
     match: {
       params: { category }
     },
@@ -53,14 +50,7 @@ export default function Movies(props) {
   return (
     <div className="container px-4 mx-auto overflow-auto md:pt-10">
       <Categories category={category} />
-      <div className="flex flex-col items-center">
-        <AutoSearchBox
-          pathname={pathname}
-          history={history}
-          query={query}
-          placeholder="Movie name or description..."
-        />
-      </div>
+
       <div className="mt-20">{mainContent}</div>
     </div>
   );
