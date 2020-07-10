@@ -24,7 +24,7 @@ const useFocus = () => {
 
 const OmniSearch = ({ open, closeHandler, history }) => {
   const [inputRef, setInputFocus] = useFocus();
-  useEffect(() => setInputFocus(), [open]);
+  useEffect(() => setInputFocus());
 
   const [query, setQuery] = useState();
 
