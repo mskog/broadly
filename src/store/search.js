@@ -10,12 +10,12 @@ const GET_OMNISEARCH = gql`
         overview
         runtime
         releaseDate
-        posterImage
+        posterImageThumbnail
       }
       ... on TvShow {
         id
         name
-        posterImage
+        posterImageThumbnail
         tmdbDetails {
           voteAverage
           firstAirDate

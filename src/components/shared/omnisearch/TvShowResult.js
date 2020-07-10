@@ -8,7 +8,7 @@ import { thumbnail, formattedRuntime, releaseYear } from "utilities";
 export default function TvShowResult({ tvShow, handleClose }) {
   const {
     id,
-    posterImage,
+    posterImageThumbnail,
     name,
     tmdbDetails: { firstAirDate },
     traktDetails: { runtime }
@@ -22,7 +22,11 @@ export default function TvShowResult({ tvShow, handleClose }) {
     >
       <div className="flex -mx-2">
         <div className="flex-initial">
-          <img src={thumbnail(posterImage)} alt="" className="w-12 rounded" />
+          <img
+            src={thumbnail(posterImageThumbnail)}
+            alt=""
+            className="w-12 rounded"
+          />
         </div>
         <div className="flex flex-col px-4">
           <h2 className="text-xl text-gray-800">{name}</h2>

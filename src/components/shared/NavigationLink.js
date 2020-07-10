@@ -6,7 +6,7 @@ export default function NavigationLink({ title, href, active, onClick }) {
 
   return (
     <Link
-      className={`block mt-4 mr-4 ${textColor} lg:inline-block lg:mt-0 hover:text-white`}
+      className={`block mt-4 mr-4 ${textColor} lg:inline-block lg:mt-0 hover:text-white text-gray-300`}
       to={href}
       onClick={onClick}
     >

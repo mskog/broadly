@@ -6,13 +6,17 @@ import { faCalendar, faClock, faFilm } from "@fortawesome/free-solid-svg-icons";
 import { thumbnail, formattedRuntime, releaseYear } from "utilities";
 
 export default function MovieResult({ movie, handleClose }) {
-  const { id, posterImage, title, releaseDate, runtime } = movie;
+  const { id, posterImageThumbnail, title, releaseDate, runtime } = movie;
 
   return (
     <Link key={`result-movie-${id}`} onClick={handleClose} to={`/movies/${id}`}>
       <div className="flex -mx-2">
         <div className="flex-initial">
-          <img src={thumbnail(posterImage)} alt="" className="w-12 rounded" />
+          <img
+            src={thumbnail(posterImageThumbnail)}
+            alt=""
+            className="w-12 rounded"
+          />
         </div>
         <div className="flex flex-col px-4">
           <h2 className="text-xl text-gray-800">{title}</h2>

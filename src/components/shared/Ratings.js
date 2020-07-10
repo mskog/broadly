@@ -16,7 +16,7 @@ export default function Ratings({ score }) {
       <RatingStar minimum="40" maximum="60" score={roundedScore} />
       <RatingStar minimum="60" maximum="80" score={roundedScore} />
       <RatingStar minimum="80" maximum="100" score={roundedScore} />
-      <span className="text-lg font-bold text-yellow-600">
+      <span className="text-lg font-bold text-yellow-400">
         {formattedScore}
       </span>
     </div>
