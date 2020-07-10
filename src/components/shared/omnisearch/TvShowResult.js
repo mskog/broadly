@@ -15,11 +15,7 @@ export default function TvShowResult({ tvShow, handleClose }) {
   } = tvShow;
 
   return (
-    <Link
-      key={`result-tvshow-${id}`}
-      onClick={handleClose}
-      to={`/tv_shows/${id}`}
-    >
+    <Link onClick={handleClose} to={`/tv_shows/${id}`}>
       <div className="flex -mx-2">
         <div className="flex-initial">
           <img

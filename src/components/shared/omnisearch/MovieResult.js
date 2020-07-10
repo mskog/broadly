@@ -9,7 +9,7 @@ export default function MovieResult({ movie, handleClose }) {
   const { id, posterImageThumbnail, title, releaseDate, runtime } = movie;
 
   return (
-    <Link key={`result-movie-${id}`} onClick={handleClose} to={`/movies/${id}`}>
+    <Link onClick={handleClose} to={`/movies/${id}`}>
       <div className="flex -mx-2">
         <div className="flex-initial">
           <img

@@ -105,7 +105,11 @@ const OmniSearch = ({ open, closeHandler, history }) => {
         {query && data && data.omnisearch && (
           <div className="grid grid-cols-1 gap-4 px-4 py-4 rounded-md bg-cool-gray-50">
             {data.omnisearch.map(result => (
-              <Result result={result} handleClose={handleClose} />
+              <Result
+                key={`result-${result.__typename}-${result.id}`}
+                result={result}
+                handleClose={handleClose}
+              />
             ))}
           </div>
         )}
