@@ -12,6 +12,10 @@ module.exports = {
         "50vh": "50vh",
         "66vh": "66vh",
         "75vh": "75vh"
+      },
+      spacing: {
+        "128": "32rem",
+        "192": "48rem"
       }
     },
     fontFamily: {
@@ -22,5 +26,5 @@ module.exports = {
     alignSelf: ["odd"],
     borderWidth: ["responsive"]
   },
-  plugins: []
+  plugins: [require("@tailwindcss/ui")]
 };

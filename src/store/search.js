@@ -1,6 +1,39 @@
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
+const GET_OMNISEARCH = gql`
+  query OmniSearch($query: String!) {
+    omnisearch(query: $query) {
+      ... on Movie {
+        id
+        title
+        overview
+        runtime
+        releaseDate
+        posterImage
+      }
+      ... on TvShow {
+        id
+        name
+        posterImage
+        tmdbDetails {
+          voteAverage
+          firstAirDate
+          id
+        }
+        traktDetails {
+          overview
+          ids {
+            tmdb
+          }
+          runtime
+          genres
+        }
+      }
+    }
+  }
+`;
+
 const GET_MOVIE_SEARCH = gql`
   query MovieSearch($query: String!) {
     movieSearch(query: $query) {
@@ -68,6 +101,13 @@ const GET_TV_SHOW_SEARCH_RESULT = gql`
     }
   }
 `;
+
+export const useOmnisearchQuery = ({ query }) => {
+  return useQuery(GET_OMNISEARCH, {
+    variables: { query },
+    fetchPolicy: "no-cache"
+  });
+};
 
 export const useMovieSearchQuery = ({ query }) => {
   return useQuery(GET_MOVIE_SEARCH, {

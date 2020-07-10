@@ -1,0 +1,117 @@
+/* eslint-disable no-underscore-dangle */
+import React, { useState, useRef, useEffect } from "react";
+
+import { DebounceInput } from "react-debounce-input";
+import { withRouter } from "react-router-dom";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+
+import { useOmnisearchQuery } from "store/search";
+
+import Result from "./Result";
+
+const useFocus = () => {
+  const htmlElRef = useRef(null);
+  const setFocus = () => {
+    if (htmlElRef.current) {
+      htmlElRef.current.focus();
+    }
+  };
+
+  return [htmlElRef, setFocus];
+};
+
+const OmniSearch = ({ open, closeHandler, history }) => {
+  const [inputRef, setInputFocus] = useFocus();
+  useEffect(() => setInputFocus(), [open]);
+
+  const [query, setQuery] = useState();
+
+  const { data } = useOmnisearchQuery({
+    query
+  });
+
+  const handleQueryChange = event => {
+    setQuery(event.target.value);
+  };
+
+  const handleClose = () => {
+    closeHandler();
+    setQuery("");
+  };
+
+  const handlePickFirst = () => {
+    if (data.omnisearch) {
+      const firstResult = data.omnisearch[0];
+      switch (firstResult.__typename) {
+        case "Movie":
+          history.push(`/movies/${data.omnisearch[0].id}`);
+          break;
+        case "TvShow":
+          history.push(`/tv_shows/${data.omnisearch[0].id}`);
+          break;
+        case "Episode":
+          history.push(`/episodes/${data.omnisearch[0].id}`);
+          break;
+        default:
+          break;
+      }
+      handleClose();
+    }
+  };
+
+  const display = open ? "flex" : "hidden";
+
+  return (
+    <div
+      className={`fixed ${display} z-50 flex items-start justify-center w-screen h-screen bg-gray-800 md:pt-16`}
+    >
+      <div className="flex flex-col w-full mx-4 -my-4 md:w-192">
+        <div className="relative py-4 mt-1 rounded-md shadow-sm">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg
+              className="w-5 h-5 text-gray-400"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
+            </svg>
+          </div>
+          <DebounceInput
+            inputRef={inputRef}
+            minLength={3}
+            debounceTimeout={200}
+            value={query}
+            onChange={handleQueryChange}
+            className="block w-full pl-10 leading-8 form-input sm:text-sm"
+            onKeyDown={event => {
+              if (event.key === "Escape") {
+                handleClose();
+              }
+              if (event.key === "Enter") {
+                handlePickFirst();
+              }
+            }}
+          />
+          <div className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer ">
+            <FontAwesomeIcon
+              className="text-xl cursor-pointer"
+              icon={faTimes}
+              onClick={() => handleClose()}
+            />
+          </div>
+        </div>
+        {query && data && data.omnisearch && (
+          <div className="grid grid-cols-1 gap-4 px-4 py-4 rounded-md bg-cool-gray-50">
+            {data.omnisearch.map(result => (
+              <Result result={result} handleClose={handleClose} />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default withRouter(OmniSearch);
