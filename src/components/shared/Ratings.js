@@ -2,12 +2,12 @@ import React from "react";
 
 import RatingStar from "./RatingStar";
 
-export default function Ratings({ score }) {
+export default function Ratings({ score, children }) {
   if (!score) {
     return null;
   }
   const roundedScore = Math.round(score);
-  const formattedScore = `| ${roundedScore}%`;
+  const formattedScore = `${roundedScore}%`;
 
   return (
     <div className="flex items-center text-xs">
@@ -17,7 +17,8 @@ export default function Ratings({ score }) {
       <RatingStar minimum="60" maximum="80" score={roundedScore} />
       <RatingStar minimum="80" maximum="100" score={roundedScore} />
       <span className="text-lg font-bold text-yellow-400">
-        {formattedScore}
+        <span>|&nbsp;</span>
+        {children || formattedScore}
       </span>
     </div>
   );
