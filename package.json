@@ -31,7 +31,7 @@
     "react-debounce-input": "^3.2.2",
     "react-dom": "^16.12.0",
     "react-graceful-image": "^1.5.0",
-    "react-image": "^4.0.0",
+    "react-image": "^4.0.3",
     "react-infinite-scroll-component": "^5.0.4",
     "react-keyboard-event-handler": "^1.5.4",
     "react-lazyload": "^2.6.5",
