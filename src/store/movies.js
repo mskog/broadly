@@ -148,3 +148,10 @@ export const useForceMovieMutation = ({ id, update }) => {
     update
   });
 };
+
+// export const useRateMovieMutation = ({ id, rating, update }) => {
+//   return useMutation(RATE_MOVIE, {
+//     variables: { id, rating },
+//     update
+//   });
+// };

@@ -5,6 +5,7 @@ import { releaseYear, formattedRuntime, cdnImage } from "utilities";
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
 import RtRating from "components/shared/RtRating";
+import PersonalRating from "./PersonalRating";
 
 function backgroundStyle(url) {
   return {
@@ -17,6 +18,7 @@ function backgroundStyle(url) {
 // TODO: Use lazy loading and fancy placeholders
 export default function Top({ movie }) {
   const {
+    id,
     title,
     releaseDate,
     runtime,
@@ -29,7 +31,11 @@ export default function Top({ movie }) {
 
   let rating;
   if (watched) {
-    rating = <LevelItem title="Rating" value={`${personalRating} / 10`} />;
+    rating = (
+      <LevelItem title="Rating">
+        <PersonalRating id={id} rating={personalRating} />
+      </LevelItem>
+    );
   } else {
     rating = (
       <>
