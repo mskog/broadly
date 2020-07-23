@@ -48,9 +48,9 @@ export default function PersonalRating({ id, rating: initialRating }) {
           })}
         </select>
       ) : (
-        <a href="#" onClick={() => setEditMode(!editMode)}>
+        <span className="cursor-pointer" onClick={() => setEditMode(!editMode)}>
           {rating} / 10
-        </a>
+        </span>
       )}
     </div>
   );
