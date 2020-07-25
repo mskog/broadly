@@ -5,7 +5,6 @@ import { thumbnail } from "utilities";
 import ProgressiveImage from "components/shared/ProgressiveImage";
 
 export default function Poster({ src }) {
-  console.log(src);
   let imageSrc;
   if (!src) {
     imageSrc = "https://www.fillmurray.com/105/160";

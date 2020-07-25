@@ -5,7 +5,7 @@ import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
 import LazyLoad from "react-lazyload";
 import { Link } from "react-router-dom";
 
-import { formattedRuntime, releaseYear, cdnImage } from "utilities";
+import { formattedRuntime, releaseYear } from "utilities";
 
 import Ratings from "components/shared/Ratings";
 import Poster from "./Poster";
@@ -26,7 +26,7 @@ export default function TvShow({ tvShow }) {
           <LazyLoad>
             <Link to={`/tv_shows/${id}`}>
               <div className="h-40 -mt-10 rounded">
-                <Poster src={cdnImage(posterImageThumbnail)} />
+                <Poster src={posterImageThumbnail} />
               </div>
             </Link>
           </LazyLoad>

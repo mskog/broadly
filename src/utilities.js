@@ -9,7 +9,7 @@ function formattedRuntime(runtime) {
 }
 
 function releaseYear(releaseDate) {
-  return new Date(releaseDate).getFullYear();
+  return releaseDate ? new Date(releaseDate).getFullYear() : "????";
 }
 
 function thumbnail(url) {
