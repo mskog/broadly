@@ -5,6 +5,8 @@ import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
 import LazyLoad from "react-lazyload";
 import { Link } from "react-router-dom";
 
+import { truncate } from "lodash";
+
 import { formattedRuntime, releaseYear } from "utilities";
 
 import Ratings from "components/shared/Ratings";
@@ -33,7 +35,9 @@ export default function TvShow({ tvShow }) {
         </div>
         <div className="w-full ">
           <Link to={`/tv_shows/${id}`}>
-            <h2 className="text-3xl leading-none ">{name}</h2>
+            <h2 className="text-3xl leading-none ">
+              {truncate(name, { length: 40 })}
+            </h2>
           </Link>
           <Ratings score={voteAverage * 10} />
           <div className="mt-2 text-sm font-thin">

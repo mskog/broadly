@@ -9,6 +9,28 @@ const GET_MOVIES = gql`
       title
       releaseDate
       downloadAt
+      watchedAt
+      runtime
+      rtCriticsRating
+      rtAudienceRating
+      watched
+      personalRating
+      overview
+      backdropImage
+      posterImage
+      posterImageThumbnail
+    }
+  }
+`;
+const GET_BEST_MOVIES = gql`
+  query BestMovies($year: Int, $first: Int, $skip: Int) {
+    bestMovies(year: $year, first: $first, skip: $skip) {
+      id
+      tmdbId
+      title
+      releaseDate
+      downloadAt
+      watchedAt
       runtime
       rtCriticsRating
       rtAudienceRating
@@ -103,6 +125,13 @@ const DOWNLOAD_MOVIE = gql`
 export const useMoviesQuery = ({ category, first, skip, query }) => {
   return useQuery(GET_MOVIES, {
     variables: { category, first, skip, query },
+    fetchPolicy: "cache-and-network"
+  });
+};
+
+export const useBestMoviesQuery = ({ year, limit }) => {
+  return useQuery(GET_BEST_MOVIES, {
+    variables: { year, limit },
     fetchPolicy: "cache-and-network"
   });
 };

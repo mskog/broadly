@@ -86,6 +86,12 @@ export default function Navigation(props) {
               onClick={() => toggleExpansion(!isExpanded)}
             />
             <NavigationLink
+              title="Best movies"
+              href="/best_movies"
+              active={currentNav === "best_movies"}
+              onClick={() => toggleExpansion(!isExpanded)}
+            />
+            <NavigationLink
               title="Calendar"
               href="/calendar"
               active={currentNav === "calendar"}

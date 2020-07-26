@@ -16,6 +16,7 @@ import TvShowsCalendar from "components/tv_shows_calendar/TvShowsCalendar";
 import TopNavigation from "./components/shared/TopNavigation";
 
 import Movies from "./components/movies/Movies";
+import BestMovies from "./components/movies/BestMovies";
 import Movie from "./components/movie/Movie";
 
 import TvShows from "./components/tv_shows/TvShows";
@@ -84,6 +85,7 @@ function App() {
           <Switch>
             <Redirect from="/" exact to="/movies/watched" />
             <Route path="/movies/:id(\d+)" component={Movie} />
+            <Route path="/best_movies/:year(\d+)?" component={BestMovies} />
             <Route path="/movies/:category(\w+)" component={Movies} />
             <Route path="/tv_shows/:id(\d+)" component={TvShow} />
             <Route path="/tv_shows/:category(\w+)" component={TvShows} />

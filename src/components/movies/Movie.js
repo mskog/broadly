@@ -1,8 +1,11 @@
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faClock, faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+
+import { truncate } from "lodash";
+import { DateTime } from "luxon";
 
 import { formattedRuntime, releaseYear } from "utilities";
 
@@ -15,6 +18,7 @@ export default function Movie({ movie }) {
     title,
     releaseDate,
     runtime,
+    watchedAt,
     rtCriticsRating,
     personalRating,
     posterImageThumbnail
@@ -35,7 +39,9 @@ export default function Movie({ movie }) {
         </div>
         <div className="w-full">
           <Link to={`/movies/${id}`}>
-            <h2 className="text-3xl leading-none ">{title}</h2>
+            <h2 className="text-3xl leading-none ">
+              {truncate(title, { length: 40 })}
+            </h2>
           </Link>
           <Ratings score={rating}>{personalRatingText}</Ratings>
           <div className="mt-2 text-sm font-thin">
@@ -43,10 +49,18 @@ export default function Movie({ movie }) {
               <FontAwesomeIcon className="mr-1" icon={faCalendar} />
               {releaseYear(releaseDate)}
             </span>
-            <span>
-              <FontAwesomeIcon className="mr-1" icon={faClock} />
-              {formattedRuntime(runtime)}
-            </span>
+            {!watchedAt && (
+              <span className="mr-2">
+                <FontAwesomeIcon className="mr-1" icon={faClock} />
+                {formattedRuntime(runtime)}
+              </span>
+            )}
+            {watchedAt && (
+              <span>
+                <FontAwesomeIcon className="mr-1" icon={faEye} />
+                {DateTime.fromISO(watchedAt).toISODate()}
+              </span>
+            )}
           </div>
         </div>
       </div>

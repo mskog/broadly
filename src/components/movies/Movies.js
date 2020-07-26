@@ -9,6 +9,8 @@ import Loading from "components/shared/LoadingFull";
 import Categories from "./Categories";
 import List from "./List";
 
+const CATEGORIES = ["watched", "downloads", "waitlist"];
+
 export default function Movies(props) {
   const {
     match: {
@@ -49,7 +51,7 @@ export default function Movies(props) {
 
   return (
     <div className="container px-4 mx-auto overflow-auto md:pt-10">
-      <Categories category={category} />
+      <Categories categories={CATEGORIES} category={category} />
 
       <div className="mt-20">{mainContent}</div>
     </div>
