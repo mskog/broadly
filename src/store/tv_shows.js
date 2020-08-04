@@ -47,6 +47,7 @@ const GET_TV_SHOW = gql`
         }
         runtime
         genres
+        network
       }
       episodes {
         id

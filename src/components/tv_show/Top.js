@@ -20,7 +20,7 @@ export default function Top({ tvShow }) {
     status,
     backdropImage,
     tmdbDetails: { voteAverage, firstAirDate },
-    traktDetails: { runtime, genres }
+    traktDetails: { runtime, genres, network }
   } = tvShow;
 
   return (
@@ -34,6 +34,9 @@ export default function Top({ tvShow }) {
           <h1 className="text-5xl leading-none text-center text-gray-200 md:text-left">
             {name}
           </h1>
+          <h2 className="text-xl text-gray-500 pt-2 text-center md:text-left">
+            {network}
+          </h2>
           <div className="capitalize md:pt-10">
             <Level>
               <LevelItem title="First Aired" value={firstAirDate} />
