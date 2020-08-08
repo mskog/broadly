@@ -20,6 +20,11 @@ export default function Seasons({
   ));
 
   return (
-    <ul className="flex justify-start pt-20 -mx-2 overflow-auto ">{options}</ul>
+    <div className="pt-20">
+      <h2 className="text-3xl">Episodes</h2>
+      <ul className="flex justify-start pt-4 -mx-2 overflow-auto ">
+        {options}
+      </ul>
+    </div>
   );
 }

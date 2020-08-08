@@ -5,6 +5,7 @@ import { useTvShowQuery } from "store/tv_shows";
 
 import Loading from "components/shared/LoadingFull";
 import Top from "./Top";
+import News from "./News";
 import Actions from "./Actions";
 import Seasons from "./Seasons";
 import Episodes from "./Episodes";
@@ -46,6 +47,8 @@ function TvShow(props) {
         <div className="flex flex-col pt-4 -mx-2 md:flex-row">
           <Actions history={history} tvShow={data.tvShow} />
         </div>
+
+        <News newsItems={data.tvShow.newsItems} />
 
         <Seasons
           tvShowId={id}
