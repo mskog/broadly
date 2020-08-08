@@ -3,23 +3,29 @@ import { Link } from "react-router-dom";
 
 import { truncate } from "lodash";
 
-export default function Item({ title, url, image, description, newsworthy }) {
+export default function Item({ title, url, metadata, newsworthy }) {
+  const { image, description } = metadata || {};
+
   const thumbnail = `https://thumbs.mskog.com/100x100/smart/${image}`;
   const thumbnailMobile = `https://thumbs.mskog.com/240x120/smart/${image}`;
 
   return (
     <li className="py-6 flex md:flex-row flex-col">
-      <a className="flex-none" href={url}>
-        <img
-          className="h-32 w-32 mr-4 rounded md:block hidden"
-          src={thumbnail}
-          alt={title}
-        />
-        <img
-          className="w-full object-cover mr-4 rounded-t-lg md:hidden block"
-          src={thumbnailMobile}
-          alt={title}
-        />
+      <a className="h-32 w-32 mr-4 flex-none" href={url}>
+        {image && (
+          <>
+            <img
+              className="h-32 w-32 mr-4 rounded md:block hidden"
+              src={thumbnail}
+              alt={title}
+            />
+            <img
+              className="w-full object-cover mr-4 rounded-t-lg md:hidden block"
+              src={thumbnailMobile}
+              alt={title}
+            />
+          </>
+        )}
       </a>
       <div className="pt-4 md:pt-0">
         {newsworthy && (

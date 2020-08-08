@@ -8,14 +8,14 @@ export default function List({ newsItems, title }) {
       <h1 className="font-bold text-4xl">{title}</h1>
       <ul>
         {newsItems.map(item => {
+          const { title: itemTitle, url, newsworthy, metadata } = item;
           return (
             <Item
-              key={item.title}
-              title={item.title}
-              url={item.url}
-              image={item.metadata.image}
-              description={item.metadata.description}
-              newsworthy={item.newsworthy}
+              key={itemTitle}
+              title={itemTitle}
+              url={url}
+              metadata={metadata}
+              newsworthy={newsworthy}
             />
           );
         })}

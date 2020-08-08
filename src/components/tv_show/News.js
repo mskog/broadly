@@ -12,14 +12,9 @@ export default function News({ newsItems }) {
       <h2 className="font-bold text-3xl">News</h2>
       <ul>
         {newsItems.map(item => {
+          const { title, url, metadata } = item;
           return (
-            <NewsItem
-              key={item.title}
-              title={item.title}
-              url={item.url}
-              description={item.description}
-              image={item.metadata.image}
-            />
+            <NewsItem key={title} title={title} url={url} metadata={metadata} />
           );
         })}
       </ul>
