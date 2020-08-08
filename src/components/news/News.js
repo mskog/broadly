@@ -5,10 +5,17 @@ import { gql } from "apollo-boost";
 import Loading from "components/shared/LoadingFull";
 
 import List from "./List";
+import Categories from "./Categories";
+
+const CATEGORIES = [
+  { name: "Our Shows", value: "our_tv_shows" },
+  { name: "TV Shows", value: "tv_shows" },
+  { name: "Movies", value: "movies" }
+];
 
 const query = gql`
-  query News {
-    tvShowsNews {
+  query News($category: String!) {
+    news(category: $category) {
       title
       url
       metadata {
@@ -22,20 +29,19 @@ const query = gql`
         }
       }
     }
-    moviesNews {
-      title
-      url
-      metadata {
-        image
-        description
-      }
-    }
   }
 `;
 
-export default function News() {
+export default function News(props) {
+  const {
+    match: {
+      params: { category: chosenCategory }
+    }
+  } = props;
+
   const { loading, error, data } = useQuery(query, {
-    fetchPolicy: "cache-and-network"
+    fetchPolicy: "cache-and-network",
+    variables: { category: chosenCategory }
   });
 
   let mainContent;
@@ -46,16 +52,15 @@ export default function News() {
   } else {
     mainContent = (
       <div>
-        <List title="TV" newsItems={data.tvShowsNews} />
-        <div className="mt-10" />
-        <List title="Movies" newsItems={data.moviesNews} />
+        <Categories categories={CATEGORIES} category={chosenCategory} />
+        <List newsItems={data.news} />
       </div>
     );
   }
 
   return (
-    <div className="container px-4 mx-auto overflow-auto md:pt-10 md:max-w-4xl">
-      <div className="mt-20">{mainContent}</div>
+    <div className="container px-4 mx-auto overflow-auto md:max-w-4xl">
+      <div className="mt-10">{mainContent}</div>
     </div>
   );
 }

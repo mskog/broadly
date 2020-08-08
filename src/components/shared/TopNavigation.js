@@ -99,7 +99,7 @@ export default function Navigation(props) {
             />
             <NavigationLink
               title="News"
-              href="/news"
+              href="/news/our_tv_shows"
               active={currentNav === "news"}
               onClick={() => toggleExpansion(!isExpanded)}
             />

@@ -103,7 +103,7 @@ function App() {
             />
             <Route path="/search/:category?" component={Search} />
             <Route path="/calendar" component={TvShowsCalendar} />
-            <Route path="/news" component={News} />
+            <Route path="/news/:category" component={News} />
           </Switch>
         </div>
       </div>
