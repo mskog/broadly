@@ -97,6 +97,12 @@ export default function Navigation(props) {
               active={currentNav === "calendar"}
               onClick={() => toggleExpansion(!isExpanded)}
             />
+            <NavigationLink
+              title="News"
+              href="/news"
+              active={currentNav === "news"}
+              onClick={() => toggleExpansion(!isExpanded)}
+            />
             <div className="hidden float-right mt-4 mr-4 text-right md:block lg:inline-block lg:mt-0 hover:text-white">
               <FontAwesomeIcon
                 className="text-xl cursor-pointer"

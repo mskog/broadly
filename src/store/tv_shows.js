@@ -62,6 +62,15 @@ const GET_TV_SHOW = gql`
           overview
         }
       }
+
+      newsItems {
+        title
+        url
+        metadata {
+          image
+          description
+        }
+      }
     }
   }
 `;
