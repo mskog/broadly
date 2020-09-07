@@ -7,7 +7,7 @@ export default function Categories({
   category,
   baseRoute = "movies"
 }) {
-  const options = categories.map(cat => (
+  const options = categories.map((cat) => (
     <Category
       baseRoute={baseRoute}
       key={cat}

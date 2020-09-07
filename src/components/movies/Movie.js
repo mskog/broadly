@@ -31,13 +31,13 @@ export default function Movie({ movie }) {
 
   return (
     <div className="text-gray-100 rounded shadow-lg shadow-fat bg-background-blue-2">
-      <div className="flex h-40 p-4">
-        <div className="relative w-3/5 md:w-2/5">
+      <div className="flex p-4">
+        <div className="w-32 h-40 -mt-10">
           <Link to={`/movies/${id}`}>
             <Poster src={posterImageThumbnail} />
           </Link>
         </div>
-        <div className="w-full">
+        <div className="w-full pl-4">
           <Link to={`/movies/${id}`}>
             <h2 className="text-3xl leading-none ">
               {truncate(title, { length: 40 })}

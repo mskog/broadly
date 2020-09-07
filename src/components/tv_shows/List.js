@@ -4,7 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import TvShow from "./TvShow";
 
 export default function List({ loadMore, tvShows }) {
-  const tvShowsList = tvShows.map(tvShow => (
+  const tvShowsList = tvShows.map((tvShow) => (
     <div key={tvShow.id} className="px-3 mb-10 md:w-full lg:w-1/2">
       <TvShow tvShow={tvShow} />
     </div>
@@ -21,7 +21,7 @@ export default function List({ loadMore, tvShows }) {
         next={loadMore}
         hasMore
         loader={<h4>Loading...</h4>}
-        className="flex-wrap mt-10 -mx-3 md:flex"
+        className="flex-wrap mt-20 -mx-3 md:flex"
       >
         {tvShowsList}
       </InfiniteScroll>

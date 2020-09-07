@@ -23,17 +23,17 @@ export default function TvShow({ tvShow }) {
 
   return (
     <div className="text-gray-100 rounded shadow-lg shadow-fat bg-background-blue-2">
-      <div className="flex h-40 p-4">
-        <div className="relative w-3/5 md:w-2/5">
-          <LazyLoad>
+      <div className="flex p-4">
+        <LazyLoad>
+          <div className="w-32 h-40 -mt-10">
             <Link to={`/tv_shows/${id}`}>
-              <div className="h-40 -mt-10 rounded">
+              <div>
                 <Poster src={posterImageThumbnail} />
               </div>
             </Link>
-          </LazyLoad>
-        </div>
-        <div className="w-full ">
+          </div>
+        </LazyLoad>
+        <div className="w-full pl-4">
           <Link to={`/tv_shows/${id}`}>
             <h2 className="text-3xl leading-none ">
               {truncate(name, { length: 40 })}

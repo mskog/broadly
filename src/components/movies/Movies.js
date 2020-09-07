@@ -50,7 +50,7 @@ export default function Movies(props) {
   }
 
   return (
-    <div className="container px-4 mx-auto overflow-auto md:pt-10">
+    <div className="container px-4 pt-10 mx-auto overflow-auto">
       <Categories categories={CATEGORIES} category={category} />
 
       <div className="mt-20">{mainContent}</div>
