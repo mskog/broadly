@@ -26,7 +26,7 @@
     "lodash": "^4.17.20",
     "luxon": "^1.22.0",
     "moment": "^2.24.0",
-    "query-string": "^6.10.1",
+    "query-string": "^6.13.1",
     "react": "^16.12.0",
     "react-cool-onclickoutside": "^1.5.5",
     "react-debounce-input": "^3.2.2",
