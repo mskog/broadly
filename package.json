@@ -33,7 +33,7 @@
     "react-dom": "^16.13.0",
     "react-graceful-image": "^1.5.0",
     "react-image": "^4.0.3",
-    "react-infinite-scroll-component": "^5.0.4",
+    "react-infinite-scroll-component": "^5.0.5",
     "react-keyboard-event-handler": "^1.5.4",
     "react-lazyload": "^2.6.5",
     "react-loading-overlay": "^1.0.1",
