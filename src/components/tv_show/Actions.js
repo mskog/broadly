@@ -1,14 +1,18 @@
+// TODO: Put actions in a separate directory?
+
 import React from "react";
 
 import {
   useUnwatchTvShowMutation,
   useWatchTvShowMutation,
-  useCollectTvShowMutation
+  useCollectTvShowMutation,
+  useRemoveTvShowFromWaitlistMutation
 } from "store/tv_shows";
 
 import Watch from "./Watch";
 import Unwatch from "./Unwatch";
 import Collect from "./Collect";
+import RemoveFromWaitlist from "./RemoveFromWaitlist";
 
 export default function Actions(props) {
   const {
@@ -27,6 +31,10 @@ export default function Actions(props) {
     id
   });
 
+  const [removeFromWaitlist] = useRemoveTvShowFromWaitlistMutation({
+    id
+  });
+
   return (
     <>
       <Watch waitlist={waitlist} watching={watching} handle={watchTvShow} />
@@ -36,6 +44,7 @@ export default function Actions(props) {
         collected={collected}
         handle={collectTvShow}
       />
+      <RemoveFromWaitlist waitlist={waitlist} handle={removeFromWaitlist} />
     </>
   );
 }

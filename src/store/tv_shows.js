@@ -150,6 +150,14 @@ const UNWATCH_TV_SHOW = gql`
   }
 `;
 
+const REMOVE_TV_SHOW_FROM_WAITLIST = gql`
+  mutation RemoveTvShowFromWaitlist($id: ID!) {
+    removeTvShowFromWaitlist(id: $id) {
+      id
+    }
+  }
+`;
+
 const WATCH_TV_SHOW = gql`
   mutation WatchTvShow($id: ID!) {
     watchTvShow(id: $id) {
@@ -227,6 +235,14 @@ export const useUnwatchTvShowMutation = ({ id, update }) => {
 
 export const useWatchTvShowMutation = ({ id, update }) => {
   return useMutation(WATCH_TV_SHOW, {
+    variables: { id },
+    refetchQueries: ["TvShow", "TvShows"],
+    update
+  });
+};
+
+export const useRemoveTvShowFromWaitlistMutation = ({ id, update }) => {
+  return useMutation(REMOVE_TV_SHOW_FROM_WAITLIST, {
     variables: { id },
     refetchQueries: ["TvShow", "TvShows"],
     update
