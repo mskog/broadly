@@ -175,7 +175,7 @@ const COLLECT_TV_SHOW = gql`
 `;
 
 const SAMPLE_TV_SHOW = gql`
-  mutation SampleTvShow($id: String!) {
+  mutation SampleTvShow($id: ID!) {
     sampleTvShow(id: $id) {
       id
     }

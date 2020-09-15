@@ -50,12 +50,14 @@ function TvShow(props) {
 
         <News newsItems={data.tvShow.newsItems} />
 
-        <Seasons
-          tvShowId={id}
-          seasonNumbers={seasonNumbers}
-          selectedSeason={selectedSeason || last(seasonNumbers)}
-          onSelect={setSelectedSeason}
-        />
+        {selectedEpisodes.length > 0 && (
+          <Seasons
+            tvShowId={id}
+            seasonNumbers={seasonNumbers}
+            selectedSeason={selectedSeason || last(seasonNumbers)}
+            onSelect={setSelectedSeason}
+          />
+        )}
       </div>
       <div className="container mx-auto mt-8">
         <Episodes episodes={selectedEpisodes} />

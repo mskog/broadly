@@ -1,22 +1,19 @@
-// TODO: Put actions in a separate directory?
-
 import React from "react";
 
 import {
   useUnwatchTvShowMutation,
   useWatchTvShowMutation,
   useCollectTvShowMutation,
-  useRemoveTvShowFromWaitlistMutation
+  useRemoveTvShowFromWaitlistMutation,
+  useSampleTvShowMutation
 } from "store/tv_shows";
 
-import Watch from "./Watch";
-import Unwatch from "./Unwatch";
-import Collect from "./Collect";
-import RemoveFromWaitlist from "./RemoveFromWaitlist";
+import ActionButton from "./ActionButton";
+import DangerousActionButton from "./DangerousActionButton";
 
 export default function Actions(props) {
   const {
-    tvShow: { id, watching, collected, waitlist }
+    tvShow: { id, watching, collected, waitlist, episodes, status }
   } = props;
 
   const [unwatchTvShow] = useUnwatchTvShowMutation({
@@ -35,16 +32,35 @@ export default function Actions(props) {
     id
   });
 
+  const [sample] = useSampleTvShowMutation({
+    id
+  });
+
+  const addToWaitlist = sample;
+
+  const hasEpisodes = episodes.length > 0;
+
   return (
     <>
-      <Watch waitlist={waitlist} watching={watching} handle={watchTvShow} />
-      <Unwatch waitlist={waitlist} watching={watching} handle={unwatchTvShow} />
-      <Collect
-        waitlist={waitlist}
-        collected={collected}
-        handle={collectTvShow}
-      />
-      <RemoveFromWaitlist waitlist={waitlist} handle={removeFromWaitlist} />
+      {!status === "ended" && !(watching || waitlist) && hasEpisodes && (
+        <ActionButton title="Watch" handle={watchTvShow} />
+      )}
+      {hasEpisodes && <ActionButton title="Sample" handle={sample} />}
+      {!status === "ended" && watching && (
+        <DangerousActionButton title="Unwatch" handle={unwatchTvShow} />
+      )}
+      {hasEpisodes && !collected && !waitlist && (
+        <ActionButton title="Collect" handle={collectTvShow} />
+      )}
+      {waitlist && (
+        <DangerousActionButton
+          title="Remove from waitlist"
+          handle={removeFromWaitlist}
+        />
+      )}
+      {!waitlist && !hasEpisodes && (
+        <ActionButton title="Add to waitlist" handle={addToWaitlist} />
+      )}
     </>
   );
 }
