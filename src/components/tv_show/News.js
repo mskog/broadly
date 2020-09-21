@@ -9,9 +9,9 @@ export default function News({ newsItems }) {
 
   return (
     <div className="pt-20">
-      <h2 className="font-bold text-3xl">News</h2>
+      <h2 className="text-3xl font-bold">News</h2>
       <ul>
-        {newsItems.map(item => {
+        {newsItems.slice(0, 5).map((item) => {
           const { title, url, metadata } = item;
           return (
             <NewsItem key={title} title={title} url={url} metadata={metadata} />
