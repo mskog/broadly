@@ -1,7 +1,12 @@
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar, faClock, faEye } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendar,
+  faClock,
+  faEye,
+  faPhotoVideo
+} from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 import { truncate } from "lodash";
@@ -21,7 +26,8 @@ export default function Movie({ movie }) {
     watchedAt,
     rtCriticsRating,
     personalRating,
-    posterImageThumbnail
+    posterImageThumbnail,
+    bestRelease
   } = movie;
 
   const rating = personalRating * 10 || rtCriticsRating;
@@ -49,6 +55,12 @@ export default function Movie({ movie }) {
               <FontAwesomeIcon className="mr-1" icon={faCalendar} />
               {releaseYear(releaseDate)}
             </span>
+            {bestRelease && (
+              <span className="mr-2">
+                <FontAwesomeIcon className="mr-1" icon={faPhotoVideo} />
+                {bestRelease.resolution}
+              </span>
+            )}
             {!watchedAt && (
               <span className="mr-2">
                 <FontAwesomeIcon className="mr-1" icon={faClock} />

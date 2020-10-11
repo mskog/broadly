@@ -31,7 +31,8 @@ export default function Top({ episode }) {
       id: tvShowId,
       name: tvShowName,
       traktDetails: { runtime }
-    }
+    },
+    bestRelease: { resolution }
   } = episode;
 
   return (
@@ -62,6 +63,7 @@ export default function Top({ episode }) {
                 value={DateTime.fromISO(watchedAt).toISODate()}
               />
               <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
+              <LevelItem title="Resolution" value={resolution} />
             </Level>
           </div>
         </div>

@@ -26,7 +26,8 @@ export default function Top({ movie }) {
     rtAudienceRating,
     personalRating,
     watched,
-    backdropImage
+    backdropImage,
+    bestRelease
   } = movie;
 
   let rating;
@@ -67,6 +68,9 @@ export default function Top({ movie }) {
                 value={releaseYear(releaseDate)}
               />
               <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
+              {bestRelease && (
+                <LevelItem title="Resolution" value={bestRelease.resolution} />
+              )}
               {rating}
             </Level>
           </div>

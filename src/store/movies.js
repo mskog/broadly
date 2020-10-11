@@ -19,6 +19,10 @@ const GET_MOVIES = gql`
       backdropImage
       posterImage
       posterImageThumbnail
+
+      bestRelease {
+        resolution
+      }
     }
   }
 `;

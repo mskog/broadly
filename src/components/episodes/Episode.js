@@ -30,6 +30,7 @@ export default function Episode({ episode }) {
     season,
     episode: episodeNumber,
     tmdbDetails = {},
+    bestRelease: { resolution },
     tvShow: { name },
     watched
   } = episode;
@@ -47,9 +48,14 @@ export default function Episode({ episode }) {
             )}')`
           }}
         >
+          {resolution && (
+            <div className="absolute bottom-0 right-0">
+              <div className="p-2 text-gray-400">{resolution}</div>
+            </div>
+          )}
           {watched && (
             <div className="absolute top-0 right-0">
-              <div className="p-2 text-gray-500">
+              <div className="p-2 text-gray-400">
                 <FontAwesomeIcon icon={faEye} />
               </div>
             </div>

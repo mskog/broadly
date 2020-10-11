@@ -114,6 +114,9 @@ const GET_EPISODE = gql`
           runtime
         }
       }
+      bestRelease {
+        resolution
+      }
     }
   }
 `;
@@ -132,6 +135,10 @@ const GET_EPISODES = gql`
         name
         overview
         firstAirDate
+      }
+
+      bestRelease {
+        resolution
       }
 
       tvShow {
