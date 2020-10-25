@@ -77,6 +77,6 @@
     "eslint-plugin-react-hooks": "^2.5.1",
     "postcss-cli": "^7.1.2",
     "prettier": "^2.1.1",
-    "tailwindcss": "^1.8.4"
+    "tailwindcss": "^1.9.6"
   }
 }
