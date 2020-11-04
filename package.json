@@ -11,7 +11,7 @@
     "@fullhuman/postcss-purgecss": "^2.0.5",
     "@tailwindcss/ui": "^0.6.0",
     "@testing-library/jest-dom": "^5.11.3",
-    "@testing-library/react": "^9.4.0",
+    "@testing-library/react": "^11.1.1",
     "@testing-library/user-event": "^8.0.4",
     "apollo-boost": "^0.4.7",
     "apollo-cache-inmemory": "^1.6.5",
