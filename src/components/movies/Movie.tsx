@@ -12,7 +12,13 @@ import { formattedRuntime, releaseYear } from "utilities";
 import Ratings from "components/shared/Ratings";
 import Poster from "./Poster";
 
-export default function Movie({ movie }) {
+import { Movie as MovieType } from "types";
+
+type MovieProps = {
+  movie: MovieType;
+};
+
+export default function Movie({ movie }: MovieProps) {
   const {
     id,
     title,

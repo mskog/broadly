@@ -3,7 +3,14 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 import Movie from "./Movie";
 
-export default function List({ loadMore, movies }) {
+import { Movie as MovieType } from "types";
+
+type ListProps = {
+  loadMore: () => void;
+  movies: Array<MovieType>;
+};
+
+export default function List({ loadMore, movies }: ListProps) {
   const moviesList = movies.map(movie => (
     <div key={movie.id} className="px-3 mb-10 md:w-full lg:w-1/2">
       <Movie movie={movie} />

@@ -4,8 +4,13 @@ import { thumbnail } from "utilities";
 
 import ProgressiveImage from "components/shared/ProgressiveImage";
 
-export default function Poster({ src }) {
-  let imageSrc;
+type PosterProps = {
+  src: string;
+};
+
+export default function Poster({ src }: PosterProps) {
+  let imageSrc: string;
+
   if (!src) {
     imageSrc = "https://www.fillmurray.com/105/160";
   } else {
