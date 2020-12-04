@@ -1,11 +1,19 @@
 import React from "react";
 
+import { EpisodesData } from "types";
+
 import { useEpisodesQuery } from "store/tv_shows";
 import Loading from "components/shared/LoadingFull";
 import List from "./List";
 import Categories from "./Categories";
 
-export default function Episodes(props) {
+type EpisodesProps = {
+  match: {
+    params: { category: string };
+  };
+};
+
+export default function Episodes(props: EpisodesProps) {
   const {
     match: {
       params: { category = "WATCHED" }
@@ -21,7 +29,7 @@ export default function Episodes(props) {
   const loadMore = () => {
     fetchMore({
       variables: { skip: data.episodes.length },
-      updateQuery: (prev, { fetchMoreResult }) => {
+      updateQuery: (prev: EpisodesData, { fetchMoreResult }) => {
         if (!fetchMoreResult) {
           return prev;
         }

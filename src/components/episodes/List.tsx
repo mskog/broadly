@@ -1,9 +1,16 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
+import { Episode as EpisodeType } from "types";
+
 import Episode from "./Episode";
 
-export default function List({ loadMore, episodes }) {
+type ListProps = {
+  loadMore: () => void;
+  episodes: EpisodeType[];
+};
+
+export default function List({ loadMore, episodes }: ListProps) {
   const episodeComponents = episodes.map(episode => {
     return <Episode key={episode.id} episode={episode} />;
   });

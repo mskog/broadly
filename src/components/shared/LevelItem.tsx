@@ -1,12 +1,20 @@
 import React from "react";
 
+type LevelItemProps = {
+  title: string;
+  value?: string;
+  children?: React.ReactNode;
+  defaultText?: string;
+  hideIfBlank?: boolean;
+};
+
 function LevelItem({
   title,
   value,
   children,
   defaultText = "?",
   hideIfBlank = false
-}) {
+}: LevelItemProps) {
   if (!value && hideIfBlank) {
     return <></>;
   }

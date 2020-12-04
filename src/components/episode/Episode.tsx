@@ -7,7 +7,15 @@ import LoaderButton from "components/shared/LoaderButton";
 
 import Top from "./Top";
 
-export default function Episode(props) {
+type EpisodeProps = {
+  match: {
+    params: {
+      id: number;
+    };
+  };
+};
+
+export default function Episode(props: EpisodeProps) {
   const {
     match: {
       params: { id }
@@ -41,7 +49,6 @@ export default function Episode(props) {
         {!episode.watched && (
           <div className="w-full mx-auto my-2 md:mt-8 md:w-auto">
             <LoaderButton
-              type="button"
               className="w-full px-4 py-2 font-bold text-white bg-teal-500 rounded hover:bg-teal-700"
               onClick={episodeWatched}
             >

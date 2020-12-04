@@ -7,7 +7,11 @@ import { useDeleteMovieMutation, useForceMovieMutation } from "store/movies";
 import Delete from "./Delete";
 import Force from "./Force";
 
-export default function Actions(props) {
+type ActionsProps = {
+  movie: { id: number; bestRelease: any };
+};
+
+export default function Actions(props: ActionsProps) {
   const {
     movie: { id, bestRelease }
   } = props;

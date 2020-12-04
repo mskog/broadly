@@ -172,42 +172,66 @@ const EPISODE_WATCHED = gql`
   }
 `;
 
-export const useTvShowsQuery = ({ category, first, skip, query }) => {
+export const useTvShowsQuery = ({
+  category,
+  first,
+  skip,
+  query
+}: {
+  category: string;
+  first: number;
+  skip: number;
+  query: string;
+}) => {
   return useQuery(GET_TV_SHOWS, {
     variables: { category, first, skip, query },
     fetchPolicy: "cache-and-network"
   });
 };
 
-export const useTvShowQuery = ({ id }) => {
+export const useTvShowQuery = ({ id }: { id: number }) => {
   return useQuery(GET_TV_SHOW, {
     variables: { id },
     fetchPolicy: "cache-and-network"
   });
 };
 
-export const useTvShowSummaryQuery = ({ imdbId }) => {
+export const useTvShowSummaryQuery = ({ imdbId }: { imdbId: string }) => {
   return useQuery(GET_TV_SHOW_SUMMARY, {
     variables: { imdbId },
     fetchPolicy: "cache-first"
   });
 };
 
-export const useEpisodeQuery = ({ id }) => {
+export const useEpisodeQuery = ({ id }: { id: number }) => {
   return useQuery(GET_EPISODE, {
     fetchPolicy: "cache-and-network",
     variables: { id }
   });
 };
 
-export const useEpisodesQuery = ({ first, skip, category }) => {
+export const useEpisodesQuery = ({
+  first,
+  skip,
+  category
+}: {
+  first: number;
+  skip: number;
+  category: string;
+}) => {
   return useQuery(GET_EPISODES, {
     variables: { first, skip, category },
     fetchPolicy: "cache-and-network"
   });
 };
 
-export const useUnwatchTvShowMutation = ({ id, update }) => {
+export const useUnwatchTvShowMutation = ({
+  id,
+  update
+}: {
+  id: number;
+  update: () => void;
+}) => {
   return useMutation(UNWATCH_TV_SHOW, {
     variables: { id },
     refetchQueries: ["TvShow", "TvShows"],
@@ -215,7 +239,13 @@ export const useUnwatchTvShowMutation = ({ id, update }) => {
   });
 };
 
-export const useWatchTvShowMutation = ({ id, update }) => {
+export const useWatchTvShowMutation = ({
+  id,
+  update
+}: {
+  id: number;
+  update: () => void;
+}) => {
   return useMutation(WATCH_TV_SHOW, {
     variables: { id },
     refetchQueries: ["TvShow", "TvShows"],
@@ -223,7 +253,13 @@ export const useWatchTvShowMutation = ({ id, update }) => {
   });
 };
 
-export const useSampleTvShowMutation = ({ id, update }) => {
+export const useSampleTvShowMutation = ({
+  id,
+  update
+}: {
+  id: number;
+  update: () => void;
+}) => {
   return useMutation(SAMPLE_TV_SHOW, {
     variables: { id },
     refetchQueries: ["TvShow", "TvShows"],
@@ -231,7 +267,13 @@ export const useSampleTvShowMutation = ({ id, update }) => {
   });
 };
 
-export const useCollectTvShowMutation = ({ id, update }) => {
+export const useCollectTvShowMutation = ({
+  id,
+  update
+}: {
+  id: number;
+  update: () => void;
+}) => {
   return useMutation(COLLECT_TV_SHOW, {
     variables: { id },
     refetchQueries: ["TvShow", "TvShows"],
@@ -239,7 +281,13 @@ export const useCollectTvShowMutation = ({ id, update }) => {
   });
 };
 
-export const useEpisodeWatchedMutation = ({ id, update }) => {
+export const useEpisodeWatchedMutation = ({
+  id,
+  update
+}: {
+  id: number;
+  update?: () => void;
+}) => {
   return useMutation(EPISODE_WATCHED, {
     variables: { id },
     refetchQueries: ["TvShow", "Episode"],

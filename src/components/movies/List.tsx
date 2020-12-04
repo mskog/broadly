@@ -7,7 +7,7 @@ import { Movie as MovieType } from "types";
 
 type ListProps = {
   loadMore: () => void;
-  movies: Array<MovieType>;
+  movies: MovieType[];
 };
 
 export default function List({ loadMore, movies }: ListProps) {

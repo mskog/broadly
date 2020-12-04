@@ -11,7 +11,18 @@ import List from "./List";
 
 const CATEGORIES = ["watched", "downloads", "waitlist"];
 
-export default function Movies(props: any) {
+type MoviesProps = {
+  match: {
+    params: {
+      category: string;
+    };
+  };
+  location: {
+    search: string;
+  };
+};
+
+export default function Movies(props: MoviesProps) {
   const {
     match: {
       params: { category }
@@ -21,12 +32,24 @@ export default function Movies(props: any) {
 
   const { query } = queryString.parse(search);
 
-  const { loading, error, data, fetchMore } = useMoviesQuery({
+  const { data, fetchMore } = useMoviesQuery({
     first: 20,
     skip: 0,
     category,
     query
   });
+
+  if (data === undefined) {
+    return (
+      <div className="container px-4 mx-auto overflow-auto md:pt-10">
+        <Categories categories={CATEGORIES} category={category} />
+
+        <div className="mt-20">
+          <Loading />
+        </div>
+      </div>
+    );
+  }
 
   const loadMore = () => {
     fetchMore({
@@ -40,20 +63,13 @@ export default function Movies(props: any) {
     });
   };
 
-  let mainContent;
-  if (loading && !data) {
-    mainContent = <Loading />;
-  } else if (error) {
-    mainContent = <p>Error</p>;
-  } else {
-    mainContent = <List loadMore={loadMore} movies={data.movies} />;
-  }
-
   return (
     <div className="container px-4 mx-auto overflow-auto md:pt-10">
       <Categories categories={CATEGORIES} category={category} />
 
-      <div className="mt-20">{mainContent}</div>
+      <div className="mt-20">
+        <List loadMore={loadMore} movies={data.movies} />
+      </div>
     </div>
   );
 }

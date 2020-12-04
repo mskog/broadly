@@ -9,9 +9,16 @@ import Top from "./Top";
 import Actions from "./Actions";
 import ReleaseInformation from "./ReleaseInformation";
 
-function Movie(props) {
+type MovieProps = {
+  match: {
+    params: {
+      id: number;
+    };
+  };
+};
+
+function Movie(props: MovieProps) {
   const {
-    history,
     match: {
       params: { id }
     }
@@ -49,7 +56,7 @@ function Movie(props) {
         )}
         {!downloaded && (
           <div className="flex flex-col pt-4 -mx-2 md:flex-row">
-            <Actions history={history} movie={data.movie} />
+            <Actions movie={data.movie} />
           </div>
         )}
       </div>

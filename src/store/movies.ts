@@ -1,5 +1,6 @@
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import { BestMoviesData, MoviesData } from "types";
 
 const GET_MOVIES = gql`
   query Movies($category: String, $first: Int, $skip: Int, $query: String) {
@@ -122,56 +123,96 @@ const DOWNLOAD_MOVIE = gql`
   }
 `;
 
-export const useMoviesQuery = ({ category, first, skip, query }) => {
-  return useQuery(GET_MOVIES, {
+export const useMoviesQuery = ({
+  category,
+  first,
+  skip,
+  query
+}: {
+  category: string;
+  first: number;
+  skip: number;
+  query: any; // Fix this. No any
+}) => {
+  return useQuery<MoviesData>(GET_MOVIES, {
     variables: { category, first, skip, query },
     fetchPolicy: "cache-and-network"
   });
 };
 
-export const useBestMoviesQuery = ({ year, limit }) => {
-  return useQuery(GET_BEST_MOVIES, {
+export const useBestMoviesQuery = ({
+  year,
+  limit
+}: {
+  year: number;
+  limit?: number;
+}) => {
+  return useQuery<BestMoviesData>(GET_BEST_MOVIES, {
     variables: { year, limit },
     fetchPolicy: "cache-and-network"
   });
 };
 
-export const useMovieSummaryQuery = ({ imdbId }) => {
+export const useMovieSummaryQuery = ({ imdbId }: { imdbId: string }) => {
   return useQuery(GET_MOVIE_SUMMARY, {
     variables: { imdbId },
     fetchPolicy: "cache-first"
   });
 };
 
-export const useMovieQuery = ({ id }) => {
+export const useMovieQuery = ({ id }: { id: number }) => {
   return useQuery(GET_MOVIE, {
     variables: { id },
     fetchPolicy: "cache-and-network"
   });
 };
 
-export const useAddMovieToWaitlistMutation = ({ imdbId, update }) => {
+export const useAddMovieToWaitlistMutation = ({
+  imdbId,
+  update
+}: {
+  imdbId: string;
+  update: () => void;
+}) => {
   return useMutation(ADD_MOVIE_TO_WAITLIST, {
     variables: { imdbId },
     update
   });
 };
 
-export const useDownloadMovieMutation = ({ imdbId, update }) => {
+export const useDownloadMovieMutation = ({
+  imdbId,
+  update
+}: {
+  imdbId: string;
+  update: () => void;
+}) => {
   return useMutation(DOWNLOAD_MOVIE, {
     variables: { imdbId },
     update
   });
 };
 
-export const useDeleteMovieMutation = ({ id, update }) => {
+export const useDeleteMovieMutation = ({
+  id,
+  update
+}: {
+  id: number;
+  update: () => void;
+}) => {
   return useMutation(DELETE_MOVIE, {
     variables: { id },
     update
   });
 };
 
-export const useForceMovieMutation = ({ id, update }) => {
+export const useForceMovieMutation = ({
+  id,
+  update
+}: {
+  id: number;
+  update: () => void;
+}) => {
   return useMutation(FORCE_MOVIE, {
     variables: { id },
     update

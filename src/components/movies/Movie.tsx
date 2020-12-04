@@ -30,7 +30,7 @@ export default function Movie({ movie }: MovieProps) {
     posterImageThumbnail
   } = movie;
 
-  const rating = personalRating * 10 || rtCriticsRating;
+  const rating = personalRating ? personalRating * 10 : rtCriticsRating;
   const personalRatingText = personalRating
     ? `${personalRating}/10`
     : undefined;
@@ -49,7 +49,9 @@ export default function Movie({ movie }: MovieProps) {
               {truncate(title, { length: 40 })}
             </h2>
           </Link>
-          <Ratings score={rating}>{personalRatingText}</Ratings>
+          <Ratings score={rating}>
+            <span>{personalRatingText}</span>
+          </Ratings>
           <div className="mt-2 text-sm font-thin">
             <span className="mr-2">
               <FontAwesomeIcon className="mr-1" icon={faCalendar} />
@@ -64,7 +66,7 @@ export default function Movie({ movie }: MovieProps) {
             {watchedAt && (
               <span>
                 <FontAwesomeIcon className="mr-1" icon={faEye} />
-                {DateTime.fromISO(watchedAt).toISODate()}
+                {DateTime.fromISO(watchedAt.toString()).toISODate()}
               </span>
             )}
           </div>

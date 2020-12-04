@@ -2,7 +2,13 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-export default function Category({ name, active, baseRoute }) {
+export default function Category({
+  name,
+  active
+}: {
+  name: string;
+  active: boolean;
+}) {
   let classNames =
     "flex-1 text-base font-bold text-center cursor-pointer hover:text-white pb-2";
 
@@ -14,7 +20,7 @@ export default function Category({ name, active, baseRoute }) {
 
   return (
     <li key={name} className={classNames}>
-      <Link to={`/${baseRoute}/${name}`} className="capitalize">
+      <Link to={`/episodes/${name}`} className="capitalize">
         {name}
       </Link>
     </li>

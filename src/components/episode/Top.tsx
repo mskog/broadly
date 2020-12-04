@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import { padStart } from "lodash";
 import { DateTime } from "luxon";
 
+import { Episode } from "types";
 import { formattedRuntime, cdnImage } from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
 
-function backgroundStyle(url) {
+function backgroundStyle(url: string) {
   return {
     backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url('${url}')`,
     backgroundSize: "cover",
@@ -16,23 +17,34 @@ function backgroundStyle(url) {
   };
 }
 
-function seasonEpisode(season, episodeNumber) {
-  return `S${padStart(season, 2, "0")}E${padStart(episodeNumber, 2, "0")}`;
+function seasonEpisode(season?: number, episodeNumber?: number) {
+  if (season === undefined || episodeNumber === undefined) {
+    return "?";
+  }
+  return `S${padStart(season.toString(), 2, "0")}E${padStart(
+    episodeNumber.toString(),
+    2,
+    "0"
+  )}`;
 }
 
-export default function Top({ episode }) {
+export default function Top({ episode }: { episode: Episode }) {
   const {
     season,
     episode: episodeNumber,
     stillImage,
-    tmdbDetails: { name },
     watchedAt,
+    tmdbDetails: { name },
     tvShow: {
       id: tvShowId,
       name: tvShowName,
       traktDetails: { runtime }
     }
   } = episode;
+
+  const watchedAtDate = watchedAt
+    ? DateTime.fromISO(watchedAt.toString()).toISODate()
+    : "";
 
   return (
     <div>
@@ -56,11 +68,7 @@ export default function Top({ episode }) {
                 title="Episode"
                 value={seasonEpisode(season, episodeNumber)}
               />
-              <LevelItem
-                hideIfBlank
-                title="Watched"
-                value={DateTime.fromISO(watchedAt).toISODate()}
-              />
+              <LevelItem hideIfBlank title="Watched" value={watchedAtDate} />
               <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
             </Level>
           </div>

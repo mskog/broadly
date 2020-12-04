@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, SyntheticEvent, useState } from "react";
 
 import useOnclickOutside from "react-cool-onclickoutside";
 import { useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
-export default function PersonalRating({ id, rating: initialRating }) {
+type PersonalRatingProps = {
+  id: number;
+  rating: number;
+};
+
+export default function PersonalRating({
+  id,
+  rating: initialRating
+}: PersonalRatingProps) {
   const ratingValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const [editMode, setEditMode] = useState(false);
@@ -24,8 +32,8 @@ export default function PersonalRating({ id, rating: initialRating }) {
 
   const [rateMovie] = useMutation(RATE_MOVIE);
 
-  const onChange = event => {
-    const newRating = parseInt(event.target.value, 10);
+  const onChange = (event: React.FormEvent<HTMLSelectElement>) => {
+    const newRating = parseInt(event.currentTarget.value, 10);
     setRating(newRating);
     setEditMode(false);
     rateMovie({ variables: { id, rating: newRating } });
