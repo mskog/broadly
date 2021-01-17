@@ -32,7 +32,7 @@ const OmniSearch = ({ open, closeHandler, history }) => {
     query
   });
 
-  const handleQueryChange = event => {
+  const handleQueryChange = (event) => {
     setQuery(event.target.value);
   };
 
@@ -85,7 +85,7 @@ const OmniSearch = ({ open, closeHandler, history }) => {
             value={query}
             onChange={handleQueryChange}
             className="block w-full pl-10 leading-8 form-input sm:text-sm"
-            onKeyDown={event => {
+            onKeyDown={(event) => {
               if (event.key === "Escape") {
                 handleClose();
               }
@@ -104,13 +104,19 @@ const OmniSearch = ({ open, closeHandler, history }) => {
         </div>
         {query && data && data.omnisearch && (
           <div className="grid grid-cols-1 gap-4 px-4 py-4 rounded-md bg-cool-gray-50">
-            {data.omnisearch.map(result => (
+            {data.omnisearch.length === 0 ? <div>Nothing found</div> : ""}
+            {data.omnisearch.map((result) => (
               <Result
                 key={`result-${result.__typename}-${result.id}`}
                 result={result}
                 handleClose={handleClose}
               />
             ))}
+            <div className="pb-2 text-center text-indigo-800">
+              <a href={`/search?query=${query}`}>
+                Search for new Movies and TV Shows
+              </a>
+            </div>
           </div>
         )}
       </div>
