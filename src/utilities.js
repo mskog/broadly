@@ -13,11 +13,11 @@ function releaseYear(releaseDate) {
 }
 
 function thumbnail(url) {
-  return `https://thumbs.mskog.com/240x0/${url}`;
+  return `https://thumbs.mskog.com/240x0/filters:quality(50)/${url}`;
 }
 
 function placeholder(url) {
-  return `https://thumbs.mskog.com/20x0/filters:blur(5)/${url}`;
+  return `https://thumbs.mskog.com/20x0/filters:blur(5):quality(5)/${url}`;
 }
 
 function cdnImage(url) {
