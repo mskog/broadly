@@ -8,7 +8,7 @@ import { padStart } from "lodash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
-import { cdnImage } from "utilities";
+import { cdnImage, resolutionDisplay } from "utilities";
 
 function seasonEpisode(season, episodeNumber) {
   return `S${padStart(season, 2, "0")}E${padStart(episodeNumber, 2, "0")}`;
@@ -50,7 +50,9 @@ export default function Episode({ episode }) {
         >
           {resolution && (
             <div className="absolute bottom-0 right-0">
-              <div className="p-2 text-gray-400">{resolution}</div>
+              <div className="p-2 text-gray-400">
+                {resolutionDisplay(resolution)}
+              </div>
             </div>
           )}
           {watched && (

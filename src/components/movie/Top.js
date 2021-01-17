@@ -1,6 +1,11 @@
 import React from "react";
 
-import { releaseYear, formattedRuntime, cdnImage } from "utilities";
+import {
+  releaseYear,
+  formattedRuntime,
+  cdnImage,
+  resolutionDisplay
+} from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
@@ -69,7 +74,10 @@ export default function Top({ movie }) {
               />
               <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
               {bestRelease && (
-                <LevelItem title="Resolution" value={bestRelease.resolution} />
+                <LevelItem
+                  title="Resolution"
+                  value={resolutionDisplay(bestRelease.resolution)}
+                />
               )}
               {rating}
             </Level>

@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { truncate } from "lodash";
 import { DateTime } from "luxon";
 
-import { formattedRuntime, releaseYear } from "utilities";
+import { formattedRuntime, releaseYear, resolutionDisplay } from "utilities";
 
 import Ratings from "components/shared/Ratings";
 import Poster from "./Poster";
@@ -58,7 +58,7 @@ export default function Movie({ movie }) {
             {bestRelease && (
               <span className="mr-2">
                 <FontAwesomeIcon className="mr-1" icon={faPhotoVideo} />
-                {bestRelease.resolution}
+                {resolutionDisplay(bestRelease.resolution)}
               </span>
             )}
             {!watchedAt && (

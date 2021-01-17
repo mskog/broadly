@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { padStart } from "lodash";
 import { DateTime } from "luxon";
 
-import { formattedRuntime, cdnImage } from "utilities";
+import { formattedRuntime, cdnImage, resolutionDisplay } from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
@@ -63,7 +63,10 @@ export default function Top({ episode }) {
                 value={DateTime.fromISO(watchedAt).toISODate()}
               />
               <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
-              <LevelItem title="Resolution" value={resolution} />
+              <LevelItem
+                title="Resolution"
+                value={resolutionDisplay(resolution)}
+              />
             </Level>
           </div>
         </div>

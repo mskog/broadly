@@ -1,9 +1,13 @@
 import React from "react";
 
+import { resolutionDisplay } from "utilities";
+
 export default function ReleaseInformation({ killer, acceptable, release }) {
   const { releaseName, source, size, resolution, container } = release;
 
-  const releaseLine = `${source} - ${container} - ${resolution} - ${size}GB`;
+  const releaseLine = `${source} - ${container} - ${resolutionDisplay(
+    resolution
+  )} - ${size}GB`;
 
   return (
     <div>

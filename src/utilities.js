@@ -24,10 +24,15 @@ function cdnImage(url) {
   return `https://thumbs.mskog.com/filters:quality(80)/${url}`;
 }
 
+function resolutionDisplay(resolution) {
+  return resolution === "2160p" ? "4k" : resolution;
+}
+
 module.exports = {
   formattedRuntime,
   releaseYear,
   thumbnail,
   placeholder,
-  cdnImage
+  cdnImage,
+  resolutionDisplay
 };
