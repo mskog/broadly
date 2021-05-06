@@ -149,6 +149,23 @@ const GET_EPISODES = gql`
   }
 `;
 
+const GET_SHOW_COLLECTION_PROGRESS = gql`
+  query ShowCollectionProgress($id: ID!) {
+    showCollectionProgress(id: $id) {
+      airedEpisodes
+      completedEpisodes
+      completed
+
+      seasons {
+        number
+        completed
+        airedEpisodes
+        completedEpisodes
+      }
+    }
+  }
+`;
+
 const UNWATCH_TV_SHOW = gql`
   mutation UnwatchTvShow($id: ID!) {
     unwatchTvShow(id: $id) {
@@ -228,6 +245,13 @@ export const useEpisodeQuery = ({ id }) => {
 export const useEpisodesQuery = ({ first, skip, category }) => {
   return useQuery(GET_EPISODES, {
     variables: { first, skip, category },
+    fetchPolicy: "cache-and-network"
+  });
+};
+
+export const useShowCollectionProgressQuery = ({ id }) => {
+  return useQuery(GET_SHOW_COLLECTION_PROGRESS, {
+    variables: { id },
     fetchPolicy: "cache-and-network"
   });
 };

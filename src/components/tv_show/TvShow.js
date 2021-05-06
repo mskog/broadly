@@ -8,6 +8,7 @@ import Top from "./Top";
 import News from "./News";
 import Actions from "./Actions";
 import Seasons from "./Seasons";
+import CollectionProgress from "./CollectionProgress";
 import Episodes from "./Episodes";
 
 function TvShow(props) {
@@ -27,6 +28,7 @@ function TvShow(props) {
   }
 
   const {
+    imdbId,
     traktDetails: { overview },
     episodes
   } = data.tvShow;
@@ -50,8 +52,11 @@ function TvShow(props) {
 
         <News newsItems={data.tvShow.newsItems} />
 
+        <CollectionProgress tvShowId={id} />
+
         {selectedEpisodes.length > 0 && (
           <Seasons
+            imdbId={imdbId}
             tvShowId={id}
             seasonNumbers={seasonNumbers}
             selectedSeason={selectedSeason || last(seasonNumbers)}

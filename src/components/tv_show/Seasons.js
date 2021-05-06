@@ -8,7 +8,7 @@ export default function Seasons({
   selectedSeason,
   onSelect
 }) {
-  const options = seasonNumbers.map(number => (
+  const options = seasonNumbers.map((number) => (
     <Season
       key={number}
       tvShowId={tvShowId}
