@@ -28,7 +28,7 @@
     "moment": "^2.24.0",
     "query-string": "^6.13.1",
     "react": "^16.12.0",
-    "react-cool-onclickoutside": "^1.5.5",
+    "react-cool-onclickoutside": "^1.6.2",
     "react-debounce-input": "^3.2.2",
     "react-dom": "^16.13.0",
     "react-graceful-image": "^1.5.0",
