@@ -42,11 +42,11 @@ export default function Actions(props) {
 
   return (
     <>
-      {!status === "ended" && !(watching || waitlist) && hasEpisodes && (
+      {status !== "ended" && !(watching || waitlist) && hasEpisodes && (
         <ActionButton title="Watch" handle={watchTvShow} />
       )}
       {!hasEpisodes && <ActionButton title="Sample" handle={sample} />}
-      {!status === "ended" && watching && (
+      {watching && (
         <DangerousActionButton title="Unwatch" handle={unwatchTvShow} />
       )}
       {hasEpisodes && !collected && !waitlist && (
