@@ -12,6 +12,7 @@ import { ApolloLink } from "apollo-link";
 import { ApolloProvider } from "@apollo/react-hooks";
 
 import TvShowsCalendar from "components/tv_shows_calendar/TvShowsCalendar";
+import PtpMovieRecommendations from "components/ptp_movie_recommendations/PtpMovieRecommendations";
 
 import TopNavigation from "./components/shared/TopNavigation";
 
@@ -88,6 +89,10 @@ function App() {
             <Redirect from="/" exact to="/movies/watched" />
             <Route path="/movies/:id(\d+)" component={Movie} />
             <Route path="/best_movies/:year(\d+)?" component={BestMovies} />
+            <Route
+              path="/ptp_movie_recommendations/"
+              component={PtpMovieRecommendations}
+            />
             <Route path="/movies/:category(\w+)" component={Movies} />
             <Route path="/tv_shows/:id(\d+)" component={TvShow} />
             <Route path="/tv_shows/:category(\w+)" component={TvShows} />
