@@ -50,7 +50,7 @@ function TvShow(props) {
           <Actions history={history} tvShow={data.tvShow} />
         </div>
 
-        <News newsItems={data.tvShow.newsItems} />
+        {/* <News newsItems={data.tvShow.newsItems} /> */}
 
         <CollectionProgress tvShowId={id} />
 

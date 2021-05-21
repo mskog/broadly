@@ -2,6 +2,7 @@ import React from "react";
 import Loading from "components/shared/LoadingFull";
 
 import { useShowCollectionProgressQuery } from "store/tv_shows";
+import CollectionSeason from "./CollectionSeason";
 
 export default function CollectionProgress({ tvShowId }) {
   const { data } = useShowCollectionProgressQuery({ id: tvShowId });
@@ -11,13 +12,13 @@ export default function CollectionProgress({ tvShowId }) {
   }
 
   const seasons = data.showCollectionProgress.seasons.map((season) => {
-    return <li className="text-lg">Season {season.number}</li>;
+    return <CollectionSeason className="text-lg" season={season} />;
   });
 
   return (
     <div className="pt-20">
       <h2 className="text-3xl">Collection Progress</h2>
-      <ul>{seasons}</ul>
+      <ul className="pt-2 ">{seasons}</ul>
     </div>
   );
 }
