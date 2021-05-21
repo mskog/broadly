@@ -94,6 +94,21 @@ const GET_MOVIE_SUMMARY = gql`
   }
 `;
 
+const GET_PTP_MOVIE_RECOMMENDATIONS = gql`
+  query PtpMovieRecommendations {
+    ptpMovieRecommendations {
+      title
+      ptpRating
+      imdbRating
+      mcUrl
+      imdbId
+      synopsis
+      cover
+      year
+    }
+  }
+`;
+
 const DELETE_MOVIE = gql`
   mutation DeleteMovie($id: ID!) {
     deleteMovie(id: $id) {
@@ -150,6 +165,12 @@ export const useMovieSummaryQuery = ({ imdbId }) => {
 export const useMovieQuery = ({ id }) => {
   return useQuery(GET_MOVIE, {
     variables: { id },
+    fetchPolicy: "cache-and-network"
+  });
+};
+
+export const usePtpMovieRecommendationsQuery = () => {
+  return useQuery(GET_PTP_MOVIE_RECOMMENDATIONS, {
     fetchPolicy: "cache-and-network"
   });
 };
