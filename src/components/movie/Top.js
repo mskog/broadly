@@ -35,33 +35,13 @@ export default function Top({ movie }) {
     bestRelease
   } = movie;
 
-  let rating;
-  if (watched) {
-    rating = (
-      <LevelItem title="Rating">
-        <PersonalRating id={id} rating={personalRating} />
-      </LevelItem>
-    );
-  } else {
-    rating = (
-      <>
-        <LevelItem title="Tomatometer">
-          <RtRating rating={rtCriticsRating} />
-        </LevelItem>
-        <LevelItem title="Audience">
-          <RtRating rating={rtAudienceRating} />
-        </LevelItem>
-      </>
-    );
-  }
-
   return (
     <div>
       <div
         className="w-full -mb-40 h-66vh"
         style={backgroundStyle(cdnImage(backdropImage))}
       />
-      <div className="container h-full max-w-2xl px-8 mx-auto">
+      <div className="container h-full max-w-3xl px-8 mx-auto">
         <div className="flex flex-col justify-end h-full pb-10">
           <h1 className="text-5xl leading-none text-center text-gray-200 md:text-left">
             {title}
@@ -79,7 +59,19 @@ export default function Top({ movie }) {
                   value={resolutionDisplay(bestRelease.resolution)}
                 />
               )}
-              {rating}
+              {!watched && (
+                <>
+                  <LevelItem title="Tomatometer">
+                    <RtRating rating={rtCriticsRating} />
+                  </LevelItem>
+                  <LevelItem title="Audience">
+                    <RtRating rating={rtAudienceRating} />
+                  </LevelItem>
+                </>
+              )}
+              <LevelItem title="Rating">
+                <PersonalRating id={id} rating={personalRating} />
+              </LevelItem>
             </Level>
           </div>
         </div>

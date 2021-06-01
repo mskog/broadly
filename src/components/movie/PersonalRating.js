@@ -24,12 +24,19 @@ export default function PersonalRating({ id, rating: initialRating }) {
 
   const [rateMovie] = useMutation(RATE_MOVIE);
 
-  const onChange = event => {
+  const onChange = (event) => {
     const newRating = parseInt(event.target.value, 10);
     setRating(newRating);
     setEditMode(false);
     rateMovie({ variables: { id, rating: newRating } });
   };
+
+  let ratingDisplay;
+  if (rating) {
+    ratingDisplay = `${rating} / 10`;
+  } else {
+    ratingDisplay = "Rate";
+  }
 
   return (
     <div>
@@ -39,7 +46,7 @@ export default function PersonalRating({ id, rating: initialRating }) {
           className="w-auto pr-10 mt-1 text-base leading-6 border-gray-300 form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-lg sm:leading-5"
           onChange={onChange}
         >
-          {ratingValues.map(ratingValue => {
+          {ratingValues.map((ratingValue) => {
             return (
               <option selected={ratingValue === rating} value={ratingValue}>
                 {ratingValue}
@@ -49,7 +56,7 @@ export default function PersonalRating({ id, rating: initialRating }) {
         </select>
       ) : (
         <span className="cursor-pointer" onClick={() => setEditMode(!editMode)}>
-          {rating} / 10
+          {ratingDisplay}
         </span>
       )}
     </div>
