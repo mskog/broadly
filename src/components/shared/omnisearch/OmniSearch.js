@@ -65,7 +65,7 @@ const OmniSearch = ({ open, closeHandler, history }) => {
 
   return (
     <div
-      className={`fixed ${display} z-50 flex items-start justify-center w-screen h-screen bg-gray-800 md:pt-16`}
+      className={`fixed ${display} z-50 flex items-start justify-center w-screen h-screen bg-gray-800 md:pt-16 bg-opacity-75 `}
     >
       <div className="flex flex-col w-full mx-4 -my-4 md:w-192">
         <div className="relative py-4 mt-1 rounded-md shadow-sm">
