@@ -14,7 +14,7 @@ export default function Results({ query }) {
 
   if (data) {
     if (data.movieSearch.length !== 0) {
-      results = data.movieSearch.map(result => {
+      results = data.movieSearch.map((result) => {
         return (
           <div key={result.imdbId} className="px-3 mb-10 md:w-full lg:w-1/2">
             <Result result={result} />

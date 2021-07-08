@@ -23,7 +23,14 @@ export default function Navigation(props) {
   return (
     <div>
       <KeyboardEventHandler
-        handleKeys={["meta+p", "ctrl+p", "meta+f", "ctrl+f"]}
+        handleKeys={[
+          "meta+p",
+          "ctrl+p",
+          "meta+f",
+          "ctrl+f",
+          "meta+k",
+          "ctrl+k"
+        ]}
         onKeyEvent={(key, e) => {
           e.preventDefault();
           toggleOmnisearch(!omnisearchOpen);

@@ -42,6 +42,8 @@ const GET_MOVIE_SEARCH = gql`
       imdbId
       imdbUrl
       downloaded
+      onWaitlist
+      existingMovieId
       overview
       tmdbId
     }
@@ -81,9 +83,10 @@ const GET_TV_SHOW_SEARCH = gql`
       year
       imdbId
       imdbUrl
-      downloaded
       overview
       tmdbId
+      exists
+      existingTvShowId
     }
   }
 `;
