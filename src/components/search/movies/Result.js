@@ -60,7 +60,7 @@ export default function Result({ result }) {
         {downloaded && (
           <FontAwesomeIcon className="text-2xl align-middle" icon={faCheck} />
         )}
-        {onWaitlist && (
+        {!downloaded && onWaitlist && (
           <FontAwesomeIcon className="text-2xl align-middle" icon={faClock} />
         )}
       </div>
