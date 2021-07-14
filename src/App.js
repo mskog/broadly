@@ -11,7 +11,7 @@ import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
 import { ApolloProvider } from "@apollo/react-hooks";
 
-import TvShowsCalendar from "components/tv_shows_calendar/TvShowsCalendar";
+import Calendar from "components/calendar/Calendar";
 import PtpMovieRecommendations from "components/ptp_movie_recommendations/PtpMovieRecommendations";
 
 import TopNavigation from "./components/shared/TopNavigation";
@@ -107,7 +107,7 @@ function App() {
               component={TvShowSearchResult}
             />
             <Route path="/search/:category?" component={Search} />
-            <Route path="/calendar" component={TvShowsCalendar} />
+            <Route path="/calendar" component={Calendar} />
             <Route path="/news/:category" component={News} />
           </Switch>
         </div>

@@ -55,11 +55,13 @@ const GET_MOVIE = gql`
       tmdbId
       title
       releaseDate
+      availableDate
       downloadAt
       runtime
       rtCriticsRating
       rtAudienceRating
       watched
+      waitlist
       personalRating
       overview
       hasKillerRelease

@@ -26,14 +26,18 @@ export default function Top({ movie }) {
     id,
     title,
     releaseDate,
+    availableDate,
     runtime,
     rtCriticsRating,
     rtAudienceRating,
     personalRating,
     watched,
     backdropImage,
-    bestRelease
+    bestRelease,
+    waitlist
   } = movie;
+
+  const date = waitlist ? availableDate : releaseYear(releaseDate);
 
   return (
     <div>
@@ -48,10 +52,7 @@ export default function Top({ movie }) {
           </h1>
           <div className="md:pt-10">
             <Level>
-              <LevelItem
-                title="Release date"
-                value={releaseYear(releaseDate)}
-              />
+              <LevelItem title="Release date" value={date} />
               <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
               {bestRelease && (
                 <LevelItem
