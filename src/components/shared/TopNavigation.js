@@ -116,9 +116,17 @@ export default function Navigation(props) {
               active={currentNav === "news"}
               onClick={() => toggleExpansion(!isExpanded)}
             />
-            <div className="hidden float-right mt-4 mr-4 text-right md:block lg:inline-block lg:mt-0 hover:text-white">
+            <div className="hidden float-right mt-4 mr-4 text-right md:block lg:inline-block lg:mt-0 ">
+              <span className="mr-4">
+                <NavigationLink
+                  title="Login"
+                  href="/login"
+                  active={currentNav === "login"}
+                  onClick={() => toggleExpansion(!isExpanded)}
+                />
+              </span>
               <FontAwesomeIcon
-                className="text-xl cursor-pointer"
+                className="text-xl cursor-pointer hover:text-white"
                 icon={faSearch}
                 onClick={() => toggleOmnisearch(!omnisearchOpen)}
               />

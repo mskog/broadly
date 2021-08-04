@@ -1,7 +1,13 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from "react";
 import "typeface-roboto";
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import {
+  Switch,
+  Route,
+  Redirect,
+  withRouter,
+  useLocation
+} from "react-router-dom";
 
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
@@ -15,6 +21,8 @@ import Calendar from "components/calendar/Calendar";
 import PtpMovieRecommendations from "components/ptp_movie_recommendations/PtpMovieRecommendations";
 
 import TopNavigation from "./components/shared/TopNavigation";
+
+import Login from "./components/shared/Login";
 
 import Movies from "./components/movies/Movies";
 import BestMovies from "./components/movies/BestMovies";
@@ -37,9 +45,17 @@ import News from "./components/news/News";
 function App() {
   document.body.classList.add("bg-background-blue");
 
+  const { pathname } = useLocation();
   const [client, setClient] = useState(undefined);
+  const [loggedIn, logIn] = useState(false);
 
   useEffect(() => {
+    const authKey = localStorage.getItem("auth_key");
+
+    if (authKey) {
+      logIn(true);
+    }
+
     const cache = new InMemoryCache();
 
     const c = new ApolloClient({
@@ -57,7 +73,7 @@ function App() {
           uri: process.env.REACT_APP_API_URL,
           credentials: "same-origin",
           headers: {
-            Authorization: `Basic ${process.env.REACT_APP_BASIC_AUTHORIZATION_TOKEN}`
+            Authorization: `Basic ${authKey}`
           }
         })
       ]),
@@ -86,7 +102,9 @@ function App() {
         <TopNavigationWithRouter />
         <div className="">
           <Switch>
+            {!loggedIn && pathname !== "/login" ? <Redirect to="/login" /> : ""}
             <Redirect from="/" exact to="/movies/watched" />
+            <Route path="/login" component={Login} />
             <Route path="/movies/:id(\d+)" component={Movie} />
             <Route path="/best_movies/:year(\d+)?" component={BestMovies} />
             <Route
