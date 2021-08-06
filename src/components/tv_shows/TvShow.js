@@ -25,7 +25,7 @@ export default function TvShow({ tvShow }) {
     <div className="text-gray-100 rounded shadow-lg shadow-fat bg-background-blue-2">
       <div className="flex p-4">
         <LazyLoad>
-          <div className="w-32 h-40 -mt-10">
+          <div className="h-40 -mt-10 w-28">
             <Link to={`/tv_shows/${id}`}>
               <div>
                 <Poster src={posterImageThumbnail} />

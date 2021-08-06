@@ -14,7 +14,7 @@ export default function Poster({ src }) {
 
   return (
     <ProgressiveImage
-      className="object-contain rounded"
+      className="object-cover w-full h-full rounded"
       src={thumbnail(imageSrc)}
     />
   );
