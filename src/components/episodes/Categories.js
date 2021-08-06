@@ -5,7 +5,7 @@ import Category from "./Category";
 const CATEGORIES = ["downloads", "watched"];
 
 export default function Categories({ category }) {
-  const options = CATEGORIES.map(cat => (
+  const options = CATEGORIES.map((cat) => (
     <Category key={cat} name={cat} active={category === cat} />
   ));
 

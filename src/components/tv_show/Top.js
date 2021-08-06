@@ -34,7 +34,7 @@ export default function Top({ tvShow }) {
           <h1 className="text-5xl leading-none text-center text-gray-200 md:text-left">
             {name}
           </h1>
-          <h2 className="text-xl text-gray-500 pt-2 text-center md:text-left">
+          <h2 className="pt-2 text-xl text-center text-gray-500 md:text-left">
             {network}
           </h2>
           <div className="capitalize md:pt-10">
@@ -49,7 +49,7 @@ export default function Top({ tvShow }) {
           </div>
           {genres && (
             <div className="flex flex-row justify-center pt-8 space-x-1">
-              {genres.map(genre => {
+              {genres.map((genre) => {
                 return (
                   <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-gray-300 text-gray-800">
                     {genre}

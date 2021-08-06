@@ -13,14 +13,8 @@ import Poster from "components/search/movies/Poster";
 import ResultDetails from "./ResultDetails";
 
 export default function Result({ result }) {
-  const {
-    imdbId,
-    tmdbId,
-    title,
-    downloaded,
-    onWaitlist,
-    existingMovieId
-  } = result;
+  const { imdbId, tmdbId, title, downloaded, onWaitlist, existingMovieId } =
+    result;
 
   const { data } = useMovieSummaryQuery({
     imdbId

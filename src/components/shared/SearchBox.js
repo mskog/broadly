@@ -5,13 +5,13 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 export default function SearchBox({ pathname, history, query, placeholder }) {
   const [text, setText] = useState(query || "");
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     event.preventDefault();
     setText(event.target.value);
     history.replace({ pathname, search: `?query=${text}` });
   };
 
-  const clearSearch = event => {
+  const clearSearch = (event) => {
     event.preventDefault();
     setText("");
     history.replace({ pathname, search: `` });
@@ -25,7 +25,7 @@ export default function SearchBox({ pathname, history, query, placeholder }) {
           value={text}
           className="flex-grow px-3 py-2 leading-tight text-gray-700 bg-gray-200 border rounded rounded-r-none shadow appearance-none md:flex-grow-0 md:w-6/12 focus:outline-none focus:shadow-outline"
           placeholder={placeholder}
-          onChange={event => setText(event.target.value)}
+          onChange={(event) => setText(event.target.value)}
         />
         <button
           type="submit"

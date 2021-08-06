@@ -6,7 +6,7 @@ export default function List({ newsItems }) {
   return (
     <div>
       <ul>
-        {newsItems.map(item => {
+        {newsItems.map((item) => {
           const { title: itemTitle, url, newsworthy, metadata } = item;
           return (
             <Item

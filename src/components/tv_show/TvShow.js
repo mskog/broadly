@@ -32,7 +32,7 @@ function TvShow(props) {
   } = data.tvShow;
 
   const seasonNumbers = sortBy(
-    uniq(episodes.map((episode) => parseInt(episode.season, 0)))
+    uniq(episodes.map((episode) => parseInt(episode.season, 10)))
   );
 
   const selectedEpisodes = episodes.filter(

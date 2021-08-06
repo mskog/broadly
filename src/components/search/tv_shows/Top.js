@@ -68,7 +68,7 @@ export default function Top({ tvShow }) {
           </div>
           {genres && (
             <div className="flex flex-row justify-center pt-8 space-x-1">
-              {genres.map(genre => {
+              {genres.map((genre) => {
                 return (
                   <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-gray-300 text-gray-800">
                     {genre}
