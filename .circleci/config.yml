@@ -13,7 +13,7 @@ commands:
             - npm-cache-v2-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
-          command: npm install
+          command: yarn
       - save_cache:
           key: npm-cache-v2-{{ checksum "yarn.lock" }}
           paths:
@@ -23,7 +23,7 @@ commands:
           command: npm install @cloudflare/wrangler@1.6.0
       - run:
           name: Build
-          command: npm run build
+          command: yarn build
 workflows:
   version: 2
   build-deploy:
