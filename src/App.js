@@ -6,6 +6,7 @@ import {
   Route,
   Redirect,
   withRouter,
+  useHistory,
   useLocation
 } from "react-router-dom";
 
@@ -47,38 +48,42 @@ function App() {
 
   const { pathname } = useLocation();
   const [client, setClient] = useState(undefined);
-  const [loggedIn, logIn] = useState(false);
+  const [authKey, setAuthKey] = useState(localStorage.getItem("auth_key"));
 
   useEffect(() => {
-    const authKey = localStorage.getItem("auth_key");
-
-    if (authKey) {
-      logIn(true);
+    if (localStorage.getItem("auth_key")) {
+      setAuthKey(localStorage.getItem("auth_key"));
     }
+  });
 
+  useEffect(() => {
+    console.log(authKey);
     const cache = new InMemoryCache();
 
-    const c = new ApolloClient({
-      link: ApolloLink.from([
-        onError(({ graphQLErrors, networkError }) => {
-          if (graphQLErrors)
-            graphQLErrors.forEach(({ message, locations, path }) =>
-              console.log(
-                `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-              )
-            );
-          if (networkError) console.log(`[Network error]: ${networkError}`);
-        }),
-        new HttpLink({
-          uri: process.env.REACT_APP_API_URL,
-          credentials: "same-origin",
-          headers: {
-            Authorization: `Basic ${authKey}`
-          }
-        })
-      ]),
-      cache
-    });
+    const c = new ApolloClient(
+      {
+        link: ApolloLink.from([
+          onError(({ graphQLErrors, networkError }) => {
+            if (graphQLErrors)
+              graphQLErrors.forEach(({ message, locations, path }) =>
+                console.log(
+                  `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+                )
+              );
+            if (networkError) console.log(`[Network error]: ${networkError}`);
+          }),
+          new HttpLink({
+            uri: process.env.REACT_APP_API_URL,
+            credentials: "same-origin",
+            headers: {
+              Authorization: `Basic ${authKey}`
+            }
+          })
+        ]),
+        cache
+      },
+      []
+    );
 
     persistCache({
       cache,
@@ -102,7 +107,7 @@ function App() {
         <TopNavigationWithRouter />
         <div className="">
           <Switch>
-            {!loggedIn && pathname !== "/login" ? <Redirect to="/login" /> : ""}
+            {authKey || pathname === "/login" ? "" : <Redirect to="/login" />}
             <Redirect from="/" exact to="/movies/watched" />
             <Route path="/login" component={Login} />
             <Route path="/movies/:id(\d+)" component={Movie} />
