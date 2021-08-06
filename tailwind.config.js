@@ -15,8 +15,8 @@ module.exports = {
         "75vh": "75vh"
       },
       spacing: {
-        "128": "32rem",
-        "192": "48rem"
+        128: "32rem",
+        192: "48rem"
       }
     },
     fontFamily: {
