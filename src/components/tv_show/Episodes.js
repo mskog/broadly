@@ -12,5 +12,5 @@ export default function Episodes({ episodes }) {
     return <Episode key={episode.episode} episode={episode} />;
   });
 
-  return <div className="flex flex-wrap -mx-2">{episodeComponents}</div>;
+  return <div className="flex-wrap -mx-2 md:flex">{episodeComponents}</div>;
 }

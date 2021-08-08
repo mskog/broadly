@@ -45,11 +45,11 @@ export default function Episode({ episode }) {
   }
 
   return (
-    <LazyLoad>
-      <div className="w-full p-2 md:w-1/2 lg:w-1/3">
+    <LazyLoad className="w-full p-2 md:1/2 lg:w-1/3">
+      <div>
         <Link to={`/episodes/${id}`}>
           <div
-            className="relative h-40 bg-cover"
+            className="relative h-40 bg-cover "
             style={{
               backgroundImage: `linear-gradient(to bottom, rgba(21,26,48,0.6), rgba(21,26,48,0.9)), url('${cdnImage(
                 stillImageThumbnail
@@ -65,7 +65,7 @@ export default function Episode({ episode }) {
             )}
             <div className="p-4">
               {episodeHeader(seasonEpisode(season, episodeNumber), episodeName)}
-              <p className="text-gray-500">
+              <p className="text-gray-400">
                 {truncate(overview, { length: 100 })}
               </p>
             </div>
