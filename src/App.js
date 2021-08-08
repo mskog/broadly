@@ -6,7 +6,6 @@ import {
   Route,
   Redirect,
   withRouter,
-  useHistory,
   useLocation
 } from "react-router-dom";
 
