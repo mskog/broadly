@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faClock, faTv } from "@fortawesome/free-solid-svg-icons";
 
-import { thumbnail, formattedRuntime, releaseYear } from "utilities";
+import { thumbnail, formattedRuntime, releaseYear } from "utilities.ts";
 
 export default function TvShowResult({ tvShow, handleClose }) {
   const {

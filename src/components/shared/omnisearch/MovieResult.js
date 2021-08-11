@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faClock, faFilm } from "@fortawesome/free-solid-svg-icons";
 
-import { thumbnail, formattedRuntime, releaseYear } from "utilities";
+import { thumbnail, formattedRuntime, releaseYear } from "utilities.ts";
 
 export default function MovieResult({ movie, handleClose }) {
   const { id, posterImageThumbnail, title, releaseDate, runtime } = movie;

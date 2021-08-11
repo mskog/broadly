@@ -3,7 +3,7 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
-import { cdnImage } from "utilities";
+import { cdnImage } from "utilities.ts";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";

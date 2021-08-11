@@ -3,7 +3,7 @@ import React from "react";
 import { capitalize } from "lodash";
 
 import Ratings from "components/shared/Ratings";
-import { formattedRuntime, releaseYear } from "utilities";
+import { formattedRuntime, releaseYear } from "utilities.ts";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

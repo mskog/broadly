@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { padStart } from "lodash";
 import { DateTime } from "luxon";
 
-import { formattedRuntime, cdnImage, resolutionDisplay } from "utilities";
+import { formattedRuntime, cdnImage, resolutionDisplay } from "utilities.ts";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { thumbnail } from "utilities";
+import { thumbnail } from "utilities.ts";
 
 import ProgressiveImage from "components/shared/ProgressiveImage";
 

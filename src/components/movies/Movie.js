@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { truncate } from "lodash";
 import { DateTime } from "luxon";
 
-import { formattedRuntime, releaseYear, resolutionDisplay } from "utilities";
+import { formattedRuntime, releaseYear, resolutionDisplay } from "utilities.ts";
 
 import Ratings from "components/shared/Ratings";
 import Poster from "./Poster";

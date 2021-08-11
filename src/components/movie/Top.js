@@ -5,7 +5,7 @@ import {
   formattedRuntime,
   cdnImage,
   resolutionDisplay
-} from "utilities";
+} from "utilities.ts";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";

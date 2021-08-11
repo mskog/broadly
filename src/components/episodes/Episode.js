@@ -8,7 +8,7 @@ import { padStart } from "lodash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
-import { cdnImage, resolutionDisplay } from "utilities";
+import { cdnImage, resolutionDisplay } from "utilities.ts";
 
 function seasonEpisode(season, episodeNumber) {
   return `S${padStart(season, 2, "0")}E${padStart(episodeNumber, 2, "0")}`;

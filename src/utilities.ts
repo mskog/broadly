@@ -1,4 +1,4 @@
-function formattedRuntime(runtime) {
+export function formattedRuntime(runtime: number) {
   const hours = Math.floor(runtime / 60);
   const minutes = runtime % 60;
 
@@ -8,31 +8,22 @@ function formattedRuntime(runtime) {
   return `${hours}h ${minutes}m`;
 }
 
-function releaseYear(releaseDate) {
+export function releaseYear(releaseDate: string) {
   return releaseDate ? new Date(releaseDate).getFullYear() : "????";
 }
 
-function thumbnail(url) {
+export function thumbnail(url: string) {
   return `https://thumbs.mskog.com/240x0/filters:quality(50)/${url}`;
 }
 
-function placeholder(url) {
+export function placeholder(url: string) {
   return `https://thumbs.mskog.com/20x0/filters:blur(5):quality(5)/${url}`;
 }
 
-function cdnImage(url) {
+export function cdnImage(url: string) {
   return `https://thumbs.mskog.com/filters:quality(80)/${url}`;
 }
 
-function resolutionDisplay(resolution) {
+export function resolutionDisplay(resolution: string) {
   return resolution === "2160p" ? "4k" : resolution;
 }
-
-module.exports = {
-  formattedRuntime,
-  releaseYear,
-  thumbnail,
-  placeholder,
-  cdnImage,
-  resolutionDisplay
-};

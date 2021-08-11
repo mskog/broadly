@@ -1,6 +1,6 @@
 import React from "react";
 
-import { formattedRuntime, cdnImage } from "utilities";
+import { formattedRuntime, cdnImage } from "utilities.ts";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { resolutionDisplay } from "utilities";
+import { resolutionDisplay } from "utilities.ts";
 
 export default function ReleaseInformation({ killer, acceptable, release }) {
   const { releaseName, source, size, resolution, container } = release;
