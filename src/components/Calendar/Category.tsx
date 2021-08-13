@@ -21,7 +21,7 @@ export default function Category({
 
   return (
     <li key={name} className={classNames}>
-      <Link to={`/calendar/${name}`} className="capitalize">
+      <Link to={`/calendar/${name.toLowerCase()}`} className="capitalize">
         {capitalize(name)}
       </Link>
     </li>
