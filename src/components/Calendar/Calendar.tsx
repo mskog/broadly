@@ -2,13 +2,15 @@ import React from "react";
 
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
+
 import Loading from "components/shared/LoadingFull";
 
 import List from "./List";
+import Categories from "./Categories";
 
 const GET_CALENDAR = gql`
-  query Calendar {
-    calendar {
+  query Calendar($category: CalendarCategory) {
+    calendar(category: $category) {
       __typename
       ... on Movie {
         id
@@ -31,15 +33,24 @@ const GET_CALENDAR = gql`
   }
 `;
 
-export default function Calendar() {
-  const { data } = useQuery(GET_CALENDAR);
+export default function Calendar(props: any) {
+  const {
+    match: {
+      params: { category = "ALL" }
+    }
+  } = props;
+
+  const { data } = useQuery(GET_CALENDAR, {
+    variables: { category: category.toUpperCase() }
+  });
 
   if (!data) {
     return <Loading />;
   }
 
   return (
-    <div className="container max-w-xl pt-10 mx-auto">
+    <div className="container max-w-5xl pt-10 mx-auto">
+      <Categories category={category} />
       <List items={data.calendar} />
     </div>
   );

@@ -136,7 +136,7 @@ function App() {
               component={TvShowSearchResult}
             />
             <Route path="/search/:category?" component={Search} />
-            <Route path="/calendar" component={Calendar} />
+            <Route path="/calendar/:category(\w+)?" component={Calendar} />
             <Route path="/news/:category" component={News} />
           </Switch>
         </div>
