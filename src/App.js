@@ -10,14 +10,17 @@ import {
 } from "react-router-dom";
 
 import { ApolloClient } from "apollo-client";
-import { InMemoryCache } from "apollo-cache-inmemory";
+import {
+  InMemoryCache,
+  IntrospectionFragmentMatcher
+} from "apollo-cache-inmemory";
 import { persistCache } from "apollo-cache-persist";
 import { HttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
 import { ApolloProvider } from "@apollo/react-hooks";
 
-import Calendar from "components/calendar/Calendar";
+import Calendar from "components/Calendar/Calendar";
 import PtpMovieRecommendations from "components/ptp_movie_recommendations/PtpMovieRecommendations";
 
 import TopNavigation from "./components/shared/TopNavigation";
@@ -42,6 +45,8 @@ import TvShowSearchResult from "./components/search/tv_shows/Details";
 
 import News from "./components/news/News";
 
+import schema from "./schema.json";
+
 function App() {
   document.body.classList.add("bg-background-blue");
 
@@ -56,8 +61,10 @@ function App() {
   });
 
   useEffect(() => {
-    console.log(authKey);
-    const cache = new InMemoryCache();
+    const fragmentMatcher = new IntrospectionFragmentMatcher({
+      introspectionQueryResultData: schema
+    });
+    const cache = new InMemoryCache({ fragmentMatcher });
 
     const c = new ApolloClient(
       {

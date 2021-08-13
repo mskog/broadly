@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import MoviePoster from "components/movies/Poster";
 import TvShowPoster from "./TvShowPoster";
 
-export default function List({ items }) {
+export default function List({ items }: { items: Array<any> }) {
   const groupedItems = groupBy(items, (tvShow) =>
     DateTime.fromISO(tvShow.firstAired || tvShow.availableDate)
   );
@@ -18,8 +18,8 @@ export default function List({ items }) {
     const dateTime = DateTime.fromISO(date);
     const diffDays = dateTime.diff(DateTime.local(), "days").toObject();
 
-    let formattedDate;
-    if (diffDays.days <= 7) {
+    let formattedDate: string | null;
+    if (diffDays.days && diffDays.days <= 7) {
       formattedDate = dateTime.toRelative();
     } else {
       formattedDate = dateTime.toISODate();
@@ -42,7 +42,7 @@ export default function List({ items }) {
       }
 
       return (
-        <div key={items.id}>
+        <div key={item.id}>
           <div className="p-4 text-center border-b-2 border-black bg-background-blue-2">
             <h2 className="text-xl font-semibold">{formattedDate}</h2>
           </div>

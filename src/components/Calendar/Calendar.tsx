@@ -32,9 +32,7 @@ const GET_CALENDAR = gql`
 `;
 
 export default function Calendar() {
-  const { data } = useQuery(GET_CALENDAR, {
-    fetchPolicy: "no-cache"
-  });
+  const { data } = useQuery(GET_CALENDAR);
 
   if (!data) {
     return <Loading />;
