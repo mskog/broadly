@@ -44,14 +44,17 @@ export default function Calendar(props: any) {
     variables: { category: category.toUpperCase() }
   });
 
+  let mainContent;
   if (!data) {
-    return <Loading />;
+    mainContent = <Loading />;
+  } else {
+    mainContent = <List items={data.calendar} />;
   }
 
   return (
     <div className="container max-w-5xl pt-10 mx-auto">
       <Categories category={category} />
-      <List items={data.calendar} />
+      {mainContent}
     </div>
   );
 }
