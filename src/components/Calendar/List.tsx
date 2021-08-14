@@ -6,7 +6,7 @@ import { DateTime } from "luxon";
 
 import { Link } from "react-router-dom";
 
-import MoviePoster from "components/movies/Poster";
+import MoviePoster from "components/Movies/Poster";
 import TvShowPoster from "./TvShowPoster";
 
 export default function List({ items }: { items: Array<any> }) {

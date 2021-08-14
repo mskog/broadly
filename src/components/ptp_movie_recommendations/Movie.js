@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { truncate } from "lodash";
 
 import Ratings from "components/shared/Ratings";
-import Poster from "components/movies/Poster";
+import Poster from "components/Movies/Poster";
 
 export default function Movie({ movie }) {
   const { title, ptpRating, cover, imdbId, year } = movie;

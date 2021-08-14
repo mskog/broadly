@@ -7,7 +7,15 @@ import Loading from "components/shared/LoadingFull";
 import List from "./List";
 import Categories from "./Categories";
 
-export default function BestMovies(props) {
+type BestMoviesProps = {
+  match: {
+    params: {
+      year: string;
+    };
+  };
+};
+
+export default function BestMovies(props: BestMoviesProps) {
   const {
     match: {
       params: { year: chosenYear }
@@ -25,15 +33,14 @@ export default function BestMovies(props) {
   ];
 
   const { loading, error, data, fetchMore } = useBestMoviesQuery({
-    first: 20,
-    skip: 0,
-    year
+    year,
+    limit: 20
   });
 
   const loadMore = () => {
     fetchMore({
       variables: { skip: data.bestMovies.length },
-      updateQuery: (prev, { fetchMoreResult }) => {
+      updateQuery: (prev: any, { fetchMoreResult }) => {
         if (!fetchMoreResult) {
           return prev;
         }

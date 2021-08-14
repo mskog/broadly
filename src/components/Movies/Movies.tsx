@@ -11,7 +11,7 @@ import List from "./List";
 
 const CATEGORIES = ["watched", "downloads", "waitlist"];
 
-export default function Movies(props) {
+export default function Movies(props: any) {
   const {
     match: {
       params: { category }

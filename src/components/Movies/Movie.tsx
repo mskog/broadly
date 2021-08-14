@@ -12,12 +12,26 @@ import { Link } from "react-router-dom";
 import { truncate } from "lodash";
 import { DateTime } from "luxon";
 
-import { formattedRuntime, releaseYear, resolutionDisplay } from "utilities.ts";
+import { formattedRuntime, releaseYear, resolutionDisplay } from "utilities";
 
 import Ratings from "components/shared/Ratings";
 import Poster from "./Poster";
 
-export default function Movie({ movie }) {
+type MovieProps = {
+  movie: {
+    id: number;
+    title: string;
+    releaseDate: string;
+    runtime: number;
+    watchedAt: string;
+    rtCriticsRating: number;
+    personalRating: number;
+    posterImageThumbnail: string;
+    bestRelease: any;
+  };
+};
+
+export default function Movie({ movie }: MovieProps) {
   const {
     id,
     title,

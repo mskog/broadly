@@ -27,8 +27,8 @@ import TopNavigation from "./components/shared/TopNavigation";
 
 import Login from "./components/shared/Login";
 
-import Movies from "./components/movies/Movies";
-import BestMovies from "./components/movies/BestMovies";
+import Movies from "./components/Movies/Movies";
+import BestMovies from "./components/Movies/BestMovies";
 import Movie from "./components/movie/Movie";
 
 import TvShows from "./components/tv_shows/TvShows";

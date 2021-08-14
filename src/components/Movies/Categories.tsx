@@ -2,12 +2,18 @@ import React from "react";
 
 import Category from "./Category";
 
+type CategoriesProps = {
+  categories: Array<any>;
+  category: any;
+  baseRoute?: string;
+};
+
 export default function Categories({
   categories,
   category,
   baseRoute = "movies"
-}) {
-  const options = categories.map((cat) => (
+}: CategoriesProps) {
+  const options = categories.map((cat: any) => (
     <Category
       baseRoute={baseRoute}
       key={cat}
