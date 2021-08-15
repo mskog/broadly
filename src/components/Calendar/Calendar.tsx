@@ -41,7 +41,8 @@ export default function Calendar(props: any) {
   } = props;
 
   const { data } = useQuery(GET_CALENDAR, {
-    variables: { category: category.toUpperCase() }
+    variables: { category: category.toUpperCase() },
+    fetchPolicy: "cache-and-network"
   });
 
   let mainContent;
