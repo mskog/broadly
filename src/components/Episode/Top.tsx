@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { padStart } from "lodash";
 import { DateTime } from "luxon";
 
-import { formattedRuntime, cdnImage, resolutionDisplay } from "utilities.ts";
+import { formattedRuntime, cdnImage, resolutionDisplay } from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
 
-function backgroundStyle(url) {
+function backgroundStyle(url: string) {
   return {
     backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url('${url}')`,
     backgroundSize: "cover",
@@ -16,11 +16,11 @@ function backgroundStyle(url) {
   };
 }
 
-function seasonEpisode(season, episodeNumber) {
+function seasonEpisode(season: string, episodeNumber: string) {
   return `S${padStart(season, 2, "0")}E${padStart(episodeNumber, 2, "0")}`;
 }
 
-export default function Top({ episode }) {
+export default function Top({ episode }: { episode: any }) {
   const {
     season,
     episode: episodeNumber,
