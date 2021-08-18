@@ -3,7 +3,7 @@ import React from "react";
 type LevelItemProps = {
   title?: string;
   value?: string;
-  children?: Array<string>;
+  children?: React.ReactNode;
   defaultText?: string;
   hideIfBlank?: boolean;
 };
