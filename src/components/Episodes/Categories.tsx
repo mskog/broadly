@@ -4,7 +4,11 @@ import Category from "./Category";
 
 const CATEGORIES = ["downloads", "watched"];
 
-export default function Categories({ category }) {
+type CategoriesProps = {
+  category: string;
+};
+
+export default function Categories({ category }: CategoriesProps) {
   const options = CATEGORIES.map((cat) => (
     <Category key={cat} name={cat} active={category === cat} />
   ));

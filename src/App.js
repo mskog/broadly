@@ -36,7 +36,7 @@ import TvShow from "./components/tv_show/TvShow";
 
 import Episode from "./components/Episode/Episode";
 
-import Episodes from "./components/episodes/Episodes";
+import Episodes from "./components/Episodes/Episodes";
 
 import Search from "./components/search/Search";
 

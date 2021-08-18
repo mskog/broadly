@@ -2,7 +2,12 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-export default function Category({ name, active }) {
+type CategoryProps = {
+  name: string;
+  active: boolean;
+};
+
+export default function Category({ name, active }: CategoryProps) {
   let classNames =
     "flex-1 text-base font-bold text-center cursor-pointer hover:text-white pb-2";
 

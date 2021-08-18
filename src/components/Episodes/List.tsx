@@ -3,7 +3,12 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 import Episode from "./Episode";
 
-export default function List({ loadMore, episodes }) {
+type ListProps = {
+  loadMore: () => void;
+  episodes: Array<any>;
+};
+
+export default function List({ loadMore, episodes }: ListProps) {
   const episodeComponents = episodes.map((episode) => {
     return <Episode key={episode.id} episode={episode} />;
   });

@@ -5,7 +5,7 @@ import Loading from "components/shared/LoadingFull";
 import List from "./List";
 import Categories from "./Categories";
 
-export default function Episodes(props) {
+export default function Episodes(props: any) {
   const {
     match: {
       params: { category = "WATCHED" }
