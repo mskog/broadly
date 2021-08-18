@@ -32,7 +32,7 @@ const query = gql`
   }
 `;
 
-export default function News(props) {
+export default function News(props: any) {
   const {
     match: {
       params: { category: chosenCategory }

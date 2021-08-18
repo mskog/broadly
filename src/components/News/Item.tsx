@@ -3,7 +3,14 @@ import { Link } from "react-router-dom";
 
 import { truncate } from "lodash";
 
-export default function Item({ title, url, metadata, newsworthy }) {
+type ItemProps = {
+  title: string;
+  url: string;
+  metadata: any;
+  newsworthy: any;
+};
+
+export default function Item({ title, url, metadata, newsworthy }: ItemProps) {
   const { image, description } = metadata || {};
 
   const thumbnail = `https://thumbs.mskog.com/100x100/smart/${image}`;

@@ -43,7 +43,7 @@ import Search from "./components/search/Search";
 import MovieSearchResult from "./components/search/movies/Details";
 import TvShowSearchResult from "./components/search/tv_shows/Details";
 
-import News from "./components/news/News";
+import News from "./components/News/News";
 
 import schema from "./schema.json";
 
