@@ -29,7 +29,7 @@ import Login from "./components/shared/Login";
 
 import Movies from "./components/Movies/Movies";
 import BestMovies from "./components/Movies/BestMovies";
-import Movie from "./components/movie/Movie";
+import Movie from "./components/Movie/Movie";
 
 import TvShows from "./components/tv_shows/TvShows";
 import TvShow from "./components/tv_show/TvShow";

@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 
 import LoaderButton from "components/shared/LoaderButton";
 
-import ReleaseInformation from "components/movie/ReleaseInformation";
+import ReleaseInformation from "components/Movie/ReleaseInformation";
 
 export default function Release({ imdbId, release, acceptable, killer }) {
   const history = useHistory();
