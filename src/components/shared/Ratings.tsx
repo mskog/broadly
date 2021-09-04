@@ -2,7 +2,12 @@ import React from "react";
 
 import RatingStar from "./RatingStar";
 
-export default function Ratings({ score, children }) {
+type Props = {
+  score: number;
+  children?: React.ReactNode;
+};
+
+export default function Ratings({ score, children }: Props) {
   if (!score) {
     return null;
   }

@@ -3,7 +3,7 @@ import React from "react";
 import { capitalize } from "lodash";
 
 import Ratings from "components/shared/Ratings";
-import { formattedRuntime, releaseYear } from "utilities.ts";
+import { formattedRuntime, releaseYear } from "utilities";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,13 +13,21 @@ import {
   faTv
 } from "@fortawesome/free-solid-svg-icons";
 
+type Props = {
+  rating: number;
+  firstAired: string;
+  runtime: number;
+  status: string;
+  airedEpisodes: number;
+};
+
 export default function ResultDetails({
   rating,
   firstAired,
   runtime,
   status,
   airedEpisodes
-}) {
+}: Props) {
   return (
     <div>
       <Ratings score={rating * 10} />

@@ -9,7 +9,19 @@ import LoaderButton from "components/shared/LoaderButton";
 
 import ReleaseInformation from "components/Movie/ReleaseInformation";
 
-export default function Release({ imdbId, release, acceptable, killer }) {
+type ReleaseProps = {
+  imdbId: string;
+  release: any;
+  acceptable: boolean;
+  killer: boolean;
+};
+
+export default function Release({
+  imdbId,
+  release,
+  acceptable,
+  killer
+}: ReleaseProps) {
   const history = useHistory();
 
   const [addMovieToWaitlist] = useAddMovieToWaitlistMutation({
@@ -29,7 +41,6 @@ export default function Release({ imdbId, release, acceptable, killer }) {
   const addToWaitlistComponent = (
     <div className="w-full mx-1 my-2 md:w-6/12">
       <LoaderButton
-        type="button"
         className="w-full px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700"
         onClick={addMovieToWaitlist}
       >
@@ -41,7 +52,6 @@ export default function Release({ imdbId, release, acceptable, killer }) {
   const downloadComponent = (
     <div className="w-full mx-1 my-2 md:w-6/12">
       <LoaderButton
-        type="button"
         className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
         onClick={downloadMovie}
       >

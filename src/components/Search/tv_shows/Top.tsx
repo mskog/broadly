@@ -3,7 +3,7 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
-import { cdnImage } from "utilities.ts";
+import { cdnImage } from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
@@ -17,23 +17,35 @@ const TV_SHOW_POSTER = gql`
   }
 `;
 
-function image({ loading, error, data }) {
+function image({
+  loading,
+  error,
+  data
+}: {
+  loading: boolean;
+  error?: any;
+  data: any;
+}) {
   if (loading || error) {
     return "https://image.tmdb.org/t/p/w1280/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
   }
   return data.tvShowPoster.url;
 }
 
-function backgroundStyle(url) {
+function backgroundStyle(url: string) {
   return {
     backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url('${url}')`,
     backgroundSize: "cover"
   };
 }
 
+type Props = {
+  tvShow: any;
+};
+
 // TODO: Use lazy loading and fancy placeholders
 // TODO: There are more details to show if we want
-export default function Top({ tvShow }) {
+export default function Top({ tvShow }: Props) {
   const {
     tmdbId,
     title,
@@ -68,7 +80,7 @@ export default function Top({ tvShow }) {
           </div>
           {genres && (
             <div className="flex flex-row justify-center pt-8 space-x-1">
-              {genres.map((genre) => {
+              {genres.map((genre: string) => {
                 return (
                   <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-gray-300 text-gray-800">
                     {genre}

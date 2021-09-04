@@ -7,7 +7,12 @@ const CATEGORIES = [
   { name: "TV Shows", value: "tv_shows" }
 ];
 
-export default function Categories({ category, query }) {
+type CategoriesProps = {
+  category: string;
+  query: string;
+};
+
+export default function Categories({ category, query }: CategoriesProps) {
   const options = CATEGORIES.map(({ name, value }) => (
     <Category
       key={name}

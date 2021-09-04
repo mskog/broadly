@@ -7,7 +7,7 @@ import Loading from "components/shared/LoadingFull";
 import Top from "./Top";
 import Release from "./Release";
 
-export default function Details(props) {
+export default function Details(props: any) {
   const {
     match: {
       params: { imdbId }

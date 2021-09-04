@@ -9,11 +9,11 @@ import { truncate } from "lodash";
 
 import { useTvShowSummaryQuery } from "store/tv_shows";
 
-import Poster from "components/search/tv_shows/Poster";
+import Poster from "components/Search/tv_shows/Poster";
 
 import ResultDetails from "./ResultDetails";
 
-export default function Result({ result }) {
+export default function Result({ result }: { result: any }) {
   const { imdbId, tmdbId, title, exists, existingTvShowId } = result;
 
   const { data } = useTvShowSummaryQuery({
@@ -47,7 +47,6 @@ export default function Result({ result }) {
               runtime={data.tvShowSummary.runtime}
               status={data.tvShowSummary.status}
               airedEpisodes={data.tvShowSummary.airedEpisodes}
-              genres={data.tvShowSummary.genres}
             />
           )}
         </div>

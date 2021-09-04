@@ -8,7 +8,7 @@ import Categories from "./Categories";
 import MovieResults from "./movies/Results";
 import TvShowResults from "./tv_shows/Results";
 
-export default function Search(props) {
+export default function Search(props: any) {
   const {
     history,
     pathname,
@@ -19,18 +19,19 @@ export default function Search(props) {
   } = props;
 
   const { query } = queryString.parse(search);
+  const parsedQuery = Array.isArray(query) ? query[0] : query || "";
 
   let mainContent;
   if (query) {
     let categoryComponent;
     if (category === "movies") {
-      categoryComponent = <MovieResults query={query} />;
+      categoryComponent = <MovieResults query={parsedQuery} />;
     } else {
-      categoryComponent = <TvShowResults query={query} />;
+      categoryComponent = <TvShowResults query={parsedQuery} />;
     }
     mainContent = (
       <div>
-        <Categories category={category} query={query} />
+        <Categories category={category} query={parsedQuery} />
         <div className="mt-20">{categoryComponent}</div>
       </div>
     );
@@ -41,7 +42,7 @@ export default function Search(props) {
       <SearchBox
         pathname={pathname}
         history={history}
-        query={query}
+        query={parsedQuery}
         placeholder="Movie or TV Show id, url or name..."
       />
       <div>{mainContent}</div>

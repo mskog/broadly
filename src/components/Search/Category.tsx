@@ -2,7 +2,19 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-export default function Category({ name, value, active, query }) {
+type CategoryProps = {
+  name: string;
+  value: string;
+  active: boolean;
+  query: string;
+};
+
+export default function Category({
+  name,
+  value,
+  active,
+  query
+}: CategoryProps) {
   let classNames =
     "flex-1 text-base font-bold text-center cursor-pointer hover:text-white pb-2";
 

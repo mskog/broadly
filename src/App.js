@@ -38,10 +38,10 @@ import Episode from "./components/Episode/Episode";
 
 import Episodes from "./components/Episodes/Episodes";
 
-import Search from "./components/search/Search";
+import Search from "./components/Search/Search";
 
-import MovieSearchResult from "./components/search/movies/Details";
-import TvShowSearchResult from "./components/search/tv_shows/Details";
+import MovieSearchResult from "./components/Search/movies/Details";
+import TvShowSearchResult from "./components/Search/tv_shows/Details";
 
 import News from "./components/News/News";
 
@@ -135,7 +135,7 @@ function App() {
               path="/search/tv_shows/details/:imdbId"
               component={TvShowSearchResult}
             />
-            <Route path="/search/:category?" component={Search} />
+            <Route path="/search/:category(\w+)?" component={Search} />
             <Route path="/calendar/:category(\w+)?" component={Calendar} />
             <Route path="/news/:category" component={News} />
           </Switch>

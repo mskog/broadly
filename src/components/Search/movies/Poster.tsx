@@ -3,7 +3,7 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
-import { thumbnail } from "utilities.ts";
+import { thumbnail } from "utilities";
 
 const IMAGE_PLACEHOLDER =
   "https://image.tmdb.org/t/p/w300/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
@@ -16,7 +16,15 @@ const MOVIE_POSTER = gql`
   }
 `;
 
-function image({ loading, error, data }) {
+function image({
+  loading,
+  error,
+  data
+}: {
+  loading: boolean;
+  error?: any;
+  data: any;
+}) {
   if (loading || error) {
     return IMAGE_PLACEHOLDER;
   }
@@ -24,7 +32,7 @@ function image({ loading, error, data }) {
 }
 
 // TODO: Use lazy loading and fancy placeholders
-export default function Poster({ tmdbId }) {
+export default function Poster({ tmdbId }: { tmdbId: string }) {
   const url = image(
     useQuery(MOVIE_POSTER, {
       variables: { tmdbId },

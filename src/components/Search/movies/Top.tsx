@@ -3,7 +3,7 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
-import { cdnImage } from "utilities.ts";
+import { cdnImage } from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
@@ -16,14 +16,22 @@ const MOVIE_POSTER = gql`
   }
 `;
 
-function image({ loading, error, data }) {
+function image({
+  loading,
+  error,
+  data
+}: {
+  loading: boolean;
+  error?: any;
+  data: any;
+}) {
   if (loading || error) {
     return "https://image.tmdb.org/t/p/w1280/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
   }
   return data.moviePoster.url;
 }
 
-function backgroundStyle(url) {
+function backgroundStyle(url: string) {
   return {
     backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url('${url}')`,
     backgroundSize: "cover"
@@ -31,7 +39,7 @@ function backgroundStyle(url) {
 }
 
 // TODO: Use lazy loading and fancy placeholders
-export default function Top({ movie }) {
+export default function Top({ movie }: { movie: any }) {
   const { tmdbId, title, year } = movie;
 
   const url = image(

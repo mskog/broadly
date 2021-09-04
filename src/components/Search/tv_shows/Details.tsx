@@ -34,7 +34,7 @@ const GET_TV_SHOW_DETAILS = gql`
   }
 `;
 
-export default function Details(props) {
+export default function Details(props: any) {
   const {
     match: {
       params: { imdbId }
@@ -75,7 +75,6 @@ export default function Details(props) {
         <div className="flex flex-col pt-4 -mx-2 md:flex-row">
           <div className="w-full mx-1 my-2 md:w-6/12">
             <LoaderButton
-              type="button"
               className="w-full px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700"
               onClick={sampleTvShow}
             >
@@ -84,7 +83,6 @@ export default function Details(props) {
           </div>
           <div className="w-full mx-1 my-2 md:w-6/12">
             <LoaderButton
-              type="button"
               className="w-full px-4 py-2 font-bold text-white bg-teal-500 rounded hover:bg-teal-700"
               onClick={collectTvShow}
             >

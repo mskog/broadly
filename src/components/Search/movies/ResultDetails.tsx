@@ -1,12 +1,21 @@
 import React from "react";
 
 import Ratings from "components/shared/Ratings";
-import { formattedRuntime, releaseYear } from "utilities.ts";
+import { formattedRuntime, releaseYear } from "utilities";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
 
-export default function ResultDetails({ rating, released, runtime }) {
+type ResultDetailsProps = {
+  rating: number;
+  released: string;
+  runtime: number;
+};
+export default function ResultDetails({
+  rating,
+  released,
+  runtime
+}: ResultDetailsProps) {
   return (
     <div>
       <Ratings score={rating * 10} />
