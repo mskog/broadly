@@ -2,8 +2,8 @@ import React from "react";
 
 import Movie from "./Movie";
 
-export default function List({ movies }) {
-  const moviesList = movies.map((movie) => (
+export default function List({ movies }: { movies: any }) {
+  const moviesList = movies.map((movie: any) => (
     <div key={movie.id} className="px-3 mb-10 md:w-full lg:w-1/2">
       <Movie movie={movie} />
     </div>

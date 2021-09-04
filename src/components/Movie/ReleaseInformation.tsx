@@ -2,7 +2,7 @@ import React from "react";
 
 import { resolutionDisplay } from "utilities";
 
-type ReleaseInformation = {
+type Props = {
   killer: boolean;
   acceptable: boolean;
   release: any;
@@ -12,7 +12,7 @@ export default function ReleaseInformation({
   killer,
   acceptable,
   release
-}: ReleaseInformation) {
+}: Props) {
   const { releaseName, source, size, resolution, container } = release;
 
   const releaseLine = `${source} - ${container} - ${resolutionDisplay(

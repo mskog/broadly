@@ -9,7 +9,7 @@ import { truncate } from "lodash";
 import Ratings from "components/shared/Ratings";
 import Poster from "components/Movies/Poster";
 
-export default function Movie({ movie }) {
+export default function Movie({ movie }: { movie: any }) {
   const { title, ptpRating, cover, imdbId, year } = movie;
 
   const rating = ptpRating;

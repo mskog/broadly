@@ -21,7 +21,7 @@ import { ApolloLink } from "apollo-link";
 import { ApolloProvider } from "@apollo/react-hooks";
 
 import Calendar from "components/Calendar/Calendar";
-import PtpMovieRecommendations from "components/ptp_movie_recommendations/PtpMovieRecommendations";
+import PtpMovieRecommendations from "components/PtpMovieRecommendations/PtpMovieRecommendations";
 
 import TopNavigation from "./components/shared/TopNavigation";
 

@@ -10,7 +10,6 @@ import Actions from "./Actions";
 import ReleaseInformation from "./ReleaseInformation";
 
 type MovieProps = {
-  history: any;
   match: {
     params: {
       id: number;
@@ -20,7 +19,6 @@ type MovieProps = {
 
 function Movie(props: MovieProps) {
   const {
-    history,
     match: {
       params: { id }
     }
