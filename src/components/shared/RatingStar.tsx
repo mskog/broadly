@@ -5,7 +5,7 @@ import { faStar, faStarHalf } from "@fortawesome/free-solid-svg-icons";
 
 import { faStar as faStarEmpty } from "@fortawesome/free-regular-svg-icons";
 
-function icon(minimum, maximum, score) {
+function icon(minimum: number, maximum: number, score: number) {
   if (score >= maximum) {
     return faStar;
   }
@@ -15,7 +15,15 @@ function icon(minimum, maximum, score) {
   return faStarEmpty;
 }
 
-export default function RatingStar({ minimum, maximum, score }) {
+export default function RatingStar({
+  minimum,
+  maximum,
+  score
+}: {
+  minimum: number;
+  maximum: number;
+  score: number;
+}) {
   return (
     <FontAwesomeIcon
       className="mr-1 text-yellow-400"

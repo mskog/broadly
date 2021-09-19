@@ -4,13 +4,16 @@ import React, { useState } from "react";
 export default function Login() {
   const [token, setToken] = useState(localStorage.getItem("auth_key"));
 
-  const submitHandler = (event) => {
+  const submitHandler = (event: any) => {
+    if (!token) {
+      return;
+    }
     event.preventDefault();
     localStorage.setItem("auth_key", token);
-    window.location = "/";
+    window.location.href = "/";
   };
 
-  const changeHandler = (event) => {
+  const changeHandler = (event: any) => {
     event.preventDefault();
     setToken(event.target.value);
   };
@@ -32,7 +35,7 @@ export default function Login() {
             className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             id="token"
             type="text"
-            value={token}
+            value={token || ""}
             onChange={changeHandler}
           />
         </div>

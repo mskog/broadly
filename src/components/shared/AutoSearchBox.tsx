@@ -9,15 +9,22 @@ export default function AutoSearchBox({
   placeholder,
   minLength = 3,
   debounceTimeout = 200
+}: {
+  pathname: string;
+  history: any;
+  query: string;
+  placeholder: string;
+  minLength: number;
+  debounceTimeout: number;
 }) {
   const [text, setText] = useState(query || "");
 
-  const handleQueryChange = event => {
+  const handleQueryChange = (event: any) => {
     setText(event.target.value);
     history.replace({ pathname, search: `?query=${event.target.value}` });
   };
 
-  const clear = event => {
+  const clear = (event: any) => {
     event.preventDefault();
     setText("");
     history.replace({ pathname, search: "" });

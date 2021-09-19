@@ -1,15 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar, faClock, faFilm } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faClock, faTv } from "@fortawesome/free-solid-svg-icons";
 
-import { thumbnail, formattedRuntime, releaseYear } from "utilities.ts";
+import { thumbnail, formattedRuntime, releaseYear } from "utilities";
 
-export default function MovieResult({ movie, handleClose }) {
-  const { id, posterImageThumbnail, title, releaseDate, runtime } = movie;
+export default function TvShowResult({
+  tvShow,
+  handleClose
+}: {
+  tvShow: any;
+  handleClose: any;
+}) {
+  const {
+    id,
+    posterImageThumbnail,
+    name,
+    tmdbDetails: { firstAirDate },
+    traktDetails: { runtime }
+  } = tvShow;
 
   return (
-    <Link onClick={handleClose} to={`/movies/${id}`}>
+    <Link onClick={handleClose} to={`/tv_shows/${id}`}>
       <div className="flex -mx-2">
         <div className="flex-initial">
           <img
@@ -19,11 +31,11 @@ export default function MovieResult({ movie, handleClose }) {
           />
         </div>
         <div className="flex flex-col px-4">
-          <h2 className="text-xl text-gray-800">{title}</h2>
+          <h2 className="text-xl text-gray-800">{name}</h2>
           <div className="text-sm font-thin text-gray-600">
             <span className="mr-2">
               <FontAwesomeIcon className="mr-1" icon={faCalendar} />
-              {releaseYear(releaseDate)}
+              {releaseYear(firstAirDate)}
             </span>
             <span>
               <FontAwesomeIcon className="mr-1" icon={faClock} />
@@ -31,8 +43,9 @@ export default function MovieResult({ movie, handleClose }) {
             </span>
           </div>
         </div>
+
         <div className="flex flex-col items-end justify-center flex-1 p-4">
-          <FontAwesomeIcon className="text-3xl" icon={faFilm} />
+          <FontAwesomeIcon className="text-3xl" icon={faTv} />
         </div>
       </div>
     </Link>

@@ -2,16 +2,26 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-export default function SearchBox({ pathname, history, query, placeholder }) {
+export default function SearchBox({
+  pathname,
+  history,
+  query,
+  placeholder
+}: {
+  pathname: string;
+  history: any;
+  query: string;
+  placeholder: string;
+}) {
   const [text, setText] = useState(query || "");
 
-  const handleChange = (event) => {
+  const handleChange = (event: any) => {
     event.preventDefault();
     setText(event.target.value);
     history.replace({ pathname, search: `?query=${text}` });
   };
 
-  const clearSearch = (event) => {
+  const clearSearch = (event: any) => {
     event.preventDefault();
     setText("");
     history.replace({ pathname, search: `` });
