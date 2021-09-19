@@ -9,7 +9,7 @@ const CATEGORIES = [
   { name: "ended", value: "ended" }
 ];
 
-export default function Categories({ category }) {
+export default function Categories({ category }: { category: string }) {
   const options = CATEGORIES.map(({ name, value }) => (
     <Category
       key={name}

@@ -3,7 +3,13 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 import TvShow from "./TvShow";
 
-export default function List({ loadMore, tvShows }) {
+export default function List({
+  loadMore,
+  tvShows
+}: {
+  loadMore: () => void;
+  tvShows: any[];
+}) {
   const tvShowsList = tvShows.map((tvShow) => (
     <div key={tvShow.id} className="px-3 mb-10 md:w-full lg:w-1/2">
       <TvShow tvShow={tvShow} />

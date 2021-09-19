@@ -1,10 +1,10 @@
 import React from "react";
 
-import { thumbnail } from "utilities.ts";
+import { thumbnail } from "utilities";
 
 import ProgressiveImage from "components/shared/ProgressiveImage";
 
-export default function Poster({ src }) {
+export default function Poster({ src }: { src: string }) {
   let imageSrc;
   if (!src) {
     imageSrc = "https://www.fillmurray.com/105/160";

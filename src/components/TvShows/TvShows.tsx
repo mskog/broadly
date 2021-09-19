@@ -8,7 +8,7 @@ import Loading from "components/shared/LoadingFull";
 import Categories from "./Categories";
 import List from "./List";
 
-export default function TvShows(props) {
+export default function TvShows(props: any) {
   const {
     location: { search },
     match: {

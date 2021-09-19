@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 
 import { truncate } from "lodash";
 
-import { formattedRuntime, releaseYear } from "utilities.ts";
+import { formattedRuntime, releaseYear } from "utilities";
 
 import Ratings from "components/shared/Ratings";
 import Poster from "./Poster";
 
-export default function TvShow({ tvShow }) {
+export default function TvShow({ tvShow }: { tvShow: any }) {
   const {
     id,
     name,
