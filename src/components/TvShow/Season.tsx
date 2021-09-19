@@ -1,6 +1,16 @@
 import React from "react";
 
-export default function Category({ name, value, active, onSelect }) {
+export default function Category({
+  name,
+  value,
+  active,
+  onSelect
+}: {
+  name: string;
+  value: string;
+  active: boolean;
+  onSelect: (value: string) => void;
+}) {
   let classNames =
     "px-2 text-base font-bold text-center cursor-pointer hover:text-white pb-2";
 

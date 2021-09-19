@@ -1,12 +1,12 @@
 import React from "react";
 
-import { formattedRuntime, cdnImage } from "utilities.ts";
+import { formattedRuntime, cdnImage } from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
 import RtRating from "components/shared/RtRating";
 
-function backgroundStyle(url) {
+function backgroundStyle(url: string) {
   return {
     backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url('${url}')`,
     backgroundSize: "cover",
@@ -14,7 +14,7 @@ function backgroundStyle(url) {
   };
 }
 
-export default function Top({ tvShow }) {
+export default function Top({ tvShow }: { tvShow: any }) {
   const {
     name,
     status,
@@ -43,13 +43,13 @@ export default function Top({ tvShow }) {
               <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
               <LevelItem title="Status" value={status} />
               <LevelItem title="Rating">
-                <RtRating rating={voteAverage * 10} />
+                <RtRating rating={(voteAverage * 10).toString()} />
               </LevelItem>
             </Level>
           </div>
           {genres && (
             <div className="flex flex-row justify-center pt-8 space-x-1">
-              {genres.map((genre) => {
+              {genres.map((genre: any) => {
                 return (
                   <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-gray-300 text-gray-800">
                     {genre}

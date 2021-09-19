@@ -9,13 +9,13 @@ import LazyLoad from "react-lazyload";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
-import { cdnImage } from "utilities.ts";
+import { cdnImage } from "utilities";
 
-function seasonEpisode(season, episodeNumber) {
+function seasonEpisode(season: string, episodeNumber: string) {
   return `S${padStart(season, 2, "0")}E${padStart(episodeNumber, 2, "0")}`;
 }
 
-function episodeHeader(episode, name) {
+function episodeHeader(episode: string, name: string) {
   return (
     <h3>
       <span className="text-xl font-semibold text-gray-300">{episode}</span>
@@ -24,7 +24,7 @@ function episodeHeader(episode, name) {
   );
 }
 
-export default function Episode({ episode }) {
+export default function Episode({ episode }: any) {
   const {
     id,
     name,
@@ -45,7 +45,7 @@ export default function Episode({ episode }) {
   }
 
   return (
-    <LazyLoad className="w-full p-2 md:1/2 lg:w-1/3">
+    <LazyLoad classNamePrefix="w-full p-2 md:1/2 lg:w-1/3">
       <div>
         <Link to={`/episodes/${id}`}>
           <div

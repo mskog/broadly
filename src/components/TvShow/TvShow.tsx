@@ -10,7 +10,7 @@ import Actions from "./Actions";
 import Seasons from "./Seasons";
 import Episodes from "./Episodes";
 
-function TvShow(props) {
+function TvShow(props: any) {
   const {
     history,
     match: {
@@ -32,11 +32,11 @@ function TvShow(props) {
   } = data.tvShow;
 
   const seasonNumbers = sortBy(
-    uniq(episodes.map((episode) => parseInt(episode.season, 10)))
+    uniq(episodes.map((episode: any) => parseInt(episode.season, 10)))
   );
 
   const selectedEpisodes = episodes.filter(
-    (episode) => episode.season === (selectedSeason || last(seasonNumbers))
+    (episode: any) => episode.season === (selectedSeason || last(seasonNumbers))
   );
 
   return (
@@ -52,7 +52,6 @@ function TvShow(props) {
 
         {selectedEpisodes.length > 0 && (
           <Seasons
-            tvShowId={id}
             seasonNumbers={seasonNumbers}
             selectedSeason={selectedSeason || last(seasonNumbers)}
             onSelect={setSelectedSeason}

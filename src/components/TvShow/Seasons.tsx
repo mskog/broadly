@@ -3,15 +3,17 @@ import React from "react";
 import Season from "./Season";
 
 export default function Seasons({
-  tvShowId,
   seasonNumbers,
   selectedSeason,
   onSelect
+}: {
+  seasonNumbers: any[];
+  selectedSeason: any;
+  onSelect: any;
 }) {
   const options = seasonNumbers.map((number) => (
     <Season
       key={number}
-      tvShowId={tvShowId}
       name={`Season ${number}`}
       value={number}
       active={number === selectedSeason}

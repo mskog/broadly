@@ -2,7 +2,7 @@ import React from "react";
 
 import NewsItem from "./NewsItem";
 
-export default function News({ newsItems }) {
+export default function News({ newsItems }: { newsItems: any[] }) {
   if (newsItems.length === 0) {
     return <></>;
   }

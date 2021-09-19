@@ -3,7 +3,7 @@ import { sortBy, uniqBy, reverse } from "lodash";
 
 import Episode from "./Episode";
 
-export default function Episodes({ episodes }) {
+export default function Episodes({ episodes }: { episodes: any[] }) {
   const uniqEpisodes = uniqBy(episodes, (episode) => episode.episode);
 
   const episodeComponents = reverse(

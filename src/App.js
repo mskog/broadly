@@ -32,7 +32,7 @@ import BestMovies from "./components/Movies/BestMovies";
 import Movie from "./components/Movie/Movie";
 
 import TvShows from "./components/TvShows/TvShows";
-import TvShow from "./components/tv_show/TvShow";
+import TvShow from "./components/TvShow/TvShow";
 
 import Episode from "./components/Episode/Episode";
 

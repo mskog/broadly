@@ -11,29 +11,34 @@ import {
 import ActionButton from "./ActionButton";
 import DangerousActionButton from "./DangerousActionButton";
 
-export default function Actions(props) {
+export default function Actions(props: any) {
   const {
     tvShow: { id, watching, collected, waitlist, episodes, status }
   } = props;
 
   const [unwatchTvShow] = useUnwatchTvShowMutation({
-    id
+    id,
+    update: () => {}
   });
 
   const [watchTvShow] = useWatchTvShowMutation({
-    id
+    id,
+    update: () => {}
   });
 
   const [collectTvShow] = useCollectTvShowMutation({
-    id
+    id,
+    update: () => {}
   });
 
   const [removeFromWaitlist] = useRemoveTvShowFromWaitlistMutation({
-    id
+    id,
+    update: () => {}
   });
 
   const [sample] = useSampleTvShowMutation({
-    id
+    id,
+    update: () => {}
   });
 
   const addToWaitlist = sample;

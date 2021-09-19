@@ -2,7 +2,15 @@ import React from "react";
 
 import { truncate } from "lodash";
 
-export default function NewsItem({ title, metadata, url }) {
+export default function NewsItem({
+  title,
+  metadata,
+  url
+}: {
+  title: string;
+  metadata: { image: string; description: string };
+  url: string;
+}) {
   const { image, description } = metadata || {};
 
   const thumbnail = `https://thumbs.mskog.com/100x100/smart/${image}`;
