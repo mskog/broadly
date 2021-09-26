@@ -1,7 +1,7 @@
 import React from "react";
 
 type RtRatingProps = {
-  rating: string;
+  rating: number;
 };
 
 export default function RtRating({ rating }: RtRatingProps) {

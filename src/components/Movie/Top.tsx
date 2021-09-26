@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Movie } from "generated/graphql";
+
 import {
   releaseYear,
   formattedRuntime,
@@ -21,7 +23,25 @@ function backgroundStyle(url: string) {
 }
 
 // TODO: Use lazy loading and fancy placeholders
-export default function Top({ movie }: { movie: any }) {
+export default function Top({
+  movie
+}: {
+  movie: Pick<
+    Movie,
+    | "id"
+    | "title"
+    | "releaseDate"
+    | "availableDate"
+    | "runtime"
+    | "rtCriticsRating"
+    | "rtAudienceRating"
+    | "personalRating"
+    | "watched"
+    | "backdropImage"
+    | "bestRelease"
+    | "waitlist"
+  >;
+}) {
   const {
     id,
     title,
@@ -43,7 +63,7 @@ export default function Top({ movie }: { movie: any }) {
     <div>
       <div
         className="w-full -mb-40 h-66vh"
-        style={backgroundStyle(cdnImage(backdropImage))}
+        style={backgroundStyle(cdnImage(backdropImage || ""))}
       />
       <div className="container h-full max-w-3xl px-8 mx-auto">
         <div className="flex flex-col justify-end h-full pb-10">
@@ -53,7 +73,9 @@ export default function Top({ movie }: { movie: any }) {
           <div className="md:pt-10">
             <Level>
               <LevelItem title="Release date" value={date} />
-              <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
+              {runtime && (
+                <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
+              )}
               {bestRelease && (
                 <LevelItem
                   title="Resolution"
@@ -62,17 +84,23 @@ export default function Top({ movie }: { movie: any }) {
               )}
               {!watched && (
                 <>
-                  <LevelItem title="Tomatometer">
-                    <RtRating rating={rtCriticsRating} />
-                  </LevelItem>
-                  <LevelItem title="Audience">
-                    <RtRating rating={rtAudienceRating} />
-                  </LevelItem>
+                  {rtCriticsRating && (
+                    <LevelItem title="Tomatometer">
+                      <RtRating rating={rtCriticsRating} />
+                    </LevelItem>
+                  )}
+                  {rtAudienceRating && (
+                    <LevelItem title="Audience">
+                      <RtRating rating={rtAudienceRating} />
+                    </LevelItem>
+                  )}
                 </>
               )}
-              <LevelItem title="Rating">
-                <PersonalRating id={id} rating={personalRating} />
-              </LevelItem>
+              {personalRating && (
+                <LevelItem title="Rating">
+                  <PersonalRating id={id} rating={personalRating} />
+                </LevelItem>
+              )}
             </Level>
           </div>
         </div>

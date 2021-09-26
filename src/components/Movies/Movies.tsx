@@ -1,8 +1,6 @@
 import React from "react";
 
-import queryString from "query-string";
-
-import { useMoviesQuery } from "store/movies";
+import { useMoviesQuery } from "generated/graphql";
 
 import Loading from "components/shared/LoadingFull";
 
@@ -15,20 +13,22 @@ export default function Movies(props: any) {
   const {
     match: {
       params: { category }
-    },
-    location: { search }
+    }
   } = props;
 
-  const { query } = queryString.parse(search);
-
   const { loading, error, data, fetchMore } = useMoviesQuery({
-    first: 20,
-    skip: 0,
-    category,
-    query
+    fetchPolicy: "cache-and-network",
+    variables: {
+      first: 20,
+      skip: 0,
+      category
+    }
   });
 
   const loadMore = () => {
+    if (!data) {
+      return;
+    }
     fetchMore({
       variables: { skip: data.movies.length },
       updateQuery: (prev, { fetchMoreResult }) => {
@@ -43,7 +43,7 @@ export default function Movies(props: any) {
   let mainContent;
   if (loading && !data) {
     mainContent = <Loading />;
-  } else if (error) {
+  } else if (error || !data) {
     mainContent = <p>Error</p>;
   } else {
     mainContent = <List loadMore={loadMore} movies={data.movies} />;

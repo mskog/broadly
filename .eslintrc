@@ -5,6 +5,7 @@
     "node": true,
     "browser": true
   },
+  "ignorePatterns": ["src/generated/*"],
   "extends": ["airbnb", "plugin:prettier/recommended"],
   "settings": {
     "import/resolver": {
@@ -18,6 +19,7 @@
     "ecmaVersion": 2018
   },
   "rules": {
+    "no-undef": "off",
     "react/require-default-props": "off",
     "react/jsx-filename-extension": [0],
     "react/prop-types": [0],

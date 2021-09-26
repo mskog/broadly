@@ -1,0 +1,126 @@
+query Movies($category: String, $first: Int, $skip: Int, $query: String) {
+  movies(first: $first, skip: $skip, category: $category, query: $query) {
+    id
+    tmdbId
+    title
+    releaseDate
+    downloadAt
+    watchedAt
+    runtime
+    rtCriticsRating
+    rtAudienceRating
+    watched
+    personalRating
+    overview
+    backdropImage
+    posterImage
+    posterImageThumbnail
+
+    bestRelease {
+      id
+      resolution
+    }
+  }
+}
+
+query BestMovies($year: Int, $first: Int, $skip: Int) {
+  bestMovies(year: $year, first: $first, skip: $skip) {
+    id
+    tmdbId
+    title
+    releaseDate
+    downloadAt
+    watchedAt
+    runtime
+    rtCriticsRating
+    rtAudienceRating
+    watched
+    personalRating
+    overview
+    backdropImage
+    posterImage
+    posterImageThumbnail
+  }
+}
+
+query Movie($id: ID!) {
+  movie(id: $id) {
+    id
+    tmdbId
+    title
+    releaseDate
+    availableDate
+    downloadAt
+    runtime
+    rtCriticsRating
+    rtAudienceRating
+    watched
+    waitlist
+    personalRating
+    overview
+    hasKillerRelease
+    hasAcceptableRelease
+    backdropImage
+    posterImage
+    posterImageThumbnail
+    bestRelease {
+      id
+      codec
+      container
+      quality
+      releaseName
+      resolution
+      size
+      source
+      downloadUrl
+    }
+  }
+}
+
+query MovieSummary($imdbId: ID!) {
+  movieSummary(imdbId: $imdbId) {
+    title
+    overview
+    rating
+    status
+    runtime
+    released
+  }
+}
+
+query PtpMovieRecommendations {
+  ptpMovieRecommendations {
+    title
+    ptpRating
+    imdbRating
+    mcUrl
+    imdbId
+    synopsis
+    cover
+    year
+  }
+}
+
+mutation DeleteMovie($id: Int!) {
+  deleteMovie(id: $id) {
+    id
+  }
+}
+
+mutation ForceMovie($id: Int!) {
+  forceMovieDownload(id: $id) {
+    id
+  }
+}
+
+mutation AddMovieToWaitlist($imdbId: String!) {
+  addMovieToWaitlist(imdbId: $imdbId) {
+    id
+  }
+}
+
+mutation DownloadMovie($imdbId: String!) {
+  downloadMovie(imdbId: $imdbId) {
+    id
+  }
+}

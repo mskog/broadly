@@ -55,7 +55,8 @@
     "build": "DISABLE_ESLINT_PLUGIN='true' react-scripts build",
     "download-schema": "apollo schema:download --endpoint=http://localhost:5000/graphql src/schema.json",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -73,6 +74,11 @@
     ]
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.2.0",
+    "@graphql-codegen/introspection": "^2.1.0",
+    "@graphql-codegen/typescript": "2.2.2",
+    "@graphql-codegen/typescript-operations": "^2.1.4",
+    "@graphql-codegen/typescript-react-apollo": "3.1.4",
     "@types/lodash": "^4.14.172",
     "@types/luxon": "^2.0.0",
     "@types/react-keyboard-event-handler": "^1.5.1",

@@ -1,11 +1,13 @@
 import React from "react";
 
+import { MovieRelease } from "generated/graphql";
+
 import { resolutionDisplay } from "utilities";
 
 type Props = {
   killer: boolean;
   acceptable: boolean;
-  release: any;
+  release: MovieRelease;
 };
 
 export default function ReleaseInformation({

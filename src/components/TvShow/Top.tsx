@@ -43,7 +43,7 @@ export default function Top({ tvShow }: { tvShow: any }) {
               <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
               <LevelItem title="Status" value={status} />
               <LevelItem title="Rating">
-                <RtRating rating={(voteAverage * 10).toString()} />
+                <RtRating rating={voteAverage * 10} />
               </LevelItem>
             </Level>
           </div>

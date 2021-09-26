@@ -1,7 +1,7 @@
 import React from "react";
 import { DateTime } from "luxon";
 
-import { useMovieQuery } from "store/movies";
+import { useMovieQuery } from "generated/graphql";
 
 import Loading from "components/shared/LoadingFull";
 
@@ -12,7 +12,7 @@ import ReleaseInformation from "./ReleaseInformation";
 type MovieProps = {
   match: {
     params: {
-      id: number;
+      id: string;
     };
   };
 };
@@ -24,7 +24,7 @@ function Movie(props: MovieProps) {
     }
   } = props;
 
-  const { data } = useMovieQuery({ id });
+  const { data } = useMovieQuery({ variables: { id } });
 
   if (!data) {
     return <Loading />;
