@@ -3,8 +3,8 @@ import React from "react";
 import Category from "./Category";
 
 type CategoriesProps = {
-  categories: Array<any>;
-  category: any;
+  categories: Array<string>;
+  category: string | undefined;
   baseRoute?: string;
 };
 
@@ -13,11 +13,11 @@ export default function Categories({
   category,
   baseRoute = "movies"
 }: CategoriesProps) {
-  const options = categories.map((cat: any) => (
+  const options = categories.map((cat) => (
     <Category
       baseRoute={baseRoute}
       key={cat}
-      name={cat}
+      name={cat.toString()}
       active={category === cat}
     />
   ));

@@ -30,7 +30,7 @@ export default function BestMovies(props: BestMoviesProps) {
     currentYear - 2,
     currentYear - 1,
     currentYear
-  ];
+  ].map((y) => y.toString());
 
   const { loading, error, data, fetchMore } = useBestMoviesQuery({
     year,
@@ -63,7 +63,11 @@ export default function BestMovies(props: BestMoviesProps) {
 
   return (
     <div className="container px-4 mx-auto overflow-auto md:pt-10">
-      <Categories categories={years} category={year} baseRoute="best_movies" />
+      <Categories
+        categories={years}
+        category={year.toString()}
+        baseRoute="best_movies"
+      />
       <div className="mt-20">{mainContent}</div>
     </div>
   );

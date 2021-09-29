@@ -1,31 +1,39 @@
 import React from "react";
 
-import queryString from "query-string";
-
-import { useTvShowsQuery } from "store/tv_shows";
+import { useTvShowsQuery } from "generated/graphql";
 
 import Loading from "components/shared/LoadingFull";
 import Categories from "./Categories";
 import List from "./List";
 
-export default function TvShows(props: any) {
+type TvShowsProps = {
+  location: {
+    search: any;
+  };
+  match: {
+    params: {
+      category: string;
+    };
+  };
+};
+
+export default function TvShows(props: TvShowsProps) {
   const {
-    location: { search },
     match: {
       params: { category }
     }
   } = props;
 
-  const { query } = queryString.parse(search);
-
-  const { loading, error, data, fetchMore } = useTvShowsQuery({
-    first: 20,
-    skip: 0,
-    category,
-    query
+  const { error, data, fetchMore } = useTvShowsQuery({
+    variables: {
+      first: 20,
+      skip: 0,
+      category
+    }
   });
 
   const loadMore = () => {
+    if (!data) return;
     fetchMore({
       variables: { skip: data.tvShows.length },
       updateQuery: (prev, { fetchMoreResult }) => {
@@ -41,10 +49,10 @@ export default function TvShows(props: any) {
   };
 
   let mainContent;
-  if (loading && !data) {
-    mainContent = <Loading />;
-  } else if (error) {
+  if (error) {
     mainContent = <p>Error</p>;
+  } else if (!data) {
+    mainContent = <Loading />;
   } else {
     mainContent = <List loadMore={loadMore} tvShows={data.tvShows} />;
   }

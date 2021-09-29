@@ -14,20 +14,25 @@ import { DateTime } from "luxon";
 
 import { formattedRuntime, releaseYear, resolutionDisplay } from "utilities";
 
+import { Movie as MovieType, MovieRelease } from "generated/graphql";
+
 import Ratings from "components/shared/Ratings";
 import Poster from "./Poster";
 
 type MovieProps = {
-  movie: {
-    id: number;
-    title: string;
-    releaseDate: string;
-    runtime: number;
-    watchedAt: string;
-    rtCriticsRating: number;
-    personalRating: number;
-    posterImageThumbnail: string;
-    bestRelease: any;
+  movie: Pick<
+    MovieType,
+    | "watchedAt"
+    | "id"
+    | "title"
+    | "releaseDate"
+    | "runtime"
+    | "watchedAt"
+    | "rtCriticsRating"
+    | "personalRating"
+    | "posterImageThumbnail"
+  > & {
+    bestRelease?: Pick<MovieRelease, "id" | "resolution"> | null;
   };
 };
 
@@ -44,7 +49,7 @@ export default function Movie({ movie }: MovieProps) {
     bestRelease
   } = movie;
 
-  const rating = personalRating * 10 || rtCriticsRating;
+  const rating = personalRating ? personalRating * 10 : rtCriticsRating;
   const personalRatingText = personalRating
     ? `${personalRating}/10`
     : undefined;
@@ -63,7 +68,7 @@ export default function Movie({ movie }: MovieProps) {
               {truncate(title, { length: 40 })}
             </h2>
           </Link>
-          <Ratings score={rating}>{personalRatingText}</Ratings>
+          {rating && <Ratings score={rating}>{personalRatingText}</Ratings>}
           <div className="mt-2 text-sm font-thin">
             <span className="mr-2">
               <FontAwesomeIcon className="mr-1" icon={faCalendar} />
@@ -75,7 +80,7 @@ export default function Movie({ movie }: MovieProps) {
                 {resolutionDisplay(bestRelease.resolution)}
               </span>
             )}
-            {!watchedAt && (
+            {!watchedAt && runtime && (
               <span className="mr-2">
                 <FontAwesomeIcon className="mr-1" icon={faClock} />
                 {formattedRuntime(runtime)}

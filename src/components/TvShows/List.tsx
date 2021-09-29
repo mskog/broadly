@@ -1,15 +1,15 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
+import { TvShow as TvShowType } from "generated/graphql";
 import TvShow from "./TvShow";
 
-export default function List({
-  loadMore,
-  tvShows
-}: {
+type ListProps = {
   loadMore: () => void;
-  tvShows: any[];
-}) {
+  tvShows: TvShowType[];
+};
+
+export default function List({ loadMore, tvShows }: ListProps) {
   const tvShowsList = tvShows.map((tvShow) => (
     <div key={tvShow.id} className="px-3 mb-10 md:w-full lg:w-1/2">
       <TvShow tvShow={tvShow} />

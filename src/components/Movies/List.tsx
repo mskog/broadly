@@ -1,11 +1,28 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
+import { Movie as MovieType, MovieRelease } from "generated/graphql";
+
 import Movie from "./Movie";
+
+type MovieProps = Pick<
+  MovieType,
+  | "watchedAt"
+  | "id"
+  | "title"
+  | "releaseDate"
+  | "runtime"
+  | "watchedAt"
+  | "rtCriticsRating"
+  | "personalRating"
+  | "posterImageThumbnail"
+> & {
+  bestRelease?: Pick<MovieRelease, "id" | "resolution"> | null;
+};
 
 type ListProps = {
   loadMore: () => void;
-  movies: Array<any>;
+  movies: Array<MovieProps>;
 };
 
 export default function List({ loadMore, movies }: ListProps) {

@@ -10,6 +10,7 @@ generates:
     config:
       withMutationFn: true
       withHooks: true
+      maybeValue: "T"
   ./graphql.schema.json:
     plugins:
       - "introspection"

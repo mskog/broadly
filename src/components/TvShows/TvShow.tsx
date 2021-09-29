@@ -9,17 +9,14 @@ import { truncate } from "lodash";
 
 import { formattedRuntime, releaseYear } from "utilities";
 
+import { TvShow as TvShowType } from "generated/graphql";
+
 import Ratings from "components/shared/Ratings";
 import Poster from "./Poster";
 
-export default function TvShow({ tvShow }: { tvShow: any }) {
-  const {
-    id,
-    name,
-    posterImageThumbnail,
-    tmdbDetails: { voteAverage, firstAirDate },
-    traktDetails: { runtime }
-  } = tvShow;
+export default function TvShow({ tvShow }: { tvShow: TvShowType }) {
+  const { id, name, posterImageThumbnail, traktDetails } = tvShow;
+  const { voteAverage, firstAirDate } = tvShow.tmdbDetails || {};
 
   return (
     <div className="text-gray-100 rounded shadow-lg shadow-fat bg-background-blue-2">
@@ -39,15 +36,16 @@ export default function TvShow({ tvShow }: { tvShow: any }) {
               {truncate(name, { length: 40 })}
             </h2>
           </Link>
-          <Ratings score={voteAverage * 10} />
+
+          {voteAverage && <Ratings score={parseInt(voteAverage, 10) * 10} />}
           <div className="mt-2 text-sm font-thin">
             <span className="mr-2">
               <FontAwesomeIcon className="mr-1" icon={faCalendar} />
-              {releaseYear(firstAirDate)}
+              {firstAirDate && releaseYear(firstAirDate)}
             </span>
             <span>
               <FontAwesomeIcon className="mr-1" icon={faClock} />
-              {formattedRuntime(runtime)}
+              {traktDetails?.runtime && formattedRuntime(traktDetails.runtime)}
             </span>
           </div>
         </div>

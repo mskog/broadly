@@ -5,7 +5,7 @@ import { thumbnail } from "utilities";
 import ProgressiveImage from "components/shared/ProgressiveImage";
 
 type PosterProps = {
-  src: string;
+  src: string | undefined;
 };
 
 export default function Poster({ src }: PosterProps) {

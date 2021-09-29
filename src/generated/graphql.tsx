@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
-export type Maybe<T> = T | null;
+export type Maybe<T> = T;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -117,6 +117,11 @@ export type Movie = OmnisearchResult & {
   waitlist?: Maybe<Scalars['Boolean']>;
   watched?: Maybe<Scalars['Boolean']>;
   watchedAt?: Maybe<Scalars['ISO8601DateTime']>;
+};
+
+export type MoviePoster = {
+  __typename?: 'MoviePoster';
+  url: Scalars['String'];
 };
 
 export type MovieRelease = {
@@ -279,6 +284,8 @@ export type Query = {
   episodes: Array<Episode>;
   /** Returns a single movie */
   movie: Movie;
+  /** Returns a poster for a movie */
+  moviePoster: MoviePoster;
   /** Searches for a movie */
   movieSearch: Array<MovieSearch>;
   /** Gets the detailed search result for a movie */
@@ -336,6 +343,11 @@ export type QueryEpisodesArgs = {
 
 export type QueryMovieArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryMoviePosterArgs = {
+  tmdbId: Scalars['ID'];
 };
 
 
@@ -586,6 +598,88 @@ export type DownloadMovieMutationVariables = Exact<{
 
 
 export type DownloadMovieMutation = { __typename?: 'Mutation', downloadMovie: { __typename?: 'Movie', id: number } };
+
+export type TvShowsQueryVariables = Exact<{
+  category?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  query?: Maybe<Scalars['String']>;
+}>;
+
+
+export type TvShowsQuery = { __typename?: 'Query', tvShows: Array<{ __typename?: 'TvShow', id: number, name: string, posterImage?: Maybe<string>, posterImageThumbnail?: Maybe<string>, backdropImage?: Maybe<string>, tmdbDetails?: Maybe<{ __typename?: 'TvShowTmdbDetails', voteAverage?: Maybe<string>, firstAirDate?: Maybe<string>, id?: Maybe<number> }>, traktDetails?: Maybe<{ __typename?: 'TraktDetails', runtime?: Maybe<number>, ids?: Maybe<{ __typename?: 'TraktIds', tmdb?: Maybe<string> }> }> }> };
+
+export type TvShowQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type TvShowQuery = { __typename?: 'Query', tvShow: { __typename?: 'TvShow', id: number, name: string, status?: Maybe<string>, watching?: Maybe<boolean>, collected?: Maybe<boolean>, waitlist?: Maybe<boolean>, posterImage?: Maybe<string>, backdropImage?: Maybe<string>, tmdbDetails?: Maybe<{ __typename?: 'TvShowTmdbDetails', voteAverage?: Maybe<string>, firstAirDate?: Maybe<string>, id?: Maybe<number> }>, traktDetails?: Maybe<{ __typename?: 'TraktDetails', overview?: Maybe<string>, runtime?: Maybe<number>, genres?: Maybe<Array<string>>, network?: Maybe<string>, ids?: Maybe<{ __typename?: 'TraktIds', tmdb?: Maybe<string> }> }>, episodes?: Maybe<Array<{ __typename?: 'Episode', id?: Maybe<number>, name?: Maybe<string>, season?: Maybe<number>, episode?: Maybe<number>, stillImage?: Maybe<string>, stillImageThumbnail?: Maybe<string>, watched?: Maybe<boolean>, tmdbDetails?: Maybe<{ __typename?: 'EpisodeTmdbDetails', name?: Maybe<string>, overview?: Maybe<string> }> }>>, newsItems?: Maybe<Array<{ __typename?: 'NewsItem', title?: Maybe<string>, url?: Maybe<string>, metadata?: Maybe<{ __typename?: 'NewsItemMetadata', image?: Maybe<string>, description?: Maybe<string> }> }>> } };
+
+export type TvShowSummaryQueryVariables = Exact<{
+  imdbId: Scalars['ID'];
+}>;
+
+
+export type TvShowSummaryQuery = { __typename?: 'Query', tvShowSummary: { __typename?: 'TvShowSummary', title?: Maybe<string>, overview?: Maybe<string>, rating?: Maybe<string>, status?: Maybe<string>, firstAired?: Maybe<any>, runtime?: Maybe<number>, airedEpisodes?: Maybe<number>, genres?: Maybe<Array<string>> } };
+
+export type EpisodeQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type EpisodeQuery = { __typename?: 'Query', episode: { __typename?: 'Episode', id?: Maybe<number>, name?: Maybe<string>, season?: Maybe<number>, episode?: Maybe<number>, stillImage?: Maybe<string>, stillImageThumbnail?: Maybe<string>, watched?: Maybe<boolean>, watchedAt?: Maybe<any>, tmdbDetails?: Maybe<{ __typename?: 'EpisodeTmdbDetails', name?: Maybe<string>, overview?: Maybe<string>, firstAirDate?: Maybe<string> }>, tvShow: { __typename?: 'TvShow', id: number, name: string, traktDetails?: Maybe<{ __typename?: 'TraktDetails', runtime?: Maybe<number> }> }, bestRelease?: Maybe<{ __typename?: 'EpisodeRelease', resolution: string }> } };
+
+export type EpisodesQueryVariables = Exact<{
+  first?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  category?: Maybe<EpisodeCategory>;
+}>;
+
+
+export type EpisodesQuery = { __typename?: 'Query', episodes: Array<{ __typename?: 'Episode', id?: Maybe<number>, name?: Maybe<string>, season?: Maybe<number>, episode?: Maybe<number>, stillImage?: Maybe<string>, stillImageThumbnail?: Maybe<string>, watched?: Maybe<boolean>, tmdbDetails?: Maybe<{ __typename?: 'EpisodeTmdbDetails', name?: Maybe<string>, overview?: Maybe<string>, firstAirDate?: Maybe<string> }>, bestRelease?: Maybe<{ __typename?: 'EpisodeRelease', resolution: string }>, tvShow: { __typename?: 'TvShow', id: number, name: string } }> };
+
+export type UnwatchTvShowMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type UnwatchTvShowMutation = { __typename?: 'Mutation', unwatchTvShow: { __typename?: 'TvShow', id: number } };
+
+export type RemoveTvShowFromWaitlistMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type RemoveTvShowFromWaitlistMutation = { __typename?: 'Mutation', removeTvShowFromWaitlist: { __typename?: 'TvShow', id: number } };
+
+export type WatchTvShowMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type WatchTvShowMutation = { __typename?: 'Mutation', watchTvShow: { __typename?: 'TvShow', id: number } };
+
+export type CollectTvShowMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type CollectTvShowMutation = { __typename?: 'Mutation', collectTvShow: { __typename?: 'TvShow', id: number } };
+
+export type SampleTvShowMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type SampleTvShowMutation = { __typename?: 'Mutation', sampleTvShow: { __typename?: 'TvShow', id: number } };
+
+export type EpisodeWatchedMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type EpisodeWatchedMutation = { __typename?: 'Mutation', episodeWatched: { __typename?: 'Episode', id?: Maybe<number> } };
 
 
 export const MoviesDocument = gql`
@@ -971,3 +1065,486 @@ export function useDownloadMovieMutation(baseOptions?: Apollo.MutationHookOption
 export type DownloadMovieMutationHookResult = ReturnType<typeof useDownloadMovieMutation>;
 export type DownloadMovieMutationResult = Apollo.MutationResult<DownloadMovieMutation>;
 export type DownloadMovieMutationOptions = Apollo.BaseMutationOptions<DownloadMovieMutation, DownloadMovieMutationVariables>;
+export const TvShowsDocument = gql`
+    query TvShows($category: String, $first: Int, $skip: Int, $query: String) {
+  tvShows(category: $category, first: $first, skip: $skip, query: $query) {
+    id
+    name
+    posterImage
+    posterImageThumbnail
+    backdropImage
+    tmdbDetails {
+      voteAverage
+      firstAirDate
+      id
+    }
+    traktDetails {
+      ids {
+        tmdb
+      }
+      runtime
+    }
+  }
+}
+    `;
+
+/**
+ * __useTvShowsQuery__
+ *
+ * To run a query within a React component, call `useTvShowsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTvShowsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTvShowsQuery({
+ *   variables: {
+ *      category: // value for 'category'
+ *      first: // value for 'first'
+ *      skip: // value for 'skip'
+ *      query: // value for 'query'
+ *   },
+ * });
+ */
+export function useTvShowsQuery(baseOptions?: Apollo.QueryHookOptions<TvShowsQuery, TvShowsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TvShowsQuery, TvShowsQueryVariables>(TvShowsDocument, options);
+      }
+export function useTvShowsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TvShowsQuery, TvShowsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TvShowsQuery, TvShowsQueryVariables>(TvShowsDocument, options);
+        }
+export type TvShowsQueryHookResult = ReturnType<typeof useTvShowsQuery>;
+export type TvShowsLazyQueryHookResult = ReturnType<typeof useTvShowsLazyQuery>;
+export type TvShowsQueryResult = Apollo.QueryResult<TvShowsQuery, TvShowsQueryVariables>;
+export const TvShowDocument = gql`
+    query TvShow($id: ID!) {
+  tvShow(id: $id) {
+    id
+    name
+    status
+    watching
+    collected
+    waitlist
+    posterImage
+    backdropImage
+    tmdbDetails {
+      voteAverage
+      firstAirDate
+      id
+    }
+    traktDetails {
+      overview
+      ids {
+        tmdb
+      }
+      runtime
+      genres
+      network
+    }
+    episodes {
+      id
+      name
+      season
+      episode
+      stillImage
+      stillImageThumbnail
+      watched
+      tmdbDetails {
+        name
+        overview
+      }
+    }
+    newsItems {
+      title
+      url
+      metadata {
+        image
+        description
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useTvShowQuery__
+ *
+ * To run a query within a React component, call `useTvShowQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTvShowQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTvShowQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useTvShowQuery(baseOptions: Apollo.QueryHookOptions<TvShowQuery, TvShowQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TvShowQuery, TvShowQueryVariables>(TvShowDocument, options);
+      }
+export function useTvShowLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TvShowQuery, TvShowQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TvShowQuery, TvShowQueryVariables>(TvShowDocument, options);
+        }
+export type TvShowQueryHookResult = ReturnType<typeof useTvShowQuery>;
+export type TvShowLazyQueryHookResult = ReturnType<typeof useTvShowLazyQuery>;
+export type TvShowQueryResult = Apollo.QueryResult<TvShowQuery, TvShowQueryVariables>;
+export const TvShowSummaryDocument = gql`
+    query TvShowSummary($imdbId: ID!) {
+  tvShowSummary(imdbId: $imdbId) {
+    title
+    overview
+    rating
+    status
+    rating
+    firstAired
+    runtime
+    airedEpisodes
+    genres
+  }
+}
+    `;
+
+/**
+ * __useTvShowSummaryQuery__
+ *
+ * To run a query within a React component, call `useTvShowSummaryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTvShowSummaryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTvShowSummaryQuery({
+ *   variables: {
+ *      imdbId: // value for 'imdbId'
+ *   },
+ * });
+ */
+export function useTvShowSummaryQuery(baseOptions: Apollo.QueryHookOptions<TvShowSummaryQuery, TvShowSummaryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TvShowSummaryQuery, TvShowSummaryQueryVariables>(TvShowSummaryDocument, options);
+      }
+export function useTvShowSummaryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TvShowSummaryQuery, TvShowSummaryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TvShowSummaryQuery, TvShowSummaryQueryVariables>(TvShowSummaryDocument, options);
+        }
+export type TvShowSummaryQueryHookResult = ReturnType<typeof useTvShowSummaryQuery>;
+export type TvShowSummaryLazyQueryHookResult = ReturnType<typeof useTvShowSummaryLazyQuery>;
+export type TvShowSummaryQueryResult = Apollo.QueryResult<TvShowSummaryQuery, TvShowSummaryQueryVariables>;
+export const EpisodeDocument = gql`
+    query Episode($id: ID!) {
+  episode(id: $id) {
+    id
+    name
+    season
+    episode
+    stillImage
+    stillImageThumbnail
+    watched
+    watchedAt
+    tmdbDetails {
+      name
+      overview
+      firstAirDate
+    }
+    tvShow {
+      id
+      name
+      traktDetails {
+        runtime
+      }
+    }
+    bestRelease {
+      resolution
+    }
+  }
+}
+    `;
+
+/**
+ * __useEpisodeQuery__
+ *
+ * To run a query within a React component, call `useEpisodeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useEpisodeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useEpisodeQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useEpisodeQuery(baseOptions: Apollo.QueryHookOptions<EpisodeQuery, EpisodeQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<EpisodeQuery, EpisodeQueryVariables>(EpisodeDocument, options);
+      }
+export function useEpisodeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<EpisodeQuery, EpisodeQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<EpisodeQuery, EpisodeQueryVariables>(EpisodeDocument, options);
+        }
+export type EpisodeQueryHookResult = ReturnType<typeof useEpisodeQuery>;
+export type EpisodeLazyQueryHookResult = ReturnType<typeof useEpisodeLazyQuery>;
+export type EpisodeQueryResult = Apollo.QueryResult<EpisodeQuery, EpisodeQueryVariables>;
+export const EpisodesDocument = gql`
+    query Episodes($first: Int, $skip: Int, $category: EpisodeCategory) {
+  episodes(first: $first, skip: $skip, category: $category) {
+    id
+    name
+    season
+    episode
+    stillImage
+    stillImageThumbnail
+    watched
+    tmdbDetails {
+      name
+      overview
+      firstAirDate
+    }
+    bestRelease {
+      resolution
+    }
+    tvShow {
+      id
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useEpisodesQuery__
+ *
+ * To run a query within a React component, call `useEpisodesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useEpisodesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useEpisodesQuery({
+ *   variables: {
+ *      first: // value for 'first'
+ *      skip: // value for 'skip'
+ *      category: // value for 'category'
+ *   },
+ * });
+ */
+export function useEpisodesQuery(baseOptions?: Apollo.QueryHookOptions<EpisodesQuery, EpisodesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<EpisodesQuery, EpisodesQueryVariables>(EpisodesDocument, options);
+      }
+export function useEpisodesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<EpisodesQuery, EpisodesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<EpisodesQuery, EpisodesQueryVariables>(EpisodesDocument, options);
+        }
+export type EpisodesQueryHookResult = ReturnType<typeof useEpisodesQuery>;
+export type EpisodesLazyQueryHookResult = ReturnType<typeof useEpisodesLazyQuery>;
+export type EpisodesQueryResult = Apollo.QueryResult<EpisodesQuery, EpisodesQueryVariables>;
+export const UnwatchTvShowDocument = gql`
+    mutation UnwatchTvShow($id: ID!) {
+  unwatchTvShow(id: $id) {
+    id
+  }
+}
+    `;
+export type UnwatchTvShowMutationFn = Apollo.MutationFunction<UnwatchTvShowMutation, UnwatchTvShowMutationVariables>;
+
+/**
+ * __useUnwatchTvShowMutation__
+ *
+ * To run a mutation, you first call `useUnwatchTvShowMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUnwatchTvShowMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [unwatchTvShowMutation, { data, loading, error }] = useUnwatchTvShowMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useUnwatchTvShowMutation(baseOptions?: Apollo.MutationHookOptions<UnwatchTvShowMutation, UnwatchTvShowMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UnwatchTvShowMutation, UnwatchTvShowMutationVariables>(UnwatchTvShowDocument, options);
+      }
+export type UnwatchTvShowMutationHookResult = ReturnType<typeof useUnwatchTvShowMutation>;
+export type UnwatchTvShowMutationResult = Apollo.MutationResult<UnwatchTvShowMutation>;
+export type UnwatchTvShowMutationOptions = Apollo.BaseMutationOptions<UnwatchTvShowMutation, UnwatchTvShowMutationVariables>;
+export const RemoveTvShowFromWaitlistDocument = gql`
+    mutation RemoveTvShowFromWaitlist($id: ID!) {
+  removeTvShowFromWaitlist(id: $id) {
+    id
+  }
+}
+    `;
+export type RemoveTvShowFromWaitlistMutationFn = Apollo.MutationFunction<RemoveTvShowFromWaitlistMutation, RemoveTvShowFromWaitlistMutationVariables>;
+
+/**
+ * __useRemoveTvShowFromWaitlistMutation__
+ *
+ * To run a mutation, you first call `useRemoveTvShowFromWaitlistMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRemoveTvShowFromWaitlistMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [removeTvShowFromWaitlistMutation, { data, loading, error }] = useRemoveTvShowFromWaitlistMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useRemoveTvShowFromWaitlistMutation(baseOptions?: Apollo.MutationHookOptions<RemoveTvShowFromWaitlistMutation, RemoveTvShowFromWaitlistMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RemoveTvShowFromWaitlistMutation, RemoveTvShowFromWaitlistMutationVariables>(RemoveTvShowFromWaitlistDocument, options);
+      }
+export type RemoveTvShowFromWaitlistMutationHookResult = ReturnType<typeof useRemoveTvShowFromWaitlistMutation>;
+export type RemoveTvShowFromWaitlistMutationResult = Apollo.MutationResult<RemoveTvShowFromWaitlistMutation>;
+export type RemoveTvShowFromWaitlistMutationOptions = Apollo.BaseMutationOptions<RemoveTvShowFromWaitlistMutation, RemoveTvShowFromWaitlistMutationVariables>;
+export const WatchTvShowDocument = gql`
+    mutation WatchTvShow($id: ID!) {
+  watchTvShow(id: $id) {
+    id
+  }
+}
+    `;
+export type WatchTvShowMutationFn = Apollo.MutationFunction<WatchTvShowMutation, WatchTvShowMutationVariables>;
+
+/**
+ * __useWatchTvShowMutation__
+ *
+ * To run a mutation, you first call `useWatchTvShowMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useWatchTvShowMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [watchTvShowMutation, { data, loading, error }] = useWatchTvShowMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useWatchTvShowMutation(baseOptions?: Apollo.MutationHookOptions<WatchTvShowMutation, WatchTvShowMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<WatchTvShowMutation, WatchTvShowMutationVariables>(WatchTvShowDocument, options);
+      }
+export type WatchTvShowMutationHookResult = ReturnType<typeof useWatchTvShowMutation>;
+export type WatchTvShowMutationResult = Apollo.MutationResult<WatchTvShowMutation>;
+export type WatchTvShowMutationOptions = Apollo.BaseMutationOptions<WatchTvShowMutation, WatchTvShowMutationVariables>;
+export const CollectTvShowDocument = gql`
+    mutation CollectTvShow($id: ID!) {
+  collectTvShow(id: $id) {
+    id
+  }
+}
+    `;
+export type CollectTvShowMutationFn = Apollo.MutationFunction<CollectTvShowMutation, CollectTvShowMutationVariables>;
+
+/**
+ * __useCollectTvShowMutation__
+ *
+ * To run a mutation, you first call `useCollectTvShowMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCollectTvShowMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [collectTvShowMutation, { data, loading, error }] = useCollectTvShowMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useCollectTvShowMutation(baseOptions?: Apollo.MutationHookOptions<CollectTvShowMutation, CollectTvShowMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CollectTvShowMutation, CollectTvShowMutationVariables>(CollectTvShowDocument, options);
+      }
+export type CollectTvShowMutationHookResult = ReturnType<typeof useCollectTvShowMutation>;
+export type CollectTvShowMutationResult = Apollo.MutationResult<CollectTvShowMutation>;
+export type CollectTvShowMutationOptions = Apollo.BaseMutationOptions<CollectTvShowMutation, CollectTvShowMutationVariables>;
+export const SampleTvShowDocument = gql`
+    mutation SampleTvShow($id: ID!) {
+  sampleTvShow(id: $id) {
+    id
+  }
+}
+    `;
+export type SampleTvShowMutationFn = Apollo.MutationFunction<SampleTvShowMutation, SampleTvShowMutationVariables>;
+
+/**
+ * __useSampleTvShowMutation__
+ *
+ * To run a mutation, you first call `useSampleTvShowMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSampleTvShowMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [sampleTvShowMutation, { data, loading, error }] = useSampleTvShowMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useSampleTvShowMutation(baseOptions?: Apollo.MutationHookOptions<SampleTvShowMutation, SampleTvShowMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SampleTvShowMutation, SampleTvShowMutationVariables>(SampleTvShowDocument, options);
+      }
+export type SampleTvShowMutationHookResult = ReturnType<typeof useSampleTvShowMutation>;
+export type SampleTvShowMutationResult = Apollo.MutationResult<SampleTvShowMutation>;
+export type SampleTvShowMutationOptions = Apollo.BaseMutationOptions<SampleTvShowMutation, SampleTvShowMutationVariables>;
+export const EpisodeWatchedDocument = gql`
+    mutation EpisodeWatched($id: ID!) {
+  episodeWatched(id: $id) {
+    id
+  }
+}
+    `;
+export type EpisodeWatchedMutationFn = Apollo.MutationFunction<EpisodeWatchedMutation, EpisodeWatchedMutationVariables>;
+
+/**
+ * __useEpisodeWatchedMutation__
+ *
+ * To run a mutation, you first call `useEpisodeWatchedMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEpisodeWatchedMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [episodeWatchedMutation, { data, loading, error }] = useEpisodeWatchedMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useEpisodeWatchedMutation(baseOptions?: Apollo.MutationHookOptions<EpisodeWatchedMutation, EpisodeWatchedMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<EpisodeWatchedMutation, EpisodeWatchedMutationVariables>(EpisodeWatchedDocument, options);
+      }
+export type EpisodeWatchedMutationHookResult = ReturnType<typeof useEpisodeWatchedMutation>;
+export type EpisodeWatchedMutationResult = Apollo.MutationResult<EpisodeWatchedMutation>;
+export type EpisodeWatchedMutationOptions = Apollo.BaseMutationOptions<EpisodeWatchedMutation, EpisodeWatchedMutationVariables>;

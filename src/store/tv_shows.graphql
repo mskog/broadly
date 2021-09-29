@@ -1,0 +1,173 @@
+query TvShows($category: String, $first: Int, $skip: Int, $query: String) {
+  tvShows(category: $category, first: $first, skip: $skip, query: $query) {
+    id
+    name
+    posterImage
+    posterImageThumbnail
+    backdropImage
+    tmdbDetails {
+      voteAverage
+      firstAirDate
+      id
+    }
+    traktDetails {
+      ids {
+        tmdb
+      }
+      runtime
+    }
+  }
+}
+
+query TvShow($id: ID!) {
+  tvShow(id: $id) {
+    id
+    name
+    status
+    watching
+    collected
+    waitlist
+    posterImage
+    backdropImage
+    tmdbDetails {
+      voteAverage
+      firstAirDate
+      id
+    }
+    traktDetails {
+      overview
+      ids {
+        tmdb
+      }
+      runtime
+      genres
+      network
+    }
+    episodes {
+      id
+      name
+      season
+      episode
+      stillImage
+      stillImageThumbnail
+      watched
+      tmdbDetails {
+        name
+        overview
+      }
+    }
+
+    newsItems {
+      title
+      url
+      metadata {
+        image
+        description
+      }
+    }
+  }
+}
+
+query TvShowSummary($imdbId: ID!) {
+  tvShowSummary(imdbId: $imdbId) {
+    title
+    overview
+    rating
+    status
+    rating
+    firstAired
+    runtime
+    airedEpisodes
+    genres
+  }
+}
+
+query Episode($id: ID!) {
+  episode(id: $id) {
+    id
+    name
+    season
+    episode
+    stillImage
+    stillImageThumbnail
+    watched
+    watchedAt
+    tmdbDetails {
+      name
+      overview
+      firstAirDate
+    }
+    tvShow {
+      id
+      name
+      traktDetails {
+        runtime
+      }
+    }
+    bestRelease {
+      resolution
+    }
+  }
+}
+
+query Episodes($first: Int, $skip: Int, $category: EpisodeCategory) {
+  episodes(first: $first, skip: $skip, category: $category) {
+    id
+    name
+    season
+    episode
+    stillImage
+    stillImageThumbnail
+    watched
+    tmdbDetails {
+      name
+      overview
+      firstAirDate
+    }
+
+    bestRelease {
+      resolution
+    }
+
+    tvShow {
+      id
+      name
+    }
+  }
+}
+
+mutation UnwatchTvShow($id: ID!) {
+  unwatchTvShow(id: $id) {
+    id
+  }
+}
+
+mutation RemoveTvShowFromWaitlist($id: ID!) {
+  removeTvShowFromWaitlist(id: $id) {
+    id
+  }
+}
+
+mutation WatchTvShow($id: ID!) {
+  watchTvShow(id: $id) {
+    id
+  }
+}
+
+mutation CollectTvShow($id: ID!) {
+  collectTvShow(id: $id) {
+    id
+  }
+}
+
+mutation SampleTvShow($id: ID!) {
+  sampleTvShow(id: $id) {
+    id
+  }
+}
+
+mutation EpisodeWatched($id: ID!) {
+  episodeWatched(id: $id) {
+    id
+  }
+}

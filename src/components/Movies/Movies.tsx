@@ -9,14 +9,20 @@ import List from "./List";
 
 const CATEGORIES = ["watched", "downloads", "waitlist"];
 
-export default function Movies(props: any) {
+type MoviesProps = {
+  match: {
+    params: { category?: string };
+  };
+};
+
+export default function Movies(props: MoviesProps) {
   const {
     match: {
       params: { category }
     }
   } = props;
 
-  const { loading, error, data, fetchMore } = useMoviesQuery({
+  const { error, data, fetchMore } = useMoviesQuery({
     fetchPolicy: "cache-and-network",
     variables: {
       first: 20,
@@ -26,9 +32,8 @@ export default function Movies(props: any) {
   });
 
   const loadMore = () => {
-    if (!data) {
-      return;
-    }
+    if (!data) return;
+
     fetchMore({
       variables: { skip: data.movies.length },
       updateQuery: (prev, { fetchMoreResult }) => {
@@ -41,9 +46,9 @@ export default function Movies(props: any) {
   };
 
   let mainContent;
-  if (loading && !data) {
+  if (!data) {
     mainContent = <Loading />;
-  } else if (error || !data) {
+  } else if (error) {
     mainContent = <p>Error</p>;
   } else {
     mainContent = <List loadMore={loadMore} movies={data.movies} />;
