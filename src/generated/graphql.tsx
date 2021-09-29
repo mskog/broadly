@@ -109,7 +109,7 @@ export type Movie = OmnisearchResult & {
   rtAudienceRating?: Maybe<Scalars['Int']>;
   rtCriticsRating?: Maybe<Scalars['Int']>;
   runtime?: Maybe<Scalars['Int']>;
-  title: Scalars['String'];
+  title?: Maybe<Scalars['String']>;
   tmdbId?: Maybe<Scalars['String']>;
   traktId?: Maybe<Scalars['String']>;
   traktRating?: Maybe<Scalars['Float']>;
@@ -541,7 +541,7 @@ export type MoviesQueryVariables = Exact<{
 }>;
 
 
-export type MoviesQuery = { __typename?: 'Query', movies: Array<{ __typename?: 'Movie', id: number, tmdbId?: Maybe<string>, title: string, releaseDate?: Maybe<any>, downloadAt?: Maybe<any>, watchedAt?: Maybe<any>, runtime?: Maybe<number>, rtCriticsRating?: Maybe<number>, rtAudienceRating?: Maybe<number>, watched?: Maybe<boolean>, personalRating?: Maybe<number>, overview?: Maybe<string>, backdropImage?: Maybe<string>, posterImage?: Maybe<string>, posterImageThumbnail?: Maybe<string>, bestRelease?: Maybe<{ __typename?: 'MovieRelease', id: number, resolution: string }> }> };
+export type MoviesQuery = { __typename?: 'Query', movies: Array<{ __typename?: 'Movie', id: number, tmdbId?: Maybe<string>, title?: Maybe<string>, releaseDate?: Maybe<any>, downloadAt?: Maybe<any>, watchedAt?: Maybe<any>, runtime?: Maybe<number>, rtCriticsRating?: Maybe<number>, rtAudienceRating?: Maybe<number>, watched?: Maybe<boolean>, personalRating?: Maybe<number>, overview?: Maybe<string>, backdropImage?: Maybe<string>, posterImage?: Maybe<string>, posterImageThumbnail?: Maybe<string>, bestRelease?: Maybe<{ __typename?: 'MovieRelease', id: number, resolution: string }> }> };
 
 export type BestMoviesQueryVariables = Exact<{
   year?: Maybe<Scalars['Int']>;
@@ -550,14 +550,14 @@ export type BestMoviesQueryVariables = Exact<{
 }>;
 
 
-export type BestMoviesQuery = { __typename?: 'Query', bestMovies: Array<{ __typename?: 'Movie', id: number, tmdbId?: Maybe<string>, title: string, releaseDate?: Maybe<any>, downloadAt?: Maybe<any>, watchedAt?: Maybe<any>, runtime?: Maybe<number>, rtCriticsRating?: Maybe<number>, rtAudienceRating?: Maybe<number>, watched?: Maybe<boolean>, personalRating?: Maybe<number>, overview?: Maybe<string>, backdropImage?: Maybe<string>, posterImage?: Maybe<string>, posterImageThumbnail?: Maybe<string> }> };
+export type BestMoviesQuery = { __typename?: 'Query', bestMovies: Array<{ __typename?: 'Movie', id: number, tmdbId?: Maybe<string>, title?: Maybe<string>, releaseDate?: Maybe<any>, downloadAt?: Maybe<any>, watchedAt?: Maybe<any>, runtime?: Maybe<number>, rtCriticsRating?: Maybe<number>, rtAudienceRating?: Maybe<number>, watched?: Maybe<boolean>, personalRating?: Maybe<number>, overview?: Maybe<string>, backdropImage?: Maybe<string>, posterImage?: Maybe<string>, posterImageThumbnail?: Maybe<string> }> };
 
 export type MovieQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type MovieQuery = { __typename?: 'Query', movie: { __typename?: 'Movie', id: number, tmdbId?: Maybe<string>, title: string, releaseDate?: Maybe<any>, availableDate?: Maybe<any>, downloadAt?: Maybe<any>, runtime?: Maybe<number>, rtCriticsRating?: Maybe<number>, rtAudienceRating?: Maybe<number>, watched?: Maybe<boolean>, waitlist?: Maybe<boolean>, personalRating?: Maybe<number>, overview?: Maybe<string>, hasKillerRelease: boolean, hasAcceptableRelease: boolean, backdropImage?: Maybe<string>, posterImage?: Maybe<string>, posterImageThumbnail?: Maybe<string>, bestRelease?: Maybe<{ __typename?: 'MovieRelease', id: number, codec: string, container: string, quality: string, releaseName: string, resolution: string, size: number, source: string, downloadUrl?: Maybe<string> }> } };
+export type MovieQuery = { __typename?: 'Query', movie: { __typename?: 'Movie', id: number, tmdbId?: Maybe<string>, title?: Maybe<string>, releaseDate?: Maybe<any>, availableDate?: Maybe<any>, downloadAt?: Maybe<any>, runtime?: Maybe<number>, rtCriticsRating?: Maybe<number>, rtAudienceRating?: Maybe<number>, watched?: Maybe<boolean>, waitlist?: Maybe<boolean>, personalRating?: Maybe<number>, overview?: Maybe<string>, hasKillerRelease: boolean, hasAcceptableRelease: boolean, backdropImage?: Maybe<string>, posterImage?: Maybe<string>, posterImageThumbnail?: Maybe<string>, bestRelease?: Maybe<{ __typename?: 'MovieRelease', id: number, codec: string, container: string, quality: string, releaseName: string, resolution: string, size: number, source: string, downloadUrl?: Maybe<string> }> } };
 
 export type MovieSummaryQueryVariables = Exact<{
   imdbId: Scalars['ID'];
