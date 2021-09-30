@@ -1,8 +1,14 @@
 import React from "react";
 
+import { NewsItem as NewsItemType } from "generated/graphql";
+
 import NewsItem from "./NewsItem";
 
-export default function News({ newsItems }: { newsItems: any[] }) {
+type NewsProps = {
+  newsItems: Pick<NewsItemType, "title" | "url" | "metadata">[];
+};
+
+export default function News({ newsItems }: NewsProps) {
   if (newsItems.length === 0) {
     return <></>;
   }

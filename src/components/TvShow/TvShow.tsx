@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { uniq, sortBy, last } from "lodash";
 
-import { useTvShowQuery } from "store/tv_shows";
+import { useTvShowQuery } from "generated/graphql";
 
 import Loading from "components/shared/LoadingFull";
 import Top from "./Top";
@@ -10,9 +10,14 @@ import Actions from "./Actions";
 import Seasons from "./Seasons";
 import Episodes from "./Episodes";
 
-function TvShow(props: any) {
+type TvShowProps = {
+  match: {
+    params: { id: string };
+  };
+};
+
+function TvShow(props: TvShowProps) {
   const {
-    history,
     match: {
       params: { id }
     }
@@ -20,16 +25,13 @@ function TvShow(props: any) {
 
   const [selectedSeason, setSelectedSeason] = useState();
 
-  const { data } = useTvShowQuery({ id });
+  const { data } = useTvShowQuery({ variables: { id } });
 
   if (!data) {
     return <Loading />;
   }
 
-  const {
-    traktDetails: { overview },
-    episodes
-  } = data.tvShow;
+  const episodes = data.tvShow.episodes || [];
 
   const seasonNumbers = sortBy(
     uniq(episodes.map((episode: any) => parseInt(episode.season, 10)))
@@ -43,12 +45,14 @@ function TvShow(props: any) {
     <div className="pb-20">
       <Top tvShow={data.tvShow} />
       <div className="container max-w-2xl px-8 mx-auto">
-        <p className="py-4 text-lg text-gray-400">{overview}</p>
+        <p className="py-4 text-lg text-gray-400">
+          {data.tvShow.traktDetails?.overview}
+        </p>
         <div className="flex flex-col pt-4 -mx-2 md:flex-row">
-          <Actions history={history} tvShow={data.tvShow} />
+          <Actions tvShow={data.tvShow} />
         </div>
 
-        <News newsItems={data.tvShow.newsItems} />
+        <News newsItems={data.tvShow.newsItems || []} />
 
         {selectedEpisodes.length > 0 && (
           <Seasons

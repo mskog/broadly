@@ -1,13 +1,15 @@
 import React from "react";
 import LoaderButton from "components/shared/LoaderButton";
 
+type DangerousActionButtonProps = {
+  handle: () => void;
+  title: string;
+};
+
 export default function DangerousActionButton({
   handle,
   title
-}: {
-  handle: Function;
-  title: string;
-}) {
+}: DangerousActionButtonProps) {
   return (
     <div className="w-full mx-1 my-2 md:w-6/12">
       <LoaderButton

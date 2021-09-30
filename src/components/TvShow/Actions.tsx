@@ -5,45 +5,63 @@ import {
   useWatchTvShowMutation,
   useCollectTvShowMutation,
   useRemoveTvShowFromWaitlistMutation,
-  useSampleTvShowMutation
-} from "store/tv_shows";
+  useSampleTvShowMutation,
+  TvShow
+} from "generated/graphql";
 
 import ActionButton from "./ActionButton";
 import DangerousActionButton from "./DangerousActionButton";
 
-export default function Actions(props: any) {
+type ActionsProps = {
+  tvShow: Pick<
+    TvShow,
+    "id" | "watching" | "collected" | "waitlist" | "status"
+  > & { episodes?: any[] };
+};
+
+export default function Actions(props: ActionsProps) {
   const {
     tvShow: { id, watching, collected, waitlist, episodes, status }
   } = props;
 
   const [unwatchTvShow] = useUnwatchTvShowMutation({
-    id,
+    variables: {
+      id: id.toString()
+    },
     update: () => {}
   });
 
   const [watchTvShow] = useWatchTvShowMutation({
-    id,
+    variables: {
+      id: id.toString()
+    },
     update: () => {}
   });
 
   const [collectTvShow] = useCollectTvShowMutation({
-    id,
+    variables: {
+      id: id.toString()
+    },
     update: () => {}
   });
 
   const [removeFromWaitlist] = useRemoveTvShowFromWaitlistMutation({
-    id,
+    variables: {
+      id: id.toString()
+    },
     update: () => {}
   });
 
   const [sample] = useSampleTvShowMutation({
-    id,
+    variables: {
+      id: id.toString()
+    },
     update: () => {}
   });
 
   const addToWaitlist = sample;
 
-  const hasEpisodes = episodes.length > 0;
+  const hasEpisodes = episodes ? episodes.length > 0 : false;
 
   return (
     <>

@@ -9,6 +9,8 @@ import LazyLoad from "react-lazyload";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
+import { Episode as EpisodeType } from "generated/graphql";
+
 import { cdnImage } from "utilities";
 
 function seasonEpisode(season: string, episodeNumber: string) {
@@ -24,7 +26,20 @@ function episodeHeader(episode: string, name: string) {
   );
 }
 
-export default function Episode({ episode }: any) {
+type EpisodeProps = {
+  episode: Pick<
+    EpisodeType,
+    | "id"
+    | "name"
+    | "stillImageThumbnail"
+    | "season"
+    | "episode"
+    | "watched"
+    | "tmdbDetails"
+  >;
+};
+
+export default function Episode({ episode }: EpisodeProps) {
   const {
     id,
     name,
@@ -52,7 +67,7 @@ export default function Episode({ episode }: any) {
             className="relative h-40 bg-cover "
             style={{
               backgroundImage: `linear-gradient(to bottom, rgba(21,26,48,0.6), rgba(21,26,48,0.9)), url('${cdnImage(
-                stillImageThumbnail
+                stillImageThumbnail || ""
               )}')`
             }}
           >
@@ -64,7 +79,13 @@ export default function Episode({ episode }: any) {
               </div>
             )}
             <div className="p-4">
-              {episodeHeader(seasonEpisode(season, episodeNumber), episodeName)}
+              {season &&
+                episodeName &&
+                episodeNumber &&
+                episodeHeader(
+                  seasonEpisode(season.toString(), episodeNumber.toString()),
+                  episodeName
+                )}
               <p className="text-gray-400">
                 {truncate(overview, { length: 100 })}
               </p>

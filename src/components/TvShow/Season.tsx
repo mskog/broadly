@@ -1,16 +1,13 @@
 import React from "react";
 
-export default function Category({
-  name,
-  value,
-  active,
-  onSelect
-}: {
+type SeasonProps = {
   name: string;
   value: string;
   active: boolean;
   onSelect: (value: string) => void;
-}) {
+};
+
+export default function Season({ name, value, active, onSelect }: SeasonProps) {
   let classNames =
     "px-2 text-base font-bold text-center cursor-pointer hover:text-white pb-2";
 

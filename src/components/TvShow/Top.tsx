@@ -2,6 +2,8 @@ import React from "react";
 
 import { formattedRuntime, cdnImage } from "utilities";
 
+import { TvShow } from "generated/graphql";
+
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
 import RtRating from "components/shared/RtRating";
@@ -14,20 +16,24 @@ function backgroundStyle(url: string) {
   };
 }
 
-export default function Top({ tvShow }: { tvShow: any }) {
-  const {
-    name,
-    status,
-    backdropImage,
-    tmdbDetails: { voteAverage, firstAirDate },
-    traktDetails: { runtime, genres, network }
-  } = tvShow;
+type TopProps = {
+  tvShow: Pick<
+    TvShow,
+    "id" | "name" | "status" | "backdropImage" | "tmdbDetails" | "traktDetails"
+  >;
+};
+
+export default function Top({ tvShow }: TopProps) {
+  const { name, status, backdropImage, tmdbDetails, traktDetails } = tvShow;
+
+  const { voteAverage, firstAirDate } = tmdbDetails || {};
+  const { genres, runtime, network } = traktDetails || {};
 
   return (
     <div>
       <div
         className="w-full -mb-40 h-75vh"
-        style={backgroundStyle(cdnImage(backdropImage))}
+        style={backgroundStyle(cdnImage(backdropImage || ""))}
       />
       <div className="container h-full max-w-2xl px-8 mx-auto">
         <div className="flex flex-col justify-end h-full pb-10">
@@ -40,10 +46,14 @@ export default function Top({ tvShow }: { tvShow: any }) {
           <div className="capitalize md:pt-10">
             <Level>
               <LevelItem title="First Aired" value={firstAirDate} />
-              <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
+              {runtime && (
+                <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
+              )}
               <LevelItem title="Status" value={status} />
               <LevelItem title="Rating">
-                <RtRating rating={voteAverage * 10} />
+                {voteAverage && (
+                  <RtRating rating={parseInt(voteAverage, 10) * 10} />
+                )}
               </LevelItem>
             </Level>
           </div>

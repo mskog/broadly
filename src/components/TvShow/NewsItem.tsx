@@ -8,7 +8,7 @@ export default function NewsItem({
   url
 }: {
   title: string;
-  metadata: { image: string; description: string };
+  metadata: { image?: string; description?: string };
   url: string;
 }) {
   const { image, description } = metadata || {};
