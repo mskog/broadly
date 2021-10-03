@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useEpisodeQuery, useEpisodeWatchedMutation } from "store/tv_shows";
+import { useEpisodeQuery, useEpisodeWatchedMutation } from "generated/graphql";
 
 import Loading from "components/shared/LoadingFull";
 import LoaderButton from "components/shared/LoaderButton";
@@ -15,11 +15,11 @@ export default function Episode(props: any) {
   } = props;
 
   const [episodeWatched] = useEpisodeWatchedMutation({
-    id,
+    variables: { id },
     update: () => {}
   });
 
-  const { data } = useEpisodeQuery({ id });
+  const { data } = useEpisodeQuery({ variables: { id } });
 
   if (!data) {
     return <Loading />;
@@ -28,7 +28,7 @@ export default function Episode(props: any) {
   const { episode } = data;
 
   let overview;
-  if (episode.watched) {
+  if (episode.watched && episode.tmdbDetails) {
     overview = episode.tmdbDetails.overview;
   } else {
     overview = "[ Overview hidden to prevent spoilers ]";
