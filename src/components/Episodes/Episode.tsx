@@ -8,6 +8,8 @@ import { padStart } from "lodash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
+import { Episode as EpisodeType, EpisodeRelease } from "generated/graphql";
+
 import { cdnImage, resolutionDisplay } from "utilities";
 
 function seasonEpisode(season: string, episodeNumber: string) {
@@ -24,7 +26,17 @@ function episodeHeader(episode: string, name: string) {
 }
 
 type EpisodeProps = {
-  episode: any;
+  episode: Pick<
+    EpisodeType,
+    | "id"
+    | "season"
+    | "episode"
+    | "stillImageThumbnail"
+    | "tmdbDetails"
+    | "watchedAt"
+    | "tvShow"
+    | "watched"
+  > & { bestRelease?: Pick<EpisodeRelease, "resolution"> };
 };
 
 export default function Episode({ episode }: EpisodeProps) {
@@ -34,9 +46,9 @@ export default function Episode({ episode }: EpisodeProps) {
     season,
     episode: episodeNumber,
     tmdbDetails = {},
-    bestRelease: { resolution },
     tvShow: { name },
-    watched
+    watched,
+    bestRelease
   } = episode;
 
   const { name: episodeName } = tmdbDetails;
@@ -48,14 +60,14 @@ export default function Episode({ episode }: EpisodeProps) {
           className="relative h-40 bg-cover"
           style={{
             backgroundImage: `linear-gradient(to bottom, rgba(21,26,48,0.6), rgba(21,26,48,0.9)), url('${cdnImage(
-              stillImageThumbnail
+              stillImageThumbnail || ""
             )}')`
           }}
         >
-          {resolution && (
+          {bestRelease && (
             <div className="absolute bottom-0 right-0">
               <div className="p-2 text-gray-400">
-                {resolutionDisplay(resolution)}
+                {resolutionDisplay(bestRelease.resolution)}
               </div>
             </div>
           )}
@@ -68,7 +80,13 @@ export default function Episode({ episode }: EpisodeProps) {
           )}
           <div className="p-8">
             <h2 className="text-2xl font-semibold text-gray-300">{name}</h2>
-            {episodeHeader(seasonEpisode(season, episodeNumber), episodeName)}
+            {season &&
+              episodeNumber &&
+              episodeName &&
+              episodeHeader(
+                seasonEpisode(season.toString(), episodeNumber.toString()),
+                episodeName
+              )}
           </div>
         </div>
       </Link>

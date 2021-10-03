@@ -32,7 +32,7 @@ export default function Item({ title, url, metadata, newsworthy }: ItemProps) {
         )}
       </a>
       <div className="pt-4 md:pt-0">
-        {newsworthy && newsworthy.__typename == "TvShow" && (
+        {newsworthy && newsworthy.__typename === "TvShow" && (
           <Link to={`/tv_shows/${newsworthy.id}`}>
             <h3 className="text-lg font-bold text-teal-500">
               {newsworthy.name}

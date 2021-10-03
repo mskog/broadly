@@ -7,7 +7,13 @@ import LoaderButton from "components/shared/LoaderButton";
 
 import Top from "./Top";
 
-export default function Episode(props: any) {
+type EpisodeProps = {
+  match: {
+    params: { id: string };
+  };
+};
+
+export default function Episode(props: EpisodeProps) {
   const {
     match: {
       params: { id }

@@ -1,11 +1,25 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
+import { Episode as EpisodeType, EpisodeRelease } from "generated/graphql";
+
 import Episode from "./Episode";
 
 type ListProps = {
+  episodes: Array<
+    Pick<
+      EpisodeType,
+      | "id"
+      | "season"
+      | "episode"
+      | "stillImageThumbnail"
+      | "tmdbDetails"
+      | "watchedAt"
+      | "tvShow"
+      | "watched"
+    > & { bestRelease?: Pick<EpisodeRelease, "resolution"> }
+  >;
   loadMore: () => void;
-  episodes: Array<any>;
 };
 
 export default function List({ loadMore, episodes }: ListProps) {

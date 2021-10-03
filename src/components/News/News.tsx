@@ -1,5 +1,4 @@
 import React from "react";
-import { useQuery } from "@apollo/react-hooks";
 
 import { useNewsQuery } from "generated/graphql";
 

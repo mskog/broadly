@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useEpisodesQuery } from "store/tv_shows";
+import { useEpisodesQuery } from "generated/graphql";
 import Loading from "components/shared/LoadingFull";
 import List from "./List";
 import Categories from "./Categories";
@@ -12,13 +12,16 @@ export default function Episodes(props: any) {
     }
   } = props;
 
-  const { loading, error, data, fetchMore } = useEpisodesQuery({
-    first: 30,
-    skip: 0,
-    category: category.toUpperCase()
+  const { error, data, fetchMore } = useEpisodesQuery({
+    variables: {
+      first: 30,
+      skip: 0,
+      category: category.toUpperCase()
+    }
   });
 
   const loadMore = () => {
+    if (!data) return;
     fetchMore({
       variables: { skip: data.episodes.length },
       updateQuery: (prev, { fetchMoreResult }) => {
@@ -33,7 +36,7 @@ export default function Episodes(props: any) {
     });
   };
   let mainContent;
-  if (loading && !data) {
+  if (!data) {
     mainContent = <Loading />;
   } else if (error) {
     mainContent = <p>Error</p>;
