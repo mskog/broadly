@@ -1,9 +1,13 @@
 import React from "react";
 
+import { NewsItem } from "generated/graphql";
+
 import Item from "./Item";
 
 type ListProps = {
-  newsItems: Array<any>;
+  newsItems: Array<
+    Pick<NewsItem, "title" | "url" | "metadata"> & { newsworthy?: any }
+  >;
 };
 
 export default function List({ newsItems }: ListProps) {

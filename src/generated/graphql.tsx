@@ -599,6 +599,13 @@ export type DownloadMovieMutationVariables = Exact<{
 
 export type DownloadMovieMutation = { __typename?: 'Mutation', downloadMovie: { __typename?: 'Movie', id: number } };
 
+export type NewsQueryVariables = Exact<{
+  category: Scalars['String'];
+}>;
+
+
+export type NewsQuery = { __typename?: 'Query', news: Array<{ __typename?: 'NewsItem', title: string, url: string, metadata: { __typename?: 'NewsItemMetadata', image?: Maybe<string>, description?: Maybe<string> }, newsworthy?: Maybe<{ __typename?: 'Movie' } | { __typename?: 'TvShow', id: number, name: string }> }> };
+
 export type TvShowsQueryVariables = Exact<{
   category?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1065,6 +1072,52 @@ export function useDownloadMovieMutation(baseOptions?: Apollo.MutationHookOption
 export type DownloadMovieMutationHookResult = ReturnType<typeof useDownloadMovieMutation>;
 export type DownloadMovieMutationResult = Apollo.MutationResult<DownloadMovieMutation>;
 export type DownloadMovieMutationOptions = Apollo.BaseMutationOptions<DownloadMovieMutation, DownloadMovieMutationVariables>;
+export const NewsDocument = gql`
+    query News($category: String!) {
+  news(category: $category) {
+    title
+    url
+    metadata {
+      image
+      description
+    }
+    newsworthy {
+      ... on TvShow {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useNewsQuery__
+ *
+ * To run a query within a React component, call `useNewsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useNewsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useNewsQuery({
+ *   variables: {
+ *      category: // value for 'category'
+ *   },
+ * });
+ */
+export function useNewsQuery(baseOptions: Apollo.QueryHookOptions<NewsQuery, NewsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<NewsQuery, NewsQueryVariables>(NewsDocument, options);
+      }
+export function useNewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<NewsQuery, NewsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<NewsQuery, NewsQueryVariables>(NewsDocument, options);
+        }
+export type NewsQueryHookResult = ReturnType<typeof useNewsQuery>;
+export type NewsLazyQueryHookResult = ReturnType<typeof useNewsLazyQuery>;
+export type NewsQueryResult = Apollo.QueryResult<NewsQuery, NewsQueryVariables>;
 export const TvShowsDocument = gql`
     query TvShows($category: String, $first: Int, $skip: Int, $query: String) {
   tvShows(category: $category, first: $first, skip: $skip, query: $query) {

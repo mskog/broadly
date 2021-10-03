@@ -3,7 +3,7 @@ import React from "react";
 import Category from "./Category";
 
 type CategoriesProps = {
-  categories: Array<any>;
+  categories: Array<{ name: string; value: string }>;
   category: string;
 };
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+
+import { useNewsQuery } from "generated/graphql";
 
 import Loading from "components/shared/LoadingFull";
 
@@ -13,39 +14,25 @@ const CATEGORIES = [
   { name: "Movies", value: "movies" }
 ];
 
-const query = gql`
-  query News($category: String!) {
-    news(category: $category) {
-      title
-      url
-      metadata {
-        image
-        description
-      }
-      newsworthy {
-        ... on TvShow {
-          id
-          name
-        }
-      }
-    }
-  }
-`;
+type NewsProps = {
+  match: {
+    params: { category: string };
+  };
+};
 
-export default function News(props: any) {
+export default function News(props: NewsProps) {
   const {
     match: {
       params: { category: chosenCategory }
     }
   } = props;
 
-  const { loading, error, data } = useQuery(query, {
-    fetchPolicy: "cache-and-network",
+  const { error, data } = useNewsQuery({
     variables: { category: chosenCategory }
   });
 
   let mainContent;
-  if (loading && !data) {
+  if (!data) {
     mainContent = <Loading />;
   } else if (error) {
     mainContent = <p>Error</p>;

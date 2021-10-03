@@ -1,14 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { NewsItem } from "generated/graphql";
+
 import { truncate } from "lodash";
 
-type ItemProps = {
-  title: string;
-  url: string;
-  metadata: any;
-  newsworthy: any;
-};
+type ItemProps = Pick<NewsItem, "title" | "url" | "metadata" | "newsworthy">;
 
 export default function Item({ title, url, metadata, newsworthy }: ItemProps) {
   const { image, description } = metadata || {};
@@ -35,7 +32,7 @@ export default function Item({ title, url, metadata, newsworthy }: ItemProps) {
         )}
       </a>
       <div className="pt-4 md:pt-0">
-        {newsworthy && (
+        {newsworthy && newsworthy.__typename == "TvShow" && (
           <Link to={`/tv_shows/${newsworthy.id}`}>
             <h3 className="text-lg font-bold text-teal-500">
               {newsworthy.name}

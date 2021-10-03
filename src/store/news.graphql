@@ -1,0 +1,16 @@
+query News($category: String!) {
+  news(category: $category) {
+    title
+    url
+    metadata {
+      image
+      description
+    }
+    newsworthy {
+      ... on TvShow {
+        id
+        name
+      }
+    }
+  }
+}
