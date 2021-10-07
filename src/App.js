@@ -9,16 +9,17 @@ import {
   useLocation
 } from "react-router-dom";
 
-import { ApolloClient } from "apollo-client";
 import {
   InMemoryCache,
   IntrospectionFragmentMatcher
 } from "apollo-cache-inmemory";
 import { persistCache } from "apollo-cache-persist";
-import { HttpLink } from "apollo-link-http";
-import { onError } from "apollo-link-error";
-import { ApolloLink } from "apollo-link";
-import { ApolloProvider } from "@apollo/react-hooks";
+import {
+  HttpLink,
+  ApolloClient,
+  ApolloLink,
+  ApolloProvider
+} from "@apollo/client";
 
 import Calendar from "components/Calendar/Calendar";
 import PtpMovieRecommendations from "components/PtpMovieRecommendations/PtpMovieRecommendations";
@@ -69,15 +70,6 @@ function App() {
     const c = new ApolloClient(
       {
         link: ApolloLink.from([
-          onError(({ graphQLErrors, networkError }) => {
-            if (graphQLErrors)
-              graphQLErrors.forEach(({ message, locations, path }) =>
-                console.log(
-                  `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-                )
-              );
-            if (networkError) console.log(`[Network error]: ${networkError}`);
-          }),
           new HttpLink({
             uri: process.env.REACT_APP_API_URL,
             credentials: "same-origin",
@@ -86,6 +78,11 @@ function App() {
             }
           })
         ]),
+        defaultOptions: {
+          query: {
+            fetchPolicy: "no-cache"
+          }
+        },
         cache
       },
       []

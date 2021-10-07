@@ -25,6 +25,7 @@ export default function TvShows(props: TvShowsProps) {
   } = props;
 
   const { error, data, fetchMore } = useTvShowsQuery({
+    fetchPolicy: "cache-and-network",
     variables: {
       first: 20,
       skip: 0,

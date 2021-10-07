@@ -24,7 +24,10 @@ function Movie(props: MovieProps) {
     }
   } = props;
 
-  const { data } = useMovieQuery({ variables: { id } });
+  const { data } = useMovieQuery({
+    fetchPolicy: "cache-and-network",
+    variables: { id }
+  });
 
   if (!data) {
     return <Loading />;

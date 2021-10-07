@@ -1,5 +1,4 @@
-import { useQuery, useMutation } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+import { useQuery, useMutation, gql } from "@apollo/client";
 
 const GET_TV_SHOWS = gql`
   query TvShows($category: String, $first: Int, $skip: Int, $query: String) {

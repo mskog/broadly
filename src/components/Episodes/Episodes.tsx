@@ -13,6 +13,7 @@ export default function Episodes(props: any) {
   } = props;
 
   const { error, data, fetchMore } = useEpisodesQuery({
+    fetchPolicy: "cache-and-network",
     variables: {
       first: 30,
       skip: 0,

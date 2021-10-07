@@ -25,7 +25,10 @@ export default function Episode(props: EpisodeProps) {
     update: () => {}
   });
 
-  const { data } = useEpisodeQuery({ variables: { id } });
+  const { data } = useEpisodeQuery({
+    fetchPolicy: "cache-and-network",
+    variables: { id }
+  });
 
   if (!data) {
     return <Loading />;

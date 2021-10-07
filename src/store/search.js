@@ -1,5 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+import { useQuery, gql } from "@apollo/client";
 
 const GET_OMNISEARCH = gql`
   query OmniSearch($query: String!) {

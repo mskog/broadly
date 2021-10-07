@@ -1,7 +1,6 @@
 import React from "react";
 
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+import { useQuery, gql } from "@apollo/client";
 
 import { cdnImage } from "utilities";
 

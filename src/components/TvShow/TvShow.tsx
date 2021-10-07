@@ -25,7 +25,10 @@ function TvShow(props: TvShowProps) {
 
   const [selectedSeason, setSelectedSeason] = useState();
 
-  const { data } = useTvShowQuery({ variables: { id } });
+  const { data } = useTvShowQuery({
+    fetchPolicy: "cache-and-network",
+    variables: { id }
+  });
 
   if (!data) {
     return <Loading />;

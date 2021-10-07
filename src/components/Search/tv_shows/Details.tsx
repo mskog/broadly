@@ -2,8 +2,7 @@ import React from "react";
 
 import { useHistory } from "react-router-dom";
 
-import { gql } from "apollo-boost";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, gql } from "@apollo/client";
 
 import {
   useCollectTvShowMutation,

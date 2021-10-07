@@ -27,7 +27,8 @@ export default function News(props: NewsProps) {
   } = props;
 
   const { error, data } = useNewsQuery({
-    variables: { category: chosenCategory }
+    variables: { category: chosenCategory },
+    fetchPolicy: "cache-and-network"
   });
 
   let mainContent;

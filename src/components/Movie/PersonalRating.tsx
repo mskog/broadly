@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
 import useOnclickOutside from "react-cool-onclickoutside";
-import { useMutation } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+import { useMutation, gql } from "@apollo/client";
 
 type PersonalRatingProps = {
   id: number;
