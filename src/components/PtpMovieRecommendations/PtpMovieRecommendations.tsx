@@ -5,7 +5,7 @@ import Loading from "components/shared/LoadingFull";
 
 import List from "./List";
 
-export default function PtpMovieRecommendations() {
+const PtpMovieRecommendations = () => {
   const { error, data } = usePtpMovieRecommendationsQuery();
 
   let mainContent;
@@ -22,4 +22,6 @@ export default function PtpMovieRecommendations() {
       <div className="mt-20">{mainContent}</div>
     </div>
   );
-}
+};
+
+export default PtpMovieRecommendations;
