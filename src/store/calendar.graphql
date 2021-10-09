@@ -1,0 +1,22 @@
+query Calendar($category: CalendarCategory) {
+  calendar(category: $category) {
+    __typename
+    ... on Movie {
+      id
+      posterImage
+      title
+      availableDate
+    }
+
+    ... on CalendarEpisode {
+      id
+      firstAired
+      season
+      name
+      title
+      tmdbDetails {
+        id
+      }
+    }
+  }
+}

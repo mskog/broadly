@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useBestMoviesQuery } from "store/movies";
+import { useBestMoviesQuery } from "generated/graphql";
 
 import Loading from "components/shared/LoadingFull";
 
@@ -32,12 +32,16 @@ export default function BestMovies(props: BestMoviesProps) {
     currentYear
   ].map((y) => y.toString());
 
-  const { loading, error, data, fetchMore } = useBestMoviesQuery({
-    year,
-    limit: 20
+  const { error, data, fetchMore } = useBestMoviesQuery({
+    variables: {
+      year,
+      first: 20
+    }
   });
 
   const loadMore = () => {
+    if (!data) return;
+
     fetchMore({
       variables: { skip: data.bestMovies.length },
       updateQuery: (prev: any, { fetchMoreResult }) => {
@@ -53,7 +57,7 @@ export default function BestMovies(props: BestMoviesProps) {
   };
 
   let mainContent;
-  if (loading && !data) {
+  if (!data) {
     mainContent = <Loading />;
   } else if (error) {
     mainContent = <p>Error</p>;

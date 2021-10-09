@@ -1,15 +1,15 @@
 import React from "react";
 
-import { usePtpMovieRecommendationsQuery } from "store/movies";
+import { usePtpMovieRecommendationsQuery } from "generated/graphql";
 import Loading from "components/shared/LoadingFull";
 
 import List from "./List";
 
 export default function PtpMovieRecommendations() {
-  const { loading, error, data } = usePtpMovieRecommendationsQuery();
+  const { error, data } = usePtpMovieRecommendationsQuery();
 
   let mainContent;
-  if (loading && !data) {
+  if (!data) {
     mainContent = <Loading />;
   } else if (error) {
     mainContent = <p>Error</p>;

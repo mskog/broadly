@@ -27,7 +27,7 @@ export enum CalendarCategory {
 export type CalendarEpisode = {
   __typename?: 'CalendarEpisode';
   firstAired?: Maybe<Scalars['ISO8601Date']>;
-  id?: Maybe<Scalars['Int']>;
+  id: Scalars['Int'];
   ids?: Maybe<TraktIds>;
   name?: Maybe<Scalars['String']>;
   number?: Maybe<Scalars['Int']>;
@@ -533,6 +533,13 @@ export type TvShowTmdbDetails = {
   voteCount?: Maybe<Scalars['Int']>;
 };
 
+export type CalendarQueryVariables = Exact<{
+  category?: Maybe<CalendarCategory>;
+}>;
+
+
+export type CalendarQuery = { __typename?: 'Query', calendar: Array<{ __typename: 'CalendarEpisode', id: number, firstAired?: Maybe<any>, season?: Maybe<number>, name?: Maybe<string>, title?: Maybe<string>, tmdbDetails?: Maybe<{ __typename?: 'EpisodeTmdbDetails', id?: Maybe<number> }> } | { __typename: 'Movie', id: number, posterImage?: Maybe<string>, title?: Maybe<string>, availableDate?: Maybe<any> }> };
+
 export type MoviesQueryVariables = Exact<{
   category?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -646,6 +653,13 @@ export type EpisodesQueryVariables = Exact<{
 
 export type EpisodesQuery = { __typename?: 'Query', episodes: Array<{ __typename?: 'Episode', id?: Maybe<number>, name?: Maybe<string>, season?: Maybe<number>, episode?: Maybe<number>, stillImage?: Maybe<string>, stillImageThumbnail?: Maybe<string>, watched?: Maybe<boolean>, tmdbDetails?: Maybe<{ __typename?: 'EpisodeTmdbDetails', name?: Maybe<string>, overview?: Maybe<string>, firstAirDate?: Maybe<string> }>, bestRelease?: Maybe<{ __typename?: 'EpisodeRelease', resolution: string }>, tvShow: { __typename?: 'TvShow', id: number, name: string } }> };
 
+export type TvShowPosterQueryVariables = Exact<{
+  tmdbId: Scalars['ID'];
+}>;
+
+
+export type TvShowPosterQuery = { __typename?: 'Query', tvShowPoster: { __typename?: 'TvShowPoster', url: string } };
+
 export type UnwatchTvShowMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -689,6 +703,57 @@ export type EpisodeWatchedMutationVariables = Exact<{
 export type EpisodeWatchedMutation = { __typename?: 'Mutation', episodeWatched: { __typename?: 'Episode', id?: Maybe<number> } };
 
 
+export const CalendarDocument = gql`
+    query Calendar($category: CalendarCategory) {
+  calendar(category: $category) {
+    __typename
+    ... on Movie {
+      id
+      posterImage
+      title
+      availableDate
+    }
+    ... on CalendarEpisode {
+      id
+      firstAired
+      season
+      name
+      title
+      tmdbDetails {
+        id
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useCalendarQuery__
+ *
+ * To run a query within a React component, call `useCalendarQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCalendarQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCalendarQuery({
+ *   variables: {
+ *      category: // value for 'category'
+ *   },
+ * });
+ */
+export function useCalendarQuery(baseOptions?: Apollo.QueryHookOptions<CalendarQuery, CalendarQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CalendarQuery, CalendarQueryVariables>(CalendarDocument, options);
+      }
+export function useCalendarLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CalendarQuery, CalendarQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CalendarQuery, CalendarQueryVariables>(CalendarDocument, options);
+        }
+export type CalendarQueryHookResult = ReturnType<typeof useCalendarQuery>;
+export type CalendarLazyQueryHookResult = ReturnType<typeof useCalendarLazyQuery>;
+export type CalendarQueryResult = Apollo.QueryResult<CalendarQuery, CalendarQueryVariables>;
 export const MoviesDocument = gql`
     query Movies($category: String, $first: Int, $skip: Int, $query: String) {
   movies(first: $first, skip: $skip, category: $category, query: $query) {
@@ -1403,6 +1468,41 @@ export function useEpisodesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<E
 export type EpisodesQueryHookResult = ReturnType<typeof useEpisodesQuery>;
 export type EpisodesLazyQueryHookResult = ReturnType<typeof useEpisodesLazyQuery>;
 export type EpisodesQueryResult = Apollo.QueryResult<EpisodesQuery, EpisodesQueryVariables>;
+export const TvShowPosterDocument = gql`
+    query TvShowPoster($tmdbId: ID!) {
+  tvShowPoster(tmdbId: $tmdbId) {
+    url
+  }
+}
+    `;
+
+/**
+ * __useTvShowPosterQuery__
+ *
+ * To run a query within a React component, call `useTvShowPosterQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTvShowPosterQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTvShowPosterQuery({
+ *   variables: {
+ *      tmdbId: // value for 'tmdbId'
+ *   },
+ * });
+ */
+export function useTvShowPosterQuery(baseOptions: Apollo.QueryHookOptions<TvShowPosterQuery, TvShowPosterQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TvShowPosterQuery, TvShowPosterQueryVariables>(TvShowPosterDocument, options);
+      }
+export function useTvShowPosterLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TvShowPosterQuery, TvShowPosterQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TvShowPosterQuery, TvShowPosterQueryVariables>(TvShowPosterDocument, options);
+        }
+export type TvShowPosterQueryHookResult = ReturnType<typeof useTvShowPosterQuery>;
+export type TvShowPosterLazyQueryHookResult = ReturnType<typeof useTvShowPosterLazyQuery>;
+export type TvShowPosterQueryResult = Apollo.QueryResult<TvShowPosterQuery, TvShowPosterQueryVariables>;
 export const UnwatchTvShowDocument = gql`
     mutation UnwatchTvShow($id: ID!) {
   unwatchTvShow(id: $id) {

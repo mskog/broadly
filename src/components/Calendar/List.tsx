@@ -6,13 +6,28 @@ import { DateTime } from "luxon";
 
 import { Link } from "react-router-dom";
 
+import { CalendarEpisode, Movie } from "generated/graphql";
+
 import MoviePoster from "components/Movies/Poster";
 import TvShowPoster from "./TvShowPoster";
 
-export default function List({ items }: { items: Array<any> }) {
-  const groupedItems = groupBy(items, (tvShow) =>
-    DateTime.fromISO(tvShow.firstAired || tvShow.availableDate)
-  );
+type ListProps = {
+  items: (
+    | Pick<CalendarEpisode, "__typename" | "id" | "tmdbDetails" | "firstAired">
+    | Pick<Movie, "__typename" | "id" | "posterImage" | "availableDate">
+  )[];
+};
+
+const List = ({ items }: ListProps): JSX.Element => {
+  const groupedItems = groupBy(items, (tvShow) => {
+    let date;
+    if (tvShow.__typename === "CalendarEpisode") {
+      date = DateTime.fromISO(tvShow.firstAired);
+    } else if (tvShow.__typename === "Movie") {
+      date = DateTime.fromISO(tvShow.availableDate);
+    }
+    return date;
+  });
 
   const showComponents = Object.entries(groupedItems).map(([date, things]) => {
     const dateTime = DateTime.fromISO(date);
@@ -33,10 +48,12 @@ export default function List({ items }: { items: Array<any> }) {
             <MoviePoster src={item.posterImage} />
           </Link>
         );
-      } else {
+      } else if (item.__typename === "CalendarEpisode") {
         component = (
           <Link to={`/tv_shows/${item.id}`}>
-            <TvShowPoster tmdbId={item.tmdbDetails.id} />
+            {item.tmdbDetails && item.tmdbDetails.id && (
+              <TvShowPoster tmdbId={item.tmdbDetails.id.toString()} />
+            )}
           </Link>
         );
       }
@@ -55,4 +72,6 @@ export default function List({ items }: { items: Array<any> }) {
   return (
     <div className="flex flex-col items-center mt-20">{showComponents}</div>
   );
-}
+};
+
+export default List;

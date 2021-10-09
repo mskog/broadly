@@ -136,6 +136,12 @@ query Episodes($first: Int, $skip: Int, $category: EpisodeCategory) {
   }
 }
 
+query TvShowPoster($tmdbId: ID!) {
+  tvShowPoster(tmdbId: $tmdbId) {
+    url
+  }
+}
+
 mutation UnwatchTvShow($id: ID!) {
   unwatchTvShow(id: $id) {
     id

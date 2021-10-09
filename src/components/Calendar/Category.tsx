@@ -3,13 +3,13 @@ import { capitalize } from "lodash";
 
 import { Link } from "react-router-dom";
 
-export default function Category({
+const Category = ({
   name,
   active
 }: {
   name: string;
   active: boolean;
-}) {
+}): JSX.Element => {
   let classNames =
     "flex-1 text-base font-bold text-center cursor-pointer hover:text-white pb-2";
 
@@ -26,4 +26,6 @@ export default function Category({
       </Link>
     </li>
   );
-}
+};
+
+export default Category;

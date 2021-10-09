@@ -1,46 +1,23 @@
 import React from "react";
 
-import { useQuery, gql } from "@apollo/client";
-
 import Loading from "components/shared/LoadingFull";
+
+import { useCalendarQuery } from "generated/graphql";
 
 import List from "./List";
 import Categories from "./Categories";
 
-const GET_CALENDAR = gql`
-  query Calendar($category: CalendarCategory) {
-    calendar(category: $category) {
-      __typename
-      ... on Movie {
-        id
-        posterImage
-        title
-        availableDate
-      }
-
-      ... on CalendarEpisode {
-        id
-        firstAired
-        season
-        name
-        title
-        tmdbDetails {
-          id
-        }
-      }
-    }
-  }
-`;
-
-export default function Calendar(props: any) {
+const Calendar = (props: any): JSX.Element => {
   const {
     match: {
       params: { category = "ALL" }
     }
   } = props;
 
-  const { data } = useQuery(GET_CALENDAR, {
-    variables: { category: category.toUpperCase() },
+  const { data } = useCalendarQuery({
+    variables: {
+      category: category.toUpperCase()
+    },
     fetchPolicy: "cache-and-network"
   });
 
@@ -57,4 +34,6 @@ export default function Calendar(props: any) {
       {mainContent}
     </div>
   );
-}
+};
+
+export default Calendar;
