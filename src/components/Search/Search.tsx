@@ -8,7 +8,16 @@ import Categories from "./Categories";
 import MovieResults from "./movies/Results";
 import TvShowResults from "./tv_shows/Results";
 
-export default function Search(props: any) {
+type SearchProps = {
+  history: any;
+  pathname: string;
+  location: { search: string };
+  match: {
+    params: { category: string };
+  };
+};
+
+export default function Search(props: SearchProps) {
   const {
     history,
     pathname,
@@ -21,7 +30,7 @@ export default function Search(props: any) {
   const { query } = queryString.parse(search);
   const parsedQuery = Array.isArray(query) ? query[0] : query || "";
 
-  let mainContent;
+  let mainContent: JSX.Element = <></>;
   if (query) {
     let categoryComponent;
     if (category === "movies") {

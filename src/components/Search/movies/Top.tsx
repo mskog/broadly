@@ -1,19 +1,11 @@
 import React from "react";
 
-import { useQuery, gql } from "@apollo/client";
+import { MovieSearch, useMoviePosterQuery } from "generated/graphql";
 
 import { cdnImage } from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
-
-const MOVIE_POSTER = gql`
-  query MoviePoster($tmdbId: ID!) {
-    moviePoster(tmdbId: $tmdbId) {
-      url
-    }
-  }
-`;
 
 function image({
   loading,
@@ -22,9 +14,9 @@ function image({
 }: {
   loading: boolean;
   error?: any;
-  data: any;
+  data?: { moviePoster: { url: string } };
 }) {
-  if (loading || error) {
+  if (loading || error || !data) {
     return "https://image.tmdb.org/t/p/w1280/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
   }
   return data.moviePoster.url;
@@ -36,13 +28,16 @@ function backgroundStyle(url: string) {
     backgroundSize: "cover"
   };
 }
+type TopProps = {
+  movie: Pick<MovieSearch, "title" | "tmdbId" | "year">;
+};
 
 // TODO: Use lazy loading and fancy placeholders
-export default function Top({ movie }: { movie: any }) {
+export default function Top({ movie }: TopProps) {
   const { tmdbId, title, year } = movie;
 
   const url = image(
-    useQuery(MOVIE_POSTER, {
+    useMoviePosterQuery({
       variables: { tmdbId }
     })
   );
@@ -60,7 +55,7 @@ export default function Top({ movie }: { movie: any }) {
           </h1>
           <div className="md:pt-10">
             <Level>
-              <LevelItem title="Year" value={year} />
+              <LevelItem title="Year" value={year?.toString()} />
             </Level>
           </div>
         </div>

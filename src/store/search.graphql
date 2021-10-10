@@ -1,0 +1,44 @@
+query MovieSearch($query: String!) {
+  movieSearch(query: $query) {
+    title
+    year
+    imdbId
+    imdbUrl
+    downloaded
+    onWaitlist
+    existingMovieId
+    overview
+    tmdbId
+  }
+}
+
+query MovieSearchResult($imdbId: String!) {
+  movieSearchResult(imdbId: $imdbId) {
+    title
+    year
+    imdbId
+    imdbUrl
+    downloaded
+    overview
+    tmdbId
+    hasKillerRelease
+    hasAcceptableRelease
+    onWaitlist
+    bestRelease {
+      codec
+      container
+      quality
+      releaseName
+      resolution
+      size
+      source
+      downloadUrl
+    }
+  }
+}
+
+query MoviePoster($tmdbId: ID!) {
+  moviePoster(tmdbId: $tmdbId) {
+    url
+  }
+}

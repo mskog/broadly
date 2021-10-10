@@ -6,17 +6,29 @@ import { truncate } from "lodash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faClock } from "@fortawesome/free-solid-svg-icons";
 
-import { useMovieSummaryQuery } from "store/movies";
+import { MovieSearch, useMovieSummaryQuery } from "generated/graphql";
 
 import Poster from "./Poster";
 import ResultDetails from "./ResultDetails";
 
-export default function Result({ result }: { result: any }) {
+type ResultProps = {
+  result: Pick<
+    MovieSearch,
+    | "imdbId"
+    | "tmdbId"
+    | "title"
+    | "downloaded"
+    | "onWaitlist"
+    | "existingMovieId"
+  >;
+};
+
+export default function Result({ result }: ResultProps) {
   const { imdbId, tmdbId, title, downloaded, onWaitlist, existingMovieId } =
     result;
 
   const { data } = useMovieSummaryQuery({
-    imdbId
+    variables: { imdbId }
   });
 
   const movieUrl =
@@ -40,9 +52,9 @@ export default function Result({ result }: { result: any }) {
               <span>{truncate(title, { length: 50 })}</span>
             </h2>
           </Link>
-          {data && (
+          {data && data.movieSummary.rating && data.movieSummary.runtime && (
             <ResultDetails
-              rating={data.movieSummary.rating}
+              rating={parseInt(data.movieSummary.rating, 10)}
               released={data.movieSummary.released}
               runtime={data.movieSummary.runtime}
             />

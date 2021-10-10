@@ -1,19 +1,11 @@
 import React from "react";
 
-import { useQuery, gql } from "@apollo/client";
+import { useMoviePosterQuery } from "generated/graphql";
 
 import { thumbnail } from "utilities";
 
 const IMAGE_PLACEHOLDER =
   "https://image.tmdb.org/t/p/w300/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
-
-const MOVIE_POSTER = gql`
-  query MoviePoster($tmdbId: ID!) {
-    moviePoster(tmdbId: $tmdbId) {
-      url
-    }
-  }
-`;
 
 function image({
   loading,
@@ -22,9 +14,9 @@ function image({
 }: {
   loading: boolean;
   error?: any;
-  data: any;
+  data?: { moviePoster: { url: string } };
 }) {
-  if (loading || error) {
+  if (loading || error || !data) {
     return IMAGE_PLACEHOLDER;
   }
   return data.moviePoster.url;
@@ -33,7 +25,7 @@ function image({
 // TODO: Use lazy loading and fancy placeholders
 export default function Poster({ tmdbId }: { tmdbId: string }) {
   const url = image(
-    useQuery(MOVIE_POSTER, {
+    useMoviePosterQuery({
       variables: { tmdbId },
       fetchPolicy: "cache-first"
     })

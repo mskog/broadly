@@ -1,13 +1,19 @@
 import React from "react";
 
-import { useMovieSearchResultQuery } from "store/search";
+import { useMovieSearchResultQuery } from "generated/graphql";
 
 import Loading from "components/shared/LoadingFull";
 
 import Top from "./Top";
 import Release from "./Release";
 
-export default function Details(props: any) {
+type DetailsProps = {
+  match: {
+    params: { imdbId: string };
+  };
+};
+
+export default function Details(props: DetailsProps): JSX.Element {
   const {
     match: {
       params: { imdbId }
@@ -15,7 +21,7 @@ export default function Details(props: any) {
   } = props;
 
   const { data } = useMovieSearchResultQuery({
-    imdbId
+    variables: { imdbId }
   });
 
   if (!data) {

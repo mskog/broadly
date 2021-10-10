@@ -2,7 +2,7 @@ import React from "react";
 import {
   useAddMovieToWaitlistMutation,
   useDownloadMovieMutation
-} from "store/movies";
+} from "generated/graphql";
 import { useHistory } from "react-router-dom";
 
 import LoaderButton from "components/shared/LoaderButton";
@@ -25,14 +25,14 @@ export default function Release({
   const history = useHistory();
 
   const [addMovieToWaitlist] = useAddMovieToWaitlistMutation({
-    imdbId,
+    variables: { imdbId },
     update: () => {
       history.goBack();
     }
   });
 
   const [downloadMovie] = useDownloadMovieMutation({
-    imdbId,
+    variables: { imdbId },
     update: () => {
       history.goBack();
     }

@@ -144,13 +144,13 @@ export type MovieSearch = {
   existingMovieId?: Maybe<Scalars['Int']>;
   hasAcceptableRelease: Scalars['Boolean'];
   hasKillerRelease: Scalars['Boolean'];
-  imdbId?: Maybe<Scalars['String']>;
+  imdbId: Scalars['String'];
   imdbUrl?: Maybe<Scalars['String']>;
   onWaitlist: Scalars['Boolean'];
   overview?: Maybe<Scalars['String']>;
   releases?: Maybe<Array<MovieRelease>>;
-  title?: Maybe<Scalars['String']>;
-  tmdbId?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  tmdbId: Scalars['String'];
   year?: Maybe<Scalars['Int']>;
 };
 
@@ -612,6 +612,27 @@ export type NewsQueryVariables = Exact<{
 
 
 export type NewsQuery = { __typename?: 'Query', news: Array<{ __typename?: 'NewsItem', title: string, url: string, metadata: { __typename?: 'NewsItemMetadata', image?: Maybe<string>, description?: Maybe<string> }, newsworthy?: Maybe<{ __typename?: 'Movie' } | { __typename?: 'TvShow', id: number, name: string }> }> };
+
+export type MovieSearchQueryVariables = Exact<{
+  query: Scalars['String'];
+}>;
+
+
+export type MovieSearchQuery = { __typename?: 'Query', movieSearch: Array<{ __typename?: 'MovieSearch', title: string, year?: Maybe<number>, imdbId: string, imdbUrl?: Maybe<string>, downloaded: boolean, onWaitlist: boolean, existingMovieId?: Maybe<number>, overview?: Maybe<string>, tmdbId: string }> };
+
+export type MovieSearchResultQueryVariables = Exact<{
+  imdbId: Scalars['String'];
+}>;
+
+
+export type MovieSearchResultQuery = { __typename?: 'Query', movieSearchResult: { __typename?: 'MovieSearch', title: string, year?: Maybe<number>, imdbId: string, imdbUrl?: Maybe<string>, downloaded: boolean, overview?: Maybe<string>, tmdbId: string, hasKillerRelease: boolean, hasAcceptableRelease: boolean, onWaitlist: boolean, bestRelease?: Maybe<{ __typename?: 'MovieRelease', codec: string, container: string, quality: string, releaseName: string, resolution: string, size: number, source: string, downloadUrl?: Maybe<string> }> } };
+
+export type MoviePosterQueryVariables = Exact<{
+  tmdbId: Scalars['ID'];
+}>;
+
+
+export type MoviePosterQuery = { __typename?: 'Query', moviePoster: { __typename?: 'MoviePoster', url: string } };
 
 export type TvShowsQueryVariables = Exact<{
   category?: Maybe<Scalars['String']>;
@@ -1183,6 +1204,138 @@ export function useNewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<NewsQ
 export type NewsQueryHookResult = ReturnType<typeof useNewsQuery>;
 export type NewsLazyQueryHookResult = ReturnType<typeof useNewsLazyQuery>;
 export type NewsQueryResult = Apollo.QueryResult<NewsQuery, NewsQueryVariables>;
+export const MovieSearchDocument = gql`
+    query MovieSearch($query: String!) {
+  movieSearch(query: $query) {
+    title
+    year
+    imdbId
+    imdbUrl
+    downloaded
+    onWaitlist
+    existingMovieId
+    overview
+    tmdbId
+  }
+}
+    `;
+
+/**
+ * __useMovieSearchQuery__
+ *
+ * To run a query within a React component, call `useMovieSearchQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMovieSearchQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMovieSearchQuery({
+ *   variables: {
+ *      query: // value for 'query'
+ *   },
+ * });
+ */
+export function useMovieSearchQuery(baseOptions: Apollo.QueryHookOptions<MovieSearchQuery, MovieSearchQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MovieSearchQuery, MovieSearchQueryVariables>(MovieSearchDocument, options);
+      }
+export function useMovieSearchLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MovieSearchQuery, MovieSearchQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MovieSearchQuery, MovieSearchQueryVariables>(MovieSearchDocument, options);
+        }
+export type MovieSearchQueryHookResult = ReturnType<typeof useMovieSearchQuery>;
+export type MovieSearchLazyQueryHookResult = ReturnType<typeof useMovieSearchLazyQuery>;
+export type MovieSearchQueryResult = Apollo.QueryResult<MovieSearchQuery, MovieSearchQueryVariables>;
+export const MovieSearchResultDocument = gql`
+    query MovieSearchResult($imdbId: String!) {
+  movieSearchResult(imdbId: $imdbId) {
+    title
+    year
+    imdbId
+    imdbUrl
+    downloaded
+    overview
+    tmdbId
+    hasKillerRelease
+    hasAcceptableRelease
+    onWaitlist
+    bestRelease {
+      codec
+      container
+      quality
+      releaseName
+      resolution
+      size
+      source
+      downloadUrl
+    }
+  }
+}
+    `;
+
+/**
+ * __useMovieSearchResultQuery__
+ *
+ * To run a query within a React component, call `useMovieSearchResultQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMovieSearchResultQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMovieSearchResultQuery({
+ *   variables: {
+ *      imdbId: // value for 'imdbId'
+ *   },
+ * });
+ */
+export function useMovieSearchResultQuery(baseOptions: Apollo.QueryHookOptions<MovieSearchResultQuery, MovieSearchResultQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MovieSearchResultQuery, MovieSearchResultQueryVariables>(MovieSearchResultDocument, options);
+      }
+export function useMovieSearchResultLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MovieSearchResultQuery, MovieSearchResultQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MovieSearchResultQuery, MovieSearchResultQueryVariables>(MovieSearchResultDocument, options);
+        }
+export type MovieSearchResultQueryHookResult = ReturnType<typeof useMovieSearchResultQuery>;
+export type MovieSearchResultLazyQueryHookResult = ReturnType<typeof useMovieSearchResultLazyQuery>;
+export type MovieSearchResultQueryResult = Apollo.QueryResult<MovieSearchResultQuery, MovieSearchResultQueryVariables>;
+export const MoviePosterDocument = gql`
+    query MoviePoster($tmdbId: ID!) {
+  moviePoster(tmdbId: $tmdbId) {
+    url
+  }
+}
+    `;
+
+/**
+ * __useMoviePosterQuery__
+ *
+ * To run a query within a React component, call `useMoviePosterQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMoviePosterQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMoviePosterQuery({
+ *   variables: {
+ *      tmdbId: // value for 'tmdbId'
+ *   },
+ * });
+ */
+export function useMoviePosterQuery(baseOptions: Apollo.QueryHookOptions<MoviePosterQuery, MoviePosterQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MoviePosterQuery, MoviePosterQueryVariables>(MoviePosterDocument, options);
+      }
+export function useMoviePosterLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoviePosterQuery, MoviePosterQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MoviePosterQuery, MoviePosterQueryVariables>(MoviePosterDocument, options);
+        }
+export type MoviePosterQueryHookResult = ReturnType<typeof useMoviePosterQuery>;
+export type MoviePosterLazyQueryHookResult = ReturnType<typeof useMoviePosterLazyQuery>;
+export type MoviePosterQueryResult = Apollo.QueryResult<MoviePosterQuery, MoviePosterQueryVariables>;
 export const TvShowsDocument = gql`
     query TvShows($category: String, $first: Int, $skip: Int, $query: String) {
   tvShows(category: $category, first: $first, skip: $skip, query: $query) {
