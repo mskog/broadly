@@ -1,19 +1,11 @@
 import React from "react";
 
-import { useQuery, gql } from "@apollo/client";
+import { useTvShowPosterQuery } from "generated/graphql";
 
 import { thumbnail } from "utilities";
 
 const IMAGE_PLACEHOLDER =
   "https://image.tmdb.org/t/p/w300/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
-
-const TV_SHOW_POSTER = gql`
-  query TvShowPoster($tmdbId: ID!) {
-    tvShowPoster(tmdbId: $tmdbId) {
-      url
-    }
-  }
-`;
 
 function image({
   loading,
@@ -33,7 +25,7 @@ function image({
 // TODO: Use lazy loading and fancy placeholders
 export default function Poster({ tmdbId }: { tmdbId: string }) {
   const url = image(
-    useQuery(TV_SHOW_POSTER, {
+    useTvShowPosterQuery({
       variables: { tmdbId },
       fetchPolicy: "cache-first"
     })

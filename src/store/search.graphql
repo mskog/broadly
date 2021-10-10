@@ -42,3 +42,27 @@ query MoviePoster($tmdbId: ID!) {
     url
   }
 }
+
+query TvShowSearch($query: String!) {
+  tvShowSearch(query: $query) {
+    title
+    year
+    imdbId
+    imdbUrl
+    overview
+    tmdbId
+    exists
+    existingTvShowId
+  }
+}
+
+query TvShowSearchResult($imdbId: String!) {
+  tvShowSearchResult(imdbId: $imdbId) {
+    title
+    year
+    imdbId
+    imdbUrl
+    overview
+    tmdbId
+  }
+}

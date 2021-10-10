@@ -7,17 +7,24 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { truncate } from "lodash";
 
-import { useTvShowSummaryQuery } from "store/tv_shows";
+import { TvShowSearch, useTvShowSummaryQuery } from "generated/graphql";
 
 import Poster from "components/Search/tv_shows/Poster";
 
 import ResultDetails from "./ResultDetails";
 
-export default function Result({ result }: { result: any }) {
+export default function Result({
+  result
+}: {
+  result: Pick<
+    TvShowSearch,
+    "imdbId" | "tmdbId" | "title" | "exists" | "existingTvShowId"
+  >;
+}) {
   const { imdbId, tmdbId, title, exists, existingTvShowId } = result;
 
   const { data } = useTvShowSummaryQuery({
-    imdbId
+    variables: { imdbId }
   });
 
   const tvShowUrl = exists

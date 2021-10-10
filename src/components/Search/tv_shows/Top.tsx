@@ -1,20 +1,12 @@
 import React from "react";
 
-import { useQuery, gql } from "@apollo/client";
+import { useTvShowPosterQuery, TvShowSearch } from "generated/graphql";
 
 import { cdnImage } from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
 import Ratings from "components/shared/Ratings";
-
-const TV_SHOW_POSTER = gql`
-  query TvShowPoster($tmdbId: ID!) {
-    tvShowPoster(tmdbId: $tmdbId) {
-      url
-    }
-  }
-`;
 
 function image({
   loading,
@@ -39,20 +31,19 @@ function backgroundStyle(url: string) {
 }
 
 type Props = {
-  tvShow: any;
+  tvShow: Pick<TvShowSearch, "tmdbId" | "title" | "details">;
 };
 
 // TODO: Use lazy loading and fancy placeholders
 // TODO: There are more details to show if we want
 export default function Top({ tvShow }: Props) {
-  const {
-    tmdbId,
-    title,
-    details: { firstAired, runtime, airedEpisodes, status, rating, genres }
-  } = tvShow;
+  const { tmdbId, title, details } = tvShow;
+
+  const { firstAired, runtime, airedEpisodes, status, rating, genres } =
+    details || {};
 
   const url = image(
-    useQuery(TV_SHOW_POSTER, {
+    useTvShowPosterQuery({
       variables: { tmdbId }
     })
   );
@@ -67,14 +58,19 @@ export default function Top({ tvShow }: Props) {
         <div className="flex flex-col justify-end h-full pb-10">
           <h1 className="text-5xl text-center text-gray-200 md:text-left">
             {title}
-            <Ratings score={rating * 10} />
+            {rating && <Ratings score={rating * 10} />}
           </h1>
           <div className="capitalize md:pt-10">
             <Level>
               <LevelItem title="Status" value={status} />
               <LevelItem title="First Aired" value={firstAired} />
               <LevelItem title="Runtime" value={`${runtime}m`} />
-              <LevelItem title="Aired episodes" value={airedEpisodes} />
+              {airedEpisodes && (
+                <LevelItem
+                  title="Aired episodes"
+                  value={airedEpisodes.toString()}
+                />
+              )}
             </Level>
           </div>
           {genres && (

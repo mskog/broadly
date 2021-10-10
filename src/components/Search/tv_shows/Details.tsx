@@ -7,7 +7,7 @@ import { useQuery, gql } from "@apollo/client";
 import {
   useCollectTvShowMutation,
   useSampleTvShowMutation
-} from "store/tv_shows";
+} from "generated/graphql";
 
 import Loading from "components/shared/LoadingFull";
 import LoaderButton from "components/shared/LoaderButton";
@@ -33,7 +33,15 @@ const GET_TV_SHOW_DETAILS = gql`
   }
 `;
 
-export default function Details(props: any) {
+type DetailsProps = {
+  match: {
+    params: {
+      imdbId: string;
+    };
+  };
+};
+
+export default function Details(props: DetailsProps) {
   const {
     match: {
       params: { imdbId }
@@ -47,14 +55,14 @@ export default function Details(props: any) {
   });
 
   const [sampleTvShow] = useSampleTvShowMutation({
-    id: imdbId,
+    variables: { id: imdbId },
     update: () => {
       history.goBack();
     }
   });
 
   const [collectTvShow] = useCollectTvShowMutation({
-    id: imdbId,
+    variables: { id: imdbId },
     update: () => {
       history.goBack();
     }

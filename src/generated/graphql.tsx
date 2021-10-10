@@ -492,11 +492,11 @@ export type TvShowSearch = {
   details?: Maybe<TvShowDetails>;
   existingTvShowId?: Maybe<Scalars['Int']>;
   exists?: Maybe<Scalars['Boolean']>;
-  imdbId?: Maybe<Scalars['String']>;
+  imdbId: Scalars['String'];
   imdbUrl?: Maybe<Scalars['String']>;
   overview?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  tmdbId?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  tmdbId: Scalars['String'];
   tvdbId?: Maybe<Scalars['String']>;
   year?: Maybe<Scalars['Int']>;
 };
@@ -633,6 +633,20 @@ export type MoviePosterQueryVariables = Exact<{
 
 
 export type MoviePosterQuery = { __typename?: 'Query', moviePoster: { __typename?: 'MoviePoster', url: string } };
+
+export type TvShowSearchQueryVariables = Exact<{
+  query: Scalars['String'];
+}>;
+
+
+export type TvShowSearchQuery = { __typename?: 'Query', tvShowSearch: Array<{ __typename?: 'TvShowSearch', title: string, year?: Maybe<number>, imdbId: string, imdbUrl?: Maybe<string>, overview?: Maybe<string>, tmdbId: string, exists?: Maybe<boolean>, existingTvShowId?: Maybe<number> }> };
+
+export type TvShowSearchResultQueryVariables = Exact<{
+  imdbId: Scalars['String'];
+}>;
+
+
+export type TvShowSearchResultQuery = { __typename?: 'Query', tvShowSearchResult: { __typename?: 'TvShowSearch', title: string, year?: Maybe<number>, imdbId: string, imdbUrl?: Maybe<string>, overview?: Maybe<string>, tmdbId: string } };
 
 export type TvShowsQueryVariables = Exact<{
   category?: Maybe<Scalars['String']>;
@@ -1336,6 +1350,88 @@ export function useMoviePosterLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type MoviePosterQueryHookResult = ReturnType<typeof useMoviePosterQuery>;
 export type MoviePosterLazyQueryHookResult = ReturnType<typeof useMoviePosterLazyQuery>;
 export type MoviePosterQueryResult = Apollo.QueryResult<MoviePosterQuery, MoviePosterQueryVariables>;
+export const TvShowSearchDocument = gql`
+    query TvShowSearch($query: String!) {
+  tvShowSearch(query: $query) {
+    title
+    year
+    imdbId
+    imdbUrl
+    overview
+    tmdbId
+    exists
+    existingTvShowId
+  }
+}
+    `;
+
+/**
+ * __useTvShowSearchQuery__
+ *
+ * To run a query within a React component, call `useTvShowSearchQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTvShowSearchQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTvShowSearchQuery({
+ *   variables: {
+ *      query: // value for 'query'
+ *   },
+ * });
+ */
+export function useTvShowSearchQuery(baseOptions: Apollo.QueryHookOptions<TvShowSearchQuery, TvShowSearchQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TvShowSearchQuery, TvShowSearchQueryVariables>(TvShowSearchDocument, options);
+      }
+export function useTvShowSearchLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TvShowSearchQuery, TvShowSearchQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TvShowSearchQuery, TvShowSearchQueryVariables>(TvShowSearchDocument, options);
+        }
+export type TvShowSearchQueryHookResult = ReturnType<typeof useTvShowSearchQuery>;
+export type TvShowSearchLazyQueryHookResult = ReturnType<typeof useTvShowSearchLazyQuery>;
+export type TvShowSearchQueryResult = Apollo.QueryResult<TvShowSearchQuery, TvShowSearchQueryVariables>;
+export const TvShowSearchResultDocument = gql`
+    query TvShowSearchResult($imdbId: String!) {
+  tvShowSearchResult(imdbId: $imdbId) {
+    title
+    year
+    imdbId
+    imdbUrl
+    overview
+    tmdbId
+  }
+}
+    `;
+
+/**
+ * __useTvShowSearchResultQuery__
+ *
+ * To run a query within a React component, call `useTvShowSearchResultQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTvShowSearchResultQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTvShowSearchResultQuery({
+ *   variables: {
+ *      imdbId: // value for 'imdbId'
+ *   },
+ * });
+ */
+export function useTvShowSearchResultQuery(baseOptions: Apollo.QueryHookOptions<TvShowSearchResultQuery, TvShowSearchResultQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TvShowSearchResultQuery, TvShowSearchResultQueryVariables>(TvShowSearchResultDocument, options);
+      }
+export function useTvShowSearchResultLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TvShowSearchResultQuery, TvShowSearchResultQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TvShowSearchResultQuery, TvShowSearchResultQueryVariables>(TvShowSearchResultDocument, options);
+        }
+export type TvShowSearchResultQueryHookResult = ReturnType<typeof useTvShowSearchResultQuery>;
+export type TvShowSearchResultLazyQueryHookResult = ReturnType<typeof useTvShowSearchResultLazyQuery>;
+export type TvShowSearchResultQueryResult = Apollo.QueryResult<TvShowSearchResultQuery, TvShowSearchResultQueryVariables>;
 export const TvShowsDocument = gql`
     query TvShows($category: String, $first: Int, $skip: Int, $query: String) {
   tvShows(category: $category, first: $first, skip: $skip, query: $query) {
