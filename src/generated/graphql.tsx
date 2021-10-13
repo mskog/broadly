@@ -492,11 +492,11 @@ export type TvShowSearch = {
   details?: Maybe<TvShowDetails>;
   existingTvShowId?: Maybe<Scalars['Int']>;
   exists?: Maybe<Scalars['Boolean']>;
-  imdbId: Scalars['String'];
+  imdbId?: Maybe<Scalars['String']>;
   imdbUrl?: Maybe<Scalars['String']>;
   overview?: Maybe<Scalars['String']>;
   title: Scalars['String'];
-  tmdbId: Scalars['String'];
+  tmdbId?: Maybe<Scalars['String']>;
   tvdbId?: Maybe<Scalars['String']>;
   year?: Maybe<Scalars['Int']>;
 };
@@ -639,14 +639,14 @@ export type TvShowSearchQueryVariables = Exact<{
 }>;
 
 
-export type TvShowSearchQuery = { __typename?: 'Query', tvShowSearch: Array<{ __typename?: 'TvShowSearch', title: string, year?: Maybe<number>, imdbId: string, imdbUrl?: Maybe<string>, overview?: Maybe<string>, tmdbId: string, exists?: Maybe<boolean>, existingTvShowId?: Maybe<number> }> };
+export type TvShowSearchQuery = { __typename?: 'Query', tvShowSearch: Array<{ __typename?: 'TvShowSearch', title: string, year?: Maybe<number>, imdbId?: Maybe<string>, imdbUrl?: Maybe<string>, overview?: Maybe<string>, tmdbId?: Maybe<string>, exists?: Maybe<boolean>, existingTvShowId?: Maybe<number> }> };
 
 export type TvShowSearchResultQueryVariables = Exact<{
   imdbId: Scalars['String'];
 }>;
 
 
-export type TvShowSearchResultQuery = { __typename?: 'Query', tvShowSearchResult: { __typename?: 'TvShowSearch', title: string, year?: Maybe<number>, imdbId: string, imdbUrl?: Maybe<string>, overview?: Maybe<string>, tmdbId: string } };
+export type TvShowSearchResultQuery = { __typename?: 'Query', tvShowSearchResult: { __typename?: 'TvShowSearch', title: string, year?: Maybe<number>, imdbId?: Maybe<string>, imdbUrl?: Maybe<string>, overview?: Maybe<string>, tmdbId?: Maybe<string> } };
 
 export type TvShowsQueryVariables = Exact<{
   category?: Maybe<Scalars['String']>;

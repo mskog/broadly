@@ -42,11 +42,14 @@ export default function Top({ tvShow }: Props) {
   const { firstAired, runtime, airedEpisodes, status, rating, genres } =
     details || {};
 
-  const url = image(
-    useTvShowPosterQuery({
-      variables: { tmdbId }
-    })
-  );
+  let url: string = "";
+  if (tmdbId) {
+    url = image(
+      useTvShowPosterQuery({
+        variables: { tmdbId }
+      })
+    );
+  }
 
   return (
     <div>

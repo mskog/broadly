@@ -23,6 +23,10 @@ export default function Result({
 }) {
   const { imdbId, tmdbId, title, exists, existingTvShowId } = result;
 
+  if (!imdbId || !tmdbId) {
+    return <></>;
+  }
+
   const { data } = useTvShowSummaryQuery({
     variables: { imdbId }
   });
