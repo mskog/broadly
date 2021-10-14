@@ -5,7 +5,7 @@ import { useMovieSearchQuery, MovieSearch } from "generated/graphql";
 import Loading from "components/shared/LoadingFull";
 import Result from "./Result";
 
-export default function Results({ query }: { query: string }) {
+const Results = ({ query }: { query: string }): JSX.Element => {
   const { data } = useMovieSearchQuery({
     variables: { query }
   });
@@ -39,4 +39,6 @@ export default function Results({ query }: { query: string }) {
   }
 
   return <div className="flex-wrap mt-10 -mx-3 md:flex">{results}</div>;
-}
+};
+
+export default Results;

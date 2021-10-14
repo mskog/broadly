@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { uniq, sortBy, last } from "lodash";
 
-import { useTvShowQuery } from "generated/graphql";
+import { useTvShowQuery, Episode } from "generated/graphql";
 
 import Loading from "components/shared/LoadingFull";
 import Top from "./Top";
@@ -16,14 +16,14 @@ type TvShowProps = {
   };
 };
 
-function TvShow(props: TvShowProps) {
+const TvShow = (props: TvShowProps): JSX.Element => {
   const {
     match: {
       params: { id }
     }
   } = props;
 
-  const [selectedSeason, setSelectedSeason] = useState();
+  const [selectedSeason, setSelectedSeason] = useState(0);
 
   const { data } = useTvShowQuery({
     fetchPolicy: "cache-and-network",
@@ -37,11 +37,16 @@ function TvShow(props: TvShowProps) {
   const episodes = data.tvShow.episodes || [];
 
   const seasonNumbers = sortBy(
-    uniq(episodes.map((episode: any) => parseInt(episode.season, 10)))
+    uniq(
+      episodes.map((episode: Pick<Episode, "season">) =>
+        episode?.season ? episode.season : 0
+      )
+    )
   );
 
   const selectedEpisodes = episodes.filter(
-    (episode: any) => episode.season === (selectedSeason || last(seasonNumbers))
+    (episode: Pick<Episode, "season">) =>
+      episode.season === (selectedSeason || last(seasonNumbers))
   );
 
   return (
@@ -70,6 +75,6 @@ function TvShow(props: TvShowProps) {
       </div>
     </div>
   );
-}
+};
 
 export default TvShow;

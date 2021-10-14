@@ -25,7 +25,7 @@ type ListProps = {
   movies: Array<MovieProps>;
 };
 
-export default function List({ loadMore, movies }: ListProps) {
+const List = ({ loadMore, movies }: ListProps): JSX.Element => {
   const moviesList = movies.map((movie) => (
     <div key={movie.id} className="px-3 mb-10 md:w-full lg:w-1/2">
       <Movie movie={movie} />
@@ -49,4 +49,6 @@ export default function List({ loadMore, movies }: ListProps) {
       </InfiniteScroll>
     </div>
   );
-}
+};
+
+export default List;

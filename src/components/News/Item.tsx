@@ -7,7 +7,7 @@ import { truncate } from "lodash";
 
 type ItemProps = Pick<NewsItem, "title" | "url" | "metadata" | "newsworthy">;
 
-export default function Item({ title, url, metadata, newsworthy }: ItemProps) {
+const Item = ({ title, url, metadata, newsworthy }: ItemProps): JSX.Element => {
   const { image, description } = metadata || {};
 
   const thumbnail = `https://thumbs.mskog.com/100x100/smart/${image}`;
@@ -46,4 +46,6 @@ export default function Item({ title, url, metadata, newsworthy }: ItemProps) {
       </div>
     </li>
   );
-}
+};
+
+export default Item;

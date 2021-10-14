@@ -7,9 +7,6 @@ import Categories from "./Categories";
 import List from "./List";
 
 type TvShowsProps = {
-  location: {
-    search: any;
-  };
   match: {
     params: {
       category: string;
@@ -17,7 +14,7 @@ type TvShowsProps = {
   };
 };
 
-export default function TvShows(props: TvShowsProps) {
+const TvShows = (props: TvShowsProps): JSX.Element => {
   const {
     match: {
       params: { category }
@@ -65,4 +62,6 @@ export default function TvShows(props: TvShowsProps) {
       {mainContent}
     </div>
   );
-}
+};
+
+export default TvShows;

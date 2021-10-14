@@ -1,27 +1,27 @@
 import React, { useState } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-export default function SearchBox({
+const SearchBox = ({
   pathname,
   history,
   query,
   placeholder
 }: {
   pathname: string;
-  history: any;
   query: string;
   placeholder: string;
-}) {
+} & Pick<RouteComponentProps, "history">): JSX.Element => {
   const [text, setText] = useState(query || "");
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setText(event.target.value);
+    setText(event.currentTarget.value);
     history.replace({ pathname, search: `?query=${text}` });
   };
 
-  const clearSearch = (event: any) => {
+  const clearSearch = (event: React.FormEvent) => {
     event.preventDefault();
     setText("");
     history.replace({ pathname, search: `` });
@@ -57,4 +57,6 @@ export default function SearchBox({
       )}
     </div>
   );
-}
+};
+
+export default SearchBox;

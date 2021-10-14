@@ -23,7 +23,7 @@ type TopProps = {
   >;
 };
 
-export default function Top({ tvShow }: TopProps) {
+const Top = ({ tvShow }: TopProps): JSX.Element => {
   const { name, status, backdropImage, tmdbDetails, traktDetails } = tvShow;
 
   const { voteAverage, firstAirDate } = tmdbDetails || {};
@@ -46,20 +46,24 @@ export default function Top({ tvShow }: TopProps) {
           <div className="capitalize md:pt-10">
             <Level>
               <LevelItem title="First Aired" value={firstAirDate} />
-              {runtime && (
+              {runtime ? (
                 <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
+              ) : (
+                <></>
               )}
               <LevelItem title="Status" value={status} />
               <LevelItem title="Rating">
-                {voteAverage && (
+                {voteAverage ? (
                   <RtRating rating={parseInt(voteAverage, 10) * 10} />
+                ) : (
+                  <></>
                 )}
               </LevelItem>
             </Level>
           </div>
           {genres && (
             <div className="flex flex-row justify-center pt-8 space-x-1">
-              {genres.map((genre: any) => {
+              {genres.map((genre: string) => {
                 return (
                   <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-gray-300 text-gray-800">
                     {genre}
@@ -72,4 +76,6 @@ export default function Top({ tvShow }: TopProps) {
       </div>
     </div>
   );
-}
+};
+
+export default Top;

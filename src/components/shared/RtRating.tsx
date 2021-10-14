@@ -4,7 +4,7 @@ type RtRatingProps = {
   rating: number;
 };
 
-export default function RtRating({ rating }: RtRatingProps) {
+const RtRating = ({ rating }: RtRatingProps): JSX.Element => {
   let formattedRating;
   if (rating) {
     formattedRating = `${rating}%`;
@@ -13,4 +13,6 @@ export default function RtRating({ rating }: RtRatingProps) {
   }
 
   return <div>{formattedRating}</div>;
-}
+};
+
+export default RtRating;

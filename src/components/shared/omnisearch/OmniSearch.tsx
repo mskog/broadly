@@ -1,39 +1,32 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 
 import { DebounceInput } from "react-debounce-input";
-import { withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+
+import { useOmniSearchQuery } from "generated/graphql";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-import { useOmnisearchQuery } from "store/search";
-
 import Result from "./Result";
 
-const useFocus = () => {
-  const htmlElRef = useRef(null);
-  const setFocus = () => {
-    if (htmlElRef.current) {
-      htmlElRef.current.focus();
-    }
-  };
+type OmniSearchProps = {
+  open: boolean;
+  closeHandler: () => void;
+} & RouteComponentProps;
 
-  return [htmlElRef, setFocus];
-};
+const OmniSearch = ({ open, closeHandler, history }: OmniSearchProps) => {
+  const [query, setQuery] = useState("");
 
-const OmniSearch = ({ open, closeHandler, history }) => {
-  const [inputRef, setInputFocus] = useFocus();
-  useEffect(() => setInputFocus());
-
-  const [query, setQuery] = useState();
-
-  const { data } = useOmnisearchQuery({
-    query
+  const { data } = useOmniSearchQuery({
+    variables: { query }
   });
 
-  const handleQueryChange = (event) => {
-    setQuery(event.target.value);
+  const handleQueryChange = (event: React.FormEvent) => {
+    const target = event.target as HTMLInputElement;
+    setQuery(target.value);
   };
 
   const handleClose = () => {
@@ -42,7 +35,7 @@ const OmniSearch = ({ open, closeHandler, history }) => {
   };
 
   const handlePickFirst = () => {
-    if (data.omnisearch) {
+    if (data?.omnisearch) {
       const firstResult = data.omnisearch[0];
       switch (firstResult.__typename) {
         case "Movie":
@@ -50,9 +43,6 @@ const OmniSearch = ({ open, closeHandler, history }) => {
           break;
         case "TvShow":
           history.push(`/tv_shows/${data.omnisearch[0].id}`);
-          break;
-        case "Episode":
-          history.push(`/episodes/${data.omnisearch[0].id}`);
           break;
         default:
           break;
@@ -79,7 +69,7 @@ const OmniSearch = ({ open, closeHandler, history }) => {
             </svg>
           </div>
           <DebounceInput
-            inputRef={inputRef}
+            inputRef={(input) => input && input.focus()}
             minLength={3}
             debounceTimeout={200}
             value={query}
@@ -105,7 +95,7 @@ const OmniSearch = ({ open, closeHandler, history }) => {
         {query && data && data.omnisearch && (
           <div className="grid grid-cols-1 gap-4 px-4 py-4 rounded-md bg-cool-gray-50">
             {data.omnisearch.length === 0 ? <div>Nothing found</div> : ""}
-            {data.omnisearch.map((result) => (
+            {data.omnisearch.map((result: any) => (
               <Result
                 key={`result-${result.__typename}-${result.id}`}
                 result={result}

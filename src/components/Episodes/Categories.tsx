@@ -8,10 +8,12 @@ type CategoriesProps = {
   category: string;
 };
 
-export default function Categories({ category }: CategoriesProps) {
+const Categories = ({ category }: CategoriesProps): JSX.Element => {
   const options = CATEGORIES.map((cat) => (
     <Category key={cat} name={cat} active={category === cat} />
   ));
 
   return <ul className="flex pt-20">{options}</ul>;
-}
+};
+
+export default Categories;

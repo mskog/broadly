@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function NavigationLink({
+const NavigationLink = ({
   title,
   href,
   active,
@@ -10,8 +10,8 @@ export default function NavigationLink({
   title: string;
   href: string;
   active: boolean;
-  onClick: () => {};
-}) {
+  onClick: () => void;
+}): JSX.Element => {
   const textColor = active ? "md:border-b-4 md:border-teal-500" : "";
 
   return (
@@ -23,4 +23,6 @@ export default function NavigationLink({
       {title}
     </Link>
   );
-}
+};
+
+export default NavigationLink;

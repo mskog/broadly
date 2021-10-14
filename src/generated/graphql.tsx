@@ -648,6 +648,13 @@ export type TvShowSearchResultQueryVariables = Exact<{
 
 export type TvShowSearchResultQuery = { __typename?: 'Query', tvShowSearchResult: { __typename?: 'TvShowSearch', title: string, year?: Maybe<number>, imdbId?: Maybe<string>, imdbUrl?: Maybe<string>, overview?: Maybe<string>, tmdbId?: Maybe<string> } };
 
+export type OmniSearchQueryVariables = Exact<{
+  query: Scalars['String'];
+}>;
+
+
+export type OmniSearchQuery = { __typename?: 'Query', omnisearch: Array<{ __typename?: 'Movie', id: number, title?: Maybe<string>, overview?: Maybe<string>, runtime?: Maybe<number>, releaseDate?: Maybe<any>, posterImageThumbnail?: Maybe<string> } | { __typename?: 'TvShow', id: number, name: string, posterImageThumbnail?: Maybe<string>, tmdbDetails?: Maybe<{ __typename?: 'TvShowTmdbDetails', voteAverage?: Maybe<string>, firstAirDate?: Maybe<string>, id?: Maybe<number> }>, traktDetails?: Maybe<{ __typename?: 'TraktDetails', overview?: Maybe<string>, runtime?: Maybe<number>, genres?: Maybe<Array<string>>, ids?: Maybe<{ __typename?: 'TraktIds', tmdb?: Maybe<string> }> }> }> };
+
 export type TvShowsQueryVariables = Exact<{
   category?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1432,6 +1439,66 @@ export function useTvShowSearchResultLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type TvShowSearchResultQueryHookResult = ReturnType<typeof useTvShowSearchResultQuery>;
 export type TvShowSearchResultLazyQueryHookResult = ReturnType<typeof useTvShowSearchResultLazyQuery>;
 export type TvShowSearchResultQueryResult = Apollo.QueryResult<TvShowSearchResultQuery, TvShowSearchResultQueryVariables>;
+export const OmniSearchDocument = gql`
+    query OmniSearch($query: String!) {
+  omnisearch(query: $query) {
+    ... on Movie {
+      id
+      title
+      overview
+      runtime
+      releaseDate
+      posterImageThumbnail
+    }
+    ... on TvShow {
+      id
+      name
+      posterImageThumbnail
+      tmdbDetails {
+        voteAverage
+        firstAirDate
+        id
+      }
+      traktDetails {
+        overview
+        ids {
+          tmdb
+        }
+        runtime
+        genres
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useOmniSearchQuery__
+ *
+ * To run a query within a React component, call `useOmniSearchQuery` and pass it any options that fit your needs.
+ * When your component renders, `useOmniSearchQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOmniSearchQuery({
+ *   variables: {
+ *      query: // value for 'query'
+ *   },
+ * });
+ */
+export function useOmniSearchQuery(baseOptions: Apollo.QueryHookOptions<OmniSearchQuery, OmniSearchQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<OmniSearchQuery, OmniSearchQueryVariables>(OmniSearchDocument, options);
+      }
+export function useOmniSearchLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<OmniSearchQuery, OmniSearchQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<OmniSearchQuery, OmniSearchQueryVariables>(OmniSearchDocument, options);
+        }
+export type OmniSearchQueryHookResult = ReturnType<typeof useOmniSearchQuery>;
+export type OmniSearchLazyQueryHookResult = ReturnType<typeof useOmniSearchLazyQuery>;
+export type OmniSearchQueryResult = Apollo.QueryResult<OmniSearchQuery, OmniSearchQueryVariables>;
 export const TvShowsDocument = gql`
     query TvShows($category: String, $first: Int, $skip: Int, $query: String) {
   tvShows(category: $category, first: $first, skip: $skip, query: $query) {

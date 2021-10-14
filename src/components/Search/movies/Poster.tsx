@@ -3,6 +3,7 @@ import React from "react";
 import { useMoviePosterQuery } from "generated/graphql";
 
 import { thumbnail } from "utilities";
+import { ApolloError } from "@apollo/client";
 
 const IMAGE_PLACEHOLDER =
   "https://image.tmdb.org/t/p/w300/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
@@ -13,7 +14,7 @@ function image({
   data
 }: {
   loading: boolean;
-  error?: any;
+  error?: ApolloError;
   data?: { moviePoster: { url: string } };
 }) {
   if (loading || error || !data) {
@@ -23,7 +24,7 @@ function image({
 }
 
 // TODO: Use lazy loading and fancy placeholders
-export default function Poster({ tmdbId }: { tmdbId: string }) {
+const Poster = ({ tmdbId }: { tmdbId: string }): JSX.Element => {
   const url = image(
     useMoviePosterQuery({
       variables: { tmdbId },
@@ -38,4 +39,6 @@ export default function Poster({ tmdbId }: { tmdbId: string }) {
       src={thumbnail(url)}
     />
   );
-}
+};
+
+export default Poster;

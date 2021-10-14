@@ -15,7 +15,7 @@ function icon(minimum: number, maximum: number, score: number) {
   return faStarEmpty;
 }
 
-export default function RatingStar({
+const RatingStar = ({
   minimum,
   maximum,
   score
@@ -23,11 +23,13 @@ export default function RatingStar({
   minimum: number;
   maximum: number;
   score: number;
-}) {
+}): JSX.Element => {
   return (
     <FontAwesomeIcon
       className="mr-1 text-yellow-400"
       icon={icon(minimum, maximum, score)}
     />
   );
-}
+};
+
+export default RatingStar;

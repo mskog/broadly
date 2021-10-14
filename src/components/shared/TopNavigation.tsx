@@ -8,7 +8,11 @@ import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 import NavigationLink from "./NavigationLink";
 import OmniSearch from "./omnisearch/OmniSearch";
 
-export default function Navigation(props) {
+type TopNavigationProps = {
+  location: { pathname: string };
+};
+
+const TopNavigation = (props: TopNavigationProps): JSX.Element => {
   const {
     location: { pathname }
   } = props;
@@ -136,4 +140,6 @@ export default function Navigation(props) {
       </nav>
     </div>
   );
-}
+};
+
+export default TopNavigation;

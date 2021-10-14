@@ -15,7 +15,7 @@ type MoviesProps = {
   };
 };
 
-export default function Movies(props: MoviesProps) {
+const Movies = (props: MoviesProps): JSX.Element => {
   const {
     match: {
       params: { category }
@@ -61,4 +61,6 @@ export default function Movies(props: MoviesProps) {
       <div className="mt-20">{mainContent}</div>
     </div>
   );
-}
+};
+
+export default Movies;

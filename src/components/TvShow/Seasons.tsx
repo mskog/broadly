@@ -5,19 +5,19 @@ import Season from "./Season";
 type SeasonsProps = {
   seasonNumbers: number[];
   selectedSeason?: number;
-  onSelect: (season: any) => void;
+  onSelect: (season: number) => void;
 };
 
-export default function Seasons({
+const Seasons = ({
   seasonNumbers,
   selectedSeason,
   onSelect
-}: SeasonsProps) {
+}: SeasonsProps): JSX.Element => {
   const options = seasonNumbers.map((number) => (
     <Season
       key={number}
       name={`Season ${number}`}
-      value={number.toString()}
+      value={number}
       active={number === selectedSeason}
       onSelect={onSelect}
     />
@@ -31,4 +31,5 @@ export default function Seasons({
       </ul>
     </div>
   );
-}
+};
+export default Seasons;

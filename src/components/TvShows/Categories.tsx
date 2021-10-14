@@ -9,7 +9,7 @@ const CATEGORIES = [
   { name: "ended", value: "ended" }
 ];
 
-export default function Categories({ category }: { category: string }) {
+const Categories = ({ category }: { category: string }): JSX.Element => {
   const options = CATEGORIES.map(({ name, value }) => (
     <Category
       key={name}
@@ -20,4 +20,6 @@ export default function Categories({ category }: { category: string }) {
   ));
 
   return <ul className="flex pt-20">{options}</ul>;
-}
+};
+
+export default Categories;

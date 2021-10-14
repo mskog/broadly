@@ -3,29 +3,25 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faClock, faTv } from "@fortawesome/free-solid-svg-icons";
 
+import { TvShow } from "generated/graphql";
+
 import { thumbnail, formattedRuntime, releaseYear } from "utilities";
 
-export default function TvShowResult({
+const TvShowResult = ({
   tvShow,
   handleClose
 }: {
-  tvShow: any;
-  handleClose: any;
-}) {
-  const {
-    id,
-    posterImageThumbnail,
-    name,
-    tmdbDetails: { firstAirDate },
-    traktDetails: { runtime }
-  } = tvShow;
+  tvShow: TvShow;
+  handleClose: () => void;
+}): JSX.Element => {
+  const { id, posterImageThumbnail, name, tmdbDetails, traktDetails } = tvShow;
 
   return (
     <Link onClick={handleClose} to={`/tv_shows/${id}`}>
       <div className="flex -mx-2">
         <div className="flex-initial">
           <img
-            src={thumbnail(posterImageThumbnail)}
+            src={thumbnail(posterImageThumbnail || "")}
             alt=""
             className="w-12 rounded"
           />
@@ -35,11 +31,12 @@ export default function TvShowResult({
           <div className="text-sm font-thin text-gray-600">
             <span className="mr-2">
               <FontAwesomeIcon className="mr-1" icon={faCalendar} />
-              {releaseYear(firstAirDate)}
+              {tmdbDetails?.firstAirDate &&
+                releaseYear(tmdbDetails.firstAirDate)}
             </span>
             <span>
               <FontAwesomeIcon className="mr-1" icon={faClock} />
-              {formattedRuntime(runtime)}
+              {traktDetails?.runtime && formattedRuntime(traktDetails.runtime)}
             </span>
           </div>
         </div>
@@ -50,4 +47,6 @@ export default function TvShowResult({
       </div>
     </Link>
   );
-}
+};
+
+export default TvShowResult;

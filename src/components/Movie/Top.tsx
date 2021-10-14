@@ -23,7 +23,7 @@ function backgroundStyle(url: string) {
 }
 
 // TODO: Use lazy loading and fancy placeholders
-export default function Top({
+const Top = ({
   movie
 }: {
   movie: Pick<
@@ -41,7 +41,7 @@ export default function Top({
     | "bestRelease"
     | "waitlist"
   >;
-}) {
+}): JSX.Element => {
   const {
     id,
     title,
@@ -73,16 +73,20 @@ export default function Top({
           <div className="md:pt-10">
             <Level>
               <LevelItem title="Release date" value={date} />
-              {runtime && (
+              {runtime ? (
                 <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
+              ) : (
+                <></>
               )}
-              {bestRelease && (
+              {bestRelease ? (
                 <LevelItem
                   title="Resolution"
                   value={resolutionDisplay(bestRelease.resolution)}
                 />
+              ) : (
+                <></>
               )}
-              {!watched && (
+              {!watched ? (
                 <>
                   {rtCriticsRating && (
                     <LevelItem title="Tomatometer">
@@ -95,11 +99,15 @@ export default function Top({
                     </LevelItem>
                   )}
                 </>
+              ) : (
+                <></>
               )}
-              {personalRating && (
+              {personalRating ? (
                 <LevelItem title="Rating">
                   <PersonalRating id={id} rating={personalRating} />
                 </LevelItem>
+              ) : (
+                <></>
               )}
             </Level>
           </div>
@@ -107,4 +115,6 @@ export default function Top({
       </div>
     </div>
   );
-}
+};
+
+export default Top;

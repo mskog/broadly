@@ -8,7 +8,7 @@ type NewsProps = {
   newsItems: Pick<NewsItemType, "title" | "url" | "metadata">[];
 };
 
-export default function News({ newsItems }: NewsProps) {
+const News = ({ newsItems }: NewsProps): JSX.Element => {
   if (newsItems.length === 0) {
     return <></>;
   }
@@ -26,4 +26,6 @@ export default function News({ newsItems }: NewsProps) {
       </ul>
     </div>
   );
-}
+};
+
+export default News;

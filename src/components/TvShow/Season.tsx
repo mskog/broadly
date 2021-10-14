@@ -2,12 +2,17 @@ import React from "react";
 
 type SeasonProps = {
   name: string;
-  value: string;
+  value: number;
   active: boolean;
-  onSelect: (value: string) => void;
+  onSelect: (value: number) => void;
 };
 
-export default function Season({ name, value, active, onSelect }: SeasonProps) {
+const Season = ({
+  name,
+  value,
+  active,
+  onSelect
+}: SeasonProps): JSX.Element => {
   let classNames =
     "px-2 text-base font-bold text-center cursor-pointer hover:text-white pb-2";
 
@@ -33,4 +38,6 @@ export default function Season({ name, value, active, onSelect }: SeasonProps) {
       </button>
     </li>
   );
-}
+};
+
+export default Season;

@@ -22,7 +22,7 @@ type ListProps = {
   loadMore: () => void;
 };
 
-export default function List({ loadMore, episodes }: ListProps) {
+const List = ({ loadMore, episodes }: ListProps): JSX.Element => {
   const episodeComponents = episodes.map((episode) => {
     return <Episode key={episode.id} episode={episode} />;
   });
@@ -41,4 +41,6 @@ export default function List({ loadMore, episodes }: ListProps) {
       </InfiniteScroll>
     </div>
   );
-}
+};
+
+export default List;

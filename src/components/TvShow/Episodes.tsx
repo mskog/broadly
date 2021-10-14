@@ -17,7 +17,7 @@ type EpisodeProps = {
   >[];
 };
 
-export default function Episodes({ episodes }: EpisodeProps) {
+const Episodes = ({ episodes }: EpisodeProps): JSX.Element => {
   const uniqEpisodes = uniqBy(episodes, (episode) => episode.episode);
 
   const episodeComponents = reverse(
@@ -27,4 +27,6 @@ export default function Episodes({ episodes }: EpisodeProps) {
   });
 
   return <div className="flex-wrap -mx-2 md:flex">{episodeComponents}</div>;
-}
+};
+
+export default Episodes;

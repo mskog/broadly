@@ -13,14 +13,14 @@ import Poster from "components/Search/tv_shows/Poster";
 
 import ResultDetails from "./ResultDetails";
 
-export default function Result({
+const Result = ({
   result
 }: {
   result: Pick<
     TvShowSearch,
     "imdbId" | "tmdbId" | "title" | "exists" | "existingTvShowId"
   >;
-}) {
+}): JSX.Element => {
   const { imdbId, tmdbId, title, exists, existingTvShowId } = result;
 
   if (!imdbId || !tmdbId) {
@@ -70,4 +70,6 @@ export default function Result({
       </div>
     </div>
   );
-}
+};
+
+export default Result;

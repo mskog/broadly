@@ -1,16 +1,18 @@
 /* eslint-disable no-underscore-dangle */
 import React from "react";
 
+import { Movie, TvShow } from "generated/graphql";
+
 import MovieResult from "./MovieResult";
 import TvShowResult from "./TvShowResult";
 
-export default function Result({
+const Result = ({
   result,
   handleClose
 }: {
-  result: any;
-  handleClose: any;
-}) {
+  result: Movie | TvShow;
+  handleClose: () => void;
+}): JSX.Element => {
   switch (result.__typename) {
     case "Movie":
       return <MovieResult movie={result} handleClose={handleClose} />;
@@ -19,4 +21,6 @@ export default function Result({
     default:
       return <></>;
   }
-}
+};
+
+export default Result;

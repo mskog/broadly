@@ -8,7 +8,7 @@ type CategoryProps = {
   baseRoute: string;
 };
 
-export default function Category({ name, active, baseRoute }: CategoryProps) {
+const Category = ({ name, active, baseRoute }: CategoryProps): JSX.Element => {
   let classNames =
     "flex-1 text-base font-bold text-center cursor-pointer hover:text-white pb-2";
 
@@ -25,4 +25,6 @@ export default function Category({ name, active, baseRoute }: CategoryProps) {
       </Link>
     </li>
   );
-}
+};
+
+export default Category;

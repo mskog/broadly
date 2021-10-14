@@ -2,21 +2,29 @@ import React from "react";
 
 import Loading from "components/shared/LoadingFull";
 
-import { useCalendarQuery } from "generated/graphql";
+import { CalendarCategory, useCalendarQuery } from "generated/graphql";
 
 import List from "./List";
 import Categories from "./Categories";
 
-const Calendar = (props: any): JSX.Element => {
+type CalendarProps = {
+  match: {
+    params: {
+      category?: CalendarCategory;
+    };
+  };
+};
+
+const Calendar = (props: CalendarProps): JSX.Element => {
   const {
     match: {
-      params: { category = "ALL" }
+      params: { category = CalendarCategory.All }
     }
   } = props;
 
   const { data } = useCalendarQuery({
     variables: {
-      category: category.toUpperCase()
+      category
     },
     fetchPolicy: "cache-and-network"
   });

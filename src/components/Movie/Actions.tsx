@@ -11,11 +11,11 @@ import {
 import Delete from "./Delete";
 import Force from "./Force";
 
-export default function Actions({
+const Actions = ({
   movie
 }: {
   movie: Pick<Movie, "id" | "bestRelease">;
-}) {
+}): JSX.Element => {
   const { id, bestRelease } = movie;
 
   const history = useHistory();
@@ -40,4 +40,6 @@ export default function Actions({
       <Delete handle={deleteMovie} />
     </>
   );
-}
+};
+
+export default Actions;

@@ -3,15 +3,17 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faClock, faFilm } from "@fortawesome/free-solid-svg-icons";
 
+import { Movie } from "generated/graphql";
+
 import { thumbnail, formattedRuntime, releaseYear } from "utilities";
 
-export default function MovieResult({
+const MovieResult = ({
   movie,
   handleClose
 }: {
-  movie: any;
-  handleClose: any;
-}) {
+  movie: Movie;
+  handleClose: () => void;
+}): JSX.Element => {
   const { id, posterImageThumbnail, title, releaseDate, runtime } = movie;
 
   return (
@@ -19,7 +21,7 @@ export default function MovieResult({
       <div className="flex -mx-2">
         <div className="flex-initial">
           <img
-            src={thumbnail(posterImageThumbnail)}
+            src={thumbnail(posterImageThumbnail || "")}
             alt=""
             className="w-12 rounded"
           />
@@ -31,10 +33,12 @@ export default function MovieResult({
               <FontAwesomeIcon className="mr-1" icon={faCalendar} />
               {releaseYear(releaseDate)}
             </span>
-            <span>
-              <FontAwesomeIcon className="mr-1" icon={faClock} />
-              {formattedRuntime(runtime)}
-            </span>
+            {runtime && (
+              <span>
+                <FontAwesomeIcon className="mr-1" icon={faClock} />
+                {formattedRuntime(runtime)}
+              </span>
+            )}
           </div>
         </div>
         <div className="flex flex-col items-end justify-center flex-1 p-4">
@@ -43,4 +47,6 @@ export default function MovieResult({
       </div>
     </Link>
   );
-}
+};
+
+export default MovieResult;

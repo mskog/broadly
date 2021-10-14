@@ -39,7 +39,7 @@ type EpisodeProps = {
   > & { bestRelease?: Pick<EpisodeRelease, "resolution"> };
 };
 
-export default function Episode({ episode }: EpisodeProps) {
+const Episode = ({ episode }: EpisodeProps): JSX.Element => {
   const {
     id,
     stillImageThumbnail,
@@ -92,4 +92,6 @@ export default function Episode({ episode }: EpisodeProps) {
       </Link>
     </div>
   );
-}
+};
+
+export default Episode;

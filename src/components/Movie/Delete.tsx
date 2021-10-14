@@ -4,7 +4,7 @@ import LoaderButton from "components/shared/LoaderButton";
 type DeleteProps = {
   handle: () => void;
 };
-export default function Delete({ handle }: DeleteProps) {
+const Delete = ({ handle }: DeleteProps): JSX.Element => {
   return (
     <div className="w-full mx-1 my-2 md:w-6/12">
       <LoaderButton
@@ -15,4 +15,6 @@ export default function Delete({ handle }: DeleteProps) {
       </LoaderButton>
     </div>
   );
-}
+};
+
+export default Delete;

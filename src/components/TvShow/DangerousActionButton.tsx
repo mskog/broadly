@@ -6,10 +6,10 @@ type DangerousActionButtonProps = {
   title: string;
 };
 
-export default function DangerousActionButton({
+const DangerousActionButton = ({
   handle,
   title
-}: DangerousActionButtonProps) {
+}: DangerousActionButtonProps): JSX.Element => {
   return (
     <div className="w-full mx-1 my-2 md:w-6/12">
       <LoaderButton
@@ -20,4 +20,6 @@ export default function DangerousActionButton({
       </LoaderButton>
     </div>
   );
-}
+};
+
+export default DangerousActionButton;

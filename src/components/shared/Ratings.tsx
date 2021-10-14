@@ -7,9 +7,9 @@ type Props = {
   children?: React.ReactNode;
 };
 
-export default function Ratings({ score, children }: Props) {
+const Ratings = ({ score, children }: Props): JSX.Element => {
   if (!score) {
-    return null;
+    return <></>;
   }
   const roundedScore = Math.round(score);
   const formattedScore = `${roundedScore}%`;
@@ -27,4 +27,5 @@ export default function Ratings({ score, children }: Props) {
       </span>
     </div>
   );
-}
+};
+export default Ratings;

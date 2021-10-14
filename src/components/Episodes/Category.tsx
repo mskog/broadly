@@ -7,7 +7,7 @@ type CategoryProps = {
   active: boolean;
 };
 
-export default function Category({ name, active }: CategoryProps) {
+const Category = ({ name, active }: CategoryProps): JSX.Element => {
   let classNames =
     "flex-1 text-base font-bold text-center cursor-pointer hover:text-white pb-2";
 
@@ -24,4 +24,6 @@ export default function Category({ name, active }: CategoryProps) {
       </Link>
     </li>
   );
-}
+};
+
+export default Category;

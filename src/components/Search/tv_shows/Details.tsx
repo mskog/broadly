@@ -41,7 +41,7 @@ type DetailsProps = {
   };
 };
 
-export default function Details(props: DetailsProps) {
+const Details = (props: DetailsProps): JSX.Element => {
   const {
     match: {
       params: { imdbId }
@@ -100,4 +100,6 @@ export default function Details(props: DetailsProps) {
       </div>
     </div>
   );
-}
+};
+
+export default Details;

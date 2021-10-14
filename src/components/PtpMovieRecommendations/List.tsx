@@ -3,9 +3,9 @@ import { PtpRecommendedMovie } from "generated/graphql";
 
 import Movie from "./Movie";
 
-const List = ({ movies }: { movies: PtpRecommendedMovie[] }) => {
-  const moviesList = movies.map((movie: any) => (
-    <div key={movie.id} className="px-3 mb-10 md:w-full lg:w-1/2">
+const List = ({ movies }: { movies: PtpRecommendedMovie[] }): JSX.Element => {
+  const moviesList = movies.map((movie: PtpRecommendedMovie) => (
+    <div key={movie.imdbId} className="px-3 mb-10 md:w-full lg:w-1/2">
       <Movie movie={movie} />
     </div>
   ));

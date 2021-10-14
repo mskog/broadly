@@ -14,7 +14,7 @@ import { TvShow as TvShowType } from "generated/graphql";
 import Ratings from "components/shared/Ratings";
 import Poster from "./Poster";
 
-export default function TvShow({ tvShow }: { tvShow: TvShowType }) {
+const TvShow = ({ tvShow }: { tvShow: TvShowType }): JSX.Element => {
   const { id, name, posterImageThumbnail, traktDetails } = tvShow;
   const { voteAverage, firstAirDate } = tvShow.tmdbDetails || {};
 
@@ -52,4 +52,6 @@ export default function TvShow({ tvShow }: { tvShow: TvShowType }) {
       </div>
     </div>
   );
-}
+};
+
+export default TvShow;

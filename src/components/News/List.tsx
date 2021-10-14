@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 
 import { NewsItem } from "generated/graphql";
@@ -10,7 +11,7 @@ type ListProps = {
   >;
 };
 
-export default function List({ newsItems }: ListProps) {
+const List = ({ newsItems }: ListProps): JSX.Element => {
   return (
     <div>
       <ul>
@@ -29,4 +30,6 @@ export default function List({ newsItems }: ListProps) {
       </ul>
     </div>
   );
-}
+};
+
+export default List;

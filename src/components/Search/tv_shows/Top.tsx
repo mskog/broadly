@@ -1,4 +1,5 @@
 import React from "react";
+import { ApolloError } from "@apollo/client";
 
 import { useTvShowPosterQuery, TvShowSearch } from "generated/graphql";
 
@@ -14,10 +15,10 @@ function image({
   data
 }: {
   loading: boolean;
-  error?: any;
-  data: any;
+  error?: ApolloError;
+  data?: { tvShowPoster: { url: string } };
 }) {
-  if (loading || error) {
+  if (loading || error || !data) {
     return "https://image.tmdb.org/t/p/w1280/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
   }
   return data.tvShowPoster.url;
@@ -36,13 +37,13 @@ type Props = {
 
 // TODO: Use lazy loading and fancy placeholders
 // TODO: There are more details to show if we want
-export default function Top({ tvShow }: Props) {
+const Top = ({ tvShow }: Props): JSX.Element => {
   const { tmdbId, title, details } = tvShow;
 
   const { firstAired, runtime, airedEpisodes, status, rating, genres } =
     details || {};
 
-  let url: string = "";
+  let url = "";
   if (tmdbId) {
     url = image(
       useTvShowPosterQuery({
@@ -68,11 +69,13 @@ export default function Top({ tvShow }: Props) {
               <LevelItem title="Status" value={status} />
               <LevelItem title="First Aired" value={firstAired} />
               <LevelItem title="Runtime" value={`${runtime}m`} />
-              {airedEpisodes && (
+              {airedEpisodes ? (
                 <LevelItem
                   title="Aired episodes"
                   value={airedEpisodes.toString()}
                 />
+              ) : (
+                <></>
               )}
             </Level>
           </div>
@@ -91,4 +94,6 @@ export default function Top({ tvShow }: Props) {
       </div>
     </div>
   );
-}
+};
+
+export default Top;

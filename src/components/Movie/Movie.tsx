@@ -17,7 +17,7 @@ type MovieProps = {
   };
 };
 
-function Movie(props: MovieProps) {
+const Movie = (props: MovieProps): JSX.Element => {
   const {
     match: {
       params: { id }
@@ -65,6 +65,6 @@ function Movie(props: MovieProps) {
       </div>
     </div>
   );
-}
+};
 
 export default Movie;

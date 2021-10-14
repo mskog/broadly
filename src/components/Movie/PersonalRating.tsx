@@ -8,10 +8,10 @@ type PersonalRatingProps = {
   rating: number;
 };
 
-export default function PersonalRating({
+const PersonalRating = ({
   id,
   rating: initialRating
-}: PersonalRatingProps) {
+}: PersonalRatingProps): JSX.Element => {
   const ratingValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const [editMode, setEditMode] = useState(false);
@@ -31,8 +31,8 @@ export default function PersonalRating({
 
   const [rateMovie] = useMutation(RATE_MOVIE);
 
-  const onChange = (event: any) => {
-    const newRating = parseInt(event.target.value, 10);
+  const onChange = (event: React.FormEvent<HTMLSelectElement>) => {
+    const newRating = parseInt(event.currentTarget.value, 10);
     setRating(newRating);
     setEditMode(false);
     rateMovie({ variables: { id, rating: newRating } });
@@ -68,4 +68,6 @@ export default function PersonalRating({
       )}
     </div>
   );
-}
+};
+
+export default PersonalRating;

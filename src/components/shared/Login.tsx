@@ -1,10 +1,9 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
 
-export default function Login() {
+const Login = (): JSX.Element => {
   const [token, setToken] = useState(localStorage.getItem("auth_key"));
 
-  const submitHandler = (event: any) => {
+  const submitHandler = (event: React.FormEvent) => {
     if (!token) {
       return;
     }
@@ -13,9 +12,9 @@ export default function Login() {
     window.location.href = "/";
   };
 
-  const changeHandler = (event: any) => {
+  const changeHandler = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
-    setToken(event.target.value);
+    setToken(event.currentTarget.value);
   };
 
   return (
@@ -51,4 +50,6 @@ export default function Login() {
       </form>
     </div>
   );
-}
+};
+
+export default Login;

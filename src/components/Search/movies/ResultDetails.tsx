@@ -11,11 +11,11 @@ type ResultDetailsProps = {
   released: string;
   runtime: number;
 };
-export default function ResultDetails({
+const ResultDetails = ({
   rating,
   released,
   runtime
-}: ResultDetailsProps) {
+}: ResultDetailsProps): JSX.Element => {
   return (
     <div>
       <Ratings score={rating * 10} />
@@ -32,4 +32,6 @@ export default function ResultDetails({
       </div>
     </div>
   );
-}
+};
+
+export default ResultDetails;

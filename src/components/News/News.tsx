@@ -19,7 +19,7 @@ type NewsProps = {
   };
 };
 
-export default function News(props: NewsProps) {
+const News = (props: NewsProps): JSX.Element => {
   const {
     match: {
       params: { category: chosenCategory }
@@ -50,4 +50,6 @@ export default function News(props: NewsProps) {
       <div className="mt-10">{mainContent}</div>
     </div>
   );
-}
+};
+
+export default News;

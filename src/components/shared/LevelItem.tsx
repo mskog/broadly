@@ -3,18 +3,18 @@ import React from "react";
 type LevelItemProps = {
   title?: string;
   value?: string;
-  children?: React.ReactNode;
+  children?: JSX.Element | JSX.Element[] | undefined;
   defaultText?: string;
   hideIfBlank?: boolean;
 };
 
-function LevelItem({
+const LevelItem = ({
   title,
   value,
   children,
   defaultText = "?",
   hideIfBlank = false
-}: LevelItemProps) {
+}: LevelItemProps): JSX.Element => {
   if (!value && hideIfBlank) {
     return <></>;
   }
@@ -27,6 +27,6 @@ function LevelItem({
       <div className="text-base text-gray-500 uppercase ">{title}</div>
     </div>
   );
-}
+};
 
 export default LevelItem;

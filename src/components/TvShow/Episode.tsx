@@ -39,7 +39,7 @@ type EpisodeProps = {
   >;
 };
 
-export default function Episode({ episode }: EpisodeProps) {
+const Episode = ({ episode }: EpisodeProps): JSX.Element => {
   const {
     id,
     name,
@@ -95,4 +95,6 @@ export default function Episode({ episode }: EpisodeProps) {
       </div>
     </LazyLoad>
   );
-}
+};
+
+export default Episode;

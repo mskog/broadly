@@ -3,15 +3,15 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-export default function LoaderButton({
+const LoaderButton = ({
   onClick,
   className,
   children
 }: {
-  onClick: any;
+  onClick: () => void;
   className?: string;
   children?: React.ReactNode;
-}) {
+}): JSX.Element => {
   const [loading, setLoading] = useState(false);
 
   const handle = () => {
@@ -33,4 +33,6 @@ export default function LoaderButton({
       {label}
     </button>
   );
-}
+};
+
+export default LoaderButton;

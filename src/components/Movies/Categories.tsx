@@ -8,11 +8,11 @@ type CategoriesProps = {
   baseRoute?: string;
 };
 
-export default function Categories({
+const Categories = ({
   categories,
   category,
   baseRoute = "movies"
-}: CategoriesProps) {
+}: CategoriesProps): JSX.Element => {
   const options = categories.map((cat) => (
     <Category
       baseRoute={baseRoute}
@@ -23,4 +23,6 @@ export default function Categories({
   ));
 
   return <ul className="flex pt-20">{options}</ul>;
-}
+};
+
+export default Categories;

@@ -36,7 +36,7 @@ type MovieProps = {
   };
 };
 
-export default function Movie({ movie }: MovieProps) {
+const Movie = ({ movie }: MovieProps): JSX.Element => {
   const {
     id,
     title,
@@ -97,4 +97,6 @@ export default function Movie({ movie }: MovieProps) {
       </div>
     </div>
   );
-}
+};
+
+export default Movie;

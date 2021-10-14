@@ -4,7 +4,7 @@ import { thumbnail } from "utilities";
 
 import ProgressiveImage from "components/shared/ProgressiveImage";
 
-export default function Poster({ src }: { src: string | undefined }) {
+const Poster = ({ src }: { src: string | undefined }): JSX.Element => {
   let imageSrc;
   if (!src) {
     imageSrc = "https://www.fillmurray.com/105/160";
@@ -18,4 +18,6 @@ export default function Poster({ src }: { src: string | undefined }) {
       src={thumbnail(imageSrc)}
     />
   );
-}
+};
+
+export default Poster;

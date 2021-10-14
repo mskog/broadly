@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import "typeface-roboto";
 import {
@@ -9,16 +9,14 @@ import {
   useLocation
 } from "react-router-dom";
 
-import {
-  InMemoryCache,
-  IntrospectionFragmentMatcher
-} from "apollo-cache-inmemory";
+import { IntrospectionFragmentMatcher } from "apollo-cache-inmemory";
 import { persistCache } from "apollo-cache-persist";
 import {
   HttpLink,
   ApolloClient,
   ApolloLink,
-  ApolloProvider
+  ApolloProvider,
+  InMemoryCache
 } from "@apollo/client";
 
 import Calendar from "components/Calendar/Calendar";

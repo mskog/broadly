@@ -23,7 +23,7 @@ type ResultProps = {
   >;
 };
 
-export default function Result({ result }: ResultProps) {
+const Result = ({ result }: ResultProps): JSX.Element => {
   const { imdbId, tmdbId, title, downloaded, onWaitlist, existingMovieId } =
     result;
 
@@ -71,4 +71,6 @@ export default function Result({ result }: ResultProps) {
       </div>
     </div>
   );
-}
+};
+
+export default Result;

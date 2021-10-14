@@ -15,7 +15,7 @@ type BestMoviesProps = {
   };
 };
 
-export default function BestMovies(props: BestMoviesProps) {
+const BestMovies = (props: BestMoviesProps): JSX.Element => {
   const {
     match: {
       params: { year: chosenYear }
@@ -44,6 +44,7 @@ export default function BestMovies(props: BestMoviesProps) {
 
     fetchMore({
       variables: { skip: data.bestMovies.length },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       updateQuery: (prev: any, { fetchMoreResult }) => {
         if (!fetchMoreResult) {
           return prev;
@@ -75,4 +76,6 @@ export default function BestMovies(props: BestMoviesProps) {
       <div className="mt-20">{mainContent}</div>
     </div>
   );
-}
+};
+
+export default BestMovies;

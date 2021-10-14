@@ -9,7 +9,7 @@ type ListProps = {
   tvShows: TvShowType[];
 };
 
-export default function List({ loadMore, tvShows }: ListProps) {
+const List = ({ loadMore, tvShows }: ListProps): JSX.Element => {
   const tvShowsList = tvShows.map((tvShow) => (
     <div key={tvShow.id} className="px-3 mb-10 md:w-full lg:w-1/2">
       <TvShow tvShow={tvShow} />
@@ -33,4 +33,6 @@ export default function List({ loadMore, tvShows }: ListProps) {
       </InfiniteScroll>
     </div>
   );
-}
+};
+
+export default List;

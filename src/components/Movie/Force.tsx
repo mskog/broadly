@@ -1,13 +1,15 @@
 import React from "react";
 import LoaderButton from "components/shared/LoaderButton";
 
+import { MovieRelease } from "generated/graphql";
+
 type ForceProps = {
   handle: () => void;
-  bestRelease: any;
+  bestRelease?: MovieRelease;
 };
 
-export default function Force({ handle, bestRelease }: ForceProps) {
-  if (!bestRelease) return null;
+const Force = ({ handle, bestRelease }: ForceProps): JSX.Element => {
+  if (!bestRelease) return <></>;
 
   return (
     <div className="w-full mx-1 my-2 md:w-6/12">
@@ -19,4 +21,6 @@ export default function Force({ handle, bestRelease }: ForceProps) {
       </LoaderButton>
     </div>
   );
-}
+};
+
+export default Force;

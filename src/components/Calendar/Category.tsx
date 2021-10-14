@@ -3,13 +3,12 @@ import { capitalize } from "lodash";
 
 import { Link } from "react-router-dom";
 
-const Category = ({
-  name,
-  active
-}: {
+type CategoryProps = {
   name: string;
   active: boolean;
-}): JSX.Element => {
+};
+
+const Category = ({ name, active }: CategoryProps): JSX.Element => {
   let classNames =
     "flex-1 text-base font-bold text-center cursor-pointer hover:text-white pb-2";
 

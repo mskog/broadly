@@ -1,23 +1,34 @@
 import React from "react";
 
-import { useEpisodesQuery } from "generated/graphql";
+import { capitalize } from "lodash";
+
+import { EpisodeCategory, useEpisodesQuery } from "generated/graphql";
 import Loading from "components/shared/LoadingFull";
 import List from "./List";
 import Categories from "./Categories";
 
-export default function Episodes(props: any) {
+type EpisodesProps = {
+  match: {
+    params: { category: EpisodeCategory };
+  };
+};
+
+const Episodes = (props: EpisodesProps): JSX.Element => {
   const {
     match: {
-      params: { category = "WATCHED" }
+      params: { category = EpisodeCategory.Downloads }
     }
   } = props;
+
+  const episodeCategory =
+    EpisodeCategory[capitalize(category) as keyof typeof EpisodeCategory];
 
   const { error, data, fetchMore } = useEpisodesQuery({
     fetchPolicy: "cache-and-network",
     variables: {
       first: 30,
       skip: 0,
-      category: category.toUpperCase()
+      category: episodeCategory
     }
   });
 
@@ -51,4 +62,6 @@ export default function Episodes(props: any) {
       {mainContent}
     </div>
   );
-}
+};
+
+export default Episodes;

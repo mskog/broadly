@@ -13,7 +13,7 @@ type DetailsProps = {
   };
 };
 
-export default function Details(props: DetailsProps): JSX.Element {
+const Details = (props: DetailsProps): JSX.Element => {
   const {
     match: {
       params: { imdbId }
@@ -36,14 +36,18 @@ export default function Details(props: DetailsProps): JSX.Element {
           {data.movieSearchResult.overview}
         </p>
         <div className="mt-4">
-          <Release
-            killer={data.movieSearchResult.hasKillerRelease}
-            acceptable={data.movieSearchResult.hasAcceptableRelease}
-            release={data.movieSearchResult.bestRelease}
-            imdbId={imdbId}
-          />
+          {data.movieSearchResult.bestRelease && (
+            <Release
+              killer={data.movieSearchResult.hasKillerRelease}
+              acceptable={data.movieSearchResult.hasAcceptableRelease}
+              release={data.movieSearchResult.bestRelease}
+              imdbId={imdbId}
+            />
+          )}
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Details;

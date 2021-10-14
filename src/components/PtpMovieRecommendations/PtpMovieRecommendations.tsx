@@ -5,7 +5,7 @@ import Loading from "components/shared/LoadingFull";
 
 import List from "./List";
 
-const PtpMovieRecommendations = () => {
+const PtpMovieRecommendations = (): JSX.Element => {
   const { error, data } = usePtpMovieRecommendationsQuery();
 
   let mainContent;

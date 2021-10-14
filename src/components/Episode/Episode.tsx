@@ -13,7 +13,7 @@ type EpisodeProps = {
   };
 };
 
-export default function Episode(props: EpisodeProps) {
+const Episode = (props: EpisodeProps): JSX.Element => {
   const {
     match: {
       params: { id }
@@ -61,4 +61,6 @@ export default function Episode(props: EpisodeProps) {
       </div>
     </div>
   );
-}
+};
+
+export default Episode;

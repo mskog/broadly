@@ -6,7 +6,7 @@ type ActionButtonProps = {
   title: string;
 };
 
-export default function ActionButton({ handle, title }: ActionButtonProps) {
+const ActionButton = ({ handle, title }: ActionButtonProps): JSX.Element => {
   return (
     <div className="w-full mx-1 my-2 md:w-6/12">
       <LoaderButton
@@ -17,4 +17,6 @@ export default function ActionButton({ handle, title }: ActionButtonProps) {
       </LoaderButton>
     </div>
   );
-}
+};
+
+export default ActionButton;

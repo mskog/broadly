@@ -21,13 +21,13 @@ type ResultDetailsProps = {
   airedEpisodes?: number;
 };
 
-export default function ResultDetails({
+const ResultDetails = ({
   rating,
   firstAired,
   runtime,
   status,
   airedEpisodes
-}: ResultDetailsProps) {
+}: ResultDetailsProps): JSX.Element => {
   return (
     <div>
       {rating && <Ratings score={parseInt(rating, 10) * 10} />}
@@ -55,4 +55,6 @@ export default function ResultDetails({
       </div>
     </div>
   );
-}
+};
+
+export default ResultDetails;

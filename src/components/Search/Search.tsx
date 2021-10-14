@@ -1,6 +1,8 @@
 import React from "react";
 import queryString from "query-string";
 
+import { RouteComponentProps } from "react-router-dom";
+
 import SearchBox from "../shared/SearchBox";
 
 import Categories from "./Categories";
@@ -9,15 +11,13 @@ import MovieResults from "./movies/Results";
 import TvShowResults from "./tv_shows/Results";
 
 type SearchProps = {
-  history: any;
   pathname: string;
-  location: { search: string };
   match: {
     params: { category: string };
   };
-};
+} & RouteComponentProps;
 
-export default function Search(props: SearchProps) {
+const Search = (props: SearchProps): JSX.Element => {
   const {
     history,
     pathname,
@@ -57,4 +57,6 @@ export default function Search(props: SearchProps) {
       <div>{mainContent}</div>
     </div>
   );
-}
+};
+
+export default Search;

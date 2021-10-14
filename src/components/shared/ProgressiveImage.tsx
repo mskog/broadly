@@ -1,11 +1,13 @@
 import React from "react";
 
-export default function ProgressiveImage({
+const ProgressiveImage = ({
   src,
   className
 }: {
   src: string;
   className?: string;
-}) {
+}): JSX.Element => {
   return <img alt="poster" className={className} src={src} />;
-}
+};
+
+export default ProgressiveImage;

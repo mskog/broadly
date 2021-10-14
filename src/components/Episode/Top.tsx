@@ -29,7 +29,7 @@ type TopProps = {
   > & { bestRelease?: Pick<EpisodeRelease, "resolution"> };
 };
 
-export default function Top({ episode }: TopProps) {
+const Top = ({ episode }: TopProps): JSX.Element => {
   const {
     season,
     episode: episodeNumber,
@@ -58,7 +58,7 @@ export default function Top({ episode }: TopProps) {
           </h2>
           <div className="capitalize md:pt-10">
             <Level>
-              {season && episodeNumber && (
+              {season && episodeNumber ? (
                 <LevelItem
                   title="Episode"
                   value={seasonEpisode(
@@ -66,24 +66,30 @@ export default function Top({ episode }: TopProps) {
                     episodeNumber?.toString()
                   )}
                 />
+              ) : (
+                <></>
               )}
               <LevelItem
                 hideIfBlank
                 title="Watched"
                 value={DateTime.fromISO(watchedAt).toISODate()}
               />
-              {traktDetails?.runtime && (
+              {traktDetails?.runtime ? (
                 <LevelItem
                   title="Runtime"
                   value={formattedRuntime(traktDetails.runtime)}
                 />
+              ) : (
+                <></>
               )}
 
-              {bestRelease && (
+              {bestRelease ? (
                 <LevelItem
                   title="Resolution"
                   value={resolutionDisplay(bestRelease.resolution)}
                 />
+              ) : (
+                <></>
               )}
             </Level>
           </div>
@@ -91,4 +97,6 @@ export default function Top({ episode }: TopProps) {
       </div>
     </div>
   );
-}
+};
+
+export default Top;

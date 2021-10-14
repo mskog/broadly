@@ -66,3 +66,34 @@ query TvShowSearchResult($imdbId: String!) {
     tmdbId
   }
 }
+
+query OmniSearch($query: String!) {
+  omnisearch(query: $query) {
+    ... on Movie {
+      id
+      title
+      overview
+      runtime
+      releaseDate
+      posterImageThumbnail
+    }
+    ... on TvShow {
+      id
+      name
+      posterImageThumbnail
+      tmdbDetails {
+        voteAverage
+        firstAirDate
+        id
+      }
+      traktDetails {
+        overview
+        ids {
+          tmdb
+        }
+        runtime
+        genres
+      }
+    }
+  }
+}

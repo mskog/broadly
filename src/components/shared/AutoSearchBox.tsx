@@ -1,30 +1,33 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 
 import { DebounceInput } from "react-debounce-input";
+import { RouteComponentProps } from "react-router-dom";
 
-export default function AutoSearchBox({
+const AutoSearchBox = ({
   pathname,
-  history,
   query,
   placeholder,
   minLength = 3,
-  debounceTimeout = 200
+  debounceTimeout = 200,
+  history
 }: {
   pathname: string;
-  history: any;
   query: string;
   placeholder: string;
   minLength: number;
   debounceTimeout: number;
-}) {
+} & RouteComponentProps): JSX.Element => {
   const [text, setText] = useState(query || "");
 
-  const handleQueryChange = (event: any) => {
-    setText(event.target.value);
-    history.replace({ pathname, search: `?query=${event.target.value}` });
+  const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setText(event.currentTarget.value);
+    history.replace({
+      pathname,
+      search: `?query=${event.currentTarget.value}`
+    });
   };
 
-  const clear = (event: any) => {
+  const clear = (event: React.MouseEvent) => {
     event.preventDefault();
     setText("");
     history.replace({ pathname, search: "" });
@@ -53,4 +56,6 @@ export default function AutoSearchBox({
       )}
     </>
   );
-}
+};
+
+export default AutoSearchBox;

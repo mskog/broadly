@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  MovieRelease,
   useAddMovieToWaitlistMutation,
   useDownloadMovieMutation
 } from "generated/graphql";
@@ -11,17 +12,20 @@ import ReleaseInformation from "components/Movie/ReleaseInformation";
 
 type ReleaseProps = {
   imdbId: string;
-  release: any;
+  release: Pick<
+    MovieRelease,
+    "releaseName" | "source" | "size" | "resolution" | "container"
+  >;
   acceptable: boolean;
   killer: boolean;
 };
 
-export default function Release({
+const Release = ({
   imdbId,
   release,
   acceptable,
   killer
-}: ReleaseProps) {
+}: ReleaseProps): JSX.Element => {
   const history = useHistory();
 
   const [addMovieToWaitlist] = useAddMovieToWaitlistMutation({
@@ -75,4 +79,6 @@ export default function Release({
       </div>
     </div>
   );
-}
+};
+
+export default Release;

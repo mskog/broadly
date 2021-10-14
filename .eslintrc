@@ -6,7 +6,7 @@
     "browser": true
   },
   "ignorePatterns": ["src/generated/*"],
-  "extends": ["airbnb", "plugin:prettier/recommended"],
+  "extends": ["airbnb", "airbnb-typescript", "plugin:prettier/recommended", "plugin:@typescript-eslint/recommended"],
   "settings": {
     "import/resolver": {
       "node": {
@@ -15,8 +15,10 @@
       }
     }
   },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2018
+    "ecmaVersion": 2018,
+    "project": "./tsconfig.json"
   },
   "rules": {
     "no-undef": "off",

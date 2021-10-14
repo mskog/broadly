@@ -8,7 +8,7 @@ type PosterProps = {
   src: string | undefined;
 };
 
-export default function Poster({ src }: PosterProps) {
+const Poster = ({ src }: PosterProps): JSX.Element => {
   let imageSrc;
   if (!src) {
     imageSrc = "https://www.fillmurray.com/105/160";
@@ -22,4 +22,6 @@ export default function Poster({ src }: PosterProps) {
       src={thumbnail(imageSrc)}
     />
   );
-}
+};
+
+export default Poster;

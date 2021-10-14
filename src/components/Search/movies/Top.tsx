@@ -6,6 +6,7 @@ import { cdnImage } from "utilities";
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
+import { ApolloError } from "@apollo/client";
 
 function image({
   loading,
@@ -13,7 +14,7 @@ function image({
   data
 }: {
   loading: boolean;
-  error?: any;
+  error?: ApolloError;
   data?: { moviePoster: { url: string } };
 }) {
   if (loading || error || !data) {
@@ -33,7 +34,7 @@ type TopProps = {
 };
 
 // TODO: Use lazy loading and fancy placeholders
-export default function Top({ movie }: TopProps) {
+const Top = ({ movie }: TopProps): JSX.Element => {
   const { tmdbId, title, year } = movie;
 
   const url = image(
@@ -62,4 +63,6 @@ export default function Top({ movie }: TopProps) {
       </div>
     </div>
   );
-}
+};
+
+export default Top;

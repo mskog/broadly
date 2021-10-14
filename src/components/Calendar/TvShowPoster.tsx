@@ -1,7 +1,11 @@
 import React from "react";
-import { useTvShowPosterQuery } from "generated/graphql";
+import {
+  TvShowPoster as TvShowPosterType,
+  useTvShowPosterQuery
+} from "generated/graphql";
 
 import { thumbnail } from "utilities";
+import { ApolloError } from "@apollo/client";
 
 const IMAGE_PLACEHOLDER =
   "https://image.tmdb.org/t/p/w300/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
@@ -12,10 +16,10 @@ function image({
   data
 }: {
   loading: boolean;
-  error?: any;
-  data: any;
+  error?: ApolloError;
+  data?: { tvShowPoster: TvShowPosterType };
 }) {
-  if (loading || error) {
+  if (loading || error || !data) {
     return IMAGE_PLACEHOLDER;
   }
   return data.tvShowPoster.url;

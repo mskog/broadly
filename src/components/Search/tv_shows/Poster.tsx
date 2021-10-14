@@ -3,6 +3,7 @@ import React from "react";
 import { useTvShowPosterQuery } from "generated/graphql";
 
 import { thumbnail } from "utilities";
+import { ApolloError } from "@apollo/client";
 
 const IMAGE_PLACEHOLDER =
   "https://image.tmdb.org/t/p/w300/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
@@ -13,17 +14,17 @@ function image({
   data
 }: {
   loading: boolean;
-  error?: any;
-  data: any;
+  error?: ApolloError;
+  data?: { tvShowPoster: { url: string } };
 }) {
-  if (loading || error) {
+  if (loading || error || !data) {
     return IMAGE_PLACEHOLDER;
   }
   return data.tvShowPoster.url;
 }
 
 // TODO: Use lazy loading and fancy placeholders
-export default function Poster({ tmdbId }: { tmdbId: string }) {
+const Poster = ({ tmdbId }: { tmdbId: string }): JSX.Element => {
   const url = image(
     useTvShowPosterQuery({
       variables: { tmdbId },
@@ -38,4 +39,5 @@ export default function Poster({ tmdbId }: { tmdbId: string }) {
       src={thumbnail(url)}
     />
   );
-}
+};
+export default Poster;

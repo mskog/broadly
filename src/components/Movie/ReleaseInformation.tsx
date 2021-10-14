@@ -4,17 +4,20 @@ import { MovieRelease } from "generated/graphql";
 
 import { resolutionDisplay } from "utilities";
 
-type Props = {
+type ReleaseInformationProps = {
   killer: boolean;
   acceptable: boolean;
-  release: MovieRelease;
+  release: Pick<
+    MovieRelease,
+    "releaseName" | "source" | "size" | "resolution" | "container"
+  >;
 };
 
-export default function ReleaseInformation({
+const ReleaseInformation = ({
   killer,
   acceptable,
   release
-}: Props) {
+}: ReleaseInformationProps): JSX.Element => {
   const { releaseName, source, size, resolution, container } = release;
 
   const releaseLine = `${source} - ${container} - ${resolutionDisplay(
@@ -35,4 +38,6 @@ export default function ReleaseInformation({
       )}
     </div>
   );
-}
+};
+
+export default ReleaseInformation;
