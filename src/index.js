@@ -8,7 +8,7 @@ import App from "./App";
 
 const rootEl = document.getElementById("root");
 
-const render = (Component: any): void => {
+const render = (Component): void => {
   ReactDOM.render(
     <BrowserRouter>
       <Component />
