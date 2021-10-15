@@ -10,7 +10,7 @@ import Categories from "./Categories";
 type CalendarProps = {
   match: {
     params: {
-      category?: CalendarCategory;
+      category?: string;
     };
   };
 };
@@ -22,9 +22,11 @@ const Calendar = (props: CalendarProps): JSX.Element => {
     }
   } = props;
 
+  const calendarCategory = category.toUpperCase() as CalendarCategory;
+
   const { data } = useCalendarQuery({
     variables: {
-      category
+      category: calendarCategory
     },
     fetchPolicy: "cache-and-network"
   });
