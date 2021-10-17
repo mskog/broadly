@@ -1,6 +1,6 @@
 import React from "react";
 
-import { truncate } from "lodash";
+import truncate from "lodash/truncate";
 
 const NewsItem = ({
   title,

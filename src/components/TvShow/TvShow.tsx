@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { uniq, sortBy, last } from "lodash";
+
+import uniq from "lodash/uniq";
+import sortBy from "lodash/sortBy";
+import last from "lodash/last";
 
 import { useTvShowQuery, Episode } from "generated/graphql";
 

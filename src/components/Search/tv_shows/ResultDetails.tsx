@@ -1,6 +1,6 @@
 import React from "react";
 
-import { capitalize } from "lodash";
+import capitalize from "lodash/capitalize";
 
 import Ratings from "components/shared/Ratings";
 import { formattedRuntime, releaseYear } from "utilities";

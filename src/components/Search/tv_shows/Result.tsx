@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 import { Link } from "react-router-dom";
-import { truncate } from "lodash";
+import truncate from "lodash/truncate";
 
 import { TvShowSearch, useTvShowSummaryQuery } from "generated/graphql";
 

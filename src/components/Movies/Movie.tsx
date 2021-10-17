@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-import { truncate } from "lodash";
+import truncate from "lodash/truncate";
 import { DateTime } from "luxon";
 
 import { formattedRuntime, releaseYear, resolutionDisplay } from "utilities";

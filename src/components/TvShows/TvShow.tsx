@@ -5,7 +5,7 @@ import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
 import LazyLoad from "react-lazyload";
 import { Link } from "react-router-dom";
 
-import { truncate } from "lodash";
+import truncate from "lodash/truncate";
 
 import { formattedRuntime, releaseYear } from "utilities";
 

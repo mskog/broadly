@@ -1,6 +1,6 @@
 import React from "react";
 
-import { capitalize } from "lodash";
+import capitalize from "lodash/capitalize";
 
 import { EpisodeCategory, useEpisodesQuery } from "generated/graphql";
 import Loading from "components/shared/LoadingFull";

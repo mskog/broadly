@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { padStart } from "lodash";
+import padStart from "lodash/padStart";
 import { DateTime } from "luxon";
 
 import { Episode, EpisodeRelease } from "generated/graphql";

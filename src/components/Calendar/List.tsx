@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React from "react";
 
-import { groupBy } from "lodash";
+import groupBy from "lodash/groupBy";
 import { DateTime } from "luxon";
 
 import { Link } from "react-router-dom";

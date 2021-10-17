@@ -3,7 +3,9 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-import { padStart, truncate } from "lodash";
+import padStart from "lodash/padStart";
+import truncate from "lodash/truncate";
+
 import LazyLoad from "react-lazyload";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

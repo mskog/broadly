@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { NewsItem } from "generated/graphql";
 
-import { truncate } from "lodash";
+import truncate from "lodash/truncate";
 
 type ItemProps = Pick<NewsItem, "title" | "url" | "metadata" | "newsworthy">;
 

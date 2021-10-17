@@ -1,5 +1,8 @@
 import React from "react";
-import { sortBy, uniqBy, reverse } from "lodash";
+
+import sortBy from "lodash/sortBy";
+import uniqBy from "lodash/uniqBy";
+import reverse from "lodash/reverse";
 
 import { Episode as EpisodeType } from "generated/graphql";
 import Episode from "./Episode";

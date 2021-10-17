@@ -3,7 +3,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-import { padStart } from "lodash";
+import padStart from "lodash/padStart";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
