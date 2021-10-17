@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import "typeface-roboto";
 import {
@@ -20,8 +19,8 @@ import {
 
 import { LocalStorageWrapper, persistCache } from "apollo3-cache-persist";
 
-import Calendar from "./components/Calendar/Calendar";
-import PtpMovieRecommendations from "./components/PtpMovieRecommendations/PtpMovieRecommendations";
+import { Calendar } from "./components/Calendar";
+import { PtpMovieRecommendations } from "./components/PtpMovieRecommendations";
 
 import TopNavigation from "./components/shared/TopNavigation";
 

@@ -8,7 +8,7 @@ import App from "./App";
 
 const rootEl = document.getElementById("root");
 
-const render = (Component) => {
+const render = (Component: React.FunctionComponent) => {
   ReactDOM.render(
     <BrowserRouter>
       <Component />
@@ -18,7 +18,3 @@ const render = (Component) => {
 };
 
 render(App);
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA

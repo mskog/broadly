@@ -2,8 +2,6 @@ import React from "react";
 
 import { thumbnail } from "utilities";
 
-import ProgressiveImage from "components/shared/ProgressiveImage";
-
 type PosterProps = {
   src: string | undefined;
 };
@@ -17,7 +15,7 @@ const Poster = ({ src }: PosterProps): JSX.Element => {
   }
 
   return (
-    <ProgressiveImage
+    <img
       className="object-cover w-full h-full rounded"
       src={thumbnail(imageSrc)}
     />
