@@ -25,10 +25,13 @@ const TvShow = (props: TvShowProps): JSX.Element => {
 
   const [selectedSeason, setSelectedSeason] = useState(0);
 
-  const { data } = useTvShowQuery({
+  const { data, loading } = useTvShowQuery({
     fetchPolicy: "cache-and-network",
     variables: { id }
   });
+
+  console.log(loading);
+  console.log(data);
 
   if (!data) {
     return <Loading />;

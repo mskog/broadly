@@ -42,13 +42,10 @@ import TvShowSearchResult from "./components/Search/tv_shows/Details";
 
 import News from "./components/News/News";
 
-import schema from "./schema.json";
-
 function App() {
   document.body.classList.add("bg-background-blue");
 
   const { pathname } = useLocation();
-  const [client, setClient] = useState(undefined);
   const [authKey, setAuthKey] = useState(localStorage.getItem("auth_key"));
 
   useEffect(() => {
@@ -57,37 +54,32 @@ function App() {
     }
   });
 
-  useEffect(() => {
-    const cache = new InMemoryCache();
+  const cache = new InMemoryCache();
 
-    const c = new ApolloClient({
-      link: ApolloLink.from([
-        new HttpLink({
-          uri: import.meta.env.VITE_API_URL,
-          credentials: "same-origin",
-          headers: {
-            Authorization: `Basic ${authKey}`
-          }
-        })
-      ]),
-      defaultOptions: {
-        query: {
-          fetchPolicy: "no-cache"
+  const c = new ApolloClient({
+    link: ApolloLink.from([
+      new HttpLink({
+        uri: import.meta.env.VITE_API_URL,
+        credentials: "same-origin",
+        headers: {
+          Authorization: `Basic ${authKey}`
         }
-      },
-      cache
-    });
+      })
+    ]),
+    defaultOptions: {
+      query: {
+        fetchPolicy: "no-cache"
+      }
+    },
+    cache
+  });
 
-    setClient(c);
-    return () => {};
-  }, []);
-
-  if (client === undefined) return <div>Loading...</div>;
+  if (c === undefined) return <div>Loading...</div>;
 
   const TopNavigationWithRouter = withRouter(TopNavigation);
 
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={c}>
       <div
         style={{ height: "100%" }}
         className="h-screen text-gray-400 App bg-background-blue"
