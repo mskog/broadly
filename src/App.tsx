@@ -14,8 +14,11 @@ import {
   ApolloClient,
   ApolloLink,
   ApolloProvider,
-  InMemoryCache
+  InMemoryCache,
+  NormalizedCacheObject
 } from "@apollo/client";
+
+import { LocalStorageWrapper, persistCache } from "apollo3-cache-persist";
 
 import Calendar from "./components/Calendar/Calendar";
 import PtpMovieRecommendations from "./components/PtpMovieRecommendations/PtpMovieRecommendations";
@@ -54,32 +57,42 @@ function App() {
     }
   });
 
+  const [client, setClient] = useState<ApolloClient<NormalizedCacheObject>>();
+
+  useEffect(() => {
+    async function init() {
+      const cache = new InMemoryCache();
+      await persistCache({
+        cache,
+        storage: new LocalStorageWrapper(window.localStorage)
+      });
+      setClient(
+        new ApolloClient({
+          cache,
+          link: ApolloLink.from([
+            new HttpLink({
+              uri: import.meta.env.VITE_API_URL,
+              credentials: "same-origin",
+              headers: {
+                Authorization: `Basic ${authKey}`
+              }
+            })
+          ])
+        })
+      );
+    }
+
+    init().catch(console.error);
+  }, []);
+
   const cache = new InMemoryCache();
 
-  const c = new ApolloClient({
-    link: ApolloLink.from([
-      new HttpLink({
-        uri: import.meta.env.VITE_API_URL,
-        credentials: "same-origin",
-        headers: {
-          Authorization: `Basic ${authKey}`
-        }
-      })
-    ]),
-    defaultOptions: {
-      query: {
-        fetchPolicy: "no-cache"
-      }
-    },
-    cache
-  });
-
-  if (c === undefined) return <div>Loading...</div>;
+  if (client === undefined) return <div>Loading...</div>;
 
   const TopNavigationWithRouter = withRouter(TopNavigation);
 
   return (
-    <ApolloProvider client={c}>
+    <ApolloProvider client={client}>
       <div
         style={{ height: "100%" }}
         className="h-screen text-gray-400 App bg-background-blue"
