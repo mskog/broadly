@@ -8,7 +8,7 @@ const NewsItem = ({
   url
 }: {
   title: string;
-  metadata: { image?: string; description?: string };
+  metadata?: { image?: string; description?: string };
   url: string;
 }): JSX.Element => {
   const { image, description } = metadata || {};

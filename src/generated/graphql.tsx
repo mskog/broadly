@@ -239,7 +239,7 @@ export type MutationWatchTvShowArgs = {
 export type NewsItem = {
   __typename?: 'NewsItem';
   id: Scalars['Int'];
-  metadata: NewsItemMetadata;
+  metadata?: Maybe<NewsItemMetadata>;
   newsworthy?: Maybe<Newsworthy>;
   score: Scalars['Int'];
   title: Scalars['String'];
@@ -611,7 +611,7 @@ export type NewsQueryVariables = Exact<{
 }>;
 
 
-export type NewsQuery = { __typename?: 'Query', news: Array<{ __typename?: 'NewsItem', title: string, url: string, metadata: { __typename?: 'NewsItemMetadata', image?: Maybe<string>, description?: Maybe<string> }, newsworthy?: Maybe<{ __typename?: 'Movie' } | { __typename?: 'TvShow', id: number, name: string }> }> };
+export type NewsQuery = { __typename?: 'Query', news: Array<{ __typename?: 'NewsItem', title: string, url: string, metadata?: Maybe<{ __typename?: 'NewsItemMetadata', image?: Maybe<string>, description?: Maybe<string> }>, newsworthy?: Maybe<{ __typename?: 'Movie' } | { __typename?: 'TvShow', id: number, name: string }> }> };
 
 export type MovieSearchQueryVariables = Exact<{
   query: Scalars['String'];
@@ -670,7 +670,7 @@ export type TvShowQueryVariables = Exact<{
 }>;
 
 
-export type TvShowQuery = { __typename?: 'Query', tvShow: { __typename?: 'TvShow', id: number, name: string, status?: Maybe<string>, watching?: Maybe<boolean>, collected?: Maybe<boolean>, waitlist?: Maybe<boolean>, posterImage?: Maybe<string>, backdropImage?: Maybe<string>, tmdbDetails?: Maybe<{ __typename?: 'TvShowTmdbDetails', voteAverage?: Maybe<string>, firstAirDate?: Maybe<string>, id?: Maybe<number> }>, traktDetails?: Maybe<{ __typename?: 'TraktDetails', overview?: Maybe<string>, runtime?: Maybe<number>, genres?: Maybe<Array<string>>, network?: Maybe<string>, ids?: Maybe<{ __typename?: 'TraktIds', tmdb?: Maybe<string> }> }>, episodes?: Maybe<Array<{ __typename?: 'Episode', id?: Maybe<number>, name?: Maybe<string>, season?: Maybe<number>, episode?: Maybe<number>, stillImage?: Maybe<string>, stillImageThumbnail?: Maybe<string>, watched?: Maybe<boolean>, tmdbDetails?: Maybe<{ __typename?: 'EpisodeTmdbDetails', name?: Maybe<string>, overview?: Maybe<string> }> }>>, newsItems?: Maybe<Array<{ __typename?: 'NewsItem', title: string, url: string, metadata: { __typename?: 'NewsItemMetadata', image?: Maybe<string>, description?: Maybe<string> } }>> } };
+export type TvShowQuery = { __typename?: 'Query', tvShow: { __typename?: 'TvShow', id: number, name: string, status?: Maybe<string>, watching?: Maybe<boolean>, collected?: Maybe<boolean>, waitlist?: Maybe<boolean>, posterImage?: Maybe<string>, backdropImage?: Maybe<string>, tmdbDetails?: Maybe<{ __typename?: 'TvShowTmdbDetails', voteAverage?: Maybe<string>, firstAirDate?: Maybe<string>, id?: Maybe<number> }>, traktDetails?: Maybe<{ __typename?: 'TraktDetails', overview?: Maybe<string>, runtime?: Maybe<number>, genres?: Maybe<Array<string>>, network?: Maybe<string>, ids?: Maybe<{ __typename?: 'TraktIds', tmdb?: Maybe<string> }> }>, episodes?: Maybe<Array<{ __typename?: 'Episode', id?: Maybe<number>, name?: Maybe<string>, season?: Maybe<number>, episode?: Maybe<number>, stillImage?: Maybe<string>, stillImageThumbnail?: Maybe<string>, watched?: Maybe<boolean>, tmdbDetails?: Maybe<{ __typename?: 'EpisodeTmdbDetails', name?: Maybe<string>, overview?: Maybe<string> }> }>>, newsItems?: Maybe<Array<{ __typename?: 'NewsItem', title: string, url: string, metadata?: Maybe<{ __typename?: 'NewsItemMetadata', image?: Maybe<string>, description?: Maybe<string> }> }>> } };
 
 export type TvShowSummaryQueryVariables = Exact<{
   imdbId: Scalars['ID'];

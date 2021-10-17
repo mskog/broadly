@@ -30,9 +30,6 @@ const TvShow = (props: TvShowProps): JSX.Element => {
     variables: { id }
   });
 
-  console.log(loading);
-  console.log(data);
-
   if (!data) {
     return <Loading />;
   }
