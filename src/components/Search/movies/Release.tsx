@@ -12,19 +12,21 @@ import ReleaseInformation from "components/Movie/ReleaseInformation";
 
 type ReleaseProps = {
   imdbId: string;
-  release: Pick<
+  release?: Pick<
     MovieRelease,
     "releaseName" | "source" | "size" | "resolution" | "container"
   >;
   acceptable: boolean;
   killer: boolean;
+  onWaitlist: boolean;
 };
 
 const Release = ({
   imdbId,
   release,
   acceptable,
-  killer
+  killer,
+  onWaitlist
 }: ReleaseProps): JSX.Element => {
   const history = useHistory();
 
@@ -74,7 +76,7 @@ const Release = ({
         />
       )}
       <div className="flex flex-col mt-4 -mx-2 md:flex-row">
-        {!killer && addToWaitlistComponent}
+        {!killer && !onWaitlist && addToWaitlistComponent}
         {acceptable && downloadComponent}
       </div>
     </div>

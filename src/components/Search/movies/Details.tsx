@@ -21,7 +21,8 @@ const Details = (props: DetailsProps): JSX.Element => {
   } = props;
 
   const { data } = useMovieSearchResultQuery({
-    variables: { imdbId }
+    variables: { imdbId },
+    fetchPolicy: "cache-and-network"
   });
 
   if (!data) {
@@ -36,14 +37,13 @@ const Details = (props: DetailsProps): JSX.Element => {
           {data.movieSearchResult.overview}
         </p>
         <div className="mt-4">
-          {data.movieSearchResult.bestRelease && (
-            <Release
-              killer={data.movieSearchResult.hasKillerRelease}
-              acceptable={data.movieSearchResult.hasAcceptableRelease}
-              release={data.movieSearchResult.bestRelease}
-              imdbId={imdbId}
-            />
-          )}
+          <Release
+            killer={data.movieSearchResult.hasKillerRelease}
+            acceptable={data.movieSearchResult.hasAcceptableRelease}
+            release={data.movieSearchResult.bestRelease}
+            imdbId={imdbId}
+            onWaitlist={data.movieSearchResult.onWaitlist}
+          />
         </div>
       </div>
     </div>

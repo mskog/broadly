@@ -7,7 +7,8 @@ import Result from "./Result";
 
 const Results = ({ query }: { query: string }): JSX.Element => {
   const { data } = useMovieSearchQuery({
-    variables: { query }
+    variables: { query },
+    fetchPolicy: "cache-and-network"
   });
 
   let results: JSX.Element | JSX.Element[] = <Loading />;
