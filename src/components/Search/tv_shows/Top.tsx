@@ -5,9 +5,8 @@ import { useTvShowPosterQuery, TvShowSearch } from "generated/graphql";
 
 import { cdnImage } from "utilities";
 
-import LevelItem from "components/shared/LevelItem";
-import Level from "components/shared/Level";
-import Ratings from "components/shared/Ratings";
+import { Level, LevelItem } from "components/shared";
+import { Ratings } from "components/shared";
 
 function image({
   loading,

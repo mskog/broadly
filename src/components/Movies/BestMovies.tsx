@@ -2,7 +2,7 @@ import React from "react";
 
 import { useBestMoviesQuery } from "generated/graphql";
 
-import Loading from "components/shared/LoadingFull";
+import { LoadingFull } from "components/shared";
 
 import List from "./List";
 import Categories from "./Categories";
@@ -59,7 +59,7 @@ const BestMovies = (props: BestMoviesProps): JSX.Element => {
 
   let mainContent;
   if (!data) {
-    mainContent = <Loading />;
+    mainContent = <LoadingFull />;
   } else if (error) {
     mainContent = <p>Error</p>;
   } else {

@@ -1,20 +1,18 @@
 import React from "react";
 
-import { PtpRecommendedMovie } from "generated/graphql";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
+import { PtpRecommendedMovie } from "generated/graphql";
+
 import truncate from "lodash/truncate";
 
-import Ratings from "components/shared/Ratings";
-import Poster from "components/Movies/Poster";
+import { Ratings } from "components/shared";
+import { Poster } from "components/Movies";
 
 const Movie = ({ movie }: { movie: PtpRecommendedMovie }): JSX.Element => {
   const { title, ptpRating, cover, imdbId, year } = movie;
-
-  const rating = ptpRating;
 
   return (
     <div className="text-gray-100 rounded shadow-lg shadow-fat bg-background-blue-2">
@@ -30,7 +28,7 @@ const Movie = ({ movie }: { movie: PtpRecommendedMovie }): JSX.Element => {
               {truncate(title, { length: 40 })}
             </h2>
           </Link>
-          {rating && <Ratings score={rating}>{rating}</Ratings>}
+          {ptpRating && <Ratings score={ptpRating}>{ptpRating}</Ratings>}
           <div className="mt-2 text-sm font-thin">
             <span>
               <FontAwesomeIcon className="mr-1" icon={faCalendar} />

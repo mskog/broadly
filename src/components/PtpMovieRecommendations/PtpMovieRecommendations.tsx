@@ -1,7 +1,7 @@
 import React from "react";
 
 import { usePtpMovieRecommendationsQuery } from "generated/graphql";
-import Loading from "components/shared/LoadingFull";
+import { LoadingFull } from "components/shared";
 
 import List from "./List";
 
@@ -10,7 +10,7 @@ const PtpMovieRecommendations = (): JSX.Element => {
 
   let mainContent;
   if (!data) {
-    mainContent = <Loading />;
+    mainContent = <LoadingFull />;
   } else if (error) {
     mainContent = <p>Error</p>;
   } else {

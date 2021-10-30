@@ -3,7 +3,7 @@ import React from "react";
 import capitalize from "lodash/capitalize";
 
 import { EpisodeCategory, useEpisodesQuery } from "generated/graphql";
-import Loading from "components/shared/LoadingFull";
+import { LoadingFull } from "components/shared";
 import List from "./List";
 import Categories from "./Categories";
 
@@ -49,7 +49,7 @@ const Episodes = (props: EpisodesProps): JSX.Element => {
   };
   let mainContent;
   if (!data) {
-    mainContent = <Loading />;
+    mainContent = <LoadingFull />;
   } else if (error) {
     mainContent = <p>Error</p>;
   } else {

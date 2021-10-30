@@ -2,7 +2,7 @@ import React from "react";
 
 import { useMovieSearchResultQuery } from "generated/graphql";
 
-import Loading from "components/shared/LoadingFull";
+import { LoadingFull } from "components/shared";
 
 import Top from "./Top";
 import Release from "./Release";
@@ -26,7 +26,7 @@ const Details = (props: DetailsProps): JSX.Element => {
   });
 
   if (!data) {
-    return <Loading />;
+    return <LoadingFull />;
   }
 
   return (

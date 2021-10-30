@@ -1,6 +1,6 @@
 import React from "react";
 
-import Loading from "components/shared/LoadingFull";
+import { LoadingFull } from "components/shared";
 
 import { CalendarCategory, useCalendarQuery } from "generated/graphql";
 
@@ -33,7 +33,7 @@ const Calendar = (props: CalendarProps): JSX.Element => {
 
   let mainContent;
   if (!data) {
-    mainContent = <Loading />;
+    mainContent = <LoadingFull />;
   } else {
     mainContent = <List items={data.calendar} />;
   }

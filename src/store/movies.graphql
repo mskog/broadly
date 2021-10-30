@@ -124,3 +124,9 @@ mutation DownloadMovie($imdbId: String!) {
     id
   }
 }
+
+mutation RateMovie($id: ID!, $rating: Int!) {
+  rateMovie(id: $id, rating: $rating) {
+    id
+  }
+}

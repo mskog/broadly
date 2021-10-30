@@ -2,7 +2,7 @@ import React from "react";
 
 import { TvShowSearch, useTvShowSearchQuery } from "generated/graphql";
 
-import Loading from "components/shared/LoadingFull";
+import { LoadingFull } from "components/shared";
 import Result from "./Result";
 
 const Results = ({ query }: { query: string }): JSX.Element => {
@@ -10,7 +10,7 @@ const Results = ({ query }: { query: string }): JSX.Element => {
     variables: { query }
   });
 
-  let results: JSX.Element | JSX.Element[] = <Loading />;
+  let results: JSX.Element | JSX.Element[] = <LoadingFull />;
 
   if (data) {
     if (data.tvShowSearch.length !== 0) {

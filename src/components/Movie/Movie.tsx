@@ -3,7 +3,7 @@ import { DateTime } from "luxon";
 
 import { useMovieQuery } from "generated/graphql";
 
-import Loading from "components/shared/LoadingFull";
+import { LoadingFull } from "components/shared";
 
 import Top from "./Top";
 import Actions from "./Actions";
@@ -30,7 +30,7 @@ const Movie = (props: MovieProps): JSX.Element => {
   });
 
   if (!data) {
-    return <Loading />;
+    return <LoadingFull />;
   }
 
   const {

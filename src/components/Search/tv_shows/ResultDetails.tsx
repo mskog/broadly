@@ -2,7 +2,7 @@ import React from "react";
 
 import capitalize from "lodash/capitalize";
 
-import Ratings from "components/shared/Ratings";
+import { Ratings } from "components/shared";
 import { formattedRuntime, releaseYear } from "utilities";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

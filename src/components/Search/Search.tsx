@@ -3,7 +3,7 @@ import queryString from "query-string";
 
 import { RouteComponentProps } from "react-router-dom";
 
-import SearchBox from "../shared/SearchBox";
+import { SearchBox } from "components/shared";
 
 import Categories from "./Categories";
 

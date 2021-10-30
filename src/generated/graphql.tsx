@@ -606,6 +606,14 @@ export type DownloadMovieMutationVariables = Exact<{
 
 export type DownloadMovieMutation = { __typename?: 'Mutation', downloadMovie: { __typename?: 'Movie', id: number } };
 
+export type RateMovieMutationVariables = Exact<{
+  id: Scalars['ID'];
+  rating: Scalars['Int'];
+}>;
+
+
+export type RateMovieMutation = { __typename?: 'Mutation', rateMovie: { __typename?: 'Movie', id: number } };
+
 export type NewsQueryVariables = Exact<{
   category: Scalars['String'];
 }>;
@@ -1179,6 +1187,40 @@ export function useDownloadMovieMutation(baseOptions?: Apollo.MutationHookOption
 export type DownloadMovieMutationHookResult = ReturnType<typeof useDownloadMovieMutation>;
 export type DownloadMovieMutationResult = Apollo.MutationResult<DownloadMovieMutation>;
 export type DownloadMovieMutationOptions = Apollo.BaseMutationOptions<DownloadMovieMutation, DownloadMovieMutationVariables>;
+export const RateMovieDocument = gql`
+    mutation RateMovie($id: ID!, $rating: Int!) {
+  rateMovie(id: $id, rating: $rating) {
+    id
+  }
+}
+    `;
+export type RateMovieMutationFn = Apollo.MutationFunction<RateMovieMutation, RateMovieMutationVariables>;
+
+/**
+ * __useRateMovieMutation__
+ *
+ * To run a mutation, you first call `useRateMovieMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRateMovieMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [rateMovieMutation, { data, loading, error }] = useRateMovieMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      rating: // value for 'rating'
+ *   },
+ * });
+ */
+export function useRateMovieMutation(baseOptions?: Apollo.MutationHookOptions<RateMovieMutation, RateMovieMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RateMovieMutation, RateMovieMutationVariables>(RateMovieDocument, options);
+      }
+export type RateMovieMutationHookResult = ReturnType<typeof useRateMovieMutation>;
+export type RateMovieMutationResult = Apollo.MutationResult<RateMovieMutation>;
+export type RateMovieMutationOptions = Apollo.BaseMutationOptions<RateMovieMutation, RateMovieMutationVariables>;
 export const NewsDocument = gql`
     query News($category: String!) {
   news(category: $category) {

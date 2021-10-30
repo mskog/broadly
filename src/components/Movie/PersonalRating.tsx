@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 import useOnclickOutside from "react-cool-onclickoutside";
-import { useMutation, gql } from "@apollo/client";
+
+import { useRateMovieMutation } from "generated/graphql";
 
 type PersonalRatingProps = {
   id: number;
@@ -21,21 +22,15 @@ const PersonalRating = ({
     setEditMode(false);
   });
 
-  const RATE_MOVIE = gql`
-    mutation RateMovie($id: ID!, $rating: Int!) {
-      rateMovie(id: $id, rating: $rating) {
-        id
-      }
-    }
-  `;
-
-  const [rateMovie] = useMutation(RATE_MOVIE);
+  const [rateMovie] = useRateMovieMutation();
 
   const onChange = (event: React.FormEvent<HTMLSelectElement>) => {
     const newRating = parseInt(event.currentTarget.value, 10);
     setRating(newRating);
     setEditMode(false);
-    rateMovie({ variables: { id, rating: newRating } });
+    rateMovie({
+      variables: { id: id.toString(), rating: newRating }
+    });
   };
 
   let ratingDisplay;

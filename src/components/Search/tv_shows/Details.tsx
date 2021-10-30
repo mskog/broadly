@@ -9,8 +9,7 @@ import {
   useSampleTvShowMutation
 } from "generated/graphql";
 
-import Loading from "components/shared/LoadingFull";
-import LoaderButton from "components/shared/LoaderButton";
+import { LoadingFull, LoaderButton } from "components/shared";
 
 import Top from "./Top";
 
@@ -69,7 +68,7 @@ const Details = (props: DetailsProps): JSX.Element => {
   });
 
   if (!data) {
-    return <Loading />;
+    return <LoadingFull />;
   }
 
   return (

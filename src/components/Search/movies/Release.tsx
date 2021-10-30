@@ -6,9 +6,9 @@ import {
 } from "generated/graphql";
 import { useHistory } from "react-router-dom";
 
-import LoaderButton from "components/shared/LoaderButton";
+import { LoaderButton } from "components/shared";
 
-import ReleaseInformation from "components/Movie/ReleaseInformation";
+import { ReleaseInformation } from "components/Movie";
 
 type ReleaseProps = {
   imdbId: string;
