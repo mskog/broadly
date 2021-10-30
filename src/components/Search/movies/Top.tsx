@@ -4,8 +4,7 @@ import { MovieSearch, useMoviePosterQuery } from "generated/graphql";
 
 import { cdnImage } from "utilities";
 
-import LevelItem from "components/shared/LevelItem";
-import Level from "components/shared/Level";
+import { Level, LevelItem } from "components/shared";
 import { ApolloError } from "@apollo/client";
 
 function image({

@@ -22,7 +22,8 @@ const OmniSearch = ({ open, closeHandler, history }: OmniSearchProps) => {
 
   const { data } = useOmniSearchQuery({
     skip: !query,
-    variables: { query }
+    variables: { query },
+    fetchPolicy: "cache-and-network"
   });
 
   const handleQueryChange = (event: React.FormEvent) => {

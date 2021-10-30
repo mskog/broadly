@@ -19,30 +19,27 @@ import {
 
 import { LocalStorageWrapper, persistCache } from "apollo3-cache-persist";
 
-import { Calendar } from "./components/Calendar";
-import { PtpMovieRecommendations } from "./components/PtpMovieRecommendations";
+import { Calendar } from "components/Calendar";
+import { PtpMovieRecommendations } from "components/PtpMovieRecommendations";
 
-import TopNavigation from "./components/shared/TopNavigation";
+import { Login, TopNavigation } from "components/shared";
 
-import Login from "./components/shared/Login";
+import { BestMovies, Movies } from "components/Movies";
+import { Movie } from "components/Movie";
 
-import Movies from "./components/Movies/Movies";
-import BestMovies from "./components/Movies/BestMovies";
-import Movie from "./components/Movie/Movie";
+import { TvShows } from "components/TvShows";
+import { TvShow } from "components/TvShow";
 
-import TvShows from "./components/TvShows/TvShows";
-import TvShow from "./components/TvShow/TvShow";
+import { Episode } from "components/Episode";
 
-import Episode from "./components/Episode/Episode";
+import { Episodes } from "components/Episodes";
 
-import Episodes from "./components/Episodes/Episodes";
+import { Search } from "components/Search";
 
-import Search from "./components/Search/Search";
+import MovieSearchResult from "components/Search/movies/Details";
+import TvShowSearchResult from "components/Search/tv_shows/Details";
 
-import MovieSearchResult from "./components/Search/movies/Details";
-import TvShowSearchResult from "./components/Search/tv_shows/Details";
-
-import News from "./components/News/News";
+import { News } from "components/News";
 
 function App() {
   document.body.classList.add("bg-background-blue");

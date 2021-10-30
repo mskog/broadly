@@ -7,8 +7,7 @@ import { Episode, EpisodeRelease } from "generated/graphql";
 
 import { formattedRuntime, cdnImage, resolutionDisplay } from "utilities";
 
-import LevelItem from "components/shared/LevelItem";
-import Level from "components/shared/Level";
+import { Level, LevelItem } from "components/shared";
 
 function backgroundStyle(url: string) {
   return {

@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import React from "react";
 
 import groupBy from "lodash/groupBy";
@@ -8,7 +7,7 @@ import { Link } from "react-router-dom";
 
 import { CalendarEpisode, Movie } from "generated/graphql";
 
-import MoviePoster from "components/Movies/Poster";
+import { Poster as MoviePoster } from "components/Movies";
 import TvShowPoster from "./TvShowPoster";
 
 type ListProps = {

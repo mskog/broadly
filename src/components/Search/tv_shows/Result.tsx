@@ -9,8 +9,7 @@ import truncate from "lodash/truncate";
 
 import { TvShowSearch, useTvShowSummaryQuery } from "generated/graphql";
 
-import Poster from "components/Search/tv_shows/Poster";
-
+import Poster from "./Poster";
 import ResultDetails from "./ResultDetails";
 
 const Result = ({

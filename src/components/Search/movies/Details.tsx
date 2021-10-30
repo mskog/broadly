@@ -2,7 +2,7 @@ import React from "react";
 
 import { useMovieSearchResultQuery } from "generated/graphql";
 
-import Loading from "components/shared/LoadingFull";
+import { LoadingFull } from "components/shared";
 
 import Top from "./Top";
 import Release from "./Release";
@@ -21,11 +21,12 @@ const Details = (props: DetailsProps): JSX.Element => {
   } = props;
 
   const { data } = useMovieSearchResultQuery({
-    variables: { imdbId }
+    variables: { imdbId },
+    fetchPolicy: "cache-and-network"
   });
 
   if (!data) {
-    return <Loading />;
+    return <LoadingFull />;
   }
 
   return (
@@ -36,14 +37,13 @@ const Details = (props: DetailsProps): JSX.Element => {
           {data.movieSearchResult.overview}
         </p>
         <div className="mt-4">
-          {data.movieSearchResult.bestRelease && (
-            <Release
-              killer={data.movieSearchResult.hasKillerRelease}
-              acceptable={data.movieSearchResult.hasAcceptableRelease}
-              release={data.movieSearchResult.bestRelease}
-              imdbId={imdbId}
-            />
-          )}
+          <Release
+            killer={data.movieSearchResult.hasKillerRelease}
+            acceptable={data.movieSearchResult.hasAcceptableRelease}
+            release={data.movieSearchResult.bestRelease}
+            imdbId={imdbId}
+            onWaitlist={data.movieSearchResult.onWaitlist}
+          />
         </div>
       </div>
     </div>

@@ -2,8 +2,8 @@ import React from "react";
 
 import { useEpisodeQuery, useEpisodeWatchedMutation } from "generated/graphql";
 
-import Loading from "components/shared/LoadingFull";
-import LoaderButton from "components/shared/LoaderButton";
+import { LoadingFull } from "components/shared";
+import { LoaderButton } from "components/shared";
 
 import Top from "./Top";
 
@@ -31,7 +31,7 @@ const Episode = (props: EpisodeProps): JSX.Element => {
   });
 
   if (!data) {
-    return <Loading />;
+    return <LoadingFull />;
   }
 
   const { episode } = data;

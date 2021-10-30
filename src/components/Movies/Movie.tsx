@@ -16,7 +16,7 @@ import { formattedRuntime, releaseYear, resolutionDisplay } from "utilities";
 
 import { Movie as MovieType, MovieRelease } from "generated/graphql";
 
-import Ratings from "components/shared/Ratings";
+import { Ratings } from "components/shared";
 import Poster from "./Poster";
 
 type MovieProps = {

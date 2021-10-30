@@ -2,15 +2,16 @@ import React from "react";
 
 import { useMovieSearchQuery, MovieSearch } from "generated/graphql";
 
-import Loading from "components/shared/LoadingFull";
+import { LoadingFull } from "components/shared";
 import Result from "./Result";
 
 const Results = ({ query }: { query: string }): JSX.Element => {
   const { data } = useMovieSearchQuery({
-    variables: { query }
+    variables: { query },
+    fetchPolicy: "cache-and-network"
   });
 
-  let results: JSX.Element | JSX.Element[] = <Loading />;
+  let results: JSX.Element | JSX.Element[] = <LoadingFull />;
 
   if (data) {
     if (data.movieSearch.length !== 0) {

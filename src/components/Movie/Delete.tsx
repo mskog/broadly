@@ -1,5 +1,5 @@
 import React from "react";
-import LoaderButton from "components/shared/LoaderButton";
+import { LoaderButton } from "components/shared";
 
 type DeleteProps = {
   handle: () => void;
