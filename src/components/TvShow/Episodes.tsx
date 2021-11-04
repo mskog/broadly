@@ -7,12 +7,12 @@ import reverse from "lodash/reverse";
 import { Episode as EpisodeType } from "generated/graphql";
 import Episode from "./Episode";
 
-type EpisodeProps = {
+type EpisodesProps = {
   episodes: Pick<
     EpisodeType,
     | "id"
     | "name"
-    | "stillImageThumbnail"
+    | "stillImage"
     | "season"
     | "episode"
     | "watched"
@@ -20,7 +20,7 @@ type EpisodeProps = {
   >[];
 };
 
-const Episodes = ({ episodes }: EpisodeProps): JSX.Element => {
+const Episodes = ({ episodes }: EpisodesProps): JSX.Element => {
   const uniqEpisodes = uniqBy(episodes, (episode) => episode.episode);
 
   const episodeComponents = reverse(

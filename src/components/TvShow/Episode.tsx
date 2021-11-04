@@ -33,7 +33,7 @@ type EpisodeProps = {
     EpisodeType,
     | "id"
     | "name"
-    | "stillImageThumbnail"
+    | "stillImage"
     | "season"
     | "episode"
     | "watched"
@@ -45,7 +45,7 @@ const Episode = ({ episode }: EpisodeProps): JSX.Element => {
   const {
     id,
     name,
-    stillImageThumbnail,
+    stillImage,
     season,
     episode: episodeNumber,
     watched,
@@ -62,14 +62,14 @@ const Episode = ({ episode }: EpisodeProps): JSX.Element => {
   }
 
   return (
-    <LazyLoad classNamePrefix="w-full p-2 md:1/2 lg:w-1/3">
+    <LazyLoad classNamePrefix="w-full p-2 md:w-1/2 lg:w-1/3">
       <div>
         <Link to={`/episodes/${id}`}>
           <div
             className="relative h-40 bg-cover "
             style={{
               backgroundImage: `linear-gradient(to bottom, rgba(21,26,48,0.6), rgba(21,26,48,0.9)), url('${cdnImage(
-                stillImageThumbnail || ""
+                stillImage || ""
               )}')`
             }}
           >
