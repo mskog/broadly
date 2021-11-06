@@ -14,9 +14,9 @@ import Level from "components/shared/Level";
 import RtRating from "components/shared/RtRating";
 import PersonalRating from "./PersonalRating";
 
-function backgroundStyle(url: string) {
+function backgroundStyle(url: string, placeholder?: string) {
   return {
-    backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url('${url}')`,
+    backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url('${url}'), url('${placeholder}')`,
     backgroundSize: "cover",
     backgroundPosition: "center"
   };
@@ -38,6 +38,7 @@ const Top = ({
     | "personalRating"
     | "watched"
     | "backdropImage"
+    | "backdropImageBase64"
     | "bestRelease"
     | "waitlist"
   >;
@@ -53,6 +54,7 @@ const Top = ({
     personalRating,
     watched,
     backdropImage,
+    backdropImageBase64,
     bestRelease,
     waitlist
   } = movie;
@@ -63,7 +65,10 @@ const Top = ({
     <div>
       <div
         className="w-full -mb-40 h-66vh"
-        style={backgroundStyle(cdnImage(backdropImage || ""))}
+        style={backgroundStyle(
+          cdnImage(backdropImage || ""),
+          backdropImageBase64
+        )}
       />
       <div className="container h-full max-w-3xl px-8 mx-auto">
         <div className="flex flex-col justify-end h-full pb-10">

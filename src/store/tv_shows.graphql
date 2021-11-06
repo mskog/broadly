@@ -5,6 +5,7 @@ query TvShows($category: String, $first: Int, $skip: Int, $query: String) {
     posterImage
     posterImageThumbnail
     backdropImage
+    posterImageBase64
     tmdbDetails {
       voteAverage
       firstAirDate
@@ -29,6 +30,7 @@ query TvShow($id: ID!) {
     waitlist
     posterImage
     backdropImage
+    backdropImageBase64
     tmdbDetails {
       voteAverage
       firstAirDate
@@ -90,6 +92,7 @@ query Episode($id: ID!) {
     episode
     stillImage
     stillImageThumbnail
+    stillImageBase64
     watched
     watchedAt
     tmdbDetails {
@@ -118,6 +121,7 @@ query Episodes($first: Int, $skip: Int, $category: EpisodeCategory) {
     episode
     stillImage
     stillImageThumbnail
+    stillImageBase64
     watched
     tmdbDetails {
       name

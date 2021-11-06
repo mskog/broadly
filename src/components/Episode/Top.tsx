@@ -5,13 +5,18 @@ import { DateTime } from "luxon";
 
 import { Episode, EpisodeRelease } from "generated/graphql";
 
-import { formattedRuntime, cdnImage, resolutionDisplay } from "utilities";
+import {
+  formattedRuntime,
+  cdnImage,
+  resolutionDisplay,
+  placeholder
+} from "utilities";
 
 import { Level, LevelItem } from "components/shared";
 
-function backgroundStyle(url: string) {
+function backgroundStyle(url: string, placeholder?: string) {
   return {
-    backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url('${url}')`,
+    backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url('${url}'), url('${placeholder}')`,
     backgroundSize: "cover",
     backgroundPosition: "center"
   };
@@ -24,7 +29,13 @@ function seasonEpisode(season: string, episodeNumber: string) {
 type TopProps = {
   episode: Pick<
     Episode,
-    "season" | "episode" | "stillImage" | "tmdbDetails" | "watchedAt" | "tvShow"
+    | "season"
+    | "episode"
+    | "stillImage"
+    | "stillImageBase64"
+    | "tmdbDetails"
+    | "watchedAt"
+    | "tvShow"
   > & { bestRelease?: Pick<EpisodeRelease, "resolution"> };
 };
 
@@ -33,6 +44,7 @@ const Top = ({ episode }: TopProps): JSX.Element => {
     season,
     episode: episodeNumber,
     stillImage,
+    stillImageBase64,
     tmdbDetails,
     watchedAt,
     tvShow: { id: tvShowId, name: tvShowName, traktDetails },
@@ -43,7 +55,7 @@ const Top = ({ episode }: TopProps): JSX.Element => {
     <div>
       <div
         className="w-full -mb-40 h-75vh"
-        style={backgroundStyle(cdnImage(stillImage || ""))}
+        style={backgroundStyle(cdnImage(stillImage || ""), stillImageBase64)}
       />
       <div className="container h-full max-w-2xl px-8 mx-auto">
         <div className="flex flex-col justify-end h-full pb-10">

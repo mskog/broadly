@@ -17,7 +17,7 @@ import { formattedRuntime, releaseYear, resolutionDisplay } from "utilities";
 import { Movie as MovieType, MovieRelease } from "generated/graphql";
 
 import { Ratings } from "components/shared";
-import Poster from "./Poster";
+import { Poster } from "components/shared";
 
 type MovieProps = {
   movie: Pick<
@@ -31,6 +31,7 @@ type MovieProps = {
     | "rtCriticsRating"
     | "personalRating"
     | "posterImageThumbnail"
+    | "posterImageBase64"
   > & {
     bestRelease?: Pick<MovieRelease, "id" | "resolution"> | null;
   };
@@ -46,6 +47,7 @@ const Movie = ({ movie }: MovieProps): JSX.Element => {
     rtCriticsRating,
     personalRating,
     posterImageThumbnail,
+    posterImageBase64,
     bestRelease
   } = movie;
 
@@ -59,7 +61,10 @@ const Movie = ({ movie }: MovieProps): JSX.Element => {
       <div className="flex p-4">
         <div className="w-32 h-40 -mt-10">
           <Link to={`/movies/${id}`}>
-            <Poster src={posterImageThumbnail} />
+            <Poster
+              src={posterImageThumbnail}
+              placeholder={posterImageBase64}
+            />
           </Link>
         </div>
         <div className="w-full pl-4">

@@ -16,6 +16,7 @@ type MovieProps = Pick<
   | "rtCriticsRating"
   | "personalRating"
   | "posterImageThumbnail"
+  | "posterImageBase64"
 > & {
   bestRelease?: Pick<MovieRelease, "id" | "resolution"> | null;
 };

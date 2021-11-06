@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 import { CalendarEpisode, Movie } from "generated/graphql";
 
-import { Poster as MoviePoster } from "components/Movies";
+import { Poster as MoviePoster } from "components/shared";
 import TvShowPoster from "./TvShowPoster";
 
 type ListProps = {

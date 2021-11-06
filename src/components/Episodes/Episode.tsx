@@ -32,6 +32,7 @@ type EpisodeProps = {
     | "season"
     | "episode"
     | "stillImageThumbnail"
+    | "stillImageBase64"
     | "tmdbDetails"
     | "watchedAt"
     | "tvShow"
@@ -43,6 +44,7 @@ const Episode = ({ episode }: EpisodeProps): JSX.Element => {
   const {
     id,
     stillImageThumbnail,
+    stillImageBase64,
     season,
     episode: episodeNumber,
     tmdbDetails = {},
@@ -61,7 +63,7 @@ const Episode = ({ episode }: EpisodeProps): JSX.Element => {
           style={{
             backgroundImage: `linear-gradient(to bottom, rgba(21,26,48,0.6), rgba(21,26,48,0.9)), url('${cdnImage(
               stillImageThumbnail || ""
-            )}')`
+            )}'), url('${stillImageBase64}')`
           }}
         >
           {bestRelease && (

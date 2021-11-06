@@ -8,6 +8,7 @@ import Ratings from "./Ratings";
 import RtRating from "./RtRating";
 import SearchBox from "./SearchBox";
 import TopNavigation from "./TopNavigation";
+import Poster from "./Poster";
 
 export {
   Level,
@@ -19,5 +20,6 @@ export {
   Ratings,
   RtRating,
   SearchBox,
-  TopNavigation
+  TopNavigation,
+  Poster
 };

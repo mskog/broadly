@@ -50,6 +50,7 @@ export type Episode = {
   publishedAt?: Maybe<Scalars['ISO8601DateTime']>;
   season?: Maybe<Scalars['Int']>;
   stillImage?: Maybe<Scalars['String']>;
+  stillImageBase64?: Maybe<Scalars['String']>;
   stillImageThumbnail?: Maybe<Scalars['String']>;
   tmdbDetails?: Maybe<EpisodeTmdbDetails>;
   tvShow: TvShow;
@@ -88,6 +89,7 @@ export type Movie = OmnisearchResult & {
   __typename?: 'Movie';
   availableDate?: Maybe<Scalars['ISO8601Date']>;
   backdropImage?: Maybe<Scalars['String']>;
+  backdropImageBase64?: Maybe<Scalars['String']>;
   bestRelease?: Maybe<MovieRelease>;
   cacheKey: Scalars['String'];
   certification?: Maybe<Scalars['String']>;
@@ -103,6 +105,7 @@ export type Movie = OmnisearchResult & {
   overview?: Maybe<Scalars['String']>;
   personalRating?: Maybe<Scalars['Int']>;
   posterImage?: Maybe<Scalars['String']>;
+  posterImageBase64?: Maybe<Scalars['String']>;
   posterImageThumbnail?: Maybe<Scalars['String']>;
   releaseDate?: Maybe<Scalars['ISO8601Date']>;
   releases?: Maybe<Array<MovieRelease>>;
@@ -445,6 +448,7 @@ export type TraktIds = {
 export type TvShow = OmnisearchResult & {
   __typename?: 'TvShow';
   backdropImage?: Maybe<Scalars['String']>;
+  backdropImageBase64?: Maybe<Scalars['String']>;
   collected?: Maybe<Scalars['Boolean']>;
   episodes?: Maybe<Array<Episode>>;
   id: Scalars['Int'];
@@ -452,6 +456,7 @@ export type TvShow = OmnisearchResult & {
   name: Scalars['String'];
   newsItems?: Maybe<Array<NewsItem>>;
   posterImage?: Maybe<Scalars['String']>;
+  posterImageBase64?: Maybe<Scalars['String']>;
   posterImageThumbnail?: Maybe<Scalars['String']>;
   status?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
@@ -548,7 +553,7 @@ export type MoviesQueryVariables = Exact<{
 }>;
 
 
-export type MoviesQuery = { __typename?: 'Query', movies: Array<{ __typename?: 'Movie', id: number, tmdbId?: Maybe<string>, title?: Maybe<string>, releaseDate?: Maybe<any>, downloadAt?: Maybe<any>, watchedAt?: Maybe<any>, runtime?: Maybe<number>, rtCriticsRating?: Maybe<number>, rtAudienceRating?: Maybe<number>, watched?: Maybe<boolean>, personalRating?: Maybe<number>, overview?: Maybe<string>, backdropImage?: Maybe<string>, posterImage?: Maybe<string>, posterImageThumbnail?: Maybe<string>, bestRelease?: Maybe<{ __typename?: 'MovieRelease', id: number, resolution: string }> }> };
+export type MoviesQuery = { __typename?: 'Query', movies: Array<{ __typename?: 'Movie', id: number, tmdbId?: Maybe<string>, title?: Maybe<string>, releaseDate?: Maybe<any>, downloadAt?: Maybe<any>, watchedAt?: Maybe<any>, runtime?: Maybe<number>, rtCriticsRating?: Maybe<number>, rtAudienceRating?: Maybe<number>, watched?: Maybe<boolean>, personalRating?: Maybe<number>, overview?: Maybe<string>, backdropImage?: Maybe<string>, posterImage?: Maybe<string>, posterImageThumbnail?: Maybe<string>, posterImageBase64?: Maybe<string>, bestRelease?: Maybe<{ __typename?: 'MovieRelease', id: number, resolution: string }> }> };
 
 export type BestMoviesQueryVariables = Exact<{
   year?: Maybe<Scalars['Int']>;
@@ -564,7 +569,7 @@ export type MovieQueryVariables = Exact<{
 }>;
 
 
-export type MovieQuery = { __typename?: 'Query', movie: { __typename?: 'Movie', id: number, tmdbId?: Maybe<string>, title?: Maybe<string>, releaseDate?: Maybe<any>, availableDate?: Maybe<any>, downloadAt?: Maybe<any>, runtime?: Maybe<number>, rtCriticsRating?: Maybe<number>, rtAudienceRating?: Maybe<number>, watched?: Maybe<boolean>, waitlist?: Maybe<boolean>, personalRating?: Maybe<number>, overview?: Maybe<string>, hasKillerRelease: boolean, hasAcceptableRelease: boolean, backdropImage?: Maybe<string>, posterImage?: Maybe<string>, posterImageThumbnail?: Maybe<string>, bestRelease?: Maybe<{ __typename?: 'MovieRelease', id: number, codec: string, container: string, quality: string, releaseName: string, resolution: string, size: number, source: string, downloadUrl?: Maybe<string> }> } };
+export type MovieQuery = { __typename?: 'Query', movie: { __typename?: 'Movie', id: number, tmdbId?: Maybe<string>, title?: Maybe<string>, releaseDate?: Maybe<any>, availableDate?: Maybe<any>, downloadAt?: Maybe<any>, runtime?: Maybe<number>, rtCriticsRating?: Maybe<number>, rtAudienceRating?: Maybe<number>, watched?: Maybe<boolean>, waitlist?: Maybe<boolean>, personalRating?: Maybe<number>, overview?: Maybe<string>, hasKillerRelease: boolean, hasAcceptableRelease: boolean, backdropImage?: Maybe<string>, backdropImageBase64?: Maybe<string>, posterImage?: Maybe<string>, posterImageThumbnail?: Maybe<string>, bestRelease?: Maybe<{ __typename?: 'MovieRelease', id: number, codec: string, container: string, quality: string, releaseName: string, resolution: string, size: number, source: string, downloadUrl?: Maybe<string> }> } };
 
 export type MovieSummaryQueryVariables = Exact<{
   imdbId: Scalars['ID'];
@@ -671,14 +676,14 @@ export type TvShowsQueryVariables = Exact<{
 }>;
 
 
-export type TvShowsQuery = { __typename?: 'Query', tvShows: Array<{ __typename?: 'TvShow', id: number, name: string, posterImage?: Maybe<string>, posterImageThumbnail?: Maybe<string>, backdropImage?: Maybe<string>, tmdbDetails?: Maybe<{ __typename?: 'TvShowTmdbDetails', voteAverage?: Maybe<string>, firstAirDate?: Maybe<string>, id?: Maybe<number> }>, traktDetails?: Maybe<{ __typename?: 'TraktDetails', runtime?: Maybe<number>, ids?: Maybe<{ __typename?: 'TraktIds', tmdb?: Maybe<string> }> }> }> };
+export type TvShowsQuery = { __typename?: 'Query', tvShows: Array<{ __typename?: 'TvShow', id: number, name: string, posterImage?: Maybe<string>, posterImageThumbnail?: Maybe<string>, backdropImage?: Maybe<string>, posterImageBase64?: Maybe<string>, tmdbDetails?: Maybe<{ __typename?: 'TvShowTmdbDetails', voteAverage?: Maybe<string>, firstAirDate?: Maybe<string>, id?: Maybe<number> }>, traktDetails?: Maybe<{ __typename?: 'TraktDetails', runtime?: Maybe<number>, ids?: Maybe<{ __typename?: 'TraktIds', tmdb?: Maybe<string> }> }> }> };
 
 export type TvShowQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type TvShowQuery = { __typename?: 'Query', tvShow: { __typename?: 'TvShow', id: number, name: string, status?: Maybe<string>, watching?: Maybe<boolean>, collected?: Maybe<boolean>, waitlist?: Maybe<boolean>, posterImage?: Maybe<string>, backdropImage?: Maybe<string>, tmdbDetails?: Maybe<{ __typename?: 'TvShowTmdbDetails', voteAverage?: Maybe<string>, firstAirDate?: Maybe<string>, id?: Maybe<number> }>, traktDetails?: Maybe<{ __typename?: 'TraktDetails', overview?: Maybe<string>, runtime?: Maybe<number>, genres?: Maybe<Array<string>>, network?: Maybe<string>, ids?: Maybe<{ __typename?: 'TraktIds', tmdb?: Maybe<string> }> }>, episodes?: Maybe<Array<{ __typename?: 'Episode', id?: Maybe<number>, name?: Maybe<string>, season?: Maybe<number>, episode?: Maybe<number>, stillImage?: Maybe<string>, stillImageThumbnail?: Maybe<string>, watched?: Maybe<boolean>, tmdbDetails?: Maybe<{ __typename?: 'EpisodeTmdbDetails', name?: Maybe<string>, overview?: Maybe<string> }> }>>, newsItems?: Maybe<Array<{ __typename?: 'NewsItem', title: string, url: string, metadata?: Maybe<{ __typename?: 'NewsItemMetadata', image?: Maybe<string>, description?: Maybe<string> }> }>> } };
+export type TvShowQuery = { __typename?: 'Query', tvShow: { __typename?: 'TvShow', id: number, name: string, status?: Maybe<string>, watching?: Maybe<boolean>, collected?: Maybe<boolean>, waitlist?: Maybe<boolean>, posterImage?: Maybe<string>, backdropImage?: Maybe<string>, backdropImageBase64?: Maybe<string>, tmdbDetails?: Maybe<{ __typename?: 'TvShowTmdbDetails', voteAverage?: Maybe<string>, firstAirDate?: Maybe<string>, id?: Maybe<number> }>, traktDetails?: Maybe<{ __typename?: 'TraktDetails', overview?: Maybe<string>, runtime?: Maybe<number>, genres?: Maybe<Array<string>>, network?: Maybe<string>, ids?: Maybe<{ __typename?: 'TraktIds', tmdb?: Maybe<string> }> }>, episodes?: Maybe<Array<{ __typename?: 'Episode', id?: Maybe<number>, name?: Maybe<string>, season?: Maybe<number>, episode?: Maybe<number>, stillImage?: Maybe<string>, stillImageThumbnail?: Maybe<string>, watched?: Maybe<boolean>, tmdbDetails?: Maybe<{ __typename?: 'EpisodeTmdbDetails', name?: Maybe<string>, overview?: Maybe<string> }> }>>, newsItems?: Maybe<Array<{ __typename?: 'NewsItem', title: string, url: string, metadata?: Maybe<{ __typename?: 'NewsItemMetadata', image?: Maybe<string>, description?: Maybe<string> }> }>> } };
 
 export type TvShowSummaryQueryVariables = Exact<{
   imdbId: Scalars['ID'];
@@ -692,7 +697,7 @@ export type EpisodeQueryVariables = Exact<{
 }>;
 
 
-export type EpisodeQuery = { __typename?: 'Query', episode: { __typename?: 'Episode', id?: Maybe<number>, name?: Maybe<string>, season?: Maybe<number>, episode?: Maybe<number>, stillImage?: Maybe<string>, stillImageThumbnail?: Maybe<string>, watched?: Maybe<boolean>, watchedAt?: Maybe<any>, tmdbDetails?: Maybe<{ __typename?: 'EpisodeTmdbDetails', name?: Maybe<string>, overview?: Maybe<string>, firstAirDate?: Maybe<string> }>, tvShow: { __typename?: 'TvShow', id: number, name: string, traktDetails?: Maybe<{ __typename?: 'TraktDetails', runtime?: Maybe<number> }> }, bestRelease?: Maybe<{ __typename?: 'EpisodeRelease', resolution: string }> } };
+export type EpisodeQuery = { __typename?: 'Query', episode: { __typename?: 'Episode', id?: Maybe<number>, name?: Maybe<string>, season?: Maybe<number>, episode?: Maybe<number>, stillImage?: Maybe<string>, stillImageThumbnail?: Maybe<string>, stillImageBase64?: Maybe<string>, watched?: Maybe<boolean>, watchedAt?: Maybe<any>, tmdbDetails?: Maybe<{ __typename?: 'EpisodeTmdbDetails', name?: Maybe<string>, overview?: Maybe<string>, firstAirDate?: Maybe<string> }>, tvShow: { __typename?: 'TvShow', id: number, name: string, traktDetails?: Maybe<{ __typename?: 'TraktDetails', runtime?: Maybe<number> }> }, bestRelease?: Maybe<{ __typename?: 'EpisodeRelease', resolution: string }> } };
 
 export type EpisodesQueryVariables = Exact<{
   first?: Maybe<Scalars['Int']>;
@@ -701,7 +706,7 @@ export type EpisodesQueryVariables = Exact<{
 }>;
 
 
-export type EpisodesQuery = { __typename?: 'Query', episodes: Array<{ __typename?: 'Episode', id?: Maybe<number>, name?: Maybe<string>, season?: Maybe<number>, episode?: Maybe<number>, stillImage?: Maybe<string>, stillImageThumbnail?: Maybe<string>, watched?: Maybe<boolean>, tmdbDetails?: Maybe<{ __typename?: 'EpisodeTmdbDetails', name?: Maybe<string>, overview?: Maybe<string>, firstAirDate?: Maybe<string> }>, bestRelease?: Maybe<{ __typename?: 'EpisodeRelease', resolution: string }>, tvShow: { __typename?: 'TvShow', id: number, name: string } }> };
+export type EpisodesQuery = { __typename?: 'Query', episodes: Array<{ __typename?: 'Episode', id?: Maybe<number>, name?: Maybe<string>, season?: Maybe<number>, episode?: Maybe<number>, stillImage?: Maybe<string>, stillImageThumbnail?: Maybe<string>, stillImageBase64?: Maybe<string>, watched?: Maybe<boolean>, tmdbDetails?: Maybe<{ __typename?: 'EpisodeTmdbDetails', name?: Maybe<string>, overview?: Maybe<string>, firstAirDate?: Maybe<string> }>, bestRelease?: Maybe<{ __typename?: 'EpisodeRelease', resolution: string }>, tvShow: { __typename?: 'TvShow', id: number, name: string } }> };
 
 export type TvShowPosterQueryVariables = Exact<{
   tmdbId: Scalars['ID'];
@@ -822,6 +827,7 @@ export const MoviesDocument = gql`
     backdropImage
     posterImage
     posterImageThumbnail
+    posterImageBase64
     bestRelease {
       id
       resolution
@@ -930,6 +936,7 @@ export const MovieDocument = gql`
     hasKillerRelease
     hasAcceptableRelease
     backdropImage
+    backdropImageBase64
     posterImage
     posterImageThumbnail
     bestRelease {
@@ -1549,6 +1556,7 @@ export const TvShowsDocument = gql`
     posterImage
     posterImageThumbnail
     backdropImage
+    posterImageBase64
     tmdbDetails {
       voteAverage
       firstAirDate
@@ -1605,6 +1613,7 @@ export const TvShowDocument = gql`
     waitlist
     posterImage
     backdropImage
+    backdropImageBase64
     tmdbDetails {
       voteAverage
       firstAirDate
@@ -1723,6 +1732,7 @@ export const EpisodeDocument = gql`
     episode
     stillImage
     stillImageThumbnail
+    stillImageBase64
     watched
     watchedAt
     tmdbDetails {
@@ -1780,6 +1790,7 @@ export const EpisodesDocument = gql`
     episode
     stillImage
     stillImageThumbnail
+    stillImageBase64
     watched
     tmdbDetails {
       name

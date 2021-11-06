@@ -15,6 +15,7 @@ query Movies($category: String, $first: Int, $skip: Int, $query: String) {
     backdropImage
     posterImage
     posterImageThumbnail
+    posterImageBase64
 
     bestRelease {
       id
@@ -61,6 +62,7 @@ query Movie($id: ID!) {
     hasKillerRelease
     hasAcceptableRelease
     backdropImage
+    backdropImageBase64
     posterImage
     posterImageThumbnail
     bestRelease {

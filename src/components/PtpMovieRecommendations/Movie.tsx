@@ -9,7 +9,7 @@ import { PtpRecommendedMovie } from "generated/graphql";
 import truncate from "lodash/truncate";
 
 import { Ratings } from "components/shared";
-import { Poster } from "components/Movies";
+import { Poster } from "components/shared";
 
 const Movie = ({ movie }: { movie: PtpRecommendedMovie }): JSX.Element => {
   const { title, ptpRating, cover, imdbId, year } = movie;
