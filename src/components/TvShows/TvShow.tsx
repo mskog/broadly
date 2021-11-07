@@ -9,12 +9,16 @@ import truncate from "lodash/truncate";
 
 import { formattedRuntime, releaseYear } from "utilities";
 
-import { TvShow as TvShowType } from "generated/graphql";
+import { TvShowsQuery } from "generated/graphql";
 
 import Ratings from "components/shared/Ratings";
 import { Poster } from "components/shared";
 
-const TvShow = ({ tvShow }: { tvShow: TvShowType }): JSX.Element => {
+const TvShow = ({
+  tvShow
+}: {
+  tvShow: TvShowsQuery["tvShows"][0];
+}): JSX.Element => {
   const { id, name, posterImageThumbnail, traktDetails, posterImageBase64 } =
     tvShow;
   const { voteAverage, firstAirDate } = tvShow.tmdbDetails || {};

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import padStart from "lodash/padStart";
 import { DateTime } from "luxon";
 
-import { Episode, EpisodeRelease } from "generated/graphql";
+import { EpisodeQuery, EpisodeRelease } from "generated/graphql";
 
 import {
   formattedRuntime,
@@ -28,7 +28,7 @@ function seasonEpisode(season: string, episodeNumber: string) {
 
 type TopProps = {
   episode: Pick<
-    Episode,
+    EpisodeQuery["episode"],
     | "season"
     | "episode"
     | "stillImage"

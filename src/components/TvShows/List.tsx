@@ -1,12 +1,12 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { TvShow as TvShowType } from "generated/graphql";
+import { TvShowsQuery } from "generated/graphql";
 import TvShow from "./TvShow";
 
 type ListProps = {
   loadMore: () => void;
-  tvShows: TvShowType[];
+  tvShows: TvShowsQuery["tvShows"];
 };
 
 const List = ({ loadMore, tvShows }: ListProps): JSX.Element => {

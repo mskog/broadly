@@ -8,7 +8,7 @@ import padStart from "lodash/padStart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
-import { Episode as EpisodeType, EpisodeRelease } from "generated/graphql";
+import { EpisodesQuery, EpisodeRelease } from "generated/graphql";
 
 import { cdnImage, resolutionDisplay } from "utilities";
 
@@ -27,14 +27,13 @@ function episodeHeader(episode: string, name: string) {
 
 type EpisodeProps = {
   episode: Pick<
-    EpisodeType,
+    EpisodesQuery["episodes"][0],
     | "id"
     | "season"
     | "episode"
     | "stillImageThumbnail"
     | "stillImageBase64"
     | "tmdbDetails"
-    | "watchedAt"
     | "tvShow"
     | "watched"
   > & { bestRelease?: Pick<EpisodeRelease, "resolution"> };

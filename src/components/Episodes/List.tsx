@@ -1,20 +1,19 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { Episode as EpisodeType, EpisodeRelease } from "generated/graphql";
+import { EpisodesQuery, EpisodeRelease } from "generated/graphql";
 
 import Episode from "./Episode";
 
 type ListProps = {
   episodes: Array<
     Pick<
-      EpisodeType,
+      EpisodesQuery["episodes"][0],
       | "id"
       | "season"
       | "episode"
       | "stillImageThumbnail"
       | "tmdbDetails"
-      | "watchedAt"
       | "tvShow"
       | "watched"
     > & { bestRelease?: Pick<EpisodeRelease, "resolution"> }
