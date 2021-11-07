@@ -52,6 +52,7 @@ query TvShow($id: ID!) {
       episode
       stillImage
       stillImageThumbnail
+      stillImageBase64
       watched
       tmdbDetails {
         name
