@@ -14,14 +14,14 @@ import { DateTime } from "luxon";
 
 import { formattedRuntime, releaseYear, resolutionDisplay } from "utilities";
 
-import { Movie as MovieType, MovieRelease } from "generated/graphql";
+import { MoviesQuery, MovieRelease } from "generated/graphql";
 
 import { Ratings } from "components/shared";
 import { Poster } from "components/shared";
 
 type MovieProps = {
   movie: Pick<
-    MovieType,
+    MoviesQuery["movies"][0],
     | "watchedAt"
     | "id"
     | "title"

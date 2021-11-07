@@ -1,12 +1,16 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { Movie as MovieType, MovieRelease } from "generated/graphql";
+import {
+  Movie as MovieType,
+  MovieRelease,
+  MoviesQuery
+} from "generated/graphql";
 
 import Movie from "./Movie";
 
 type MovieProps = Pick<
-  MovieType,
+  MoviesQuery["movies"][0],
   | "watchedAt"
   | "id"
   | "title"
@@ -16,7 +20,6 @@ type MovieProps = Pick<
   | "rtCriticsRating"
   | "personalRating"
   | "posterImageThumbnail"
-  | "posterImageBase64"
 > & {
   bestRelease?: Pick<MovieRelease, "id" | "resolution"> | null;
 };

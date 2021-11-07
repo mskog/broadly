@@ -11,8 +11,6 @@ query Movies($category: String, $first: Int, $skip: Int, $query: String) {
     rtAudienceRating
     watched
     personalRating
-    overview
-    backdropImage
     posterImage
     posterImageThumbnail
     posterImageBase64

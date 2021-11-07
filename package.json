@@ -36,11 +36,12 @@
     "typeface-roboto": "1.1.13"
   },
   "scripts": {
-    "start": "vite",
+    "start": "concurrently \"vite\" \"graphql-codegen --watch --config codegen.yml\"",
     "build": "tsc && vite build",
     "serve": "vite preview",
     "download-schema": "apollo schema:download --endpoint=http://localhost:5000/graphql src/schema.json",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml",
+    "tsc": "tsc"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -73,6 +74,7 @@
     "@typescript-eslint/parser": "^5.2.0",
     "@vitejs/plugin-react-refresh": "^1.3.6",
     "autoprefixer": "^10.4.0",
+    "concurrently": "^6.3.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.2",
