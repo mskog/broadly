@@ -11,7 +11,7 @@ import LazyLoad from "react-lazyload";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
-import { Episode as EpisodeType } from "generated/graphql";
+import { TvShowQuery } from "generated/graphql";
 
 import { cdnImage } from "utilities";
 
@@ -30,10 +30,11 @@ function episodeHeader(episode: string, name: string) {
 
 type EpisodeProps = {
   episode: Pick<
-    EpisodeType,
+    TvShowQuery["tvShow"]["episodes"][0],
     | "id"
     | "name"
-    | "stillImageThumbnail"
+    | "stillImage"
+    | "stillImageBase64"
     | "season"
     | "episode"
     | "watched"
@@ -45,7 +46,8 @@ const Episode = ({ episode }: EpisodeProps): JSX.Element => {
   const {
     id,
     name,
-    stillImageThumbnail,
+    stillImage,
+    stillImageBase64,
     season,
     episode: episodeNumber,
     watched,
@@ -62,40 +64,38 @@ const Episode = ({ episode }: EpisodeProps): JSX.Element => {
   }
 
   return (
-    <LazyLoad classNamePrefix="w-full p-2 md:1/2 lg:w-1/3">
-      <div>
-        <Link to={`/episodes/${id}`}>
-          <div
-            className="relative h-40 bg-cover "
-            style={{
-              backgroundImage: `linear-gradient(to bottom, rgba(21,26,48,0.6), rgba(21,26,48,0.9)), url('${cdnImage(
-                stillImageThumbnail || ""
-              )}')`
-            }}
-          >
-            {watched && (
-              <div className="absolute top-0 right-0">
-                <div className="p-2 text-gray-500">
-                  <FontAwesomeIcon icon={faEye} />
-                </div>
+    <div className="w-full p-2 md:w-1/2 lg:w-1/3">
+      <Link to={`/episodes/${id}`}>
+        <div
+          className="relative h-40 bg-cover "
+          style={{
+            backgroundImage: `linear-gradient(to bottom, rgba(21,26,48,0.6), rgba(21,26,48,0.9)), url('${cdnImage(
+              stillImage || ""
+            )}'), url('${stillImageBase64}') `
+          }}
+        >
+          {watched && (
+            <div className="absolute top-0 right-0">
+              <div className="p-2 text-gray-500">
+                <FontAwesomeIcon icon={faEye} />
               </div>
-            )}
-            <div className="p-4">
-              {season &&
-                episodeName &&
-                episodeNumber &&
-                episodeHeader(
-                  seasonEpisode(season.toString(), episodeNumber.toString()),
-                  episodeName
-                )}
-              <p className="text-gray-400">
-                {truncate(overview, { length: 100 })}
-              </p>
             </div>
+          )}
+          <div className="p-4">
+            {season &&
+              episodeName &&
+              episodeNumber &&
+              episodeHeader(
+                seasonEpisode(season.toString(), episodeNumber.toString()),
+                episodeName
+              )}
+            <p className="text-gray-400">
+              {truncate(overview, { length: 100 })}
+            </p>
           </div>
-        </Link>
-      </div>
-    </LazyLoad>
+        </div>
+      </Link>
+    </div>
   );
 };
 

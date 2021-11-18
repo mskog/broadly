@@ -8,9 +8,9 @@ import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
 import RtRating from "components/shared/RtRating";
 
-function backgroundStyle(url: string) {
+function backgroundStyle(url: string, placeholder?: string) {
   return {
-    backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url('${url}')`,
+    backgroundImage: `linear-gradient(to top, #151A30, #151A30 0%, transparent), url('${url}'), url('${placeholder}')`,
     backgroundSize: "cover",
     backgroundPosition: "center"
   };
@@ -19,12 +19,25 @@ function backgroundStyle(url: string) {
 type TopProps = {
   tvShow: Pick<
     TvShow,
-    "id" | "name" | "status" | "backdropImage" | "tmdbDetails" | "traktDetails"
+    | "id"
+    | "name"
+    | "status"
+    | "backdropImage"
+    | "backdropImageBase64"
+    | "tmdbDetails"
+    | "traktDetails"
   >;
 };
 
 const Top = ({ tvShow }: TopProps): JSX.Element => {
-  const { name, status, backdropImage, tmdbDetails, traktDetails } = tvShow;
+  const {
+    name,
+    status,
+    backdropImage,
+    backdropImageBase64,
+    tmdbDetails,
+    traktDetails
+  } = tvShow;
 
   const { voteAverage, firstAirDate } = tmdbDetails || {};
   const { genres, runtime, network } = traktDetails || {};
@@ -33,7 +46,10 @@ const Top = ({ tvShow }: TopProps): JSX.Element => {
     <div>
       <div
         className="w-full -mb-40 h-75vh"
-        style={backgroundStyle(cdnImage(backdropImage || ""))}
+        style={backgroundStyle(
+          cdnImage(backdropImage || ""),
+          backdropImageBase64
+        )}
       />
       <div className="container h-full max-w-2xl px-8 mx-auto">
         <div className="flex flex-col justify-end h-full pb-10">

@@ -9,27 +9,33 @@ import truncate from "lodash/truncate";
 
 import { formattedRuntime, releaseYear } from "utilities";
 
-import { TvShow as TvShowType } from "generated/graphql";
+import { TvShowsQuery } from "generated/graphql";
 
 import Ratings from "components/shared/Ratings";
-import Poster from "./Poster";
+import { Poster } from "components/shared";
 
-const TvShow = ({ tvShow }: { tvShow: TvShowType }): JSX.Element => {
-  const { id, name, posterImageThumbnail, traktDetails } = tvShow;
+const TvShow = ({
+  tvShow
+}: {
+  tvShow: TvShowsQuery["tvShows"][0];
+}): JSX.Element => {
+  const { id, name, posterImageThumbnail, traktDetails, posterImageBase64 } =
+    tvShow;
   const { voteAverage, firstAirDate } = tvShow.tmdbDetails || {};
 
   return (
     <div className="text-gray-100 rounded shadow-lg shadow-fat bg-background-blue-2">
       <div className="flex p-4">
-        <LazyLoad>
-          <div className="h-40 -mt-10 w-28">
-            <Link to={`/tv_shows/${id}`}>
-              <div>
-                <Poster src={posterImageThumbnail} />
-              </div>
-            </Link>
-          </div>
-        </LazyLoad>
+        <div className="w-32 h-40 -mt-10">
+          <Link to={`/tv_shows/${id}`}>
+            <div>
+              <Poster
+                placeholder={posterImageBase64}
+                src={posterImageThumbnail}
+              />
+            </div>
+          </Link>
+        </div>
         <div className="w-full pl-4">
           <Link to={`/tv_shows/${id}`}>
             <h2 className="text-3xl leading-none ">

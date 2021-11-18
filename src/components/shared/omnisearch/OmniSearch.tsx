@@ -37,7 +37,7 @@ const OmniSearch = ({ open, closeHandler, history }: OmniSearchProps) => {
   };
 
   const handlePickFirst = () => {
-    if (data?.omnisearch) {
+    if (data?.omnisearch && data.omnisearch.length > 0) {
       const firstResult = data.omnisearch[0];
       switch (firstResult.__typename) {
         case "Movie":
@@ -50,6 +50,8 @@ const OmniSearch = ({ open, closeHandler, history }: OmniSearchProps) => {
           break;
       }
       handleClose();
+    } else {
+      history.push(`/search?query=${query}`);
     }
   };
 

@@ -4,15 +4,16 @@ import sortBy from "lodash/sortBy";
 import uniqBy from "lodash/uniqBy";
 import reverse from "lodash/reverse";
 
-import { Episode as EpisodeType } from "generated/graphql";
+import { TvShowQuery } from "generated/graphql";
 import Episode from "./Episode";
 
-type EpisodeProps = {
+type EpisodesProps = {
   episodes: Pick<
-    EpisodeType,
+    TvShowQuery["tvShow"]["episodes"][0],
     | "id"
     | "name"
-    | "stillImageThumbnail"
+    | "stillImage"
+    | "stillImageBase64"
     | "season"
     | "episode"
     | "watched"
@@ -20,7 +21,7 @@ type EpisodeProps = {
   >[];
 };
 
-const Episodes = ({ episodes }: EpisodeProps): JSX.Element => {
+const Episodes = ({ episodes }: EpisodesProps): JSX.Element => {
   const uniqEpisodes = uniqBy(episodes, (episode) => episode.episode);
 
   const episodeComponents = reverse(

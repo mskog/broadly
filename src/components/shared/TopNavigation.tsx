@@ -24,6 +24,8 @@ const TopNavigation = (props: TopNavigationProps): JSX.Element => {
 
   const menuOpacity = isExpanded ? 0.9 : 0.5;
 
+  const currentYear = new Date().getFullYear();
+
   return (
     <div>
       <KeyboardEventHandler
@@ -98,7 +100,7 @@ const TopNavigation = (props: TopNavigationProps): JSX.Element => {
             />
             <NavigationLink
               title="Best movies"
-              href="/best_movies"
+              href={`/best_movies/${currentYear}`}
               active={currentNav === "best_movies"}
               onClick={() => toggleExpansion(!isExpanded)}
             />

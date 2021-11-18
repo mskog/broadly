@@ -25,12 +25,9 @@ const BestMovies = (props: BestMoviesProps): JSX.Element => {
   const year = parseInt(chosenYear, 10);
 
   const currentYear = new Date().getFullYear();
-  const years = [
-    currentYear - 3,
-    currentYear - 2,
-    currentYear - 1,
-    currentYear
-  ].map((y) => y.toString());
+  const years = [currentYear - 3, currentYear - 2, currentYear - 1, currentYear]
+    .reverse()
+    .map((y) => y.toString());
 
   const { error, data, fetchMore } = useBestMoviesQuery({
     variables: {

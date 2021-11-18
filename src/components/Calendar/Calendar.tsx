@@ -39,7 +39,7 @@ const Calendar = (props: CalendarProps): JSX.Element => {
   }
 
   return (
-    <div className="container max-w-5xl pt-10 mx-auto">
+    <div className="container px-4 mx-auto overflow-auto md:pt-10">
       <Categories category={category} />
       {mainContent}
     </div>

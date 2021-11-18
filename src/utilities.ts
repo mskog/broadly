@@ -21,7 +21,7 @@ export function placeholder(url: string): string {
 }
 
 export function cdnImage(url: string): string {
-  return `https://thumbs.mskog.com/filters:quality(80)/${url}`;
+  return `https://thumbs.mskog.com/filters:quality(50)/${url}`;
 }
 
 export function resolutionDisplay(resolution: string): string {
