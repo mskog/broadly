@@ -10,6 +10,8 @@ import { CalendarEpisode, Movie } from "generated/graphql";
 import { Poster as MoviePoster } from "components/shared";
 import TvShowPoster from "./TvShowPoster";
 
+import Group from "./Group";
+
 type ListProps = {
   items: (
     | Pick<CalendarEpisode, "__typename" | "id" | "tmdbDetails" | "firstAired">
@@ -29,48 +31,10 @@ const List = ({ items }: ListProps): JSX.Element => {
   });
 
   const showComponents = Object.entries(groupedItems).map(([date, things]) => {
-    const dateTime = DateTime.fromISO(date);
-    const diffDays = dateTime.diff(DateTime.local(), "days").toObject();
-
-    let formattedDate: string | null;
-    if (diffDays.days && diffDays.days <= 7) {
-      formattedDate = dateTime.toRelative();
-    } else {
-      formattedDate = dateTime.toISODate();
-    }
-
-    return things.map((item) => {
-      let component;
-      if (item.__typename === "Movie") {
-        component = (
-          <Link to={`/movies/${item.id}`}>
-            <MoviePoster src={item.posterImage} />
-          </Link>
-        );
-      } else if (item.__typename === "CalendarEpisode") {
-        component = (
-          <Link to={`/tv_shows/${item.id}`}>
-            {item.tmdbDetails && item.tmdbDetails.id && (
-              <TvShowPoster tmdbId={item.tmdbDetails.id.toString()} />
-            )}
-          </Link>
-        );
-      }
-
-      return (
-        <div key={item.id}>
-          <div className="p-4 text-center border-b-2 border-black bg-background-blue-2">
-            <h2 className="text-xl font-semibold">{formattedDate}</h2>
-          </div>
-          <div className="mb-8">{component}</div>
-        </div>
-      );
-    });
+    return <Group date={date} items={things} />;
   });
 
-  return (
-    <div className="flex flex-col items-center mt-20">{showComponents}</div>
-  );
+  return <div className="pt-10">{showComponents}</div>;
 };
 
 export default List;
