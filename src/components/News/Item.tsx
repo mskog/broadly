@@ -10,16 +10,20 @@ type ItemProps = Pick<NewsItem, "title" | "url" | "metadata" | "newsworthy">;
 const Item = ({ title, url, metadata, newsworthy }: ItemProps): JSX.Element => {
   const { image, description } = metadata || {};
 
-  const thumbnail = `https://thumbs.mskog.com/100x100/smart/${image}`;
-  const thumbnailMobile = `https://thumbs.mskog.com/480x240/smart/${image}`;
+  const thumbnail = `https://thumbs.mskog.com/100x100/smart/${encodeURIComponent(
+    image || "https://placeimg.com/640/480/nature"
+  )}`;
+  const thumbnailMobile = `https://thumbs.mskog.com/480x240/smart/${encodeURIComponent(
+    image || "https://placeimg.com/640/480/nature"
+  )}`;
 
   return (
     <li className="flex flex-col py-6 md:flex-row">
       <a className="flex-none w-full mr-4 md:h-32 md:w-32" href={url}>
-        {image && (
+        {
           <>
             <img
-              className="hidden w-32 h-32 mr-4 rounded md:block"
+              className="hidden w-32 h-32 mr-4 rounded-3xl md:block"
               src={thumbnail}
               alt={title}
             />
@@ -29,7 +33,7 @@ const Item = ({ title, url, metadata, newsworthy }: ItemProps): JSX.Element => {
               alt={title}
             />
           </>
-        )}
+        }
       </a>
       <div className="pt-4 md:pt-0">
         {newsworthy && newsworthy.__typename === "TvShow" && (
