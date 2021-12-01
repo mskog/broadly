@@ -2,6 +2,8 @@ import React from "react";
 
 import { Movie } from "generated/graphql";
 
+import capitalize from "lodash/capitalize";
+
 import {
   releaseYear,
   formattedRuntime,
@@ -87,6 +89,14 @@ const Top = ({
                 <LevelItem
                   title="Resolution"
                   value={resolutionDisplay(bestRelease.resolution)}
+                />
+              ) : (
+                <></>
+              )}
+              {bestRelease ? (
+                <LevelItem
+                  title="Container"
+                  value={capitalize(bestRelease.source)}
                 />
               ) : (
                 <></>
