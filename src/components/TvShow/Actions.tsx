@@ -29,35 +29,35 @@ const Actions = (props: ActionsProps): JSX.Element => {
     variables: {
       id: id.toString()
     },
-    update: () => {}
+    refetchQueries: ["TvShow"]
   });
 
   const [watchTvShow] = useWatchTvShowMutation({
     variables: {
       id: id.toString()
     },
-    update: () => {}
+    refetchQueries: ["TvShow"]
   });
 
   const [collectTvShow] = useCollectTvShowMutation({
     variables: {
       id: id.toString()
     },
-    update: () => {}
+    refetchQueries: ["TvShow"]
   });
 
   const [removeFromWaitlist] = useRemoveTvShowFromWaitlistMutation({
     variables: {
       id: id.toString()
     },
-    update: () => {}
+    refetchQueries: ["TvShow"]
   });
 
   const [sample] = useSampleTvShowMutation({
     variables: {
       id: id.toString()
     },
-    update: () => {}
+    refetchQueries: ["TvShow"]
   });
 
   const addToWaitlist = sample;
@@ -69,7 +69,9 @@ const Actions = (props: ActionsProps): JSX.Element => {
       {status !== "ended" && !(watching || waitlist) && hasEpisodes && (
         <ActionButton title="Watch" handle={watchTvShow} />
       )}
-      {!hasEpisodes && <ActionButton title="Sample" handle={sample} />}
+      {hasEpisodes && !watching && (
+        <ActionButton title="Sample" handle={sample} />
+      )}
       {watching && (
         <DangerousActionButton title="Unwatch" handle={unwatchTvShow} />
       )}
