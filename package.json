@@ -18,7 +18,7 @@
     "apollo3-cache-persist": "^0.13.0",
     "graphql": "^15.7.2",
     "lodash": "^4.17.20",
-    "luxon": "^2.0.1",
+    "luxon": "^2.2.0",
     "postcss": "^8.3.6",
     "query-string": "^7.0.1",
     "react": "^17.0.2",
