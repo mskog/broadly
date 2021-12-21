@@ -6,7 +6,9 @@ import { LoadingFull } from "components/shared";
 import List from "./List";
 
 const PtpMovieRecommendations = (): JSX.Element => {
-  const { error, data } = usePtpMovieRecommendationsQuery();
+  const { error, data } = usePtpMovieRecommendationsQuery({
+    fetchPolicy: "cache-and-network"
+  });
 
   let mainContent;
   if (!data) {
