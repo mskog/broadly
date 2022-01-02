@@ -7,7 +7,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
     "@fortawesome/free-regular-svg-icons": "^5.14.0",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
-    "@fortawesome/react-fontawesome": "^0.1.8",
+    "@fortawesome/react-fontawesome": "^0.1.16",
     "@fullhuman/postcss-purgecss": "^4.0.3",
     "@tailwindcss/ui": "^0.7.2",
     "@types/node": "^16.4.13",
