@@ -27,7 +27,8 @@ const Poster = ({ tmdbId }: { tmdbId: string }): JSX.Element => {
   const url = image(
     useTvShowPosterQuery({
       variables: { tmdbId },
-      fetchPolicy: "cache-first"
+      fetchPolicy: "cache-first",
+      context: { useApolloNetworkStatus: false }
     })
   );
 

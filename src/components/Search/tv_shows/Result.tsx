@@ -27,7 +27,8 @@ const Result = ({
   }
 
   const { data } = useTvShowSummaryQuery({
-    variables: { imdbId }
+    variables: { imdbId },
+    context: { useApolloNetworkStatus: false }
   });
 
   const tvShowUrl = exists

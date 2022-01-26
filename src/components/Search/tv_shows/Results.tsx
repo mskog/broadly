@@ -10,7 +10,8 @@ import Result from "./Result";
 const Results = ({ query }: { query: string }): JSX.Element => {
   const { data } = useTvShowSearchQuery({
     variables: { query },
-    fetchPolicy: "cache-and-network"
+    fetchPolicy: "cache-and-network",
+    context: { useApolloNetworkStatus: false }
   });
 
   let results: JSX.Element | JSX.Element[] = <LoadingFull />;
