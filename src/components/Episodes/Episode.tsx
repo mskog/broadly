@@ -52,7 +52,7 @@ const Episode = ({ episode }: EpisodeProps): JSX.Element => {
     bestRelease
   } = episode;
 
-  const { name: episodeName } = tmdbDetails;
+  const { name: episodeName } = tmdbDetails || {};
 
   return (
     <div className="w-full p-2 md:w-1/2 lg:w-1/3">

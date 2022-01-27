@@ -54,7 +54,7 @@ const Episode = ({ episode }: EpisodeProps): JSX.Element => {
     tmdbDetails = {}
   } = episode;
 
-  const { name: episodeName = name } = tmdbDetails;
+  const { name: episodeName } = tmdbDetails || {};
 
   let overview;
   if (watched) {
