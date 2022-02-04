@@ -32,5 +32,6 @@ module.exports = {
   variants: {
     alignSelf: ["odd"],
     borderWidth: ["responsive"]
-  }
+  },
+  plugins: [require("@tailwindcss/forms")]
 };
