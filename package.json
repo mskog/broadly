@@ -20,7 +20,7 @@
     "graphql": "^15.7.2",
     "lodash": "^4.17.20",
     "luxon": "^2.3.0",
-    "postcss": "^8.3.6",
+    "postcss": "^8.4.6",
     "query-string": "^7.0.1",
     "react": "^17.0.2",
     "react-apollo-network-status": "^5.1.0",
