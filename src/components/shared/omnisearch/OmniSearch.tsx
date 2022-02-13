@@ -23,7 +23,8 @@ const OmniSearch = ({ open, closeHandler, history }: OmniSearchProps) => {
   const { data } = useOmniSearchQuery({
     skip: !query,
     variables: { query },
-    fetchPolicy: "cache-and-network"
+    fetchPolicy: "cache-and-network",
+    context: { useApolloNetworkStatus: false }
   });
 
   const handleQueryChange = (event: React.FormEvent) => {
@@ -78,7 +79,7 @@ const OmniSearch = ({ open, closeHandler, history }: OmniSearchProps) => {
             debounceTimeout={200}
             value={query}
             onChange={handleQueryChange}
-            className="block w-full pl-10 leading-8 form-input sm:text-sm"
+            className="block w-full pl-10 leading-8 rounded-lg sm:text-sm"
             onKeyDown={(event) => {
               if (event.key === "Escape") {
                 handleClose();
@@ -97,7 +98,7 @@ const OmniSearch = ({ open, closeHandler, history }: OmniSearchProps) => {
           </div>
         </div>
         {query && data && data.omnisearch && (
-          <div className="grid grid-cols-1 gap-4 px-4 py-4 rounded-md bg-cool-gray-50">
+          <div className="grid grid-cols-1 gap-4 px-4 py-4 rounded-md bg-gray-50">
             {data.omnisearch.length === 0 ? <div>Nothing found</div> : ""}
             {data.omnisearch.map((result: any) => (
               <Result

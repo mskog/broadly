@@ -14,10 +14,13 @@ import {
   ApolloLink,
   ApolloProvider,
   InMemoryCache,
-  NormalizedCacheObject
+  NormalizedCacheObject,
+  createHttpLink
 } from "@apollo/client";
 
 import { LocalStorageWrapper, persistCache } from "apollo3-cache-persist";
+
+import { createNetworkStatusNotifier } from "react-apollo-network-status";
 
 import { Calendar } from "components/Calendar";
 import { PtpMovieRecommendations } from "components/PtpMovieRecommendations";
@@ -41,7 +44,24 @@ import TvShowSearchResult from "components/Search/tv_shows/Details";
 
 import { News } from "components/News";
 
+const { link, useApolloNetworkStatus } = createNetworkStatusNotifier();
+
+function LoadingIndicator(): JSX.Element {
+  const status = useApolloNetworkStatus();
+  if (status.numPendingQueries > 0) {
+    return (
+      <div className="fixed flex justify-center w-full top-4">
+        <div className="w-8 h-8 border-b-2 border-gray-100 rounded-full animate-spin"></div>
+      </div>
+    );
+  } else {
+    return <></>;
+  }
+}
+
 function App() {
+  const status = useApolloNetworkStatus();
+
   document.body.classList.add("bg-background-blue");
 
   const { pathname } = useLocation();
@@ -66,6 +86,7 @@ function App() {
         new ApolloClient({
           cache,
           link: ApolloLink.from([
+            link,
             new HttpLink({
               uri: import.meta.env.VITE_API_URL,
               credentials: "same-origin",
@@ -93,6 +114,7 @@ function App() {
         style={{ height: "100%" }}
         className="h-screen text-gray-400 App bg-background-blue"
       >
+        <LoadingIndicator />
         <TopNavigationWithRouter />
         <div className="">
           <Switch>

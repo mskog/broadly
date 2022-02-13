@@ -1,6 +1,6 @@
 module.exports = {
   mode: "jit",
-  purge: [
+  content: [
     "./src/**/*.html",
     "./src/**/*.js",
     "./src/**/*.ts",
@@ -33,5 +33,5 @@ module.exports = {
     alignSelf: ["odd"],
     borderWidth: ["responsive"]
   },
-  plugins: [require("@tailwindcss/ui")]
+  plugins: [require("@tailwindcss/forms")]
 };

@@ -41,7 +41,7 @@ const SearchBox = ({
           type="submit"
           className="px-3 py-2 bg-teal-500 rounded rounded-l-none"
         >
-          <FontAwesomeIcon className="" icon={faSearch} />
+          <FontAwesomeIcon className="text-gray-300" icon={faSearch} />
         </button>
       </form>
       {text !== "" && (

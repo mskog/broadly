@@ -2,7 +2,7 @@ import React from "react";
 
 import { NewsItem as NewsItemType } from "generated/graphql";
 
-import NewsItem from "./NewsItem";
+import { Item as NewsItem } from "components/News";
 
 type NewsProps = {
   newsItems: Pick<NewsItemType, "title" | "url" | "metadata">[];

@@ -28,7 +28,8 @@ const Result = ({ result }: ResultProps): JSX.Element => {
     result;
 
   const { data } = useMovieSummaryQuery({
-    variables: { imdbId }
+    variables: { imdbId },
+    context: { useApolloNetworkStatus: false }
   });
 
   const movieUrl =

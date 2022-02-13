@@ -5,8 +5,7 @@ import { useMoviePosterQuery } from "generated/graphql";
 import { thumbnail } from "utilities";
 import { ApolloError } from "@apollo/client";
 
-const IMAGE_PLACEHOLDER =
-  "https://image.tmdb.org/t/p/w300/9QYDosqR1iIJLFwgO9ZIuvJmhmt.jpg";
+const IMAGE_PLACEHOLDER = "https://www.fillmurray.com/105/160g";
 
 function image({
   loading,
@@ -28,7 +27,8 @@ const Poster = ({ tmdbId }: { tmdbId: string }): JSX.Element => {
   const url = image(
     useMoviePosterQuery({
       variables: { tmdbId },
-      fetchPolicy: "cache-first"
+      fetchPolicy: "cache-first",
+      context: { useApolloNetworkStatus: false }
     })
   );
 

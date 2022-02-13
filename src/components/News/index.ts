@@ -1,3 +1,4 @@
 import News from "./News";
+import Item from "./Item";
 
-export { News };
+export { News, Item };
