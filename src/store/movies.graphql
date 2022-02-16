@@ -46,6 +46,7 @@ query Movie($id: ID!) {
   movie(id: $id) {
     id
     tmdbId
+    imdbId
     title
     releaseDate
     availableDate

@@ -57,11 +57,11 @@ const Movie = (props: MovieProps): JSX.Element => {
             />
           </div>
         )}
-        {!downloaded && (
+        {
           <div className="flex flex-col pt-4 -mx-2 md:flex-row">
             <Actions movie={data.movie} />
           </div>
-        )}
+        }
       </div>
     </div>
   );
