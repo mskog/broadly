@@ -1,10 +1,11 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T;
+export type InputMaybe<T> = T;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions =  {}
+const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -321,14 +322,14 @@ export type Query = {
 
 
 export type QueryBestMoviesArgs = {
-  first?: Maybe<Scalars['Int']>;
-  skip?: Maybe<Scalars['Int']>;
-  year?: Maybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  year?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type QueryCalendarArgs = {
-  category?: Maybe<CalendarCategory>;
+  category?: InputMaybe<CalendarCategory>;
 };
 
 
@@ -338,9 +339,9 @@ export type QueryEpisodeArgs = {
 
 
 export type QueryEpisodesArgs = {
-  category?: Maybe<EpisodeCategory>;
-  first?: Maybe<Scalars['Int']>;
-  skip?: Maybe<Scalars['Int']>;
+  category?: InputMaybe<EpisodeCategory>;
+  first?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -370,10 +371,10 @@ export type QueryMovieSummaryArgs = {
 
 
 export type QueryMoviesArgs = {
-  category?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  query?: Maybe<Scalars['String']>;
-  skip?: Maybe<Scalars['Int']>;
+  category?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  query?: InputMaybe<Scalars['String']>;
+  skip?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -418,10 +419,10 @@ export type QueryTvShowSummaryArgs = {
 
 
 export type QueryTvShowsArgs = {
-  category?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  query?: Maybe<Scalars['String']>;
-  skip?: Maybe<Scalars['Int']>;
+  category?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  query?: InputMaybe<Scalars['String']>;
+  skip?: InputMaybe<Scalars['Int']>;
 };
 
 export type TraktDetails = {
