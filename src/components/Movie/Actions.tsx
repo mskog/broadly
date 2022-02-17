@@ -3,12 +3,7 @@ import { DateTime } from "luxon";
 
 import { useHistory } from "react-router-dom";
 
-import {
-  useDeleteMovieMutation,
-  useForceMovieMutation,
-  useDownloadMovieMutation,
-  Movie
-} from "generated/graphql";
+import { Movie } from "generated/graphql";
 
 import Delete from "./Delete";
 import Force from "./Force";
@@ -25,34 +20,16 @@ const Actions = ({
 
   const history = useHistory();
 
-  const [deleteMovie] = useDeleteMovieMutation({
-    variables: { id },
-    update: () => {
-      history.goBack();
-    }
-  });
-
-  const [forceMovie] = useForceMovieMutation({
-    variables: { id },
-    update: () => {
-      history.goBack();
-    }
-  });
-
-  const downloadMovie = () => {
+  const goBack = () => {
     history.goBack();
   };
 
   return (
     <>
-      {!downloaded && <Force bestRelease={bestRelease} handle={forceMovie} />}
-      {!downloaded && <Delete handle={deleteMovie} />}
+      {!downloaded && bestRelease && <Force id={id} handle={goBack} />}
+      {!downloaded && <Delete id={id} handle={goBack} />}
       {imdbId && downloaded && (
-        <Download
-          imdbId={imdbId}
-          bestRelease={bestRelease}
-          handle={downloadMovie}
-        />
+        <Download imdbId={imdbId} bestRelease={bestRelease} handle={goBack} />
       )}
     </>
   );

@@ -20,9 +20,7 @@ const Download = ({
 
   const [downloadMovie] = useDownloadMovieMutation({
     variables: { imdbId },
-    update: () => {
-      handle();
-    }
+    update: handle
   });
 
   return (
