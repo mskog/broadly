@@ -3,8 +3,6 @@ import LoaderButton from "components/shared/LoaderButton";
 
 import { useForceMovieMutation } from "generated/graphql";
 
-import { MovieRelease } from "generated/graphql";
-
 type ForceProps = {
   id: number;
   handle: () => void;
