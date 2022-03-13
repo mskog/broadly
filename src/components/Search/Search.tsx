@@ -31,7 +31,7 @@ const Search = (props: SearchProps): JSX.Element => {
   const parsedQuery = Array.isArray(query) ? query[0] : query || "";
 
   let mainContent: JSX.Element = <></>;
-  if (query) {
+  if (parsedQuery) {
     let categoryComponent;
     if (category === "movies") {
       categoryComponent = <MovieResults query={parsedQuery} />;

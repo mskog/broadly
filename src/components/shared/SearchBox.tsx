@@ -10,7 +10,7 @@ const SearchBox = ({
   placeholder
 }: {
   pathname: string;
-  query: string;
+  query: string | null;
   placeholder: string;
 } & Pick<RouteComponentProps, "history">): JSX.Element => {
   const [text, setText] = useState(query || "");
