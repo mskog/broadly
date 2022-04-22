@@ -19,7 +19,7 @@ function seasonEpisode(season: string, episodeNumber: string) {
   return `S${padStart(season, 2, "0")}E${padStart(episodeNumber, 2, "0")}`;
 }
 
-function episodeHeader(episode: string, name: string) {
+function episodeHeader(episode: string, name: string = "TBA") {
   return (
     <h3>
       <span className="text-xl font-semibold text-gray-300">{episode}</span>
@@ -83,7 +83,6 @@ const Episode = ({ episode }: EpisodeProps): JSX.Element => {
           )}
           <div className="p-4">
             {season &&
-              episodeName &&
               episodeNumber &&
               episodeHeader(
                 seasonEpisode(season.toString(), episodeNumber.toString()),
