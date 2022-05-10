@@ -41,15 +41,15 @@ const TvShow = (props: TvShowProps): JSX.Element => {
 
   const seasonNumbers = sortBy(
     uniq(
-      episodes.map((episode: Pick<Episode, "season">) =>
-        episode?.season ? episode.season : 0
+      episodes.map((episode: Pick<Episode, "seasonNumber">) =>
+        episode?.seasonNumber ? episode.seasonNumber : 0
       )
     )
   );
 
   const selectedEpisodes = episodes.filter(
-    (episode: Pick<Episode, "season">) =>
-      episode.season === (selectedSeason || last(seasonNumbers))
+    (episode: Pick<Episode, "seasonNumber">) =>
+      episode.seasonNumber === (selectedSeason || last(seasonNumbers))
   );
 
   return (

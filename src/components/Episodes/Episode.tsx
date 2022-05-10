@@ -29,7 +29,7 @@ type EpisodeProps = {
   episode: Pick<
     EpisodesQuery["episodes"][0],
     | "id"
-    | "season"
+    | "seasonNumber"
     | "episode"
     | "stillImageThumbnail"
     | "stillImageBase64"
@@ -44,7 +44,7 @@ const Episode = ({ episode }: EpisodeProps): JSX.Element => {
     id,
     stillImageThumbnail,
     stillImageBase64,
-    season,
+    seasonNumber,
     episode: episodeNumber,
     tmdbDetails = {},
     tvShow: { name },
@@ -81,11 +81,14 @@ const Episode = ({ episode }: EpisodeProps): JSX.Element => {
           )}
           <div className="p-8">
             <h2 className="text-2xl font-semibold text-gray-300">{name}</h2>
-            {season &&
+            {seasonNumber &&
               episodeNumber &&
               episodeName &&
               episodeHeader(
-                seasonEpisode(season.toString(), episodeNumber.toString()),
+                seasonEpisode(
+                  seasonNumber.toString(),
+                  episodeNumber.toString()
+                ),
                 episodeName
               )}
           </div>

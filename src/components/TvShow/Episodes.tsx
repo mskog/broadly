@@ -14,7 +14,7 @@ type EpisodesProps = {
     | "name"
     | "stillImage"
     | "stillImageBase64"
-    | "season"
+    | "seasonNumber"
     | "episode"
     | "watched"
     | "tmdbDetails"

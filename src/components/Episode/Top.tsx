@@ -29,7 +29,7 @@ function seasonEpisode(season: string, episodeNumber: string) {
 type TopProps = {
   episode: Pick<
     EpisodeQuery["episode"],
-    | "season"
+    | "seasonNumber"
     | "episode"
     | "stillImage"
     | "stillImageBase64"
@@ -41,7 +41,7 @@ type TopProps = {
 
 const Top = ({ episode }: TopProps): JSX.Element => {
   const {
-    season,
+    seasonNumber,
     episode: episodeNumber,
     stillImage,
     stillImageBase64,
@@ -69,11 +69,11 @@ const Top = ({ episode }: TopProps): JSX.Element => {
           </h2>
           <div className="capitalize md:pt-10">
             <Level>
-              {season && episodeNumber ? (
+              {seasonNumber && episodeNumber ? (
                 <LevelItem
                   title="Episode"
                   value={seasonEpisode(
-                    season.toString(),
+                    seasonNumber.toString(),
                     episodeNumber?.toString()
                   )}
                 />

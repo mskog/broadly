@@ -10,7 +10,7 @@ type ListProps = {
     Pick<
       EpisodesQuery["episodes"][0],
       | "id"
-      | "season"
+      | "seasonNumber"
       | "episode"
       | "stillImageThumbnail"
       | "tmdbDetails"

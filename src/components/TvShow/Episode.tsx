@@ -35,7 +35,7 @@ type EpisodeProps = {
     | "name"
     | "stillImage"
     | "stillImageBase64"
-    | "season"
+    | "seasonNumber"
     | "episode"
     | "watched"
     | "tmdbDetails"
@@ -48,7 +48,7 @@ const Episode = ({ episode }: EpisodeProps): JSX.Element => {
     name,
     stillImage,
     stillImageBase64,
-    season,
+    seasonNumber,
     episode: episodeNumber,
     watched,
     tmdbDetails = {}
@@ -82,10 +82,13 @@ const Episode = ({ episode }: EpisodeProps): JSX.Element => {
             </div>
           )}
           <div className="p-4">
-            {season &&
+            {seasonNumber &&
               episodeNumber &&
               episodeHeader(
-                seasonEpisode(season.toString(), episodeNumber.toString()),
+                seasonEpisode(
+                  seasonNumber.toString(),
+                  episodeNumber.toString()
+                ),
                 episodeName
               )}
             <p className="text-gray-400">

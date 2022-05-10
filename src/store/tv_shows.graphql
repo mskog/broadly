@@ -48,7 +48,7 @@ query TvShow($id: ID!) {
     episodes {
       id
       name
-      season
+      seasonNumber
       episode
       stillImage
       stillImageThumbnail
@@ -89,7 +89,7 @@ query Episode($id: ID!) {
   episode(id: $id) {
     id
     name
-    season
+    seasonNumber
     episode
     stillImage
     stillImageThumbnail
@@ -118,7 +118,7 @@ query Episodes($first: Int, $skip: Int, $category: EpisodeCategory) {
   episodes(first: $first, skip: $skip, category: $category) {
     id
     name
-    season
+    seasonNumber
     episode
     stillImage
     stillImageThumbnail
