@@ -43,10 +43,10 @@ export type Episode = {
   __typename?: 'Episode';
   bestRelease?: Maybe<EpisodeRelease>;
   downloadAt?: Maybe<Scalars['ISO8601DateTime']>;
-  downloaded?: Maybe<Scalars['Boolean']>;
+  downloaded: Scalars['Boolean'];
   episode?: Maybe<Scalars['Int']>;
   firstAired?: Maybe<Scalars['ISO8601Date']>;
-  id?: Maybe<Scalars['Int']>;
+  id: Scalars['Int'];
   key?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   publishedAt?: Maybe<Scalars['ISO8601DateTime']>;
@@ -56,7 +56,7 @@ export type Episode = {
   stillImageThumbnail?: Maybe<Scalars['String']>;
   tmdbDetails?: Maybe<EpisodeTmdbDetails>;
   tvShow: TvShow;
-  watched?: Maybe<Scalars['Boolean']>;
+  watched: Scalars['Boolean'];
   watchedAt?: Maybe<Scalars['ISO8601DateTime']>;
   year?: Maybe<Scalars['Int']>;
 };
@@ -458,6 +458,16 @@ export type QueryTvShowsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
 };
 
+export type Season = {
+  __typename?: 'Season';
+  downloaded: Scalars['Boolean'];
+  episodes: Array<Episode>;
+  id: Scalars['Int'];
+  number: Scalars['Int'];
+  tvShow: TvShow;
+  watched: Scalars['Boolean'];
+};
+
 export type TraktDetails = {
   __typename?: 'TraktDetails';
   genres?: Maybe<Array<Scalars['String']>>;
@@ -492,6 +502,7 @@ export type TvShow = OmnisearchResult & {
   posterImage?: Maybe<Scalars['String']>;
   posterImageBase64?: Maybe<Scalars['String']>;
   posterImageThumbnail?: Maybe<Scalars['String']>;
+  seasons: Array<Season>;
   status?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   tmdbDetails?: Maybe<TvShowTmdbDetails>;
@@ -717,7 +728,7 @@ export type TvShowQueryVariables = Exact<{
 }>;
 
 
-export type TvShowQuery = { __typename?: 'Query', tvShow: { __typename?: 'TvShow', id: number, name: string, status?: string, watching?: boolean, collected?: boolean, waitlist?: boolean, posterImage?: string, backdropImage?: string, backdropImageBase64?: string, tmdbDetails?: { __typename?: 'TvShowTmdbDetails', voteAverage?: string, firstAirDate?: string, id?: number }, traktDetails?: { __typename?: 'TraktDetails', overview?: string, runtime?: number, genres?: Array<string>, network?: string, ids?: { __typename?: 'TraktIds', tmdb?: string } }, episodes: Array<{ __typename?: 'Episode', id?: number, name?: string, seasonNumber?: number, episode?: number, stillImage?: string, stillImageThumbnail?: string, stillImageBase64?: string, watched?: boolean, tmdbDetails?: { __typename?: 'EpisodeTmdbDetails', name?: string, overview?: string } }>, newsItems: Array<{ __typename?: 'NewsItem', title: string, url: string, metadata?: { __typename?: 'NewsItemMetadata', image?: string, description?: string } }> } };
+export type TvShowQuery = { __typename?: 'Query', tvShow: { __typename?: 'TvShow', id: number, name: string, status?: string, watching?: boolean, collected?: boolean, waitlist?: boolean, posterImage?: string, backdropImage?: string, backdropImageBase64?: string, tmdbDetails?: { __typename?: 'TvShowTmdbDetails', voteAverage?: string, firstAirDate?: string, id?: number }, traktDetails?: { __typename?: 'TraktDetails', overview?: string, runtime?: number, genres?: Array<string>, network?: string, ids?: { __typename?: 'TraktIds', tmdb?: string } }, seasons: Array<{ __typename?: 'Season', number: number, watched: boolean, downloaded: boolean, episodes: Array<{ __typename?: 'Episode', id: number, name?: string, seasonNumber?: number, episode?: number, stillImage?: string, stillImageThumbnail?: string, stillImageBase64?: string, downloaded: boolean, watched: boolean, tmdbDetails?: { __typename?: 'EpisodeTmdbDetails', name?: string, overview?: string } }> }>, newsItems: Array<{ __typename?: 'NewsItem', title: string, url: string, metadata?: { __typename?: 'NewsItemMetadata', image?: string, description?: string } }> } };
 
 export type TvShowSummaryQueryVariables = Exact<{
   imdbId: Scalars['ID'];
@@ -731,7 +742,7 @@ export type EpisodeQueryVariables = Exact<{
 }>;
 
 
-export type EpisodeQuery = { __typename?: 'Query', episode: { __typename?: 'Episode', id?: number, name?: string, seasonNumber?: number, episode?: number, stillImage?: string, stillImageThumbnail?: string, stillImageBase64?: string, watched?: boolean, watchedAt?: any, tmdbDetails?: { __typename?: 'EpisodeTmdbDetails', name?: string, overview?: string, firstAirDate?: string }, tvShow: { __typename?: 'TvShow', id: number, name: string, traktDetails?: { __typename?: 'TraktDetails', runtime?: number } }, bestRelease?: { __typename?: 'EpisodeRelease', resolution: string } } };
+export type EpisodeQuery = { __typename?: 'Query', episode: { __typename?: 'Episode', id: number, name?: string, seasonNumber?: number, episode?: number, stillImage?: string, stillImageThumbnail?: string, stillImageBase64?: string, downloaded: boolean, watched: boolean, watchedAt?: any, tmdbDetails?: { __typename?: 'EpisodeTmdbDetails', name?: string, overview?: string, firstAirDate?: string }, tvShow: { __typename?: 'TvShow', id: number, name: string, traktDetails?: { __typename?: 'TraktDetails', runtime?: number } }, bestRelease?: { __typename?: 'EpisodeRelease', resolution: string } } };
 
 export type EpisodesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
@@ -740,7 +751,7 @@ export type EpisodesQueryVariables = Exact<{
 }>;
 
 
-export type EpisodesQuery = { __typename?: 'Query', episodes: Array<{ __typename?: 'Episode', id?: number, name?: string, seasonNumber?: number, episode?: number, stillImage?: string, stillImageThumbnail?: string, stillImageBase64?: string, watched?: boolean, tmdbDetails?: { __typename?: 'EpisodeTmdbDetails', name?: string, overview?: string, firstAirDate?: string }, bestRelease?: { __typename?: 'EpisodeRelease', resolution: string }, tvShow: { __typename?: 'TvShow', id: number, name: string } }> };
+export type EpisodesQuery = { __typename?: 'Query', episodes: Array<{ __typename?: 'Episode', id: number, name?: string, seasonNumber?: number, episode?: number, stillImage?: string, stillImageThumbnail?: string, stillImageBase64?: string, watched: boolean, tmdbDetails?: { __typename?: 'EpisodeTmdbDetails', name?: string, overview?: string, firstAirDate?: string }, bestRelease?: { __typename?: 'EpisodeRelease', resolution: string }, tvShow: { __typename?: 'TvShow', id: number, name: string } }> };
 
 export type TvShowPosterQueryVariables = Exact<{
   tmdbId: Scalars['ID'];
@@ -789,7 +800,7 @@ export type EpisodeWatchedMutationVariables = Exact<{
 }>;
 
 
-export type EpisodeWatchedMutation = { __typename?: 'Mutation', episodeWatched: { __typename?: 'Episode', id?: number } };
+export type EpisodeWatchedMutation = { __typename?: 'Mutation', episodeWatched: { __typename?: 'Episode', id: number } };
 
 
 export const CalendarDocument = gql`
@@ -1661,18 +1672,24 @@ export const TvShowDocument = gql`
       genres
       network
     }
-    episodes {
-      id
-      name
-      seasonNumber
-      episode
-      stillImage
-      stillImageThumbnail
-      stillImageBase64
+    seasons {
+      number
       watched
-      tmdbDetails {
+      downloaded
+      episodes {
+        id
         name
-        overview
+        seasonNumber
+        episode
+        stillImage
+        stillImageThumbnail
+        stillImageBase64
+        downloaded
+        watched
+        tmdbDetails {
+          name
+          overview
+        }
       }
     }
     newsItems {
@@ -1767,6 +1784,7 @@ export const EpisodeDocument = gql`
     stillImage
     stillImageThumbnail
     stillImageBase64
+    downloaded
     watched
     watchedAt
     tmdbDetails {

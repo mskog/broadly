@@ -1,42 +1,50 @@
 import React from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faDownload } from "@fortawesome/free-solid-svg-icons";
+
+import { TvShowQuery } from "generated/graphql";
+
+import Episodes from "./Episodes";
+
 type SeasonProps = {
-  name: string;
-  value: number;
-  active: boolean;
-  onSelect: (value: number) => void;
+  season: Pick<
+    TvShowQuery["tvShow"]["seasons"][0],
+    "number" | "downloaded" | "watched" | "episodes"
+  >;
 };
 
-const Season = ({
-  name,
-  value,
-  active,
-  onSelect
-}: SeasonProps): JSX.Element => {
-  let classNames =
-    "px-2 text-base font-bold text-center cursor-pointer hover:text-white pb-2";
-
-  if (active) {
-    classNames += " text-white border-b-2 border-gray-600";
-  } else {
-    classNames += " text-blue-700";
+const statusIcon = (downloaded: boolean, watched: boolean): JSX.Element => {
+  if (watched) {
+    return (
+      <div className="flex space-x-1">
+        <span>
+          <FontAwesomeIcon icon={faEye} />
+        </span>
+        <span>Watched</span>
+      </div>
+    );
+  } else if (downloaded) {
+    <div className="flex space-x-1">
+      <span>
+        <FontAwesomeIcon icon={faDownload} />
+      </span>
+      <span>Downloaded</span>
+    </div>;
   }
+  return <></>;
+};
 
-  const seasonSelected = () => {
-    onSelect(value);
-  };
+const Season = ({ season }: SeasonProps): JSX.Element => {
+  const { downloaded, watched, episodes } = season;
 
   return (
-    <li key={name} className={classNames}>
-      <button
-        className="focus:outline-none"
-        type="button"
-        role="link"
-        onClick={seasonSelected}
-      >
-        {name}
-      </button>
-    </li>
+    <div className="container mx-auto mt-8">
+      <div className="flex justify-center">
+        {statusIcon(downloaded, watched)}
+      </div>
+      {<Episodes episodes={episodes} />}
+    </div>
   );
 };
 

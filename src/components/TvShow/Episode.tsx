@@ -6,10 +6,8 @@ import { Link } from "react-router-dom";
 import padStart from "lodash/padStart";
 import truncate from "lodash/truncate";
 
-import LazyLoad from "react-lazyload";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faDownload } from "@fortawesome/free-solid-svg-icons";
 
 import { TvShowQuery } from "generated/graphql";
 
@@ -30,26 +28,48 @@ function episodeHeader(episode: string, name: string = "TBA") {
 
 type EpisodeProps = {
   episode: Pick<
-    TvShowQuery["tvShow"]["episodes"][0],
+    TvShowQuery["tvShow"]["seasons"][0]["episodes"][0],
     | "id"
     | "name"
     | "stillImage"
     | "stillImageBase64"
     | "seasonNumber"
     | "episode"
+    | "downloaded"
     | "watched"
     | "tmdbDetails"
   >;
 };
 
+const statusIcon = (downloaded: boolean, watched: boolean): JSX.Element => {
+  if (watched) {
+    return (
+      <div className="absolute top-0 right-0">
+        <div className="p-2 text-gray-500">
+          <FontAwesomeIcon icon={faEye} />
+        </div>
+      </div>
+    );
+  } else if (downloaded) {
+    return (
+      <div className="absolute top-0 right-0">
+        <div className="p-2 text-gray-500">
+          <FontAwesomeIcon icon={faDownload} />
+        </div>
+      </div>
+    );
+  }
+  return <></>;
+};
+
 const Episode = ({ episode }: EpisodeProps): JSX.Element => {
   const {
     id,
-    name,
     stillImage,
     stillImageBase64,
     seasonNumber,
     episode: episodeNumber,
+    downloaded,
     watched,
     tmdbDetails = {}
   } = episode;
@@ -74,13 +94,7 @@ const Episode = ({ episode }: EpisodeProps): JSX.Element => {
             )}'), url('${stillImageBase64}') `
           }}
         >
-          {watched && (
-            <div className="absolute top-0 right-0">
-              <div className="p-2 text-gray-500">
-                <FontAwesomeIcon icon={faEye} />
-              </div>
-            </div>
-          )}
+          {statusIcon(downloaded, watched)}
           <div className="p-4">
             {seasonNumber &&
               episodeNumber &&

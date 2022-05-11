@@ -9,13 +9,14 @@ import Episode from "./Episode";
 
 type EpisodesProps = {
   episodes: Pick<
-    TvShowQuery["tvShow"]["episodes"][0],
+    TvShowQuery["tvShow"]["seasons"][0]["episodes"][0],
     | "id"
     | "name"
     | "stillImage"
     | "stillImageBase64"
     | "seasonNumber"
     | "episode"
+    | "downloaded"
     | "watched"
     | "tmdbDetails"
   >[];

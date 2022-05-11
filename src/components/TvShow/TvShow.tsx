@@ -1,17 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
-import uniq from "lodash/uniq";
 import sortBy from "lodash/sortBy";
-import last from "lodash/last";
 
-import { useTvShowQuery, Episode } from "generated/graphql";
+import { useTvShowQuery } from "generated/graphql";
 
 import Loading from "components/shared/LoadingFull";
 import Top from "./Top";
 import News from "./News";
 import Actions from "./Actions";
 import Seasons from "./Seasons";
-import Episodes from "./Episodes";
 
 type TvShowProps = {
   match: {
@@ -26,9 +23,7 @@ const TvShow = (props: TvShowProps): JSX.Element => {
     }
   } = props;
 
-  const [selectedSeason, setSelectedSeason] = useState(0);
-
-  const { data, loading } = useTvShowQuery({
+  const { data } = useTvShowQuery({
     fetchPolicy: "cache-and-network",
     variables: { id }
   });
@@ -37,20 +32,7 @@ const TvShow = (props: TvShowProps): JSX.Element => {
     return <Loading />;
   }
 
-  const episodes = data.tvShow.episodes || [];
-
-  const seasonNumbers = sortBy(
-    uniq(
-      episodes.map((episode: Pick<Episode, "seasonNumber">) =>
-        episode?.seasonNumber ? episode.seasonNumber : 0
-      )
-    )
-  );
-
-  const selectedEpisodes = episodes.filter(
-    (episode: Pick<Episode, "seasonNumber">) =>
-      episode.seasonNumber === (selectedSeason || last(seasonNumbers))
-  );
+  const seasons = data.tvShow.seasons;
 
   return (
     <div className="pb-20">
@@ -64,17 +46,9 @@ const TvShow = (props: TvShowProps): JSX.Element => {
         </div>
 
         <News newsItems={data.tvShow.newsItems || []} />
-
-        {selectedEpisodes.length > 0 && (
-          <Seasons
-            seasonNumbers={seasonNumbers}
-            selectedSeason={selectedSeason || last(seasonNumbers)}
-            onSelect={setSelectedSeason}
-          />
-        )}
       </div>
       <div className="container mx-auto mt-8">
-        <Episodes episodes={selectedEpisodes} />
+        <Seasons seasons={seasons} />
       </div>
     </div>
   );

@@ -1,34 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
+import sortBy from "lodash/sortBy";
 
+import { TvShowQuery } from "generated/graphql";
+
+import SeasonSelection from "./SeasonSelection";
 import Season from "./Season";
 
 type SeasonsProps = {
-  seasonNumbers: number[];
-  selectedSeason?: number;
-  onSelect: (season: number) => void;
+  seasons: Pick<
+    TvShowQuery["tvShow"]["seasons"][0],
+    "number" | "downloaded" | "watched" | "episodes"
+  >[];
 };
 
-const Seasons = ({
-  seasonNumbers,
-  selectedSeason,
-  onSelect
-}: SeasonsProps): JSX.Element => {
-  const options = seasonNumbers.map((number) => (
-    <Season
+const Seasons = ({ seasons }: SeasonsProps): JSX.Element => {
+  const sortedSeasons = sortBy(seasons, (season) => season.number);
+
+  const [selectedSeason, setSelectedSeason] = useState(
+    sortedSeasons[sortedSeasons.length - 1]
+  );
+
+  const seasonSelected = (value: number) => {
+    const newSeason = sortedSeasons.find((season) => season.number === value);
+
+    if (newSeason) {
+      setSelectedSeason(newSeason);
+    }
+  };
+
+  const seasonEpisodes = seasons.find(
+    (season) => season.number === selectedSeason.number
+  )?.episodes;
+
+  const options = sortedSeasons.map(({ number }) => (
+    <SeasonSelection
       key={number}
       name={`Season ${number}`}
       value={number}
-      active={number === selectedSeason}
-      onSelect={onSelect}
+      active={number === selectedSeason.number}
+      onSelect={seasonSelected}
     />
   ));
 
   return (
     <div className="pt-20">
-      <h2 className="text-3xl">Episodes</h2>
-      <ul className="flex justify-start pt-4 -mx-2 overflow-auto ">
+      <ul className="flex justify-center pt-4 -mx-2 overflow-auto">
         {options}
       </ul>
+      <div className="container mx-auto mt-8">
+        <Season season={selectedSeason} />
+      </div>
     </div>
   );
 };

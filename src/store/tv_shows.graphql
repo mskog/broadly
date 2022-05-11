@@ -45,18 +45,25 @@ query TvShow($id: ID!) {
       genres
       network
     }
-    episodes {
-      id
-      name
-      seasonNumber
-      episode
-      stillImage
-      stillImageThumbnail
-      stillImageBase64
+
+    seasons {
+      number
       watched
-      tmdbDetails {
+      downloaded
+      episodes {
+        id
         name
-        overview
+        seasonNumber
+        episode
+        stillImage
+        stillImageThumbnail
+        stillImageBase64
+        downloaded
+        watched
+        tmdbDetails {
+          name
+          overview
+        }
       }
     }
 
@@ -94,6 +101,7 @@ query Episode($id: ID!) {
     stillImage
     stillImageThumbnail
     stillImageBase64
+    downloaded
     watched
     watchedAt
     tmdbDetails {
