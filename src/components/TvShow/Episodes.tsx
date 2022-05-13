@@ -18,15 +18,17 @@ type EpisodesProps = {
     | "episode"
     | "downloaded"
     | "watched"
+    | "aired"
     | "tmdbDetails"
   >[];
 };
 
 const Episodes = ({ episodes }: EpisodesProps): JSX.Element => {
   const uniqEpisodes = uniqBy(episodes, (episode) => episode.episode);
+  const airedEpisodes = uniqEpisodes.filter((episode) => episode.aired);
 
   const episodeComponents = reverse(
-    sortBy(uniqEpisodes, (episode) => episode.episode)
+    sortBy(airedEpisodes, (episode) => episode.episode)
   ).map((episode) => {
     return <Episode key={episode.episode} episode={episode} />;
   });

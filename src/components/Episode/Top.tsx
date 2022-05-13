@@ -35,6 +35,7 @@ type TopProps = {
     | "stillImageBase64"
     | "tmdbDetails"
     | "watchedAt"
+    | "airDate"
     | "tvShow"
   > & { bestRelease?: Pick<EpisodeRelease, "resolution"> };
 };
@@ -47,6 +48,7 @@ const Top = ({ episode }: TopProps): JSX.Element => {
     stillImageBase64,
     tmdbDetails,
     watchedAt,
+    airDate,
     tvShow: { id: tvShowId, name: tvShowName, traktDetails },
     bestRelease
   } = episode;
@@ -84,6 +86,11 @@ const Top = ({ episode }: TopProps): JSX.Element => {
                 hideIfBlank
                 title="Watched"
                 value={DateTime.fromISO(watchedAt).toISODate()}
+              />
+              <LevelItem
+                hideIfBlank
+                title="Air Date"
+                value={DateTime.fromISO(airDate).toISODate()}
               />
               {traktDetails?.runtime ? (
                 <LevelItem

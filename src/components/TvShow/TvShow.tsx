@@ -48,7 +48,7 @@ const TvShow = (props: TvShowProps): JSX.Element => {
         <News newsItems={data.tvShow.newsItems || []} />
       </div>
       <div className="container mx-auto mt-8">
-        <Seasons seasons={seasons} />
+        <Seasons tvShowId={data.tvShow.id} seasons={seasons} />
       </div>
     </div>
   );

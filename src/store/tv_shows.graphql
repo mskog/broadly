@@ -50,6 +50,8 @@ query TvShow($id: ID!) {
       number
       watched
       downloaded
+      downloadRequested
+      aired
       episodes {
         id
         name
@@ -60,6 +62,7 @@ query TvShow($id: ID!) {
         stillImageBase64
         downloaded
         watched
+        aired
         tmdbDetails {
           name
           overview
@@ -104,6 +107,8 @@ query Episode($id: ID!) {
     downloaded
     watched
     watchedAt
+    aired
+    airDate
     tmdbDetails {
       name
       overview
@@ -132,6 +137,7 @@ query Episodes($first: Int, $skip: Int, $category: EpisodeCategory) {
     stillImageThumbnail
     stillImageBase64
     watched
+    aired
     tmdbDetails {
       name
       overview
@@ -187,6 +193,12 @@ mutation SampleTvShow($id: ID!) {
 
 mutation EpisodeWatched($id: ID!) {
   episodeWatched(id: $id) {
+    id
+  }
+}
+
+mutation DownloadSeason($tvShowId: Int!, $seasonNumber: Int!) {
+  downloadSeason(tvShowId: $tvShowId, seasonNumber: $seasonNumber) {
     id
   }
 }

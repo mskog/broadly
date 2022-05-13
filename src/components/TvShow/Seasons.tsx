@@ -7,37 +7,50 @@ import SeasonSelection from "./SeasonSelection";
 import Season from "./Season";
 
 type SeasonsProps = {
+  tvShowId: number;
   seasons: Pick<
     TvShowQuery["tvShow"]["seasons"][0],
-    "number" | "downloaded" | "watched" | "episodes"
+    | "number"
+    | "downloaded"
+    | "watched"
+    | "episodes"
+    | "downloadRequested"
+    | "aired"
   >[];
 };
 
-const Seasons = ({ seasons }: SeasonsProps): JSX.Element => {
+const Seasons = ({ tvShowId, seasons }: SeasonsProps): JSX.Element => {
   const sortedSeasons = sortBy(seasons, (season) => season.number);
+  const availableSeasons = sortedSeasons.filter((season) => {
+    return season.episodes.filter((episode) => episode.aired).length > 0;
+  });
 
-  const [selectedSeason, setSelectedSeason] = useState(
-    sortedSeasons[sortedSeasons.length - 1]
+  if (availableSeasons.length === 0) {
+    return <></>;
+  }
+
+  const [selectedSeasonNumber, setSelectedSeasonNumber] = useState(
+    availableSeasons[availableSeasons.length - 1]?.number
   );
 
   const seasonSelected = (value: number) => {
-    const newSeason = sortedSeasons.find((season) => season.number === value);
-
-    if (newSeason) {
-      setSelectedSeason(newSeason);
-    }
+    setSelectedSeasonNumber(value);
   };
 
+  const selectedSeason =
+    availableSeasons.find((season) => season.number === selectedSeasonNumber) ||
+    availableSeasons[availableSeasons.length - 1];
+
   const seasonEpisodes = seasons.find(
-    (season) => season.number === selectedSeason.number
+    (season) => season.number === selectedSeasonNumber
   )?.episodes;
 
-  const options = sortedSeasons.map(({ number }) => (
+  const options = availableSeasons.map(({ number }) => (
     <SeasonSelection
       key={number}
       name={`Season ${number}`}
       value={number}
-      active={number === selectedSeason.number}
+      active={number === selectedSeasonNumber}
       onSelect={seasonSelected}
     />
   ));
@@ -48,7 +61,7 @@ const Seasons = ({ seasons }: SeasonsProps): JSX.Element => {
         {options}
       </ul>
       <div className="container mx-auto mt-8">
-        <Season season={selectedSeason} />
+        <Season tvShowId={tvShowId} season={selectedSeason} />
       </div>
     </div>
   );

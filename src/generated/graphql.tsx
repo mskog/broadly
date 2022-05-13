@@ -41,11 +41,12 @@ export type CalendarItem = CalendarEpisode | Movie;
 
 export type Episode = {
   __typename?: 'Episode';
+  airDate?: Maybe<Scalars['ISO8601Date']>;
+  aired: Scalars['Boolean'];
   bestRelease?: Maybe<EpisodeRelease>;
   downloadAt?: Maybe<Scalars['ISO8601DateTime']>;
   downloaded: Scalars['Boolean'];
   episode?: Maybe<Scalars['Int']>;
-  firstAired?: Maybe<Scalars['ISO8601Date']>;
   id: Scalars['Int'];
   key?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
@@ -177,6 +178,7 @@ export type Mutation = {
   collectTvShow: TvShow;
   deleteMovie: Movie;
   downloadMovie: Movie;
+  downloadSeason: TvShow;
   episodeWatched: Episode;
   forceMovieDownload: Movie;
   rateMovie: Movie;
@@ -204,6 +206,12 @@ export type MutationDeleteMovieArgs = {
 
 export type MutationDownloadMovieArgs = {
   imdbId: Scalars['String'];
+};
+
+
+export type MutationDownloadSeasonArgs = {
+  seasonNumber: Scalars['Int'];
+  tvShowId: Scalars['Int'];
 };
 
 
@@ -460,6 +468,8 @@ export type QueryTvShowsArgs = {
 
 export type Season = {
   __typename?: 'Season';
+  aired: Scalars['Boolean'];
+  downloadRequested: Scalars['Boolean'];
   downloaded: Scalars['Boolean'];
   episodes: Array<Episode>;
   id: Scalars['Int'];
@@ -728,7 +738,7 @@ export type TvShowQueryVariables = Exact<{
 }>;
 
 
-export type TvShowQuery = { __typename?: 'Query', tvShow: { __typename?: 'TvShow', id: number, name: string, status?: string, watching?: boolean, collected?: boolean, waitlist?: boolean, posterImage?: string, backdropImage?: string, backdropImageBase64?: string, tmdbDetails?: { __typename?: 'TvShowTmdbDetails', voteAverage?: string, firstAirDate?: string, id?: number }, traktDetails?: { __typename?: 'TraktDetails', overview?: string, runtime?: number, genres?: Array<string>, network?: string, ids?: { __typename?: 'TraktIds', tmdb?: string } }, seasons: Array<{ __typename?: 'Season', number: number, watched: boolean, downloaded: boolean, episodes: Array<{ __typename?: 'Episode', id: number, name?: string, seasonNumber?: number, episode?: number, stillImage?: string, stillImageThumbnail?: string, stillImageBase64?: string, downloaded: boolean, watched: boolean, tmdbDetails?: { __typename?: 'EpisodeTmdbDetails', name?: string, overview?: string } }> }>, newsItems: Array<{ __typename?: 'NewsItem', title: string, url: string, metadata?: { __typename?: 'NewsItemMetadata', image?: string, description?: string } }> } };
+export type TvShowQuery = { __typename?: 'Query', tvShow: { __typename?: 'TvShow', id: number, name: string, status?: string, watching?: boolean, collected?: boolean, waitlist?: boolean, posterImage?: string, backdropImage?: string, backdropImageBase64?: string, tmdbDetails?: { __typename?: 'TvShowTmdbDetails', voteAverage?: string, firstAirDate?: string, id?: number }, traktDetails?: { __typename?: 'TraktDetails', overview?: string, runtime?: number, genres?: Array<string>, network?: string, ids?: { __typename?: 'TraktIds', tmdb?: string } }, seasons: Array<{ __typename?: 'Season', number: number, watched: boolean, downloaded: boolean, downloadRequested: boolean, aired: boolean, episodes: Array<{ __typename?: 'Episode', id: number, name?: string, seasonNumber?: number, episode?: number, stillImage?: string, stillImageThumbnail?: string, stillImageBase64?: string, downloaded: boolean, watched: boolean, aired: boolean, tmdbDetails?: { __typename?: 'EpisodeTmdbDetails', name?: string, overview?: string } }> }>, newsItems: Array<{ __typename?: 'NewsItem', title: string, url: string, metadata?: { __typename?: 'NewsItemMetadata', image?: string, description?: string } }> } };
 
 export type TvShowSummaryQueryVariables = Exact<{
   imdbId: Scalars['ID'];
@@ -742,7 +752,7 @@ export type EpisodeQueryVariables = Exact<{
 }>;
 
 
-export type EpisodeQuery = { __typename?: 'Query', episode: { __typename?: 'Episode', id: number, name?: string, seasonNumber?: number, episode?: number, stillImage?: string, stillImageThumbnail?: string, stillImageBase64?: string, downloaded: boolean, watched: boolean, watchedAt?: any, tmdbDetails?: { __typename?: 'EpisodeTmdbDetails', name?: string, overview?: string, firstAirDate?: string }, tvShow: { __typename?: 'TvShow', id: number, name: string, traktDetails?: { __typename?: 'TraktDetails', runtime?: number } }, bestRelease?: { __typename?: 'EpisodeRelease', resolution: string } } };
+export type EpisodeQuery = { __typename?: 'Query', episode: { __typename?: 'Episode', id: number, name?: string, seasonNumber?: number, episode?: number, stillImage?: string, stillImageThumbnail?: string, stillImageBase64?: string, downloaded: boolean, watched: boolean, watchedAt?: any, aired: boolean, airDate?: any, tmdbDetails?: { __typename?: 'EpisodeTmdbDetails', name?: string, overview?: string, firstAirDate?: string }, tvShow: { __typename?: 'TvShow', id: number, name: string, traktDetails?: { __typename?: 'TraktDetails', runtime?: number } }, bestRelease?: { __typename?: 'EpisodeRelease', resolution: string } } };
 
 export type EpisodesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
@@ -751,7 +761,7 @@ export type EpisodesQueryVariables = Exact<{
 }>;
 
 
-export type EpisodesQuery = { __typename?: 'Query', episodes: Array<{ __typename?: 'Episode', id: number, name?: string, seasonNumber?: number, episode?: number, stillImage?: string, stillImageThumbnail?: string, stillImageBase64?: string, watched: boolean, tmdbDetails?: { __typename?: 'EpisodeTmdbDetails', name?: string, overview?: string, firstAirDate?: string }, bestRelease?: { __typename?: 'EpisodeRelease', resolution: string }, tvShow: { __typename?: 'TvShow', id: number, name: string } }> };
+export type EpisodesQuery = { __typename?: 'Query', episodes: Array<{ __typename?: 'Episode', id: number, name?: string, seasonNumber?: number, episode?: number, stillImage?: string, stillImageThumbnail?: string, stillImageBase64?: string, watched: boolean, aired: boolean, tmdbDetails?: { __typename?: 'EpisodeTmdbDetails', name?: string, overview?: string, firstAirDate?: string }, bestRelease?: { __typename?: 'EpisodeRelease', resolution: string }, tvShow: { __typename?: 'TvShow', id: number, name: string } }> };
 
 export type TvShowPosterQueryVariables = Exact<{
   tmdbId: Scalars['ID'];
@@ -801,6 +811,14 @@ export type EpisodeWatchedMutationVariables = Exact<{
 
 
 export type EpisodeWatchedMutation = { __typename?: 'Mutation', episodeWatched: { __typename?: 'Episode', id: number } };
+
+export type DownloadSeasonMutationVariables = Exact<{
+  tvShowId: Scalars['Int'];
+  seasonNumber: Scalars['Int'];
+}>;
+
+
+export type DownloadSeasonMutation = { __typename?: 'Mutation', downloadSeason: { __typename?: 'TvShow', id: number } };
 
 
 export const CalendarDocument = gql`
@@ -1676,6 +1694,8 @@ export const TvShowDocument = gql`
       number
       watched
       downloaded
+      downloadRequested
+      aired
       episodes {
         id
         name
@@ -1686,6 +1706,7 @@ export const TvShowDocument = gql`
         stillImageBase64
         downloaded
         watched
+        aired
         tmdbDetails {
           name
           overview
@@ -1787,6 +1808,8 @@ export const EpisodeDocument = gql`
     downloaded
     watched
     watchedAt
+    aired
+    airDate
     tmdbDetails {
       name
       overview
@@ -1844,6 +1867,7 @@ export const EpisodesDocument = gql`
     stillImageThumbnail
     stillImageBase64
     watched
+    aired
     tmdbDetails {
       name
       overview
@@ -2122,3 +2146,37 @@ export function useEpisodeWatchedMutation(baseOptions?: Apollo.MutationHookOptio
 export type EpisodeWatchedMutationHookResult = ReturnType<typeof useEpisodeWatchedMutation>;
 export type EpisodeWatchedMutationResult = Apollo.MutationResult<EpisodeWatchedMutation>;
 export type EpisodeWatchedMutationOptions = Apollo.BaseMutationOptions<EpisodeWatchedMutation, EpisodeWatchedMutationVariables>;
+export const DownloadSeasonDocument = gql`
+    mutation DownloadSeason($tvShowId: Int!, $seasonNumber: Int!) {
+  downloadSeason(tvShowId: $tvShowId, seasonNumber: $seasonNumber) {
+    id
+  }
+}
+    `;
+export type DownloadSeasonMutationFn = Apollo.MutationFunction<DownloadSeasonMutation, DownloadSeasonMutationVariables>;
+
+/**
+ * __useDownloadSeasonMutation__
+ *
+ * To run a mutation, you first call `useDownloadSeasonMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDownloadSeasonMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [downloadSeasonMutation, { data, loading, error }] = useDownloadSeasonMutation({
+ *   variables: {
+ *      tvShowId: // value for 'tvShowId'
+ *      seasonNumber: // value for 'seasonNumber'
+ *   },
+ * });
+ */
+export function useDownloadSeasonMutation(baseOptions?: Apollo.MutationHookOptions<DownloadSeasonMutation, DownloadSeasonMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DownloadSeasonMutation, DownloadSeasonMutationVariables>(DownloadSeasonDocument, options);
+      }
+export type DownloadSeasonMutationHookResult = ReturnType<typeof useDownloadSeasonMutation>;
+export type DownloadSeasonMutationResult = Apollo.MutationResult<DownloadSeasonMutation>;
+export type DownloadSeasonMutationOptions = Apollo.BaseMutationOptions<DownloadSeasonMutation, DownloadSeasonMutationVariables>;
