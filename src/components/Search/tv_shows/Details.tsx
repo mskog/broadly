@@ -6,7 +6,8 @@ import { useQuery, gql } from "@apollo/client";
 
 import {
   useCollectTvShowMutation,
-  useSampleTvShowMutation
+  useSampleTvShowMutation,
+  useWatchTvShowMutation
 } from "generated/graphql";
 
 import { LoadingFull, LoaderButton } from "components/shared";
@@ -67,6 +68,13 @@ const Details = (props: DetailsProps): JSX.Element => {
     }
   });
 
+  const [watchTvShow] = useWatchTvShowMutation({
+    variables: { id: imdbId },
+    update: () => {
+      history.goBack();
+    }
+  });
+
   if (!data) {
     return <LoadingFull />;
   }
@@ -93,6 +101,14 @@ const Details = (props: DetailsProps): JSX.Element => {
               onClick={collectTvShow}
             >
               Collect
+            </LoaderButton>
+          </div>
+          <div className="w-full mx-1 my-2 md:w-6/12">
+            <LoaderButton
+              className="w-full px-4 py-2 font-bold text-white bg-teal-500 rounded hover:bg-teal-700"
+              onClick={watchTvShow}
+            >
+              Watch
             </LoaderButton>
           </div>
         </div>

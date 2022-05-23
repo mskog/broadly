@@ -25,6 +25,7 @@ type EpisodesProps = {
 
 const Episodes = ({ episodes }: EpisodesProps): JSX.Element => {
   const uniqEpisodes = uniqBy(episodes, (episode) => episode.episode);
+  console.log(uniqEpisodes);
   const airedEpisodes = uniqEpisodes.filter((episode) => episode.aired);
 
   const episodeComponents = reverse(
