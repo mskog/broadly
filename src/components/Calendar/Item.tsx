@@ -1,52 +1,30 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-import { Poster as MoviePoster } from "components/shared";
-import TvShowPoster from "./TvShowPoster";
+import MovieComponent from "./Movie";
+import EpisodeComponent from "./Episode";
 
-import { CalendarEpisode, Movie } from "generated/graphql";
+import { CalendarEpisode, CalendarMovie, Movie } from "generated/graphql";
 
 type CalendarItemProps = {
   item:
     | CalendarEpisode
-    | Pick<Movie, "__typename" | "id" | "title" | "posterImage">;
+    | (Pick<CalendarMovie, "__typename" | "releaseDate" | "releaseType"> & {
+        movie: Pick<Movie, "id" | "title" | "posterImage">;
+      });
 };
 
 const Item = ({ item }: CalendarItemProps): JSX.Element => {
   let component;
-  if (item.__typename === "Movie") {
+  if (item.__typename === "CalendarMovie") {
     component = (
-      <>
-        <div className="w-32 h-40 -mt-10">
-          <Link to={`/movies/${item.id}`}>
-            <MoviePoster src={item.posterImage} />
-          </Link>
-        </div>
-        <div className="w-full pl-4">
-          <Link to={`/movies/${item.id}`}>
-            <h2 className="text-3xl leading-none ">{item.title}</h2>
-          </Link>
-        </div>
-      </>
+      <MovieComponent
+        releaseDate={item.releaseDate}
+        releaseType={item.releaseType}
+        movie={item.movie}
+      />
     );
   } else if (item.__typename === "CalendarEpisode") {
-    component = (
-      <>
-        <div className="w-32 h-40 -mt-10">
-          <Link to={`/tv_shows/${item.id}`}>
-            {item.tmdbDetails && item.tmdbDetails.id && (
-              <TvShowPoster tmdbId={item.tmdbDetails.id.toString()} />
-            )}
-          </Link>
-        </div>
-        <div className="w-full pl-4">
-          <Link to={`/tv_shows/${item.id}`}>
-            <h2 className="text-3xl leading-none ">{item.name}</h2>
-            <h3>{item.title}</h3>
-          </Link>
-        </div>
-      </>
-    );
+    component = <EpisodeComponent item={item} />;
   }
 
   return (

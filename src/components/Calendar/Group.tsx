@@ -4,13 +4,15 @@ import { DateTime } from "luxon";
 
 import Item from "./Item";
 
-import { CalendarEpisode, Movie } from "generated/graphql";
+import { CalendarEpisode, CalendarMovie, Movie } from "generated/graphql";
 
 type GroupProps = {
   date: string;
   items: (
-    | CalendarEpisode
-    | Pick<Movie, "__typename" | "id" | "title" | "posterImage">
+    | Pick<CalendarEpisode, "__typename" | "id" | "tmdbDetails" | "firstAired">
+    | (Pick<CalendarMovie, "__typename" | "releaseDate" | "releaseType"> & {
+        movie: Pick<Movie, "id" | "title" | "posterImage">;
+      })
   )[];
 };
 

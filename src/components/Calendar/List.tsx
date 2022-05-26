@@ -5,7 +5,7 @@ import { DateTime } from "luxon";
 
 import { Link } from "react-router-dom";
 
-import { CalendarEpisode, Movie } from "generated/graphql";
+import { CalendarEpisode, CalendarMovie, Movie } from "generated/graphql";
 
 import { Poster as MoviePoster } from "components/shared";
 import TvShowPoster from "./TvShowPoster";
@@ -15,7 +15,9 @@ import Group from "./Group";
 type ListProps = {
   items: (
     | Pick<CalendarEpisode, "__typename" | "id" | "tmdbDetails" | "firstAired">
-    | Pick<Movie, "__typename" | "id" | "posterImage" | "availableDate">
+    | (Pick<CalendarMovie, "__typename" | "releaseDate" | "releaseType"> & {
+        movie: Pick<Movie, "id" | "title" | "posterImage">;
+      })
   )[];
 };
 
@@ -24,8 +26,8 @@ const List = ({ items }: ListProps): JSX.Element => {
     let date;
     if (tvShow.__typename === "CalendarEpisode") {
       date = DateTime.fromISO(tvShow.firstAired);
-    } else if (tvShow.__typename === "Movie") {
-      date = DateTime.fromISO(tvShow.availableDate);
+    } else if (tvShow.__typename === "CalendarMovie") {
+      date = DateTime.fromISO(tvShow.releaseDate);
     }
     return date;
   });

@@ -37,7 +37,14 @@ export type CalendarEpisode = {
   tmdbDetails?: Maybe<EpisodeTmdbDetails>;
 };
 
-export type CalendarItem = CalendarEpisode | Movie;
+export type CalendarItem = CalendarEpisode | CalendarMovie;
+
+export type CalendarMovie = {
+  __typename?: 'CalendarMovie';
+  movie: Movie;
+  releaseDate: Scalars['ISO8601DateTime'];
+  releaseType: Scalars['String'];
+};
 
 export type Episode = {
   __typename?: 'Episode';
@@ -112,6 +119,7 @@ export type Movie = OmnisearchResult & {
   posterImageBase64?: Maybe<Scalars['String']>;
   posterImageThumbnail?: Maybe<Scalars['String']>;
   releaseDate?: Maybe<Scalars['ISO8601Date']>;
+  releaseDates: Array<MovieReleaseDate>;
   releases?: Maybe<Array<MovieRelease>>;
   rtAudienceRating?: Maybe<Scalars['Int']>;
   rtCriticsRating?: Maybe<Scalars['Int']>;
@@ -142,6 +150,12 @@ export type MovieRelease = {
   resolution: Scalars['String'];
   size: Scalars['Float'];
   source: Scalars['String'];
+};
+
+export type MovieReleaseDate = {
+  __typename?: 'MovieReleaseDate';
+  releaseDate: Scalars['ISO8601DateTime'];
+  releaseType: Scalars['String'];
 };
 
 export type MovieSearch = {
@@ -598,7 +612,7 @@ export type CalendarQueryVariables = Exact<{
 }>;
 
 
-export type CalendarQuery = { __typename?: 'Query', calendar: Array<{ __typename: 'CalendarEpisode', id: number, firstAired?: any, season?: number, name?: string, title?: string, tmdbDetails?: { __typename?: 'EpisodeTmdbDetails', id?: number } } | { __typename: 'Movie', id: number, posterImage?: string, title?: string, availableDate?: any }> };
+export type CalendarQuery = { __typename?: 'Query', calendar: Array<{ __typename?: 'CalendarEpisode', id: number, firstAired?: any, season?: number, name?: string, title?: string, tmdbDetails?: { __typename?: 'EpisodeTmdbDetails', id?: number } } | { __typename?: 'CalendarMovie', releaseType: string, releaseDate: any, movie: { __typename?: 'Movie', id: number, posterImage?: string, title?: string, availableDate?: any } }> };
 
 export type MoviesQueryVariables = Exact<{
   category?: InputMaybe<Scalars['String']>;
@@ -824,12 +838,15 @@ export type DownloadSeasonMutation = { __typename?: 'Mutation', downloadSeason: 
 export const CalendarDocument = gql`
     query Calendar($category: CalendarCategory) {
   calendar(category: $category) {
-    __typename
-    ... on Movie {
-      id
-      posterImage
-      title
-      availableDate
+    ... on CalendarMovie {
+      releaseType
+      releaseDate
+      movie {
+        id
+        posterImage
+        title
+        availableDate
+      }
     }
     ... on CalendarEpisode {
       id

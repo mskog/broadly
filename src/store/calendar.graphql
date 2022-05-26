@@ -1,11 +1,15 @@
 query Calendar($category: CalendarCategory) {
   calendar(category: $category) {
-    __typename
-    ... on Movie {
-      id
-      posterImage
-      title
-      availableDate
+    ... on CalendarMovie {
+      releaseType
+      releaseDate
+
+      movie {
+        id
+        posterImage
+        title
+        availableDate
+      }
     }
 
     ... on CalendarEpisode {
