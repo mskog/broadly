@@ -7,7 +7,7 @@ import {
   useRemoveTvShowFromWaitlistMutation,
   useSampleTvShowMutation,
   TvShow,
-  Episode
+  Season
 } from "generated/graphql";
 
 import ActionButton from "./ActionButton";
@@ -17,12 +17,12 @@ type ActionsProps = {
   tvShow: Pick<
     TvShow,
     "id" | "watching" | "collected" | "waitlist" | "status"
-  > & { episodes?: Pick<Episode, "id">[] };
+  > & { seasons?: Pick<Season, "number">[] };
 };
 
 const Actions = (props: ActionsProps): JSX.Element => {
   const {
-    tvShow: { id, watching, collected, waitlist, episodes, status }
+    tvShow: { id, watching, collected, waitlist, seasons, status }
   } = props;
 
   const [unwatchTvShow] = useUnwatchTvShowMutation({
@@ -62,7 +62,7 @@ const Actions = (props: ActionsProps): JSX.Element => {
 
   const addToWaitlist = sample;
 
-  const hasEpisodes = episodes ? episodes.length > 0 : false;
+  const hasEpisodes = seasons ? seasons.length > 0 : false;
 
   return (
     <>
