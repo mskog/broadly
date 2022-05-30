@@ -100,7 +100,7 @@ const OmniSearch = ({ open, closeHandler, history }: OmniSearchProps) => {
         {query && data && data.omnisearch && (
           <div className="grid grid-cols-1 gap-4 px-4 py-4 rounded-md bg-gray-50">
             {data.omnisearch.length === 0 ? <div>Nothing found</div> : ""}
-            {data.omnisearch.map((result: any) => (
+            {data.omnisearch.slice(0, 5).map((result: any) => (
               <Result
                 key={`result-${result.__typename}-${result.id}`}
                 result={result}
