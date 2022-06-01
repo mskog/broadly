@@ -14,7 +14,6 @@ import TvShowResult from "./TvShowResult";
 import { Movie, TvShow } from "generated/graphql";
 
 import { Combobox, Dialog, Transition } from "@headlessui/react";
-import { SearchIcon } from "@heroicons/react/solid";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -87,10 +86,6 @@ const OmniSearch = ({ closeHandler, history }: OmniSearchProps) => {
                 }}
               >
                 <div className="relative">
-                  <SearchIcon
-                    className="pointer-events-none absolute top-3.5 left-4 h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
                   <Combobox.Input
                     className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm"
                     placeholder="Search..."
