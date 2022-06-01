@@ -1,24 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-underscore-dangle */
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 
-import { DebounceInput } from "react-debounce-input";
+import debounce from "lodash/debounce";
+
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import { useOmniSearchQuery } from "generated/graphql";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import MovieResult from "./MovieResult";
+import TvShowResult from "./TvShowResult";
 
-import Result from "./Result";
+import { Movie, TvShow } from "generated/graphql";
 
-type OmniSearchProps = {
-  open: boolean;
-  closeHandler: () => void;
-} & RouteComponentProps;
+import { Combobox, Dialog, Transition } from "@headlessui/react";
+import { SearchIcon } from "@heroicons/react/solid";
 
-const OmniSearch = ({ open, closeHandler, history }: OmniSearchProps) => {
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
+type OmniSearchProps = { closeHandler: () => void } & RouteComponentProps;
+
+const OmniSearch = ({ closeHandler, history }: OmniSearchProps) => {
   const [query, setQuery] = useState("");
+  const [open, setOpen] = useState(true);
+
+  const debouncedSetQuery = debounce(setQuery, 100);
 
   const { data } = useOmniSearchQuery({
     skip: !query,
@@ -27,95 +35,124 @@ const OmniSearch = ({ open, closeHandler, history }: OmniSearchProps) => {
     context: { useApolloNetworkStatus: false }
   });
 
-  const handleQueryChange = (event: React.FormEvent) => {
-    const target = event.target as HTMLInputElement;
-    setQuery(target.value);
-  };
-
   const handleClose = () => {
     closeHandler();
-    setQuery("");
+    setOpen(false);
   };
 
-  const handlePickFirst = () => {
-    if (data?.omnisearch && data.omnisearch.length > 0) {
-      const firstResult = data.omnisearch[0];
-      switch (firstResult.__typename) {
-        case "Movie":
-          history.push(`/movies/${data.omnisearch[0].id}`);
-          break;
-        case "TvShow":
-          history.push(`/tv_shows/${data.omnisearch[0].id}`);
-          break;
-        default:
-          break;
-      }
-      handleClose();
-    } else {
-      history.push(`/search?query=${query}`);
-    }
-  };
-
-  const display = open ? "flex" : "hidden";
+  const filteredItems = data?.omnisearch?.slice(0, 5) || [];
 
   return (
-    <div
-      className={`fixed ${display} z-50 flex items-start justify-center w-screen h-screen bg-gray-800 md:pt-16 bg-opacity-75 `}
+    <Transition.Root
+      show={open}
+      as={Fragment}
+      afterLeave={() => setQuery("")}
+      appear
     >
-      <div className="flex flex-col w-full mx-4 -my-4 md:w-192">
-        <div className="relative py-4 mt-1 rounded-md shadow-sm">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <svg
-              className="w-5 h-5 text-gray-400"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
-            </svg>
-          </div>
-          <DebounceInput
-            inputRef={(input) => input && input.focus()}
-            minLength={3}
-            debounceTimeout={200}
-            value={query}
-            onChange={handleQueryChange}
-            className="block w-full pl-10 leading-8 rounded-lg sm:text-sm"
-            onKeyDown={(event) => {
-              if (event.key === "Escape") {
-                handleClose();
-              }
-              if (event.key === "Enter") {
-                handlePickFirst();
-              }
-            }}
-          />
-          <div className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer ">
-            <FontAwesomeIcon
-              className="text-xl cursor-pointer"
-              icon={faTimes}
-              onClick={() => handleClose()}
-            />
-          </div>
+      <Dialog as="div" className="relative z-10" onClose={handleClose}>
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity" />
+        </Transition.Child>
+        <div className="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20">
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
+          >
+            <Dialog.Panel className="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+              <Combobox
+                value=""
+                onChange={(item: string | Movie | TvShow) => {
+                  if (typeof item === "string") {
+                    return;
+                  }
+                  if (item.__typename === "Movie") {
+                    history.push(`/movies/${item.id}`);
+                  }
+                  if (item.__typename === "TvShow") {
+                    history.push(`/tv_shows/${item.id}`);
+                  }
+                }}
+              >
+                <div className="relative">
+                  <SearchIcon
+                    className="pointer-events-none absolute top-3.5 left-4 h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                  <Combobox.Input
+                    className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm"
+                    placeholder="Search..."
+                    onChange={(event) => debouncedSetQuery(event.target.value)}
+                  />
+                </div>
+                {filteredItems.length > 0 && (
+                  <Combobox.Options
+                    static
+                    className="max-h-96 scroll-py-3 overflow-y-auto p-3"
+                  >
+                    {filteredItems.map((item) => (
+                      <Combobox.Option
+                        key={item.id}
+                        value={item}
+                        className={({ active }) =>
+                          classNames(
+                            "flex cursor-default select-none rounded-xl p-3",
+                            active ? "bg-gray-100" : ""
+                          )
+                        }
+                      >
+                        {({ active }) => (
+                          <>
+                            {item.__typename === "Movie" && (
+                              <MovieResult movie={item} active={active} />
+                            )}
+
+                            {item.__typename === "TvShow" && (
+                              <TvShowResult tvShow={item} active={active} />
+                            )}
+                          </>
+                        )}
+                      </Combobox.Option>
+                    ))}
+                  </Combobox.Options>
+                )}
+                {query && filteredItems.length !== 0 && (
+                  <div className="pb-2 text-center text-indigo-800">
+                    <a href={`/search?query=${query}`}>
+                      Search for new Movies and TV Shows
+                    </a>
+                  </div>
+                )}
+                {query !== "" && filteredItems.length === 0 && (
+                  <div className="py-2 px-6 text-center text-sm sm:px-14">
+                    <p className="mt-4 font-semibold text-gray-900">
+                      No results found
+                    </p>
+                    <div className="pt-8 pb-2 text-center text-indigo-800">
+                      <a href={`/search?query=${query}`}>
+                        Search for new Movies and TV Shows
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </Combobox>
+            </Dialog.Panel>
+          </Transition.Child>
         </div>
-        {query && data && data.omnisearch && (
-          <div className="grid grid-cols-1 gap-4 px-4 py-4 rounded-md bg-gray-50">
-            {data.omnisearch.length === 0 ? <div>Nothing found</div> : ""}
-            {data.omnisearch.slice(0, 5).map((result: any) => (
-              <Result
-                key={`result-${result.__typename}-${result.id}`}
-                result={result}
-                handleClose={handleClose}
-              />
-            ))}
-            <div className="pb-2 text-center text-indigo-800">
-              <a href={`/search?query=${query}`}>
-                Search for new Movies and TV Shows
-              </a>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+      </Dialog>
+    </Transition.Root>
   );
 };
 

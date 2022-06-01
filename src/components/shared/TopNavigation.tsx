@@ -42,10 +42,9 @@ const TopNavigation = (props: TopNavigationProps): JSX.Element => {
           toggleOmnisearch(!omnisearchOpen);
         }}
       />
-      <OmniSearch
-        open={omnisearchOpen}
-        closeHandler={() => toggleOmnisearch(false)}
-      />
+      {omnisearchOpen && (
+        <OmniSearch closeHandler={() => toggleOmnisearch(false)} />
+      )}
       <nav
         style={{ backgroundColor: `rgba(21, 26, 48, ${menuOpacity})` }}
         className="fixed z-40 flex flex-wrap items-center justify-between w-full p-6"
