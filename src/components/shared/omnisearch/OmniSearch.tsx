@@ -39,7 +39,7 @@ const OmniSearch = ({ closeHandler, history }: OmniSearchProps) => {
     setOpen(false);
   };
 
-  const filteredItems = data?.omnisearch?.slice(0, 5) || [];
+  const filteredItems = data?.omnisearch?.slice(0, 4) || [];
 
   return (
     <Transition.Root
@@ -70,7 +70,7 @@ const OmniSearch = ({ closeHandler, history }: OmniSearchProps) => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <Dialog.Panel className="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+            <Dialog.Panel className="mx-auto max-w-2xl transform divide-y divide-gray-500 divide-opacity-20 overflow-hidden rounded-xl bg-gray-900 shadow-2xl transition-all">
               <Combobox
                 value=""
                 onChange={(item: string | Movie | TvShow) => {
@@ -87,7 +87,7 @@ const OmniSearch = ({ closeHandler, history }: OmniSearchProps) => {
               >
                 <div className="relative">
                   <Combobox.Input
-                    className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm"
+                    className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-200 placeholder-gray-400 focus:ring-0 sm:text-sm"
                     placeholder="Search..."
                     onChange={(event) => debouncedSetQuery(event.target.value)}
                   />
@@ -104,7 +104,7 @@ const OmniSearch = ({ closeHandler, history }: OmniSearchProps) => {
                         className={({ active }) =>
                           classNames(
                             "flex cursor-default select-none rounded-xl p-3",
-                            active ? "bg-gray-100" : ""
+                            active ? "bg-gray-800" : ""
                           )
                         }
                       >
@@ -124,7 +124,7 @@ const OmniSearch = ({ closeHandler, history }: OmniSearchProps) => {
                   </Combobox.Options>
                 )}
                 {query && filteredItems.length !== 0 && (
-                  <div className="pb-2 text-center text-indigo-800">
+                  <div className="pb-2 text-center text-indigo-500">
                     <a href={`/search?query=${query}`}>
                       Search for new Movies and TV Shows
                     </a>
@@ -135,7 +135,7 @@ const OmniSearch = ({ closeHandler, history }: OmniSearchProps) => {
                     <p className="mt-4 font-semibold text-gray-900">
                       No results found
                     </p>
-                    <div className="pt-8 pb-2 text-center text-indigo-800">
+                    <div className="pt-8 pb-2 text-center text-indigo-500">
                       <a href={`/search?query=${query}`}>
                         Search for new Movies and TV Shows
                       </a>

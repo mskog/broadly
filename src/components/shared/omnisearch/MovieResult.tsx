@@ -39,12 +39,12 @@ const MovieResult = ({
         <p
           className={classNames(
             "text-xl font-medium",
-            active ? "text-gray-900" : "text-gray-700"
+            active ? "text-gray-200" : "text-gray-400"
           )}
         >
           {title}
         </p>
-        <div className="text-sm font-thin text-gray-600">
+        <div className="text-sm  text-gray-400">
           <span className="mr-2">
             <FontAwesomeIcon className="mr-1" icon={faCalendar} />
             {releaseYear(releaseDate)}
@@ -57,7 +57,12 @@ const MovieResult = ({
           )}
         </div>
       </div>
-      <div className="flex flex-col items-end justify-center flex-1 text-gray-400">
+      <div
+        className={classNames(
+          "flex flex-col items-end justify-center flex-1",
+          active ? "text-gray-200" : "text-gray-400"
+        )}
+      >
         <FontAwesomeIcon className="text-3xl" icon={faFilm} />
       </div>
     </>
