@@ -25,7 +25,7 @@ const OmniSearch = ({ closeHandler, history }: OmniSearchProps) => {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(true);
 
-  const debouncedSetQuery = debounce(setQuery, 100);
+  const debouncedSetQuery = debounce(setQuery, 300);
 
   const { data } = useOmniSearchQuery({
     skip: !query,
