@@ -1,5 +1,7 @@
 import React from "react";
 
+import { DateTime } from "luxon";
+
 import { Movie } from "generated/graphql";
 
 import capitalize from "lodash/capitalize";
@@ -43,6 +45,7 @@ const Top = ({
     | "backdropImageBase64"
     | "bestRelease"
     | "waitlist"
+    | "releaseDates"
   >;
 }): JSX.Element => {
   const {
@@ -58,10 +61,19 @@ const Top = ({
     backdropImage,
     backdropImageBase64,
     bestRelease,
-    waitlist
+    waitlist,
+    releaseDates
   } = movie;
 
   const date = waitlist ? availableDate : releaseYear(releaseDate);
+
+  const topRelease = releaseDates.find((releaseDate) => {
+    return releaseDate.releaseType === "4K UHD";
+  });
+
+  const topReleaseDate = topRelease
+    ? DateTime.fromISO(topRelease.releaseDate)
+    : null;
 
   return (
     <div>
@@ -80,6 +92,14 @@ const Top = ({
           <div className="md:pt-10">
             <Level>
               <LevelItem title="Release date" value={date} />
+              {topReleaseDate ? (
+                <LevelItem
+                  title="4K Blu-ray"
+                  value={topReleaseDate.toISODate()}
+                />
+              ) : (
+                <></>
+              )}
               {runtime ? (
                 <LevelItem title="Runtime" value={formattedRuntime(runtime)} />
               ) : (

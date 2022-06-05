@@ -75,6 +75,10 @@ query Movie($id: ID!) {
       source
       downloadUrl
     }
+    releaseDates {
+      releaseType
+      releaseDate
+    }
   }
 }
 

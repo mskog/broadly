@@ -638,7 +638,7 @@ export type MovieQueryVariables = Exact<{
 }>;
 
 
-export type MovieQuery = { __typename?: 'Query', movie: { __typename?: 'Movie', id: number, tmdbId?: string, imdbId?: string, title?: string, releaseDate?: any, availableDate?: any, downloadAt?: any, runtime?: number, rtCriticsRating?: number, rtAudienceRating?: number, watched?: boolean, waitlist?: boolean, personalRating?: number, overview?: string, hasKillerRelease: boolean, hasAcceptableRelease: boolean, backdropImage?: string, backdropImageBase64?: string, posterImage?: string, posterImageThumbnail?: string, bestRelease?: { __typename?: 'MovieRelease', id: number, codec: string, container: string, quality: string, releaseName: string, resolution: string, size: number, source: string, downloadUrl?: string } } };
+export type MovieQuery = { __typename?: 'Query', movie: { __typename?: 'Movie', id: number, tmdbId?: string, imdbId?: string, title?: string, releaseDate?: any, availableDate?: any, downloadAt?: any, runtime?: number, rtCriticsRating?: number, rtAudienceRating?: number, watched?: boolean, waitlist?: boolean, personalRating?: number, overview?: string, hasKillerRelease: boolean, hasAcceptableRelease: boolean, backdropImage?: string, backdropImageBase64?: string, posterImage?: string, posterImageThumbnail?: string, bestRelease?: { __typename?: 'MovieRelease', id: number, codec: string, container: string, quality: string, releaseName: string, resolution: string, size: number, source: string, downloadUrl?: string }, releaseDates: Array<{ __typename?: 'MovieReleaseDate', releaseType: string, releaseDate: any }> } };
 
 export type MovieSummaryQueryVariables = Exact<{
   imdbId: Scalars['ID'];
@@ -1028,6 +1028,10 @@ export const MovieDocument = gql`
       size
       source
       downloadUrl
+    }
+    releaseDates {
+      releaseType
+      releaseDate
     }
   }
 }
