@@ -15,7 +15,6 @@ import {
 
 import LevelItem from "components/shared/LevelItem";
 import Level from "components/shared/Level";
-import RtRating from "components/shared/RtRating";
 import PersonalRating from "./PersonalRating";
 
 function backgroundStyle(url: string, placeholder?: string) {
@@ -54,8 +53,6 @@ const Top = ({
     releaseDate,
     availableDate,
     runtime,
-    rtCriticsRating,
-    rtAudienceRating,
     personalRating,
     watched,
     backdropImage,
@@ -118,22 +115,6 @@ const Top = ({
                   title="Container"
                   value={capitalize(bestRelease.source)}
                 />
-              ) : (
-                <></>
-              )}
-              {!watched ? (
-                <>
-                  {rtCriticsRating && (
-                    <LevelItem title="Tomatometer">
-                      <RtRating rating={rtCriticsRating} />
-                    </LevelItem>
-                  )}
-                  {rtAudienceRating && (
-                    <LevelItem title="Audience">
-                      <RtRating rating={rtAudienceRating} />
-                    </LevelItem>
-                  )}
-                </>
               ) : (
                 <></>
               )}
