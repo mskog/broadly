@@ -19,6 +19,12 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
+type CustomOption = {
+  __typename: string;
+  id: string;
+  name: string;
+};
+
 type OmniSearchProps = { closeHandler: () => void } & RouteComponentProps;
 
 const OmniSearch = ({ closeHandler, history }: OmniSearchProps) => {
@@ -73,15 +79,15 @@ const OmniSearch = ({ closeHandler, history }: OmniSearchProps) => {
             <Dialog.Panel className="mx-auto max-w-2xl transform divide-y divide-gray-500 divide-opacity-20 overflow-hidden rounded-xl bg-gray-900 shadow-2xl transition-all">
               <Combobox
                 value=""
-                onChange={(item: string | Movie | TvShow) => {
+                onChange={(item: string | Movie | TvShow | CustomOption) => {
                   if (typeof item === "string") {
                     return;
-                  }
-                  if (item.__typename === "Movie") {
+                  } else if (item.__typename === "Movie") {
                     history.push(`/movies/${item.id}`);
-                  }
-                  if (item.__typename === "TvShow") {
+                  } else if (item.__typename === "TvShow") {
                     history.push(`/tv_shows/${item.id}`);
+                  } else {
+                    history.push(`/search?query=${query}`);
                   }
                 }}
               >
@@ -92,7 +98,7 @@ const OmniSearch = ({ closeHandler, history }: OmniSearchProps) => {
                     onChange={(event) => debouncedSetQuery(event.target.value)}
                   />
                 </div>
-                {filteredItems.length > 0 && (
+                {
                   <Combobox.Options
                     static
                     className="max-h-96 scroll-py-3 overflow-y-auto p-3"
@@ -121,27 +127,21 @@ const OmniSearch = ({ closeHandler, history }: OmniSearchProps) => {
                         )}
                       </Combobox.Option>
                     ))}
+                    {query.length > 0 && (
+                      <Combobox.Option
+                        value={{ id: null, name: query }}
+                        className={({ active }) =>
+                          classNames(
+                            "flex cursor-default select-none rounded-xl p-3 text-gray-300",
+                            active ? "bg-gray-800" : ""
+                          )
+                        }
+                      >
+                        Search for new stuff: "{query}"
+                      </Combobox.Option>
+                    )}
                   </Combobox.Options>
-                )}
-                {query && filteredItems.length !== 0 && (
-                  <div className="pb-2 text-center text-indigo-500">
-                    <a href={`/search?query=${query}`}>
-                      Search for new Movies and TV Shows
-                    </a>
-                  </div>
-                )}
-                {query !== "" && filteredItems.length === 0 && (
-                  <div className="py-2 px-6 text-center text-sm sm:px-14">
-                    <p className="mt-4 font-semibold text-gray-900">
-                      No results found
-                    </p>
-                    <div className="pt-8 pb-2 text-center text-indigo-500">
-                      <a href={`/search?query=${query}`}>
-                        Search for new Movies and TV Shows
-                      </a>
-                    </div>
-                  </div>
-                )}
+                }
               </Combobox>
             </Dialog.Panel>
           </Transition.Child>
