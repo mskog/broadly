@@ -752,7 +752,7 @@ export type TvShowQueryVariables = Exact<{
 }>;
 
 
-export type TvShowQuery = { __typename?: 'Query', tvShow: { __typename?: 'TvShow', id: number, name: string, status?: string, watching?: boolean, collected?: boolean, waitlist?: boolean, posterImage?: string, backdropImage?: string, backdropImageBase64?: string, tmdbDetails?: { __typename?: 'TvShowTmdbDetails', voteAverage?: string, firstAirDate?: string, id?: number }, traktDetails?: { __typename?: 'TraktDetails', overview?: string, runtime?: number, genres?: Array<string>, network?: string, ids?: { __typename?: 'TraktIds', tmdb?: string } }, seasons: Array<{ __typename?: 'Season', number: number, watched: boolean, downloaded: boolean, downloadRequested: boolean, aired: boolean, episodes: Array<{ __typename?: 'Episode', id: number, name?: string, seasonNumber?: number, episode?: number, stillImage?: string, stillImageThumbnail?: string, stillImageBase64?: string, downloaded: boolean, watched: boolean, aired: boolean, tmdbDetails?: { __typename?: 'EpisodeTmdbDetails', name?: string, overview?: string } }> }>, newsItems: Array<{ __typename?: 'NewsItem', title: string, url: string, metadata?: { __typename?: 'NewsItemMetadata', image?: string, description?: string } }> } };
+export type TvShowQuery = { __typename?: 'Query', tvShow: { __typename?: 'TvShow', id: number, name: string, status?: string, watching?: boolean, collected?: boolean, waitlist?: boolean, posterImage?: string, backdropImage?: string, backdropImageBase64?: string, tmdbDetails?: { __typename?: 'TvShowTmdbDetails', voteAverage?: string, firstAirDate?: string, id?: number }, traktDetails?: { __typename?: 'TraktDetails', overview?: string, runtime?: number, genres?: Array<string>, network?: string, ids?: { __typename?: 'TraktIds', tmdb?: string } }, seasons: Array<{ __typename?: 'Season', number: number, watched: boolean, downloaded: boolean, downloadRequested: boolean, aired: boolean, episodes: Array<{ __typename?: 'Episode', id: number, name?: string, seasonNumber?: number, episode?: number, stillImage?: string, stillImageThumbnail?: string, stillImageBase64?: string, downloaded: boolean, watched: boolean, aired: boolean, bestRelease?: { __typename?: 'EpisodeRelease', id: number, resolution: string }, tmdbDetails?: { __typename?: 'EpisodeTmdbDetails', name?: string, overview?: string } }> }>, newsItems: Array<{ __typename?: 'NewsItem', title: string, url: string, metadata?: { __typename?: 'NewsItemMetadata', image?: string, description?: string } }> } };
 
 export type TvShowSummaryQueryVariables = Exact<{
   imdbId: Scalars['ID'];
@@ -1728,6 +1728,10 @@ export const TvShowDocument = gql`
         downloaded
         watched
         aired
+        bestRelease {
+          id
+          resolution
+        }
         tmdbDetails {
           name
           overview

@@ -63,6 +63,10 @@ query TvShow($id: ID!) {
         downloaded
         watched
         aired
+        bestRelease {
+          id
+          resolution
+        }
         tmdbDetails {
           name
           overview
