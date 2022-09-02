@@ -13,9 +13,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** An ISO 8601-encoded date */
   ISO8601Date: any;
-  /** An ISO 8601-encoded datetime */
   ISO8601DateTime: any;
 };
 
@@ -688,13 +686,6 @@ export type RateMovieMutationVariables = Exact<{
 
 export type RateMovieMutation = { __typename?: 'Mutation', rateMovie: { __typename?: 'Movie', id: number } };
 
-export type NewsQueryVariables = Exact<{
-  category: Scalars['String'];
-}>;
-
-
-export type NewsQuery = { __typename?: 'Query', news: Array<{ __typename?: 'NewsItem', title: string, url: string, metadata?: { __typename?: 'NewsItemMetadata', image?: string, description?: string }, newsworthy?: { __typename?: 'Movie' } | { __typename?: 'TvShow', id: number, name: string } }> };
-
 export type MovieSearchQueryVariables = Exact<{
   query: Scalars['String'];
 }>;
@@ -1311,52 +1302,6 @@ export function useRateMovieMutation(baseOptions?: Apollo.MutationHookOptions<Ra
 export type RateMovieMutationHookResult = ReturnType<typeof useRateMovieMutation>;
 export type RateMovieMutationResult = Apollo.MutationResult<RateMovieMutation>;
 export type RateMovieMutationOptions = Apollo.BaseMutationOptions<RateMovieMutation, RateMovieMutationVariables>;
-export const NewsDocument = gql`
-    query News($category: String!) {
-  news(category: $category) {
-    title
-    url
-    metadata {
-      image
-      description
-    }
-    newsworthy {
-      ... on TvShow {
-        id
-        name
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useNewsQuery__
- *
- * To run a query within a React component, call `useNewsQuery` and pass it any options that fit your needs.
- * When your component renders, `useNewsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useNewsQuery({
- *   variables: {
- *      category: // value for 'category'
- *   },
- * });
- */
-export function useNewsQuery(baseOptions: Apollo.QueryHookOptions<NewsQuery, NewsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<NewsQuery, NewsQueryVariables>(NewsDocument, options);
-      }
-export function useNewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<NewsQuery, NewsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<NewsQuery, NewsQueryVariables>(NewsDocument, options);
-        }
-export type NewsQueryHookResult = ReturnType<typeof useNewsQuery>;
-export type NewsLazyQueryHookResult = ReturnType<typeof useNewsLazyQuery>;
-export type NewsQueryResult = Apollo.QueryResult<NewsQuery, NewsQueryVariables>;
 export const MovieSearchDocument = gql`
     query MovieSearch($query: String!) {
   movieSearch(query: $query) {

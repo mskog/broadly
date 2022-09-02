@@ -6,7 +6,6 @@ import { useTvShowQuery } from "generated/graphql";
 
 import Loading from "components/shared/LoadingFull";
 import Top from "./Top";
-import News from "./News";
 import Actions from "./Actions";
 import Seasons from "./Seasons";
 
@@ -44,8 +43,6 @@ const TvShow = (props: TvShowProps): JSX.Element => {
         <div className="flex flex-col pt-4 -mx-2 md:flex-row">
           <Actions tvShow={data.tvShow} />
         </div>
-
-        <News newsItems={data.tvShow.newsItems || []} />
       </div>
       <div className="container mx-auto mt-8">
         <Seasons tvShowId={data.tvShow.id} seasons={seasons} />

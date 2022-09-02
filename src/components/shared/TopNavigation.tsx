@@ -115,12 +115,6 @@ const TopNavigation = (props: TopNavigationProps): JSX.Element => {
               active={currentNav === "calendar"}
               onClick={() => toggleExpansion(!isExpanded)}
             />
-            <NavigationLink
-              title="News"
-              href="/news/our_tv_shows"
-              active={currentNav === "news"}
-              onClick={() => toggleExpansion(!isExpanded)}
-            />
             <div className="hidden float-right mt-4 mr-4 text-right md:block lg:inline-block lg:mt-0 ">
               <span className="mr-4">
                 <NavigationLink

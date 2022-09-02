@@ -42,8 +42,6 @@ import { Search } from "components/Search";
 import MovieSearchResult from "components/Search/movies/Details";
 import TvShowSearchResult from "components/Search/tv_shows/Details";
 
-import { News } from "components/News";
-
 const { link, useApolloNetworkStatus } = createNetworkStatusNotifier();
 
 function LoadingIndicator(): JSX.Element {
@@ -142,7 +140,6 @@ function App() {
             />
             <Route path="/search/:category(\w+)?" component={Search} />
             <Route path="/calendar/:category(\w+)?" component={Calendar} />
-            <Route path="/news/:category" component={News} />
           </Switch>
         </div>
       </div>
