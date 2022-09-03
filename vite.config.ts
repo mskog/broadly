@@ -15,5 +15,6 @@ export default defineConfig({
       plugins: [analyze({ summaryOnly: true, limit: 10 })]
     }
   },
-  plugins: [reactRefresh(), svgrPlugin(), tsconfigPaths()]
+  plugins: [reactRefresh(), svgrPlugin(), tsconfigPaths()],
+  server: { port: 3000 }
 });
