@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import KeyboardEventHandler from "react-keyboard-event-handler";
+import KeyboardEventHandler from "@infinium/react-keyboard-event-handler";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
