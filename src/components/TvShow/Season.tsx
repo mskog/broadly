@@ -1,7 +1,6 @@
 import React from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faDownload } from "@fortawesome/free-solid-svg-icons";
+import { EyeIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
 
 import { TvShowQuery, useDownloadSeasonMutation } from "generated/graphql";
 
@@ -26,7 +25,7 @@ const statusIcon = (downloaded: boolean, watched: boolean): JSX.Element => {
     return (
       <div className="flex space-x-1">
         <span>
-          <FontAwesomeIcon icon={faEye} />
+          <EyeIcon className="w-6 h-6" />
         </span>
         <span>Watched</span>
       </div>
@@ -34,7 +33,7 @@ const statusIcon = (downloaded: boolean, watched: boolean): JSX.Element => {
   } else if (downloaded) {
     <div className="flex space-x-1">
       <span>
-        <FontAwesomeIcon icon={faDownload} />
+        <ArrowDownIcon className="w-6 h-6" />
       </span>
       <span>Downloaded</span>
     </div>;

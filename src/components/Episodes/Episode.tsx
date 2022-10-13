@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 
 import padStart from "lodash/padStart";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { EyeIcon } from "@heroicons/react/24/solid";
 
 import { EpisodesQuery, EpisodeRelease } from "generated/graphql";
 
@@ -75,7 +74,7 @@ const Episode = ({ episode }: EpisodeProps): JSX.Element => {
           {watched && (
             <div className="absolute top-0 right-0">
               <div className="p-2 text-gray-400">
-                <FontAwesomeIcon icon={faEye} />
+                <EyeIcon className="h-6 w-6" />
               </div>
             </div>
           )}

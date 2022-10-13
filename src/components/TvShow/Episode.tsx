@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import padStart from "lodash/padStart";
 import truncate from "lodash/truncate";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faDownload } from "@fortawesome/free-solid-svg-icons";
+import { EyeIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
 
 import { TvShowQuery } from "generated/graphql";
 
@@ -46,7 +45,7 @@ const statusIcon = (downloaded: boolean, watched: boolean): JSX.Element => {
     return (
       <div className="absolute top-0 right-0">
         <div className="p-2 text-gray-500">
-          <FontAwesomeIcon icon={faEye} />
+          <EyeIcon className="w-6 h-6" />
         </div>
       </div>
     );
@@ -54,7 +53,7 @@ const statusIcon = (downloaded: boolean, watched: boolean): JSX.Element => {
     return (
       <div className="absolute top-0 right-0">
         <div className="p-2 text-gray-500">
-          <FontAwesomeIcon icon={faDownload} />
+          <ArrowDownIcon className="w-6 h-6" />
         </div>
       </div>
     );

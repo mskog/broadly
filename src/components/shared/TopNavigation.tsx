@@ -2,8 +2,7 @@ import React, { useState } from "react";
 
 import KeyboardEventHandler from "@infinium/react-keyboard-event-handler";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { MagnifyingGlassIcon, Bars3Icon } from "@heroicons/react/24/solid";
 
 import NavigationLink from "./NavigationLink";
 import OmniSearch from "./omnisearch/OmniSearch";
@@ -50,9 +49,8 @@ const TopNavigation = (props: TopNavigationProps): JSX.Element => {
         className="fixed z-40 flex flex-wrap items-center justify-between w-full p-6"
       >
         <div className="block lg:hidden">
-          <FontAwesomeIcon
-            className="text-xl cursor-pointer"
-            icon={faSearch}
+          <MagnifyingGlassIcon
+            className="text-xl cursor-pointer h-6 w-6"
             onClick={() => toggleOmnisearch(!omnisearchOpen)}
           />
         </div>
@@ -63,7 +61,7 @@ const TopNavigation = (props: TopNavigationProps): JSX.Element => {
             onClick={() => toggleExpansion(!isExpanded)}
             className="flex items-center px-3 py-2 text-gray-200 border border-gray-400 rounded hover:text-white hover:border-white focus:outline-none"
           >
-            <FontAwesomeIcon icon={faBars} />
+            <Bars3Icon className="h-6 w-6" />
           </button>
         </div>
 
@@ -115,7 +113,7 @@ const TopNavigation = (props: TopNavigationProps): JSX.Element => {
               active={currentNav === "calendar"}
               onClick={() => toggleExpansion(!isExpanded)}
             />
-            <div className="hidden float-right mt-4 mr-4 text-right md:block lg:inline-block lg:mt-0 ">
+            <div className="hidden float-right mt-4 mr-4 text-right md:flex lg:mt-0">
               <span className="mr-4">
                 <NavigationLink
                   title="Login"
@@ -124,9 +122,8 @@ const TopNavigation = (props: TopNavigationProps): JSX.Element => {
                   onClick={() => toggleExpansion(!isExpanded)}
                 />
               </span>
-              <FontAwesomeIcon
-                className="text-xl cursor-pointer hover:text-white"
-                icon={faSearch}
+              <MagnifyingGlassIcon
+                className="text-xl cursor-pointer hover:text-white h-6 w-6"
                 onClick={() => toggleOmnisearch(!omnisearchOpen)}
               />
             </div>
