@@ -37,7 +37,7 @@ const TvShow = ({
         </div>
         <div className="w-full pl-4">
           <Link to={`/tv_shows/${id}`}>
-            <h2 className="text-3xl leading-none ">
+            <h2 className="text-3xl leading-none">
               {truncate(name, { length: 40 })}
             </h2>
           </Link>
@@ -45,11 +45,11 @@ const TvShow = ({
           {voteAverage && <Ratings score={parseInt(voteAverage, 10) * 10} />}
           <div className="mt-2 text-sm font-thin">
             <span className="mr-2">
-              <CalendarIcon className="mr-1 w-4 h-4 inline" />
+              <CalendarIcon className="mr-1 w-4 h-4 inline align-text-top" />
               {firstAirDate && releaseYear(firstAirDate)}
             </span>
             <span>
-              <ClockIcon className="mr-1 w-4 h-4 inline" />
+              <ClockIcon className="mr-1 w-4 h-4 inline align-text-top" />
               {traktDetails?.runtime && formattedRuntime(traktDetails.runtime)}
             </span>
           </div>
