@@ -1,6 +1,6 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar, faClock, faFilm } from "@fortawesome/free-solid-svg-icons";
+
+import { CalendarIcon, ClockIcon, FilmIcon } from "@heroicons/react/24/solid";
 
 import { Movie } from "generated/graphql";
 
@@ -46,12 +46,12 @@ const MovieResult = ({
         </p>
         <div className="text-sm  text-gray-400">
           <span className="mr-2">
-            <FontAwesomeIcon className="mr-1" icon={faCalendar} />
+            <CalendarIcon className="w-4 h-4 mr-1 inline align-text-top" />
             {releaseYear(releaseDate)}
           </span>
           {runtime && (
             <span>
-              <FontAwesomeIcon className="mr-1" icon={faClock} />
+              <ClockIcon className="w-4 h-4 mr-1 inline align-text-top" />
               {formattedRuntime(runtime)}
             </span>
           )}
@@ -63,7 +63,7 @@ const MovieResult = ({
           active ? "text-gray-200" : "text-gray-400"
         )}
       >
-        <FontAwesomeIcon className="text-3xl" icon={faFilm} />
+        <FilmIcon className="w-8 h-8 mr-1 inline align-text-top" />
       </div>
     </>
   );

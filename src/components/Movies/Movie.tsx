@@ -69,25 +69,25 @@ const Movie = ({ movie }: MovieProps): JSX.Element => {
           </Link>
           {rating && <Ratings score={rating}>{personalRatingText}</Ratings>}
           <div className="mt-2 text-sm font-thin flex">
-            <span className="mr-2 flex flex-row">
-              <CalendarIcon className="mr-1 h-4 w-4" />
+            <span className="mr-2">
+              <CalendarIcon className="mr-1 h-4 w-4 inline" />
               {releaseYear(releaseDate)}
             </span>
             {bestRelease && (
-              <span className="mr-2 flex">
-                <TvIcon className="mr-1 h-4 w-4" />
+              <span className="mr-2">
+                <TvIcon className="mr-1 h-4 w-4 inline" />
                 {resolutionDisplay(bestRelease.resolution)}
               </span>
             )}
             {!watchedAt && runtime && (
-              <span className="mr-2 flex">
-                <EyeIcon className="mr-1 h-4 w-4" />
+              <span className="mr-2">
+                <EyeIcon className="mr-1 h-4 w-4 inline" />
                 {formattedRuntime(runtime)}
               </span>
             )}
             {watchedAt && (
-              <span className="flex">
-                <EyeIcon className="mr-1 h-4 w-4" />
+              <span>
+                <EyeIcon className="mr-1 h-4 w-4 inline" />
                 {DateTime.fromISO(watchedAt).toISODate()}
               </span>
             )}

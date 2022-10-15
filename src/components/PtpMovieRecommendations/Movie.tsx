@@ -1,7 +1,6 @@
 import React from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { CalendarIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 
 import { PtpRecommendedMovie } from "generated/graphql";
@@ -31,7 +30,7 @@ const Movie = ({ movie }: { movie: PtpRecommendedMovie }): JSX.Element => {
           {ptpRating && <Ratings score={ptpRating}>{ptpRating}</Ratings>}
           <div className="mt-2 text-sm font-thin">
             <span>
-              <FontAwesomeIcon className="mr-1" icon={faCalendar} />
+              <CalendarIcon className="w-4 h-4 mr-1 inline align-text-top" />
               {year}
             </span>
           </div>
