@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { ArrowPathIcon } from "@heroicons/react/24/solid";
 
 const LoaderButton = ({
   onClick,
@@ -21,12 +20,12 @@ const LoaderButton = ({
 
   let label;
   if (loading) {
-    label = <FontAwesomeIcon className="fa" icon={faSpinner} spin />;
+    label = <ArrowPathIcon className="animate-spin h-6 w-6" />;
   } else {
     label = children;
   }
 
-  const fullClassName = `${className} focus:outline-none`;
+  const fullClassName = `${className} focus:outline-none flex justify-center`;
 
   return (
     <button type="button" className={fullClassName} onClick={handle}>

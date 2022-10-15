@@ -1,8 +1,7 @@
 import React from "react";
 
 import LazyLoad from "react-lazyload";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { CheckIcon } from "@heroicons/react/24/solid";
 
 import { Link } from "react-router-dom";
 import truncate from "lodash/truncate";
@@ -64,9 +63,7 @@ const Result = ({
       </div>
 
       <div className="absolute top-0 right-0 p-2 text-gray-300">
-        {exists && (
-          <FontAwesomeIcon className="text-2xl align-middle" icon={faCheck} />
-        )}
+        {exists && <CheckIcon className="w-6 h-6" />}
       </div>
     </div>
   );

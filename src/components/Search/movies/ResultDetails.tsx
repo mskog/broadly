@@ -2,9 +2,7 @@ import React from "react";
 
 import { Ratings } from "components/shared";
 import { formattedRuntime, releaseYear } from "utilities";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
+import { CalendarIcon, ClockIcon } from "@heroicons/react/24/solid";
 
 type ResultDetailsProps = {
   rating: number;
@@ -22,11 +20,11 @@ const ResultDetails = ({
 
       <div className="mt-2 text-sm font-thin">
         <span className="mr-2">
-          <FontAwesomeIcon className="mr-1" icon={faCalendar} />
+          <CalendarIcon className="w-4 h-4 mr-1 inline align-text-top" />
           {releaseYear(released)}
         </span>
         <span>
-          <FontAwesomeIcon className="mr-1" icon={faClock} />
+          <ClockIcon className="w-4 h-4 mr-1 inline align-text-top" />
           {formattedRuntime(runtime)}
         </span>
       </div>

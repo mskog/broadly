@@ -1,8 +1,7 @@
 import React from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
-import LazyLoad from "react-lazyload";
+import { ClockIcon, CalendarIcon } from "@heroicons/react/24/solid";
+
 import { Link } from "react-router-dom";
 
 import truncate from "lodash/truncate";
@@ -46,11 +45,11 @@ const TvShow = ({
           {voteAverage && <Ratings score={parseInt(voteAverage, 10) * 10} />}
           <div className="mt-2 text-sm font-thin">
             <span className="mr-2">
-              <FontAwesomeIcon className="mr-1" icon={faCalendar} />
+              <CalendarIcon className="mr-1 w-4 h-4 inline" />
               {firstAirDate && releaseYear(firstAirDate)}
             </span>
             <span>
-              <FontAwesomeIcon className="mr-1" icon={faClock} />
+              <ClockIcon className="mr-1 w-4 h-4 inline" />
               {traktDetails?.runtime && formattedRuntime(traktDetails.runtime)}
             </span>
           </div>

@@ -5,13 +5,12 @@ import capitalize from "lodash/capitalize";
 import { Ratings } from "components/shared";
 import { formattedRuntime, releaseYear } from "utilities";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCalendar,
-  faClock,
-  faQuestionCircle,
-  faTv
-} from "@fortawesome/free-solid-svg-icons";
+  CalendarIcon,
+  ClockIcon,
+  QuestionMarkCircleIcon,
+  TvIcon
+} from "@heroicons/react/24/solid";
 
 type ResultDetailsProps = {
   rating?: string;
@@ -31,25 +30,25 @@ const ResultDetails = ({
   return (
     <div>
       {rating && <Ratings score={parseInt(rating, 10) * 10} />}
-      <div className="grid grid-cols-2 gap-1 mt-2 text-sm font-thin md:-mx-2 md:flex">
+      <div className="grid grid-cols-2 gap-1 mt-2 text-sm font-thin md:flex space-x-1">
         {firstAired && (
-          <div className="md:px-2">
-            <FontAwesomeIcon className="mr-1" icon={faCalendar} />
+          <div>
+            <CalendarIcon className="w-4 h-4 mr-1 inline align-text-top" />
             {releaseYear(firstAired)}
           </div>
         )}
         {runtime && (
-          <div className="md:px-2">
-            <FontAwesomeIcon className="mr-1" icon={faClock} />
+          <div>
+            <ClockIcon className="w-4 h-4 mr-1 inline align-text-top" />
             {formattedRuntime(runtime)}
           </div>
         )}
-        <div className="md:px-2">
-          <FontAwesomeIcon className="mr-1" icon={faTv} />
+        <div>
+          <TvIcon className="w-4 h-4 mr-1 inline align-text-top" />
           {airedEpisodes}
         </div>
-        <div className="md:px-2">
-          <FontAwesomeIcon className="mr-1" icon={faQuestionCircle} />
+        <div>
+          <QuestionMarkCircleIcon className="w-4 h-4 mr-1 inline align-text-top" />
           {capitalize(status)}
         </div>
       </div>

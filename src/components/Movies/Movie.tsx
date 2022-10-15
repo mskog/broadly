@@ -1,12 +1,6 @@
 import React from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCalendar,
-  faClock,
-  faEye,
-  faPhotoVideo
-} from "@fortawesome/free-solid-svg-icons";
+import { CalendarIcon, TvIcon, EyeIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 
 import truncate from "lodash/truncate";
@@ -74,26 +68,26 @@ const Movie = ({ movie }: MovieProps): JSX.Element => {
             </h2>
           </Link>
           {rating && <Ratings score={rating}>{personalRatingText}</Ratings>}
-          <div className="mt-2 text-sm font-thin">
+          <div className="mt-2 text-sm font-thin flex">
             <span className="mr-2">
-              <FontAwesomeIcon className="mr-1" icon={faCalendar} />
+              <CalendarIcon className="mr-1 h-4 w-4 inline" />
               {releaseYear(releaseDate)}
             </span>
             {bestRelease && (
               <span className="mr-2">
-                <FontAwesomeIcon className="mr-1" icon={faPhotoVideo} />
+                <TvIcon className="mr-1 h-4 w-4 inline" />
                 {resolutionDisplay(bestRelease.resolution)}
               </span>
             )}
             {!watchedAt && runtime && (
               <span className="mr-2">
-                <FontAwesomeIcon className="mr-1" icon={faClock} />
+                <EyeIcon className="mr-1 h-4 w-4 inline" />
                 {formattedRuntime(runtime)}
               </span>
             )}
             {watchedAt && (
               <span>
-                <FontAwesomeIcon className="mr-1" icon={faEye} />
+                <EyeIcon className="mr-1 h-4 w-4 inline" />
                 {DateTime.fromISO(watchedAt).toISODate()}
               </span>
             )}

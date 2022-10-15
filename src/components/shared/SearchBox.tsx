@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
 const SearchBox = ({
   pathname,
@@ -41,7 +40,7 @@ const SearchBox = ({
           type="submit"
           className="px-3 py-2 bg-teal-500 rounded rounded-l-none"
         >
-          <FontAwesomeIcon className="text-gray-300" icon={faSearch} />
+          <MagnifyingGlassIcon className="text-gray-100 h-6 w-6" />
         </button>
       </form>
       {text !== "" && (

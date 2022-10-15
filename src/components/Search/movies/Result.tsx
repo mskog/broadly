@@ -3,8 +3,7 @@ import LazyLoad from "react-lazyload";
 import { Link } from "react-router-dom";
 
 import truncate from "lodash/truncate";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faClock } from "@fortawesome/free-solid-svg-icons";
+import { ClockIcon, CheckIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
 
 import { MovieSearch, useMovieSummaryQuery } from "generated/graphql";
 
@@ -63,11 +62,9 @@ const Result = ({ result }: ResultProps): JSX.Element => {
         </div>
       </div>
       <div className="absolute top-0 right-0 p-2 text-gray-300">
-        {downloaded && (
-          <FontAwesomeIcon className="text-2xl align-middle" icon={faCheck} />
-        )}
+        {downloaded && <CheckIcon className="w-6 h-6 align-text-top" />}
         {!downloaded && onWaitlist && (
-          <FontAwesomeIcon className="text-2xl align-middle" icon={faClock} />
+          <ArrowDownIcon className="w-6 h-6 align-text-top" />
         )}
       </div>
     </div>

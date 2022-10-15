@@ -1,18 +1,17 @@
 import React from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faStarHalf } from "@fortawesome/free-solid-svg-icons";
-
-import { faStar as faStarEmpty } from "@fortawesome/free-regular-svg-icons";
+import { StarIcon as EmptyStarIcon } from "@heroicons/react/24/outline";
+import { StarIcon } from "@heroicons/react/24/solid";
 
 function icon(minimum: number, maximum: number, score: number) {
   if (score >= maximum) {
-    return faStar;
+    return <StarIcon className="text-yellow-400 h-4 w-4" />;
   }
+
   if (score > minimum) {
-    return faStarHalf;
+    return <StarIcon className="text-yellow-400 h-3 w-3" />;
   }
-  return faStarEmpty;
+  return <EmptyStarIcon className="text-yellow-400 h-4 w-4" />;
 }
 
 const RatingStar = ({
@@ -24,12 +23,7 @@ const RatingStar = ({
   maximum: number;
   score: number;
 }): JSX.Element => {
-  return (
-    <FontAwesomeIcon
-      className="mr-1 text-yellow-400"
-      icon={icon(minimum, maximum, score)}
-    />
-  );
+  return icon(minimum, maximum, score);
 };
 
 export default RatingStar;
