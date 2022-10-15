@@ -1,8 +1,8 @@
 import React from "react";
 
-import { DateTime } from "luxon";
-
 import { Movie } from "generated/graphql";
+
+import dayjs from "dayjs";
 
 import capitalize from "lodash/capitalize";
 
@@ -68,9 +68,7 @@ const Top = ({
     return releaseDate.releaseType === "4K UHD";
   });
 
-  const topReleaseDate = topRelease
-    ? DateTime.fromISO(topRelease.releaseDate)
-    : null;
+  const topReleaseDate = topRelease ? dayjs(topRelease.releaseDate) : null;
 
   return (
     <div>
@@ -92,7 +90,7 @@ const Top = ({
               {topReleaseDate ? (
                 <LevelItem
                   title="4K Blu-ray"
-                  value={topReleaseDate.toISODate()}
+                  value={topReleaseDate.format("YYYY-MM-DD")}
                 />
               ) : (
                 <></>

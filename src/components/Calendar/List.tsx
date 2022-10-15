@@ -1,14 +1,10 @@
 import React from "react";
 
 import groupBy from "lodash/groupBy";
-import { DateTime } from "luxon";
 
-import { Link } from "react-router-dom";
+import dayjs from "dayjs";
 
 import { CalendarEpisode, CalendarMovie, Movie } from "generated/graphql";
-
-import { Poster as MoviePoster } from "components/shared";
-import TvShowPoster from "./TvShowPoster";
 
 import Group from "./Group";
 
@@ -25,9 +21,9 @@ const List = ({ items }: ListProps): JSX.Element => {
   const groupedItems = groupBy(items, (tvShow) => {
     let date;
     if (tvShow.__typename === "CalendarEpisode") {
-      date = DateTime.fromISO(tvShow.firstAired);
+      date = dayjs(tvShow.firstAired);
     } else if (tvShow.__typename === "CalendarMovie") {
-      date = DateTime.fromISO(tvShow.releaseDate);
+      date = dayjs(tvShow.releaseDate);
     }
     return date;
   });

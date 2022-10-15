@@ -1,6 +1,8 @@
 import React from "react";
 
-import { DateTime } from "luxon";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 
 import Item from "./Item";
 
@@ -17,14 +19,14 @@ type GroupProps = {
 };
 
 const Group = ({ date, items }: GroupProps): JSX.Element => {
-  const dateTime = DateTime.fromISO(date);
-  const diffDays = dateTime.diff(DateTime.local(), "days").toObject();
+  const dateTime = dayjs(date);
+  const diffDays = dateTime.diff(dayjs(), "days");
 
-  let formattedDate: string | null;
-  if (diffDays.days && diffDays.days <= 7) {
-    formattedDate = dateTime.toRelative();
+  let formattedDate: string;
+  if (diffDays && diffDays <= 7) {
+    formattedDate = dateTime.fromNow();
   } else {
-    formattedDate = dateTime.toISODate();
+    formattedDate = dateTime.locale("sv").format("dddd D MMMM");
   }
 
   const components = items.map((item) => {

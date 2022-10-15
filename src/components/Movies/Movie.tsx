@@ -4,7 +4,8 @@ import { CalendarIcon, TvIcon, EyeIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 
 import truncate from "lodash/truncate";
-import { DateTime } from "luxon";
+
+import dayjs from "dayjs";
 
 import { formattedRuntime, releaseYear, resolutionDisplay } from "utilities";
 
@@ -88,7 +89,7 @@ const Movie = ({ movie }: MovieProps): JSX.Element => {
             {watchedAt && (
               <span>
                 <EyeIcon className="mr-1 h-4 w-4 inline" />
-                {DateTime.fromISO(watchedAt).toISODate()}
+                {dayjs(watchedAt).format("YYYY-MM-DD")}
               </span>
             )}
           </div>

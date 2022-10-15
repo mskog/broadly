@@ -1,5 +1,6 @@
 import React from "react";
-import { DateTime } from "luxon";
+
+import dayjs from "dayjs";
 
 import { useHistory } from "react-router-dom";
 
@@ -16,7 +17,7 @@ const Actions = ({
 }): JSX.Element => {
   const { id, bestRelease, imdbId, downloadAt } = movie;
 
-  const downloaded = DateTime.fromISO(downloadAt) <= DateTime.local();
+  const downloaded = dayjs(downloadAt).isBefore(dayjs());
 
   const history = useHistory();
 

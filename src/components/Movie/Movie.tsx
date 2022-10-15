@@ -1,5 +1,6 @@
 import React from "react";
-import { DateTime } from "luxon";
+
+import dayjs from "dayjs";
 
 import { useMovieQuery } from "generated/graphql";
 
@@ -41,7 +42,7 @@ const Movie = (props: MovieProps): JSX.Element => {
     downloadAt
   } = data.movie;
 
-  const downloaded = DateTime.fromISO(downloadAt) <= DateTime.local();
+  const downloaded = dayjs(downloadAt).isBefore(dayjs());
 
   return (
     <div className="pb-20">

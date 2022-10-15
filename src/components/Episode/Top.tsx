@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import padStart from "lodash/padStart";
-import { DateTime } from "luxon";
+
+import dayjs from "dayjs";
 
 import { EpisodeQuery, EpisodeRelease } from "generated/graphql";
 
@@ -85,12 +86,12 @@ const Top = ({ episode }: TopProps): JSX.Element => {
               <LevelItem
                 hideIfBlank
                 title="Watched"
-                value={DateTime.fromISO(watchedAt).toISODate()}
+                value={dayjs(watchedAt).format("YYYY-MM-DD")}
               />
               <LevelItem
                 hideIfBlank
                 title="Air Date"
-                value={DateTime.fromISO(airDate).toISODate()}
+                value={dayjs(airDate).format("YYYY-MM-DD")}
               />
               {traktDetails?.runtime ? (
                 <LevelItem
