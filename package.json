@@ -15,7 +15,7 @@
     "apollo-cache-persist": "^0.1.1",
     "apollo3-cache-persist": "^0.14.1",
     "dayjs": "^1.11.5",
-    "graphql": "^15.8.0",
+    "graphql": "^16.6.0",
     "lodash": "^4.17.20",
     "luxon": "^3.0.4",
     "postcss": "^8.4.6",
