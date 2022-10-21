@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { useBestMoviesQuery } from "generated/graphql";
+import { BestMovieCategory, useBestMoviesQuery } from "generated/graphql";
 
 import { LoadingFull } from "components/shared";
 
@@ -15,12 +15,27 @@ type BestMoviesProps = {
   };
 };
 
+const activeButtonClasses = (
+  category: BestMovieCategory,
+  buttonName: BestMovieCategory,
+  extraClasses: string
+): string => {
+  let classes = extraClasses;
+
+  if ((category as string) === buttonName.toUpperCase()) {
+    classes += " border-teal-500 ring-teal-500 ring-2";
+  }
+  return classes;
+};
+
 const BestMovies = (props: BestMoviesProps): JSX.Element => {
   const {
     match: {
       params: { year: chosenYear }
     }
   } = props;
+
+  const [category, setCategory] = useState(BestMovieCategory.Released);
 
   const year = parseInt(chosenYear, 10);
 
@@ -31,6 +46,7 @@ const BestMovies = (props: BestMoviesProps): JSX.Element => {
 
   const { error, data, fetchMore } = useBestMoviesQuery({
     variables: {
+      category,
       year,
       first: 20
     }
@@ -70,6 +86,33 @@ const BestMovies = (props: BestMoviesProps): JSX.Element => {
         category={year.toString()}
         baseRoute="best_movies"
       />
+      <div className="mt-8 flex items-center justify-center">
+        <span className="isolate inline-flex rounded-md shadow-sm">
+          <button
+            type="button"
+            onClick={() => setCategory(BestMovieCategory.Released)}
+            className={activeButtonClasses(
+              category,
+              BestMovieCategory.Released,
+              "relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none"
+            )}
+          >
+            Released
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setCategory(BestMovieCategory.Watched)}
+            className={activeButtonClasses(
+              category,
+              BestMovieCategory.Watched,
+              "relative -ml-px inline-flex items-center rounded-r-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none"
+            )}
+          >
+            Watched
+          </button>
+        </span>
+      </div>
       <div className="mt-20">{mainContent}</div>
     </div>
   );

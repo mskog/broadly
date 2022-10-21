@@ -22,8 +22,13 @@ query Movies($category: String, $first: Int, $skip: Int, $query: String) {
   }
 }
 
-query BestMovies($year: Int, $first: Int, $skip: Int) {
-  bestMovies(year: $year, first: $first, skip: $skip) {
+query BestMovies(
+  $category: BestMovieCategory
+  $year: Int!
+  $first: Int
+  $skip: Int
+) {
+  bestMovies(category: $category, year: $year, first: $first, skip: $skip) {
     id
     tmdbId
     title
