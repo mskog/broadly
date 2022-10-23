@@ -71,24 +71,24 @@ const Movie = ({ movie }: MovieProps): JSX.Element => {
           {rating && <Ratings score={rating}>{personalRatingText}</Ratings>}
           <div className="mt-2 text-sm font-thin flex">
             <span className="mr-2">
-              <CalendarIcon className="mr-1 h-4 w-4 inline" />
+              <CalendarIcon className="mr-1 h-4 w-4 inline align-text-top" />
               {releaseYear(releaseDate)}
             </span>
             {bestRelease && (
               <span className="mr-2">
-                <TvIcon className="mr-1 h-4 w-4 inline" />
+                <TvIcon className="mr-1 h-4 w-4 inline align-text-top" />
                 {resolutionDisplay(bestRelease.resolution)}
               </span>
             )}
             {!watchedAt && runtime && (
               <span className="mr-2">
-                <EyeIcon className="mr-1 h-4 w-4 inline" />
+                <EyeIcon className="mr-1 h-4 w-4 inline align-text-top" />
                 {formattedRuntime(runtime)}
               </span>
             )}
             {watchedAt && (
               <span>
-                <EyeIcon className="mr-1 h-4 w-4 inline" />
+                <EyeIcon className="mr-1 h-4 w-4 inline align-text-top" />
                 {dayjs(watchedAt).format("YYYY-MM-DD")}
               </span>
             )}

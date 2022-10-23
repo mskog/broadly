@@ -120,7 +120,7 @@ function App() {
             <Redirect from="/" exact to="/movies/watched" />
             <Route path="/login" component={Login} />
             <Route path="/movies/:id(\d+)" component={Movie} />
-            <Route path="/best_movies/:year(\d+)?" component={BestMovies} />
+            <Route path="/best_movies/:year(\d+)" component={BestMovies} />
             <Route
               path="/ptp_movie_recommendations/"
               component={PtpMovieRecommendations}

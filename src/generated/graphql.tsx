@@ -17,6 +17,13 @@ export type Scalars = {
   ISO8601DateTime: any;
 };
 
+export enum BestMovieCategory {
+  /** When the movie was released */
+  Released = 'RELEASED',
+  /** When the movie was watched */
+  Watched = 'WATCHED'
+}
+
 export enum CalendarCategory {
   All = 'ALL',
   Episodes = 'EPISODES',
@@ -370,9 +377,10 @@ export type Query = {
 
 
 export type QueryBestMoviesArgs = {
+  category?: BestMovieCategory;
   first?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  year?: InputMaybe<Scalars['Int']>;
+  year: Scalars['Int'];
 };
 
 
@@ -623,7 +631,8 @@ export type MoviesQueryVariables = Exact<{
 export type MoviesQuery = { __typename?: 'Query', movies: Array<{ __typename?: 'Movie', id: number, tmdbId?: string, title?: string, releaseDate?: any, downloadAt?: any, watchedAt?: any, runtime?: number, rtCriticsRating?: number, rtAudienceRating?: number, watched?: boolean, personalRating?: number, posterImage?: string, posterImageThumbnail?: string, posterImageBase64?: string, bestRelease?: { __typename?: 'MovieRelease', id: number, resolution: string } }> };
 
 export type BestMoviesQueryVariables = Exact<{
-  year?: InputMaybe<Scalars['Int']>;
+  category?: InputMaybe<BestMovieCategory>;
+  year: Scalars['Int'];
   first?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 }>;
@@ -936,8 +945,8 @@ export type MoviesQueryHookResult = ReturnType<typeof useMoviesQuery>;
 export type MoviesLazyQueryHookResult = ReturnType<typeof useMoviesLazyQuery>;
 export type MoviesQueryResult = Apollo.QueryResult<MoviesQuery, MoviesQueryVariables>;
 export const BestMoviesDocument = gql`
-    query BestMovies($year: Int, $first: Int, $skip: Int) {
-  bestMovies(year: $year, first: $first, skip: $skip) {
+    query BestMovies($category: BestMovieCategory, $year: Int!, $first: Int, $skip: Int) {
+  bestMovies(category: $category, year: $year, first: $first, skip: $skip) {
     id
     tmdbId
     title
@@ -969,13 +978,14 @@ export const BestMoviesDocument = gql`
  * @example
  * const { data, loading, error } = useBestMoviesQuery({
  *   variables: {
+ *      category: // value for 'category'
  *      year: // value for 'year'
  *      first: // value for 'first'
  *      skip: // value for 'skip'
  *   },
  * });
  */
-export function useBestMoviesQuery(baseOptions?: Apollo.QueryHookOptions<BestMoviesQuery, BestMoviesQueryVariables>) {
+export function useBestMoviesQuery(baseOptions: Apollo.QueryHookOptions<BestMoviesQuery, BestMoviesQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<BestMoviesQuery, BestMoviesQueryVariables>(BestMoviesDocument, options);
       }

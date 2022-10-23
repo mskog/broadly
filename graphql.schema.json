@@ -9,6 +9,29 @@
     "subscriptionType": null,
     "types": [
       {
+        "kind": "ENUM",
+        "name": "BestMovieCategory",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "RELEASED",
+            "description": "When the movie was released",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "WATCHED",
+            "description": "When the movie was watched",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "SCALAR",
         "name": "Boolean",
         "description": "The `Boolean` scalar type represents `true` or `false`.",
@@ -2774,6 +2797,22 @@
             "description": "Returns a list of the best watched movies given a year",
             "args": [
               {
+                "name": "category",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "BestMovieCategory",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": "RELEASED",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
                 "name": "first",
                 "description": null,
                 "type": {
@@ -2801,9 +2840,13 @@
                 "name": "year",
                 "description": null,
                 "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
                 },
                 "defaultValue": null,
                 "isDeprecated": false,
