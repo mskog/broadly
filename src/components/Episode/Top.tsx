@@ -86,7 +86,7 @@ const Top = ({ episode }: TopProps): JSX.Element => {
               <LevelItem
                 hideIfBlank
                 title="Watched"
-                value={dayjs(watchedAt).format("YYYY-MM-DD")}
+                value={watchedAt && dayjs(watchedAt).format("YYYY-MM-DD")}
               />
               <LevelItem
                 hideIfBlank
