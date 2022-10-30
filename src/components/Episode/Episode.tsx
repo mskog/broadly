@@ -22,7 +22,7 @@ const Episode = (props: EpisodeProps): JSX.Element => {
 
   const [episodeWatched] = useEpisodeWatchedMutation({
     variables: { id },
-    update: () => {}
+    refetchQueries: ["Episode"]
   });
 
   const { data } = useEpisodeQuery({
