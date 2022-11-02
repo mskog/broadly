@@ -59,7 +59,7 @@
     "@graphql-codegen/introspection": "^2.2.0",
     "@graphql-codegen/typescript": "2.7.3",
     "@graphql-codegen/typescript-operations": "^2.2.1",
-    "@graphql-codegen/typescript-react-apollo": "3.2.8",
+    "@graphql-codegen/typescript-react-apollo": "3.3.6",
     "@infinium/react-keyboard-event-handler": "1.5.8",
     "@types/lodash": "^4.14.186",
     "@types/react-lazyload": "^3.2.0",
